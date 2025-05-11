@@ -1,0 +1,108 @@
+{
+  "name": "Astro blog development",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    // Add Yarn feature
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "version": "lts", // Installs latest LTS Node, redundant with base image but ensures consistency
+      "yarn": "latest" // Install latest Yarn
+    }
+  },
+  // Forward ports: Default Astro dev port (4321) and default Vite dev port (5173)
+  "forwardPorts": [4321, 5173],
+
+  // Port attributes - labels the forwarded ports in VS Code
+  "portsAttributes": {
+    "4321": {
+      "label": "Astro dev server",
+      "onAutoForward": "notify"
+    },
+    "5173": {
+      "label": "Vite dev server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "postCreateCommand": "yarn install",
+  // VS Code extensions to install inside the container.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint", // ESLint for code linting
+        "esbenp.prettier-vscode", // Prettier for code formatting
+
+        "astro-build.astro-vscode", // Official Astro extension
+        "unifiedjs.vscode-mdx", // MDX language support
+        "dsznajder.es7-react-js-snippets", // React/Redux/GraphQL snippets
+        "vite.vscode-vite", // Extension for Vite specific features (optional but helpful)
+        "asciidoctor.asciidoctor-vscode", // AsciiDoc language support and preview
+        "streetsidesoftware.code-spell-checker",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[javascriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[jsonc]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[astro]": {
+          // Astro extension handles formatting for .astro files
+          "editor.defaultFormatter": "astro-build.astro-vscode",
+          "editor.formatOnSave": true
+        },
+        "[mdx]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "always"
+        },
+        "eslint.validate": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "astro",
+          "mdx"
+        ],
+        "cSpell.language": "en",
+        "cSpell.userWords": [
+          "devcontainer",
+          "vite",
+          "astro",
+          "asciidoc",
+          "mdx",
+          "eslint",
+          "prettier"
+        ],
+        "cSpell.enabledFileTypes": {
+          "*": true,
+          "gitignore": false,
+          "gitattributes": false
+        }
+      }
+    }
+  },
+  "remoteUser": "node"
+}
