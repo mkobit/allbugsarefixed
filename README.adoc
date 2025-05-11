@@ -1,0 +1,68 @@
+= All Bugs Are Fixed Blog
+
+A blog built with Astro.
+
+== Development
+
+=== Prerequisites
+
+*   Node.js (v20 or later recommended)
+*   npm
+*   Docker (for Devcontainer)
+*   VS Code + Dev Containers extension (recommended)
+
+=== Getting Started
+
+1.  *Clone the repository:*
+    ```bash
+    git clone <repository-url>
+    cd allbugsarefixed
+    ```
+2.  *Open in Dev Container (Recommended):*
+    *   Open the project folder in VS Code.
+    *   When prompted, click "Reopen in Container".
+3.  *Install dependencies (if not using Dev Container):*
+    ```bash
+    npm install
+    ```
+4.  *Run the development server:*
+    ```bash
+    npm run dev
+    ```
+    This will start the development server, typically at http://localhost:4321.
+
+=== Available Scripts
+
+*   `npm run dev`: Starts the development server.
+*   `npm run build`: Builds the production site to the `dist/` directory.
+*   `npm run preview`: Serves the production build locally for preview.
+*   `npm run astro ...`: Runs Astro CLI commands directly.
+
+== Deployment
+
+The `.github/workflows/build.yml` workflow handles building the site. Deployment needs to be configured separately based on the chosen hosting provider (e.g., GitHub Pages, Netlify, Vercel, Cloudflare Pages).
+
+== Custom Domain (allbugsarefixed.com) & HTTPS
+
+Setting up a custom domain and HTTPS involves these general steps (specifics depend on your hosting provider and domain registrar):
+
+1.  *Domain Purchase:* Acquire the domain name `allbugsarefixed.com` from a domain registrar.
+2.  *Hosting Provider DNS Configuration:*
+    *   Choose a hosting provider (e.g., Netlify, Vercel, Cloudflare Pages, GitHub Pages).
+    *   Follow their instructions to point your domain to their service. This usually involves adding DNS records (like `A`, `AAAA`, or `CNAME`) in your domain registrar's settings.
+3.  *HTTPS/SSL Certificate:*
+    *   Most modern hosting providers offer free, automated SSL certificates (often via Let's Encrypt). Ensure this option is enabled in your hosting provider's settings for your custom domain.
+    *   If your provider doesn't offer this, you may need to obtain and configure a certificate manually, but this is less common for static site hosting.
+4.  *Astro `site` Configuration:* Update `astro.config.mjs` with your site URL:
+    ```javascript
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    // ... other imports
+
+    export default defineConfig({
+      site: 'https://allbugsarefixed.com', // Add this line
+      // ... integrations etc.
+    });
+    ```
+
+Refer to the documentation of your specific hosting provider and domain registrar for detailed instructions.
