@@ -15,7 +15,8 @@
     "@astrojs/react": "^4.2.7",
     "astro": "^5.7.10",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "@js-temporal/polyfill": "^0.4.4"
   },
   "devDependencies": {
     "@types/react": "^19.1.2",
