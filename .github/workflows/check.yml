@@ -1,8 +1,12 @@
 name: Build Astro site
 
 on:
-  types: [opened, synchronize, reopened, ready_for_review]
-  branches: [ main, "**" ]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches-ignore:
+      - 'main'
+      - 'gh-pages'
 
 jobs:
   check:
