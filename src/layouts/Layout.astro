@@ -1,49 +1,58 @@
 ---
+import { Temporal } from "@js-temporal/polyfill";
+
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
+const currentYear = Temporal.Now.plainDateISO().year;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<nav>
-			<a href="/">Home</a> |
-			<a href="/blog/">Blog</a>
-		</nav>
-		<slot />
-		<footer>
-			<p>&copy; {new Date().getFullYear()} All Bugs Are Fixed</p>
-		</footer>
-		<style is:global>
-			html {
-				font-family: system-ui, sans-serif;
-				background-color: #f6f6f6;
-			}
-			body {
-				margin: auto;
-				padding: 2rem;
-				max-width: 80ch;
-			}
-			nav {
-				margin-bottom: 2rem;
-			}
-			footer {
-				margin-top: 2rem;
-				border-top: 1px solid #ccc;
-				padding-top: 1rem;
-				font-size: 0.8em;
-			}
-		</style>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script is:inline>
+      import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
+      globalThis.Temporal = Temporal;
+      globalThis.Intl = Intl;
+      Date.prototype.toTemporalInstant = toTemporalInstant;
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/blog/">Blog</a>
+    </nav>
+    <slot />
+    <footer>
+      <p>&copy; {currentYear} All Bugs Are Fixed</p>
+    </footer>
+    <style is:global>
+      html {
+        font-family: system-ui, sans-serif;
+        background-color: #f6f6f6;
+      }
+      body {
+        margin: auto;
+        padding: 2rem;
+        max-width: 80ch;
+      }
+      nav {
+        margin-bottom: 2rem;
+      }
+      footer {
+        margin-top: 2rem;
+        border-top: 1px solid #ccc;
+        padding-top: 1rem;
+        font-size: 0.8em;
+      }
+    </style>
+  </body>
 </html>

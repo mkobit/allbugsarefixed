@@ -1,7 +1,11 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx'; // Import mdx
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()] // Add mdx() here
+  site: "https://allbugsarefixed.com",
+  base: "/",
+  integrations: [mdx()],
+  trailingSlash: "always",
+  output: "static",
 });
