@@ -1,5 +1,6 @@
 ---
 import { Temporal } from "@js-temporal/polyfill";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface Props {
   title: string;
@@ -18,6 +19,7 @@ const currentYear = Temporal.Now.plainDateISO().year;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
     <script is:inline>
       import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
       globalThis.Temporal = Temporal;
@@ -29,6 +31,7 @@ const currentYear = Temporal.Now.plainDateISO().year;
     <nav>
       <a href="/">Home</a> |
       <a href="/blog/">Blog</a>
+      <ThemeToggle />
     </nav>
     <slot />
     <footer>
@@ -37,12 +40,6 @@ const currentYear = Temporal.Now.plainDateISO().year;
     <style is:global>
       html {
         font-family: system-ui, sans-serif;
-        background-color: #f6f6f6;
-      }
-      body {
-        margin: auto;
-        padding: 2rem;
-        max-width: 80ch;
       }
       nav {
         margin-bottom: 2rem;

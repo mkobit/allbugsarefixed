@@ -1,0 +1,85 @@
+/* Add your global styles and theme variables here */
+
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --text-color: #333;
+  --background-color: #fff;
+  --code-background-color: #f4f4f4; /* Light background for code */
+  --code-text-color: #333; /* Dark text for code */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #90caf9; /* Lighter blue for dark mode */
+    --secondary-color: #b0bec5; /* Lighter gray for dark mode */
+    --text-color: #eee; /* Light text */
+    --background-color: #1e1e1e; /* Dark background */
+    --code-background-color: #2d2d2d; /* Dark background for code */
+    --code-text-color: #ccc; /* Light text for code */
+  }
+}
+
+html {
+  font-family: system-ui, sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  min-height: 100vh; /* Ensure html takes at least full viewport height */
+  line-height: 1.6; /* Improve readability */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* Remove default body margin/padding */
+}
+
+body.light-mode {
+  /* Keep light mode variables here for manual override */
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --text-color: #333;
+  --background-color: #fff;
+  --code-background-color: #f4f4f4;
+  --code-text-color: #333;
+}
+
+body.dark-mode {
+  /* Keep dark mode variables here for manual override */
+  --primary-color: #90caf9; /* Lighter blue for dark mode */
+  --secondary-color: #b0bec5; /* Lighter gray for dark mode */
+  --text-color: #eee; /* Light text */
+  --background-color: #1e1e1e; /* Dark background */
+  --code-background-color: #2d2d2d; /* Dark background for code */
+  --code-text-color: #ccc; /* Light text for code */
+}
+
+/* Container for main content */
+.container {
+  margin: auto;
+  padding: 2rem;
+  max-width: 80ch;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+  line-height: 1.2; /* Improve heading readability */
+}
+
+a {
+  color: var(--primary-color);
+}
+
+/* Styling for code snippets */
+pre {
+  background-color: var(--code-background-color);
+  color: var(--code-text-color);
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-x: auto; /* Add scroll for long lines */
+  margin-bottom: 1rem; /* Add space below code blocks */
+}
+
+code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
