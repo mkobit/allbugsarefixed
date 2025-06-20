@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node, Yarn, and Cache
+      - name: Setup node, yarn, and cache
         uses: ./.github/actions/setup-node-yarn
       - name: Install dependencies
         run: yarn install --frozen-lockfile
