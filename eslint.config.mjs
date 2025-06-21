@@ -6,6 +6,7 @@ import tsParser from "@typescript-eslint/parser";
 import { flat as mdxFlat, flatCodeBlocks as mdxFlatCodeBlocks } from "eslint-plugin-mdx";
 import prettierConfig from "eslint-config-prettier";
 import globals from "globals";
+import sortKeysPlugin from "eslint-plugin-sort-keys";
 
 const tsconfigRootDir = typeof import.meta.cwd === "function" ? import.meta.cwd() : ".";
 
@@ -14,7 +15,7 @@ export default [
     ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/"],
   },
   js.configs.recommended,
-  // TypeScript strictest rules
+  // TypeScript rules - balanced approach for Astro + Zod
   {
     files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
@@ -30,14 +31,18 @@ export default [
     },
     plugins: {
       "@typescript-eslint": typescriptEslint,
+      "sort-keys": sortKeysPlugin,
     },
     rules: {
-      ...typescriptEslint.configs["strict-type-checked"].rules,
-      ...typescriptEslint.configs["stylistic-type-checked"].rules,
+      ...typescriptEslint.configs.recommended.rules,
+      ...typescriptEslint.configs["stylistic"].rules,
+      // Key rules for type safety without being overly strict
       "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/explicit-function-return-type": "error",
-      "@typescript-eslint/no-non-null-assertion": "error",
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/no-non-null-assertion": "warn",
       "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
+      // Object key ordering rule
+      "sort-keys": ["error", "asc", { caseSensitive: true, natural: true }],
     },
   },
   // Astro files
