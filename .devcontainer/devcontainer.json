@@ -82,24 +82,9 @@
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "always"
         },
-        "eslint.validate": [
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-          "astro",
-          "mdx"
-        ],
+        "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "astro", "mdx"],
         "cSpell.language": "en",
-        "cSpell.userWords": [
-          "devcontainer",
-          "vite",
-          "astro",
-          "asciidoc",
-          "mdx",
-          "eslint",
-          "prettier"
-        ],
+        "cSpell.userWords": ["devcontainer", "vite", "astro", "asciidoc", "mdx", "eslint", "prettier"],
         "cSpell.enabledFileTypes": {
           "*": true,
           "gitignore": false,

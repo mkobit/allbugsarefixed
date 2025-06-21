@@ -1,0 +1,20 @@
+name: Setup Node.js, Yarn, and Cache
+
+description: Checks out code, sets up Node.js, and caches node_modules for yarn.
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "22"
+        cache: "yarn"
+
+    - name: Cache node_modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-

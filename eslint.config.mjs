@@ -1,66 +1,61 @@
-import globals from "globals";
-import tsParser from "@typescript-eslint/parser";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
 import astroPlugin from "eslint-plugin-astro";
 import astroEslintParser from "astro-eslint-parser";
-import * as mdxPlugin from "eslint-plugin-mdx";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
+import { flat as mdxFlat, flatCodeBlocks as mdxFlatCodeBlocks } from "eslint-plugin-mdx";
+import prettierConfig from "eslint-config-prettier";
+import globals from "globals";
+import sortKeysPlugin from "eslint-plugin-sort-keys";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-});
+const tsconfigRootDir = typeof import.meta.cwd === "function" ? import.meta.cwd() : ".";
+
 export default [
   {
-    ignores: [".astro/", "dist/"],
+    ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/"],
   },
   js.configs.recommended,
-  {
-    files: ["**/*.js", "**/*.mjs"],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-      },
-      sourceType: "module",
-    },
-  },
+  // TypeScript rules - balanced approach for Astro + Zod
   {
     files: ["**/*.ts", "**/*.tsx"],
-    plugins: {
-      "@typescript-eslint": typescriptEslint,
-    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
         project: "./tsconfig.json",
-        tsconfigRootDir: __dirname,
+        tsconfigRootDir,
+        sourceType: "module",
       },
       globals: {
         ...globals.node,
       },
     },
+    plugins: {
+      "@typescript-eslint": typescriptEslint,
+      "sort-keys": sortKeysPlugin,
+    },
     rules: {
-      ...typescriptEslint.configs["eslint-recommended"].rules,
       ...typescriptEslint.configs.recommended.rules,
+      ...typescriptEslint.configs["stylistic"].rules,
+      // Key rules for type safety without being overly strict
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/no-non-null-assertion": "warn",
+      "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
+      // Object key ordering rule
+      "sort-keys": ["error", "asc", { caseSensitive: true, natural: true }],
     },
   },
+  // Astro files
   {
     files: ["**/*.astro"],
-    plugins: {
-      astro: astroPlugin,
-    },
     languageOptions: {
       parser: astroEslintParser,
       parserOptions: {
         parser: "@typescript-eslint/parser",
         project: "./tsconfig.json",
-        tsconfigRootDir: __dirname,
+        tsconfigRootDir,
         extraFileExtensions: [".astro"],
+        sourceType: "module",
       },
       globals: {
         ...globals.browser,
@@ -68,22 +63,33 @@ export default [
         ...astroPlugin.environments.astro.globals,
       },
     },
+    plugins: {
+      astro: astroPlugin,
+    },
     processor: astroPlugin.processors.astro,
     rules: {
       ...astroPlugin.configs.recommended.rules,
       ...astroPlugin.configs["jsx-a11y-recommended"].rules,
     },
   },
-
+  // Astro <script> blocks (browser context)
   {
-    ...mdxPlugin.flat,
+    files: ["**/*.astro/*.js", "*.astro/*.js", "**/*.astro/*.ts", "*.astro/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        sourceType: "module",
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+    rules: {},
   },
-  {
-    ...mdxPlugin.flatCodeBlocks,
-  },
-  {
-    ...compat.config({
-      extends: ["prettier"],
-    })[0],
-  },
+  // MDX
+  mdxFlat,
+  mdxFlatCodeBlocks,
+  // Prettier config last
+  prettierConfig,
 ];
