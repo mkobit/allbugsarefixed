@@ -28,28 +28,19 @@ const currentYear = Temporal.Now.plainDateISO().year;
     </script>
   </head>
   <body>
-    <nav>
-      <a href="/">Home</a> |
-      <a href="/blog/">Blog</a>
-      <ThemeToggle />
-    </nav>
-    <slot />
+    <header>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about/">About</a>
+        <ThemeToggle />
+      </nav>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
     <footer>
       <p>&copy; {currentYear} All Bugs Are Fixed</p>
     </footer>
-    <style is:global>
-      html {
-        font-family: system-ui, sans-serif;
-      }
-      nav {
-        margin-bottom: 2rem;
-      }
-      footer {
-        margin-top: 2rem;
-        border-top: 1px solid #ccc;
-        padding-top: 1rem;
-        font-size: 0.8em;
-      }
-    </style>
   </body>
 </html>

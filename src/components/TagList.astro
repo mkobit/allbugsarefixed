@@ -1,0 +1,23 @@
+---
+interface Tag {
+  name: string;
+  children?: Tag[];
+}
+
+interface Props {
+  tags: Tag[];
+}
+
+const { tags } = Astro.props;
+---
+
+<ul>
+  {
+    tags.map((tag) => (
+      <li>
+        {tag.name}
+        {tag.children && <Astro.self tags={tag.children} />}
+      </li>
+    ))
+  }
+</ul>

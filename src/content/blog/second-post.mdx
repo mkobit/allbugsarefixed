@@ -1,0 +1,37 @@
+---
+title: "Second Post: Using MDX Components"
+pubDate: 2024-02-01
+description: "A demonstration of using React components inside MDX."
+tags:
+  - name: "astro"
+    children:
+      - name: "mdx"
+  - name: "react"
+draft: false
+---
+
+import Callout from '../../components/Callout.tsx';
+
+# MDX Components
+
+This post demonstrates how to use React components inside MDX files in an Astro project.
+
+<Callout type="info">
+  This is an informational callout. You can use it to highlight important information.
+</Callout>
+
+## Nested Tags
+
+This post also uses the new nested tag structure. The tags for this post are:
+
+- astro
+  - mdx
+- react
+
+<Callout type="warning">
+  Be careful when mixing different frameworks. It can get complicated!
+</Callout>
+
+<Callout type="danger">
+  Here is a danger callout.
+</Callout>

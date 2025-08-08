@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import TagList from "../../components/TagList.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -17,6 +18,7 @@ const { Content } = await entry.render();
 <Layout title={entry.data.title}>
   <h1>{entry.data.title}</h1>
   <p>Published on: {entry.data.pubDate.toLocaleDateString()}</p>
+  {entry.data.tags && <TagList tags={entry.data.tags} />}
   <hr />
   <Content />
 </Layout>
