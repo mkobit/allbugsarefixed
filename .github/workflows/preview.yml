@@ -1,4 +1,4 @@
-name: Deploy PR Preview to GitHub Pages
+name: Create PR Preview Artifact
 
 on:
   pull_request:
@@ -7,8 +7,6 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  pages: write
-  id-token: write
 
 jobs:
   build:
@@ -19,39 +17,29 @@ jobs:
         uses: ./.github/actions/setup-node-yarn
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Update base path for preview
-        run: |
-          sed -i "s|base: \"/\"|base: \"/pr-${{ github.event.number }}/\"|" astro.config.mjs
-          echo "Updated astro.config.mjs with base path for PR preview:"
-          cat astro.config.mjs
       - name: Build site
         run: yarn build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: preview-site
           path: ./dist
 
-  deploy:
+  post-comment:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
       - name: Post or Update PR Comment
         uses: actions/github-script@v7
         with:
           script: |
-            const comment_body = `🚀 Preview deployment is ready at: ${{ steps.deployment.outputs.page_url }}`;
+            const comment_body = `📦 Preview artifact is ready. Download it from the [summary of this Actions run](${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}).`;
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            const existing_comment = comments.find(comment => comment.user.login === 'github-actions[bot]' && comment.body.startsWith('🚀 Preview deployment is ready at:'));
+            const existing_comment = comments.find(comment => comment.user.login === 'github-actions[bot]' && comment.body.startsWith('📦 Preview artifact is ready.'));
             if (existing_comment) {
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
