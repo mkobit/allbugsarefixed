@@ -8,18 +8,20 @@ const posts = (await getCollection("blog"))
 ---
 
 <Layout title="Blog Posts">
-  <h1>Blog Posts</h1>
-  <ul>
+  <h1 class="text-3xl font-bold mb-8">Blog Posts</h1>
+  <div class="space-y-8">
     {
       posts.map((post) => (
-        <li>
-          <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
-          <p>
-            <small>Published on: {post.data.pubDate.toLocaleDateString()}</small>
+        <a href={`/blog/${post.slug}/`} class="block p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{post.data.title}</h2>
+          <p class="font-normal text-gray-700 dark:text-gray-400">{post.data.description}</p>
+          <p class="text-sm text-gray-500 mt-4">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
           </p>
-          <p>{post.data.description}</p>
-        </li>
+        </a>
       ))
     }
-  </ul>
+  </div>
 </Layout>
