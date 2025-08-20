@@ -27,29 +27,21 @@ const currentYear = Temporal.Now.plainDateISO().year;
       Date.prototype.toTemporalInstant = toTemporalInstant;
     </script>
   </head>
-  <body>
-    <nav>
-      <a href="/">Home</a> |
-      <a href="/blog/">Blog</a>
-      <ThemeToggle />
-    </nav>
-    <slot />
-    <footer>
-      <p>&copy; {currentYear} All Bugs Are Fixed</p>
-    </footer>
-    <style is:global>
-      html {
-        font-family: system-ui, sans-serif;
-      }
-      nav {
-        margin-bottom: 2rem;
-      }
-      footer {
-        margin-top: 2rem;
-        border-top: 1px solid #ccc;
-        padding-top: 1rem;
-        font-size: 0.8em;
-      }
-    </style>
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="flex justify-between items-center py-8">
+        <a href="/" class="text-2xl font-bold">All Bugs Are Fixed</a>
+        <nav class="flex items-center space-x-4">
+          <a href="/blog/" class="hover:underline">Blog</a>
+          <ThemeToggle />
+        </nav>
+      </header>
+      <main class="py-8">
+        <slot />
+      </main>
+      <footer class="py-8 text-center text-gray-500">
+        <p>&copy; {currentYear} All Bugs Are Fixed</p>
+      </footer>
+    </div>
   </body>
 </html>
