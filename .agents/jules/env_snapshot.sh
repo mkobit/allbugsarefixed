@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # Jules environment setup for this repository
 # For more information, see: https://jules.google/docs/environment/
@@ -45,4 +44,3 @@ echo "Building application..."
 yarn build
 
 echo "Environment ready"
-```
