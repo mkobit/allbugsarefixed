@@ -1,1 +1,1 @@
-To ensure dependencies are up to date, run `yarn install --frozen-lockfile` before processing tasks.
+This is a blog developed using the Astro framework (https://astro.build/).
