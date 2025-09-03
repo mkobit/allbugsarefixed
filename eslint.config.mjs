@@ -8,7 +8,7 @@ import prettierConfig from "eslint-config-prettier";
 import globals from "globals";
 import sortKeysPlugin from "eslint-plugin-sort-keys";
 
-const tsconfigRootDir = typeof import.meta.cwd === "function" ? import.meta.cwd() : ".";
+const tsconfigRootDir = new URL(".", import.meta.url).pathname;
 
 export default [
   {
