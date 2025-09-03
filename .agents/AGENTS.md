@@ -5,66 +5,54 @@ This is a blog developed using the Astro framework (https://astro.build/).
 ## Project structure
 ```
 ├── .agents/               # Agent configurations
-│   ├── claude/           # Claude-specific config
-│   │   └── CLAUDE.md    # Claude instructions
+│   ├── claude/           # Claude-specific config  
 │   └── AGENTS.md        # This file (symlinked to root)
 ├── .devcontainer/        # Development container config
 ├── src/                  # Source code
 │   ├── blog/            # Blog posts
-│   ├── components/      # React components
+│   ├── components/      # UI components  
 │   ├── content/         # Content collections
-│   ├── layouts/         # Astro layouts
+│   ├── layouts/         # Page layouts
 │   ├── pages/           # Route pages
-│   └── styles/          # CSS/styling
+│   └── styles/          # Styling
 ├── public/              # Static assets
 └── package.json         # Dependencies & scripts
 ```
 
-## Technology stack
-- **Framework**: Astro 5.x (static site generator)
-- **UI**: React 19.x components + Astro components
-- **Styling**: TailwindCSS 4.x
-- **Content**: MDX for blog posts
-- **Package manager**: Yarn (with frozen lockfile)
-- **TypeScript**: Strict mode enabled
-- **Linting**: ESLint + Prettier
-- **Dev environment**: VS Code devcontainer
+## Technology principles
+- **Versions**: Check `package.json` for current framework and dependency versions
+- **Package management**: Yarn with lockfile installations (`yarn install --frozen-lockfile`)
+- **Configuration**: Prefer TypeScript > JavaScript > JSON/YAML for config files
+- **Type safety**: Strict TypeScript with comprehensive type checking
+- **Code quality**: ESLint + Prettier for linting and formatting
+- **Reproducibility**: Deterministic builds with pinned versions for security
 
-## Development setup
-
-### Using devcontainer (recommended)
-- Container: `typescript-node:1-22-bookworm`
-- Auto-installs: Node 22 LTS, Yarn latest, GitHub CLI
-- Ports: 4321 (Astro), 5173 (Vite)
-- Extensions: ESLint, Prettier, Astro, MDX support
-- Post-create: `yarn install --frozen-lockfile`
-
-### Local development
+## Development workflow
 ```bash
-yarn install --frozen-lockfile
-yarn start                    # Dev server on :4321
-yarn build                   # Production build
-yarn preview                 # Preview build on :4321
-yarn lint                    # ESLint check
+yarn install --frozen-lockfile  # Install dependencies
+yarn start                      # Development server
+yarn build                     # Production build  
+yarn lint                      # Code quality checks
 ```
 
-## Key configuration files
-- `astro.config.mjs`: Astro + MDX + TailwindCSS setup
-- `tsconfig.json`: TypeScript with strict mode, path aliases (`@/*`)
-- `eslint.config.mjs`: ESLint with Astro, React, MDX rules
-- `tailwind.config.mjs`: TailwindCSS configuration
-- `.yarnrc`: `ignore-scripts true` for security
+## Key files and their purpose
+- `package.json`: Dependencies, scripts, project metadata
+- `tsconfig.json`: TypeScript configuration with strict mode
+- `astro.config.mjs`: Astro framework configuration
+- `eslint.config.mjs`: Code linting rules
+- `.yarnrc`: Yarn security settings
+- `.devcontainer/`: VS Code development container setup
 
-## CI/CD workflows
-- **check.yml**: Lint + build on PRs
-- **deploy.yml**: Deploy to GitHub Pages on main
-- **dependabot.yml**: Monthly npm, weekly GitHub Actions updates
-- Custom action: `setup-node-yarn` for consistent caching
+## CI/CD and automation
+- GitHub Actions handle build/deploy workflows
+- Dependabot manages dependency updates
+- Custom actions ensure consistent caching and setup
+- Versions are pinned for reproducibility and security
 
 ## Agent guidelines
-- Follow existing code patterns and conventions
-- Use yarn with `--frozen-lockfile` for installs
-- Run `yarn lint` before committing
+- Always run `yarn lint` and `yarn build` to verify changes
+- Follow existing code patterns and conventions  
+- Use yarn with frozen lockfile for all installations
 - Prefer editing existing files over creating new ones
-- TypeScript strict mode - all code must be properly typed
-- Follow Astro best practices for component structure
+- Ensure all code passes strict TypeScript validation
+- Check configuration files to understand current setup
