@@ -7,8 +7,10 @@ import { flat as mdxFlat, flatCodeBlocks as mdxFlatCodeBlocks } from "eslint-plu
 import prettierConfig from "eslint-config-prettier";
 import globals from "globals";
 import sortKeysPlugin from "eslint-plugin-sort-keys";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-const tsconfigRootDir = typeof import.meta.cwd === "function" ? import.meta.cwd() : ".";
+const tsconfigRootDir = dirname(fileURLToPath(import.meta.url));
 
 export default [
   {
