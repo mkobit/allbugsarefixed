@@ -89,8 +89,9 @@ export default [
     },
     rules: {},
   },
-  // MDX
+  // MDX files - using default configuration
   mdxFlat,
+  // MDX code blocks
   mdxFlatCodeBlocks,
   // Prettier config last
   prettierConfig,
