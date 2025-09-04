@@ -4,8 +4,6 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
   push:
-    branches:
-      - '**'
     branches-ignore:
       - "main"
       - "gh-pages"
@@ -13,7 +11,6 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' || !startsWith(github.ref, 'refs/pull/')
     steps:
       - uses: actions/checkout@v5
       - name: Setup Node, Yarn, and Cache
