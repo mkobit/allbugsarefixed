@@ -6,8 +6,6 @@ on:
       - "main"
       - "gh-pages"
       - 'dependabot/**' #avoid duplicates: only run the PR, not the push
-    tags-ignore:
-      - 'v*' #avoid rerun existing commit on release
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 
