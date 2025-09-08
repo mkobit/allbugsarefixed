@@ -1,0 +1,72 @@
+/* Theme Toggle Component */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: var(--space-2);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-foreground);
+}
+
+.theme-toggle:hover {
+  background: var(--color-muted);
+  border-color: var(--color-primary-300);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:focus {
+  outline: none;
+  box-shadow: var(--focus-ring-offset), var(--focus-ring);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.theme-toggle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.theme-toggle-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .theme-toggle {
+    background: var(--color-background);
+    border-color: var(--color-border);
+  }
+  
+  .theme-toggle:hover {
+    background: var(--color-muted);
+    border-color: var(--color-primary-400);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .theme-toggle {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle {
+    transition: none;
+  }
+}
