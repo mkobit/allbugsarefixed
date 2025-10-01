@@ -17,6 +17,15 @@ export default [
     ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/"],
   },
   js.configs.recommended,
+  // Config files (Node.js environment)
+  {
+    files: ["**/*.config.{js,mjs,ts}", "eslint.config.mjs"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
   // TypeScript rules - balanced approach for Astro + Zod
   {
     files: ["**/*.ts", "**/*.tsx"],
@@ -28,6 +37,7 @@ export default [
         sourceType: "module",
       },
       globals: {
+        ...globals.browser,
         ...globals.node,
       },
     },

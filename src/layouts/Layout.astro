@@ -1,12 +1,16 @@
 ---
 import { Temporal } from "@js-temporal/polyfill";
-import ThemeToggle from "../components/ThemeToggle.astro";
+import SkipLinks from "../components/SkipLinks.astro";
+import SiteMeta from "../components/SiteMeta.astro";
+import ThemeToggle from "../components/ThemeToggle.tsx";
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, image } = Astro.props;
 const currentYear = Temporal.Now.plainDateISO().year;
 ---
 
@@ -14,12 +18,26 @@ const currentYear = Temporal.Now.plainDateISO().year;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    
+    <!-- Site Meta -->
+    <SiteMeta title={title} description={description} image={image} />
+    
+    <!-- Fonts & Styles -->
+    <link rel="stylesheet" href="/src/assets/css/design-system.css" />
+    <link rel="stylesheet" href="/src/assets/css/base.css" />
+    <link rel="stylesheet" href="/src/assets/css/blog-search.css" />
+    <link rel="stylesheet" href="/src/assets/css/theme-toggle.css" />
     <link rel="stylesheet" href="/src/styles/tailwind.css" />
+    
+    <!-- Generator -->
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Temporal Polyfill -->
     <script is:inline>
       import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
       globalThis.Temporal = Temporal;
@@ -27,21 +45,61 @@ const currentYear = Temporal.Now.plainDateISO().year;
       Date.prototype.toTemporalInstant = toTemporalInstant;
     </script>
   </head>
-  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header class="flex justify-between items-center py-8">
-        <a href="/" class="text-2xl font-bold">All Bugs Are Fixed</a>
-        <nav class="flex items-center space-x-4">
-          <a href="/blog/" class="hover:underline">Blog</a>
-          <ThemeToggle />
+  <body>
+    <SkipLinks />
+    
+    <header class="container" role="banner">
+      <div class="flex items-center justify-between" style="min-height: var(--header-height);">
+        <div class="flex items-center gap-4">
+          <a href="/" class="text-2xl font-bold text-primary-600 hover:text-primary-700 transition-colors">
+            All Bugs Are Fixed
+          </a>
+        </div>
+        
+        <nav id="nav-menu" role="navigation" aria-label="Main navigation">
+          <ul class="flex items-center gap-6" role="list">
+            <li>
+              <a href="/blog/" class="hover:text-primary-600 transition-colors" aria-current={Astro.url.pathname.startsWith('/blog') ? 'page' : undefined}>
+                Blog
+              </a>
+            </li>
+            <li>
+              <ThemeToggle client:load />
+            </li>
+          </ul>
         </nav>
-      </header>
-      <main class="py-8">
-        <slot />
-      </main>
-      <footer class="py-8 text-center text-gray-500">
-        <p>&copy; {currentYear} All Bugs Are Fixed</p>
-      </footer>
-    </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content container" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="container" role="contentinfo" style="padding: var(--space-8) var(--container-padding);">
+      <div class="text-center">
+        <p style="color: var(--color-muted-foreground);">
+          &copy; {currentYear} All Bugs Are Fixed. Built with 
+          <a href="https://astro.build" class="text-primary-600 hover:text-primary-700">Astro</a>
+        </p>
+      </div>
+    </footer>
+
+    <style>
+      /* Layout specific styles */
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      
+      main {
+        padding: var(--space-8) var(--container-padding);
+      }
+      
+      header {
+        border-bottom: 1px solid var(--color-border);
+        padding: 0 var(--container-padding);
+      }
+    </style>
   </body>
 </html>
