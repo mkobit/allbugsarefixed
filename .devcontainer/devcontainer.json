@@ -3,7 +3,6 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    // Add Yarn feature
     "ghcr.io/devcontainers/features/node:1": {
       "nodeGypDependencies": true,
       "version": "lts", // Installs latest LTS Node, redundant with base image but ensures consistency
@@ -25,7 +24,13 @@
     }
   },
 
-  "postCreateCommand": "yarn install --frozen-lockfile",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && yarn install --frozen-lockfile",
+
+  // Mount host ~/.claude directory read-only
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind,readonly,consistency=cached"
+  ],
+
   // VS Code extensions to install inside the container.
   "customizations": {
     "vscode": {
