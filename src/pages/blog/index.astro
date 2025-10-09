@@ -1,27 +1,95 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import BlogCard from "../../components/BlogCard.astro";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  
+const postCount = posts.length;
 ---
 
-<Layout title="Blog Posts">
-  <h1 class="text-3xl font-bold mb-8">Blog Posts</h1>
-  <div class="space-y-8">
-    {
-      posts.map((post) => (
-        <a href={`/blog/${post.slug}/`} class="block p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{post.data.title}</h2>
-          <p class="font-normal text-gray-700 dark:text-gray-400">{post.data.description}</p>
-          <p class="text-sm text-gray-500 mt-4">
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
-            </time>
-          </p>
-        </a>
-      ))
-    }
+<Layout 
+  title="Blog" 
+  description="Latest posts about software engineering, debugging, and tech insights."
+>
+  <div class="blog-header">
+    <h1 class="blog-title">Latest Posts</h1>
+    <p class="blog-subtitle">
+      Sharing insights on software engineering, debugging techniques, and the art of building reliable systems.
+    </p>
+    <p class="blog-count" aria-live="polite">
+      {postCount} {postCount === 1 ? 'post' : 'posts'} published
+    </p>
   </div>
+
+  {posts.length > 0 ? (
+    <div class="blog-grid" role="feed" aria-label="Blog posts">
+      {posts.map((post) => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+  ) : (
+    <div class="blog-empty">
+      <p>No posts published yet. Check back soon!</p>
+    </div>
+  )}
 </Layout>
+
+<style>
+  .blog-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+  
+  .blog-title {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    color: var(--color-foreground);
+    margin-bottom: var(--space-4);
+  }
+  
+  .blog-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-muted-foreground);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-6);
+  }
+  
+  .blog-count {
+    font-size: var(--font-size-sm);
+    color: var(--color-muted-foreground);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  
+  @media (min-width: 768px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .blog-empty {
+    text-align: center;
+    padding: var(--space-12);
+    color: var(--color-muted-foreground);
+  }
+</style>
