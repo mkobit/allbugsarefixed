@@ -21,7 +21,7 @@ This is a blog developed using the Astro framework (https://astro.build/).
 
 ## Technology principles
 - **Versions**: Check `package.json` for current framework and dependency versions
-- **Package management**: Yarn with lockfile installations (`yarn install --frozen-lockfile`)
+- **Package management**: PNPM with lockfile installations (`pnpm install --frozen-lockfile`)
 - **Configuration**: Prefer TypeScript > JavaScript > JSON/YAML for config files
 - **Type safety**: Strict TypeScript with comprehensive type checking
 - **Code quality**: ESLint + Prettier for linting and formatting
@@ -29,10 +29,10 @@ This is a blog developed using the Astro framework (https://astro.build/).
 
 ## Development workflow
 ```bash
-yarn install --frozen-lockfile  # Install dependencies
-yarn start                      # Development server
-yarn build                     # Production build  
-yarn lint                      # Code quality checks
+pnpm install --frozen-lockfile  # Install dependencies
+pnpm start                      # Development server
+pnpm build                     # Production build
+pnpm lint                      # Code quality checks
 ```
 
 ## Key files and their purpose
@@ -40,7 +40,7 @@ yarn lint                      # Code quality checks
 - `tsconfig.json`: TypeScript configuration with strict mode
 - `astro.config.mjs`: Astro framework configuration
 - `eslint.config.mjs`: Code linting rules
-- `.yarnrc`: Yarn security settings
+- `.npmrc`: PNPM security settings
 - `.devcontainer/`: VS Code development container setup
 
 ## CI/CD and automation
@@ -50,9 +50,9 @@ yarn lint                      # Code quality checks
 - Versions are pinned for reproducibility and security
 
 ## Agent guidelines
-- Always run `yarn lint` and `yarn build` to verify changes
+- Always run `pnpm lint` and `pnpm build` to verify changes
 - Follow existing code patterns and conventions  
-- Use yarn with frozen lockfile for all installations
+- Use pnpm with frozen lockfile for all installations
 - Prefer editing existing files over creating new ones
 - Ensure all code passes strict TypeScript validation
 - Check configuration files to understand current setup

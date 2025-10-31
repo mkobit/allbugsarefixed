@@ -19,14 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Setup node, yarn, and cache
-        uses: ./.github/actions/setup-node-yarn
+      - name: Setup Node, PNPM, and Cache
+        uses: ./.github/actions/setup-node-pnpm
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Lint code
-        run: yarn lint
+        run: pnpm lint
       - name: Build site
-        run: yarn build
+        run: pnpm build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         id: deployment

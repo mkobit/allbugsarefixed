@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/yarn,node,visualstudiocode,macos,linux,windows,astro
-# Edit at https://www.toptal.com/developers/gitignore?templates=yarn,node,visualstudiocode,macos,linux,windows,astro
+# Created by https://www.toptal.com/developers/gitignore/api/pnpm,node,visualstudiocode,macos,linux,windows,astro
+# Edit at https://www.toptal.com/developers/gitignore?templates=pnpm,node,visualstudiocode,macos,linux,windows,astro
 
 ### Astro ###
 # Gitignore template for Astro projects
@@ -59,8 +59,6 @@ Temporary Items
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
@@ -105,7 +103,7 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
-# Optional npm cache directory
+# Optional npm cache
 .npm
 
 # Optional eslint cache
@@ -125,9 +123,6 @@ web_modules/
 
 # Output of 'npm pack'
 *.tgz
-
-# Yarn Integrity file
-.yarn-integrity
 
 # dotenv environment variable files
 .env
@@ -177,13 +172,6 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
-
-# yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
 
 ### Node Patch ###
 # Serverless Webpack directories
@@ -238,25 +226,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-### yarn ###
-# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
-
-.yarn/*
-!.yarn/releases
-!.yarn/patches
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-
-# if you are NOT using Zero-installs, then:
-# comment the following lines
-!.yarn/cache
-
-# and uncomment the following lines
-# .pnp.*
-
-# End of https://www.toptal.com/developers/gitignore/api/yarn,node,visualstudiocode,macos,linux,windows,astro
 
 # Claude Code local settings
 .claude/settings.local.json
