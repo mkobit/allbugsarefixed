@@ -15,12 +15,12 @@ jobs:
     if: (github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')))
     steps:
       - uses: actions/checkout@v5
-      - name: Setup Node, Yarn, and Cache
-        uses: ./.github/actions/setup-node-yarn
+      - name: Setup Node, PNPM, and Cache
+        uses: ./.github/actions/setup-node-pnpm
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Lint code
-        run: yarn lint
+        run: pnpm lint
 
   build:
     runs-on: ubuntu-latest
@@ -28,9 +28,9 @@ jobs:
     if: (github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')))
     steps:
       - uses: actions/checkout@v5
-      - name: Setup Node, Yarn, and Cache
-        uses: ./.github/actions/setup-node-yarn
+      - name: Setup Node, PNPM, and Cache
+        uses: ./.github/actions/setup-node-pnpm
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Build site
-        run: yarn build
+        run: pnpm build

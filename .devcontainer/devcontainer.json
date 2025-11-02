@@ -3,17 +3,13 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    // Add Yarn feature
     "ghcr.io/devcontainers/features/node:1": {
       "nodeGypDependencies": true,
-      "version": "lts", // Installs latest LTS Node, redundant with base image but ensures consistency
-      "yarn": "latest" // Install latest Yarn
+      "version": "lts",
+      "pnpm": "latest"
     }
   },
-  // Forward ports: Default Astro dev port (4321) and default Vite dev port (5173)
   "forwardPorts": [4321, 5173],
-
-  // Port attributes - labels the forwarded ports in VS Code
   "portsAttributes": {
     "4321": {
       "label": "Astro dev server",
@@ -24,20 +20,17 @@
       "onAutoForward": "notify"
     }
   },
-
-  "postCreateCommand": "yarn install --frozen-lockfile",
-  // VS Code extensions to install inside the container.
+  "postCreateCommand": "pnpm install --frozen-lockfile",
   "customizations": {
     "vscode": {
       "extensions": [
-        "dbaeumer.vscode-eslint", // ESLint for code linting
-        "esbenp.prettier-vscode", // Prettier for code formatting
-
-        "astro-build.astro-vscode", // Official Astro extension
-        "unifiedjs.vscode-mdx", // MDX language support
-        "dsznajder.es7-react-js-snippets", // React/Redux/GraphQL snippets
-        "vite.vscode-vite", // Extension for Vite specific features (optional but helpful)
-        "asciidoctor.asciidoctor-vscode", // AsciiDoc language support and preview
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "astro-build.astro-vscode",
+        "unifiedjs.vscode-mdx",
+        "dsznajder.es7-react-js-snippets",
+        "vite.vscode-vite",
+        "asciidoctor.asciidoctor-vscode",
         "streetsidesoftware.code-spell-checker",
         "ms-azuretools.vscode-docker"
       ],
@@ -71,7 +64,6 @@
           "editor.formatOnSave": true
         },
         "[astro]": {
-          // Astro extension handles formatting for .astro files
           "editor.defaultFormatter": "astro-build.astro-vscode",
           "editor.formatOnSave": true
         },
