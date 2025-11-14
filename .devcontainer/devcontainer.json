@@ -20,7 +20,7 @@
       "onAutoForward": "notify"
     }
   },
-  "postCreateCommand": "pnpm install --frozen-lockfile",
+  "postCreateCommand": "./scripts/env_setup.sh",
   "customizations": {
     "vscode": {
       "extensions": [
