@@ -20,6 +20,7 @@ const currentYear = Temporal.Now.plainDateISO().year;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="stylesheet" href="/src/styles/tailwind.css" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
     <script is:inline>
       import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
       globalThis.Temporal = Temporal;

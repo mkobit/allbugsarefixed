@@ -1,0 +1,27 @@
+---
+interface Props {
+	latitude: number;
+	longitude: number;
+	zoom: number;
+}
+
+const { latitude, longitude, zoom } = Astro.props;
+// Generate a unique ID for each map instance to avoid conflicts.
+const mapId = `map-${Math.random().toString(36).substring(2, 9)}`;
+---
+<div id={mapId} class="leaflet-map" style="height: 400px; width: 100%;"></div>
+
+<script define:vars={{ mapId, latitude, longitude, zoom }}>
+  import L from 'leaflet';
+
+  // We need to check if the map has already been initialized.
+  // Astro's HMR can sometimes cause scripts to run multiple times.
+  const mapElement = document.getElementById(mapId);
+  if (mapElement && !mapElement._leaflet_id) {
+    const map = L.map(mapId).setView([latitude, longitude], zoom);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+  }
+</script>
