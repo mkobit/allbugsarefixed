@@ -29,10 +29,5 @@ fi
 echo "Installing dependencies..."
 pnpm install
 
-echo "Running linter..."
-pnpm lint
-
-echo "Building project..."
-pnpm build
 
 echo " Environment ready"
