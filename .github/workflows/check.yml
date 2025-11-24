@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')))
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup Node, PNPM, and Cache
         uses: ./.github/actions/setup-node-pnpm
       - name: Install dependencies
@@ -27,7 +27,7 @@ jobs:
     needs: lint
     if: (github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')))
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup Node, PNPM, and Cache
         uses: ./.github/actions/setup-node-pnpm
       - name: Install dependencies
