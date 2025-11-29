@@ -19,6 +19,8 @@ jobs:
         uses: ./.github/actions/setup-node-pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Verify tool versions
+        run: node scripts/verify-versions.mjs
       - name: Lint code
         run: pnpm lint
 
