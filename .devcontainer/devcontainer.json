@@ -5,8 +5,8 @@
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {
       "nodeGypDependencies": true,
-      "version": "lts",
-      "pnpm": "latest"
+      "version": "22.21.1",
+      "pnpm": "10.20.0"
     }
   },
   "forwardPorts": [4321, 5173],

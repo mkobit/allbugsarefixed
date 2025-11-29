@@ -89,6 +89,15 @@ export default [
     },
     rules: {},
   },
+  // Script files
+  {
+    files: ["**/*.mjs"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
   // MDX files - using default configuration
   mdxFlat,
   // MDX code blocks
