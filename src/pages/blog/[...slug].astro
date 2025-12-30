@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../utils/date";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -12,48 +13,41 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-
-// Helper to format date
-const formatDate = (date: Date) => {
-  return date.toLocaleDateString("en-US", {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-};
 ---
 
 <Layout title={entry.data.title}>
   <article class="w-full">
     <!-- Header Section -->
-    <header class="mb-12 text-center max-w-[65ch] mx-auto pt-8">
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-josh-primary to-josh-secondary mb-6 leading-tight pb-2">
+    <header class="mb-10 text-center max-w-3xl mx-auto pt-4">
+      <div class="mb-4">
+        <span class="text-brand-primary font-bold tracking-wide uppercase text-xs">
+          Blog Post
+        </span>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-brand-text mb-6 leading-tight">
         {entry.data.title}
       </h1>
 
-      <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-gray-500 dark:text-gray-400 font-mono">
-        <div class="flex items-center gap-2">
-          <span class="uppercase tracking-wider text-xs font-bold text-gray-400 dark:text-gray-500">Published</span>
-          <time datetime={entry.data.pubDate.toISOString()} class="text-gray-700 dark:text-gray-300">
-            {formatDate(entry.data.pubDate)}
-          </time>
-        </div>
-
-        <span class="hidden md:inline text-gray-300 dark:text-gray-700">•</span>
-
-        <div class="flex items-center gap-2">
-           <span class="uppercase tracking-wider text-xs font-bold text-gray-400 dark:text-gray-500">Filed Under</span>
-           <span class="text-josh-primary font-medium">General</span>
-        </div>
+      <div class="flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400 font-mono">
+        <time datetime={entry.data.pubDate.toISOString()}>
+          {formatDate(entry.data.pubDate)}
+        </time>
+        <span class="text-gray-300 dark:text-gray-700">/</span>
+        <span>General</span>
       </div>
     </header>
 
     <!-- Content Section -->
-    <div class="prose prose-lg dark:prose-invert max-w-[65ch] mx-auto">
+    <!-- Prose classes extracted to @layer components in a real setup, or kept here but simplified -->
+    <div class="prose prose-lg dark:prose-invert max-w-3xl mx-auto
+      prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
+      prose-headings:font-bold prose-headings:tracking-tight
+      prose-img:rounded-xl prose-img:shadow-lg
+    ">
       <Content />
     </div>
 
-    <!-- Post-content spacer -->
     <div class="h-24"></div>
   </article>
 </Layout>
