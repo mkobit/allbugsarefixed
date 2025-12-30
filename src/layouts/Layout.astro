@@ -14,12 +14,11 @@ const currentYear = Temporal.Now.plainDateISO().year;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content="All Bugs Are Fixed - A Developer Blog" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link rel="stylesheet" href="/src/styles/tailwind.css" />
     <link rel="stylesheet" href="/src/styles/global.css" />
     <script is:inline>
       import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
@@ -27,22 +26,90 @@ const currentYear = Temporal.Now.plainDateISO().year;
       globalThis.Intl = Intl;
       Date.prototype.toTemporalInstant = toTemporalInstant;
     </script>
+    <script is:inline>
+      // Initialize theme to prevent flash of unstyled content
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
   </head>
-  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header class="flex justify-between items-center py-8">
-        <a href="/" class="text-2xl font-bold">All Bugs Are Fixed</a>
-        <nav class="flex items-center space-x-4">
-          <a href="/blog/" class="hover:underline">Blog</a>
+  <body class="bg-gray-50 dark:bg-[hsl(210deg,30%,8%)] text-gray-900 dark:text-gray-100 flex flex-col min-h-screen transition-colors duration-300">
+    <!-- Gradient Top Border -->
+    <div class="h-2 w-full bg-gradient-to-r from-josh-primary to-josh-secondary"></div>
+
+    <header class="w-full px-6 py-8">
+      <div class="max-w-[1100px] mx-auto flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-josh-primary to-josh-secondary hover:opacity-80 transition-opacity">
+          All Bugs Are Fixed
+        </a>
+        <nav class="hidden md:flex items-center space-x-8 font-medium">
+          <a href="/blog/" class="hover:text-josh-primary transition-colors">Blog</a>
+          <a href="#" class="hover:text-josh-primary transition-colors">About</a>
           <ThemeToggle />
         </nav>
-      </header>
-      <main class="py-8">
+        <div class="md:hidden">
+          <ThemeToggle />
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow px-6">
+      <div class="max-w-[1100px] mx-auto">
         <slot />
-      </main>
-      <footer class="py-8 text-center text-gray-500">
-        <p>&copy; {currentYear} All Bugs Are Fixed</p>
-      </footer>
-    </div>
+      </div>
+    </main>
+
+    <footer class="mt-24 py-12 bg-gray-100 dark:bg-[hsl(210deg,30%,12%)]">
+      <div class="max-w-[1100px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+
+        <!-- Column 1: Brand -->
+        <div class="flex flex-col space-y-4">
+          <span class="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-josh-primary to-josh-secondary">
+            All Bugs Are Fixed
+          </span>
+          <p class="text-gray-600 dark:text-gray-400 max-w-xs">
+            A blog about software development, fixing bugs, and the journey of learning.
+          </p>
+          <p class="text-gray-500">
+            &copy; {currentYear} All Rights Reserved.
+          </p>
+        </div>
+
+        <!-- Column 2: Links -->
+        <div class="flex flex-col space-y-2">
+          <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-2">General</h3>
+          <a href="/" class="text-gray-600 dark:text-gray-400 hover:text-josh-primary dark:hover:text-josh-primary transition-colors">Home</a>
+          <a href="/blog/" class="text-gray-600 dark:text-gray-400 hover:text-josh-primary dark:hover:text-josh-primary transition-colors">Blog</a>
+          <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-josh-primary dark:hover:text-josh-primary transition-colors">About</a>
+          <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-josh-primary dark:hover:text-josh-primary transition-colors">Contact</a>
+        </div>
+
+        <!-- Column 3: Social / Newsletter (Placeholder) -->
+        <div class="flex flex-col space-y-4">
+          <h3 class="font-bold text-gray-900 dark:text-gray-100">Stay Updated</h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Join the newsletter to get the latest posts.
+          </p>
+          <div class="flex">
+            <input type="email" placeholder="Email address" class="px-4 py-2 rounded-l-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-josh-primary w-full" />
+            <button class="bg-josh-primary text-white px-4 py-2 rounded-r-md font-bold hover:bg-opacity-90 transition-colors">
+              Join
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

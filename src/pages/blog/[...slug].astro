@@ -12,17 +12,48 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Helper to format date
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString("en-US", {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
 ---
 
 <Layout title={entry.data.title}>
-  <article class="prose dark:prose-invert max-w-none">
-    <h1 class="text-4xl font-extrabold tracking-tight lg:text-5xl">{entry.data.title}</h1>
-    <p class="text-lg text-gray-500">
-      Published on:{" "}
-      <time datetime={entry.data.pubDate.toISOString()}>
-        {entry.data.pubDate.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
-      </time>
-    </p>
-    <Content />
+  <article class="w-full">
+    <!-- Header Section -->
+    <header class="mb-12 text-center max-w-[65ch] mx-auto pt-8">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-josh-primary to-josh-secondary mb-6 leading-tight pb-2">
+        {entry.data.title}
+      </h1>
+
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-gray-500 dark:text-gray-400 font-mono">
+        <div class="flex items-center gap-2">
+          <span class="uppercase tracking-wider text-xs font-bold text-gray-400 dark:text-gray-500">Published</span>
+          <time datetime={entry.data.pubDate.toISOString()} class="text-gray-700 dark:text-gray-300">
+            {formatDate(entry.data.pubDate)}
+          </time>
+        </div>
+
+        <span class="hidden md:inline text-gray-300 dark:text-gray-700">•</span>
+
+        <div class="flex items-center gap-2">
+           <span class="uppercase tracking-wider text-xs font-bold text-gray-400 dark:text-gray-500">Filed Under</span>
+           <span class="text-josh-primary font-medium">General</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="prose prose-lg dark:prose-invert max-w-[65ch] mx-auto">
+      <Content />
+    </div>
+
+    <!-- Post-content spacer -->
+    <div class="h-24"></div>
   </article>
 </Layout>
