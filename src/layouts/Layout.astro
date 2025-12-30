@@ -1,6 +1,7 @@
 ---
 import { Temporal } from "@js-temporal/polyfill";
 import ThemeToggle from "../components/ThemeToggle.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, NAV_LINKS, FOOTER_LINKS } from "../consts";
 
 interface Props {
   title: string;
@@ -14,12 +15,11 @@ const currentYear = Temporal.Now.plainDateISO().year;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content={SITE_DESCRIPTION} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <link rel="stylesheet" href="/src/styles/tailwind.css" />
+    <title>{title} | {SITE_TITLE}</title>
     <link rel="stylesheet" href="/src/styles/global.css" />
     <script is:inline>
       import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
@@ -27,22 +27,88 @@ const currentYear = Temporal.Now.plainDateISO().year;
       globalThis.Intl = Intl;
       Date.prototype.toTemporalInstant = toTemporalInstant;
     </script>
+    <script is:inline>
+      /**
+       * Initialize the theme to prevent FOUC (Flash of Unstyled Content).
+       * Checks localStorage and system preference.
+       */
+      function getInitialTheme() {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          const storedTheme = localStorage.getItem('theme');
+          if (storedTheme === 'dark' || storedTheme === 'light') {
+             return storedTheme;
+          }
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      }
+
+      const theme = getInitialTheme();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
   </head>
-  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header class="flex justify-between items-center py-8">
-        <a href="/" class="text-2xl font-bold">All Bugs Are Fixed</a>
-        <nav class="flex items-center space-x-4">
-          <a href="/blog/" class="hover:underline">Blog</a>
+  <body class="bg-gray-50 dark:bg-brand-bg text-gray-900 dark:text-brand-text flex flex-col min-h-screen transition-colors duration-300">
+    <div class="h-1 w-full bg-brand-primary"></div>
+
+    <header class="w-full px-6 py-6 border-b border-gray-200 dark:border-white/10">
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="text-xl font-bold tracking-tight hover:text-brand-primary transition-colors">
+          {SITE_TITLE}
+        </a>
+        <nav class="flex items-center space-x-6 font-medium text-sm">
+          {NAV_LINKS.map(link => (
+            <a href={link.href} class="hover:text-brand-primary transition-colors">{link.text}</a>
+          ))}
           <ThemeToggle />
         </nav>
-      </header>
-      <main class="py-8">
+      </div>
+    </header>
+
+    <main class="flex-grow px-6 py-12">
+      <div class="max-w-5xl mx-auto">
         <slot />
-      </main>
-      <footer class="py-8 text-center text-gray-500">
-        <p>&copy; {currentYear} All Bugs Are Fixed</p>
-      </footer>
-    </div>
+      </div>
+    </main>
+
+    <footer class="mt-auto py-12 bg-gray-100 dark:bg-black/20 border-t border-gray-200 dark:border-white/10">
+      <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+
+        <div class="flex flex-col space-y-4">
+          <span class="font-bold text-lg">{SITE_TITLE}</span>
+          <p class="text-gray-600 dark:text-gray-400 max-w-xs">
+            {SITE_DESCRIPTION}
+          </p>
+          <p class="text-gray-500">
+            &copy; {currentYear} All Rights Reserved.
+          </p>
+        </div>
+
+        <div class="flex flex-col space-y-2">
+          <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-2">Navigation</h3>
+          {FOOTER_LINKS.general.map(link => (
+            <a href={link.href} class="text-gray-600 dark:text-gray-400 hover:text-brand-primary transition-colors">{link.text}</a>
+          ))}
+        </div>
+
+        <div class="flex flex-col space-y-4">
+          <h3 class="font-bold text-gray-900 dark:text-gray-100">Newsletter</h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Updates on code, bugs, and life.
+          </p>
+          <div class="flex gap-2">
+             <input type="email" placeholder="Email" class="px-3 py-2 bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-md w-full focus:outline-none focus:border-brand-primary" />
+             <button class="bg-brand-primary text-white px-4 py-2 rounded-md font-medium hover:bg-opacity-90">
+               Subscribe
+             </button>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
