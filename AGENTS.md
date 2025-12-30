@@ -28,7 +28,7 @@ This is a blog developed using the Astro framework (https://astro.build/).
 - **Reproducibility**: Deterministic builds with pinned versions for security
 
 ## Design & Content Guidelines
-- **Casing**: Use sentence case for all subtitles and descriptions (e.g., "A developer blog"). The only exception is the site title "All Bugs Are Fixed".
+- **Casing**: Use sentence case for all subtitles and descriptions (e.g., "A developer blog"). Exceptions are proper nouns, acronyms, and the site title "All Bugs Are Fixed".
 
 ## Development workflow
 ```bash

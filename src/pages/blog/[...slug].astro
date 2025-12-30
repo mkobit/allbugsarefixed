@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import { formatDate } from "../../utils/date";
+import PostHeader from "../../components/PostHeader.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -17,29 +17,8 @@ const { Content } = await entry.render();
 
 <Layout title={entry.data.title}>
   <article class="w-full">
-    <!-- Header Section -->
-    <header class="mb-10 text-center max-w-3xl mx-auto pt-4">
-      <div class="mb-4">
-        <span class="text-brand-primary font-bold tracking-wide uppercase text-xs">
-          Blog Post
-        </span>
-      </div>
+    <PostHeader title={entry.data.title} pubDate={entry.data.pubDate} />
 
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-brand-text mb-6 leading-tight">
-        {entry.data.title}
-      </h1>
-
-      <div class="flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400 font-mono">
-        <time datetime={entry.data.pubDate.toISOString()}>
-          {formatDate(entry.data.pubDate)}
-        </time>
-        <span class="text-gray-300 dark:text-gray-700">/</span>
-        <span>General</span>
-      </div>
-    </header>
-
-    <!-- Content Section -->
-    <!-- Prose classes extracted to @layer components in a real setup, or kept here but simplified -->
     <div class="prose prose-lg dark:prose-invert max-w-3xl mx-auto
       prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
       prose-headings:font-bold prose-headings:tracking-tight

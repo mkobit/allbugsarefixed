@@ -28,10 +28,16 @@ const currentYear = Temporal.Now.plainDateISO().year;
       Date.prototype.toTemporalInstant = toTemporalInstant;
     </script>
     <script is:inline>
-      // Theme initialization
+      /**
+       * Initialize the theme to prevent FOUC (Flash of Unstyled Content).
+       * Checks localStorage and system preference.
+       */
       function getInitialTheme() {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
+          const storedTheme = localStorage.getItem('theme');
+          if (storedTheme === 'dark' || storedTheme === 'light') {
+             return storedTheme;
+          }
         }
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
           return 'dark';
@@ -48,7 +54,6 @@ const currentYear = Temporal.Now.plainDateISO().year;
     </script>
   </head>
   <body class="bg-gray-50 dark:bg-brand-bg text-gray-900 dark:text-brand-text flex flex-col min-h-screen transition-colors duration-300">
-    <!-- Top accent bar (distinct from original, simpler) -->
     <div class="h-1 w-full bg-brand-primary"></div>
 
     <header class="w-full px-6 py-6 border-b border-gray-200 dark:border-white/10">
@@ -74,7 +79,6 @@ const currentYear = Temporal.Now.plainDateISO().year;
     <footer class="mt-auto py-12 bg-gray-100 dark:bg-black/20 border-t border-gray-200 dark:border-white/10">
       <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
 
-        <!-- Brand -->
         <div class="flex flex-col space-y-4">
           <span class="font-bold text-lg">{SITE_TITLE}</span>
           <p class="text-gray-600 dark:text-gray-400 max-w-xs">
@@ -85,7 +89,6 @@ const currentYear = Temporal.Now.plainDateISO().year;
           </p>
         </div>
 
-        <!-- Links -->
         <div class="flex flex-col space-y-2">
           <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-2">Navigation</h3>
           {FOOTER_LINKS.general.map(link => (
@@ -93,13 +96,11 @@ const currentYear = Temporal.Now.plainDateISO().year;
           ))}
         </div>
 
-        <!-- Newsletter Placeholder -->
         <div class="flex flex-col space-y-4">
           <h3 class="font-bold text-gray-900 dark:text-gray-100">Newsletter</h3>
           <p class="text-gray-600 dark:text-gray-400">
             Updates on code, bugs, and life.
           </p>
-          <!-- Simple input styling -->
           <div class="flex gap-2">
              <input type="email" placeholder="Email" class="px-3 py-2 bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-md w-full focus:outline-none focus:border-brand-primary" />
              <button class="bg-brand-primary text-white px-4 py-2 rounded-md font-medium hover:bg-opacity-90">

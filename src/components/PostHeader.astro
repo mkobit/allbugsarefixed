@@ -1,0 +1,30 @@
+---
+import { formatDateToHumanString } from "../utils/date";
+
+interface Props {
+  title: string;
+  pubDate: Date;
+}
+
+const { title, pubDate } = Astro.props;
+---
+
+<header class="mb-10 text-center max-w-3xl mx-auto pt-4">
+  <div class="mb-4">
+    <span class="text-brand-primary font-bold tracking-wide uppercase text-xs">
+      Blog Post
+    </span>
+  </div>
+
+  <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-brand-text mb-6 leading-tight">
+    {title}
+  </h1>
+
+  <div class="flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400 font-mono">
+    <time datetime={pubDate.toISOString()}>
+      {formatDateToHumanString(pubDate)}
+    </time>
+    <span class="text-gray-300 dark:text-gray-700">/</span>
+    <span>General</span>
+  </div>
+</header>
