@@ -2,6 +2,7 @@
 import { Temporal } from "@js-temporal/polyfill";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import { SITE_TITLE, SITE_DESCRIPTION, NAV_LINKS, FOOTER_LINKS } from "../consts";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -20,8 +21,7 @@ const currentYear = Temporal.Now.plainDateISO().year;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | {SITE_TITLE}</title>
-    <link rel="stylesheet" href="/src/styles/global.css" />
-    <script is:inline>
+    <script>
       import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
       globalThis.Temporal = Temporal;
       globalThis.Intl = Intl;
