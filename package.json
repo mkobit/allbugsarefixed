@@ -8,7 +8,8 @@
     "start": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview --host",
-    "lint": "eslint . --ext .js,.ts,.astro,.mdx"
+    "lint": "eslint . --ext .js,.ts,.astro,.mdx",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.12",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@iarna/toml": "^2.2.5",
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.17",
     "@types/react": "^19.2.7",
