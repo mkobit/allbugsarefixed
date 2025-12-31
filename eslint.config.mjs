@@ -14,7 +14,7 @@ const tsconfigRootDir = dirname(fileURLToPath(import.meta.url));
 
 export default [
   {
-    ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/"],
+    ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/", "playwright-report/", "test-results/"],
   },
   js.configs.recommended,
   // TypeScript rules - balanced approach for Astro + Zod
@@ -45,6 +45,16 @@ export default [
       "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
       // Object key ordering rule
       "sort-keys": ["error", "asc", { caseSensitive: true, natural: true }],
+    },
+  },
+  // Playwright Tests
+  {
+    files: ["tests/e2e/**/*.ts", "playwright.config.ts"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser, // Playwright tests can sometimes look like they use browser globals inside evaluate()
+      },
     },
   },
   // Astro files
