@@ -54,14 +54,14 @@ const currentYear = Temporal.Now.plainDateISO().year;
     </script>
   </head>
   <body class="bg-gray-50 dark:bg-brand-bg text-gray-900 dark:text-brand-text flex flex-col min-h-screen transition-colors duration-300">
-    <div class="h-1 w-full bg-brand-primary"></div>
+    <div class="h-1 w-full bg-brand-primary sticky top-0 z-50"></div>
 
-    <header class="w-full px-6 py-6 border-b border-gray-200 dark:border-white/10">
+    <header class="w-full px-6 py-4 md:py-6 border-b border-gray-200 dark:border-white/10 backdrop-blur-sm bg-white/50 dark:bg-brand-bg/50 sticky top-1 z-40">
       <div class="max-w-5xl mx-auto flex justify-between items-center">
-        <a href="/" class="text-xl font-bold tracking-tight hover:text-brand-primary transition-colors">
+        <a href="/" class="text-xl font-bold tracking-tight hover:text-brand-primary transition-colors truncate max-w-[200px] md:max-w-none">
           {SITE_TITLE}
         </a>
-        <nav class="flex items-center space-x-6 font-medium text-sm">
+        <nav class="flex items-center gap-4 md:gap-6 font-medium text-sm">
           {NAV_LINKS.map(link => (
             <a href={link.href} class="hover:text-brand-primary transition-colors">{link.text}</a>
           ))}
@@ -70,14 +70,14 @@ const currentYear = Temporal.Now.plainDateISO().year;
       </div>
     </header>
 
-    <main class="flex-grow px-6 py-12">
+    <main class="flex-grow px-4 md:px-6 py-8 md:py-12">
       <div class="max-w-5xl mx-auto">
         <slot />
       </div>
     </main>
 
     <footer class="mt-auto py-12 bg-gray-100 dark:bg-black/20 border-t border-gray-200 dark:border-white/10">
-      <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+      <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
 
         <div class="flex flex-col space-y-4">
           <span class="font-bold text-lg">{SITE_TITLE}</span>
@@ -94,19 +94,6 @@ const currentYear = Temporal.Now.plainDateISO().year;
           {FOOTER_LINKS.general.map(link => (
             <a href={link.href} class="text-gray-600 dark:text-gray-400 hover:text-brand-primary transition-colors">{link.text}</a>
           ))}
-        </div>
-
-        <div class="flex flex-col space-y-4">
-          <h3 class="font-bold text-gray-900 dark:text-gray-100">Newsletter</h3>
-          <p class="text-gray-600 dark:text-gray-400">
-            Updates on code, bugs, and life.
-          </p>
-          <div class="flex gap-2">
-             <input type="email" placeholder="Email" class="px-3 py-2 bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-md w-full focus:outline-none focus:border-brand-primary" />
-             <button class="bg-brand-primary text-white px-4 py-2 rounded-md font-medium hover:bg-opacity-90">
-               Subscribe
-             </button>
-          </div>
         </div>
       </div>
     </footer>

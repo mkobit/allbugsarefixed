@@ -1,0 +1,36 @@
+---
+interface Props {
+  code: string;
+}
+
+const { code } = Astro.props;
+---
+
+<div class="mermaid my-8 bg-white dark:bg-brand-surface p-4 rounded-xl shadow-sm border border-gray-100 dark:border-white/5 flex justify-center overflow-x-auto">
+  {code}
+</div>
+
+<script>
+  import mermaid from 'mermaid';
+
+  // Initialize mermaid
+  // We check for the theme to set basic config
+  function initMermaid() {
+      const isDark = document.documentElement.classList.contains('dark');
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose', // Needed for some interactions, but 'strict' is safer. 'loose' for demo.
+        fontFamily: 'inherit'
+      });
+      mermaid.run(); // Re-run if needed for dynamic content, but startOnLoad handles initial.
+  }
+
+  // Initial load
+  initMermaid();
+
+  // Watch for theme changes to re-render diagrams (Mermaid requires re-render for theme change usually)
+  // Re-rendering mermaid is tricky without full reload or component re-mount.
+  // For this simple demo, we settle for initial load theme.
+  // Advanced: we could clear the div and re-insert code, then call mermaid.run().
+</script>

@@ -11,6 +11,5 @@ export const FOOTER_LINKS = {
     { href: '/', text: 'Home' },
     { href: '/blog/', text: 'Blog' },
     { href: '/about/', text: 'About' },
-    { href: '/contact/', text: 'Contact' },
   ],
 };

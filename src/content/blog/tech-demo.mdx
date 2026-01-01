@@ -1,0 +1,204 @@
+---
+title: "Tech Demo: Charts, Code, and Callouts"
+pubDate: 2024-05-20
+description: "A showcase of the styling capabilities, interactive charts, and code snippets on All Bugs Are Fixed."
+tags: ["demo", "style", "components"]
+---
+
+{/* eslint-disable no-unused-vars */}
+import Callout from '../../components/Callout.astro';
+import EChart from '../../components/EChart.astro';
+import Mermaid from '../../components/Mermaid.astro';
+
+# Welcome to the Tech Demo
+
+This post serves as a living testbed for our blog's features. We want to ensure that writing technical content is seamless and beautiful, especially on mobile.
+
+## 1. Callouts
+
+We use callouts to highlight important information.
+
+<Callout type="info" title="Did you know?">
+  This is an **info** callout. It's great for general notes or side comments that add context without breaking the flow.
+</Callout>
+
+<Callout type="tip" title="Pro Tip">
+  Use **tip** callouts for best practices or shortcuts.
+
+  ```bash
+  # You can even put code inside!
+  pnpm install super-cool-package
+  ```
+</Callout>
+
+<Callout type="warning" title="Watch Out">
+  **Warning** callouts are for things that require caution, like breaking changes or deprecated features.
+</Callout>
+
+<Callout type="error" title="Critical Error">
+  Use **error** callouts for things that are strictly forbidden or dangerous operations.
+</Callout>
+
+## 2. Code Snippets
+
+We want our code to look good. Astro uses Shiki for syntax highlighting by default.
+
+### Kotlin (JS Target)
+Here's a snippet of Kotlin code, as requested for "runnable" future-proofing.
+
+```kotlin
+fun main() {
+    val message = "All Bugs Are Fixed"
+    println("Status: $message")
+
+    val bugs = listOf("NPE", "Infinite Loop", "Race Condition")
+    bugs.filter { it.length > 3 }
+        .forEach { bug ->
+            fix(bug)
+        }
+}
+
+fun fix(bug: String) {
+    console.log("Fixed $bug!")
+}
+```
+
+### TypeScript / Astro
+And here is how we might fetch data in this very blog:
+
+```typescript
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+```
+
+## 3. Data Visualization
+
+We integrate **Apache ECharts** for rich, interactive visualizations.
+
+### Monthly Bug Fixes
+A simple line chart showing our velocity.
+
+<EChart
+  height="400px"
+  options={{
+    title: {
+      text: 'Bugs Fixed Per Month',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    xAxis: {
+      type: 'category',
+      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [8, 15, 22, 19, 35, 42, 50],
+        type: 'line',
+        smooth: true,
+        lineStyle: {
+          width: 3,
+          shadowBlur: 10,
+          shadowColor: 'rgba(100,100,255,0.5)'
+        },
+        itemStyle: {
+          color: '#8b5cf6' // Brand Primary (Violet)
+        }
+      }
+    ]
+  }}
+/>
+
+### Project Distribution
+A donut chart example.
+
+<EChart
+  height="350px"
+  options={{
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '5%',
+      left: 'center'
+    },
+    series: [
+      {
+        name: 'Time Spent',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 20,
+            fontWeight: 'bold'
+          }
+        },
+        data: [
+          { value: 1048, name: 'Coding' },
+          { value: 735, name: 'Debugging' },
+          { value: 580, name: 'Planning' },
+          { value: 484, name: 'Coffee' },
+          { value: 300, name: 'Meetings' }
+        ]
+      }
+    ]
+  }}
+/>
+
+## 4. Mermaid Diagrams
+
+For flowcharts, sequence diagrams, and more, we use **Mermaid**.
+
+<Mermaid code={`
+graph TD
+    A[Start] --> B{Is it fixed?};
+    B -- Yes --> C[Deploy];
+    B -- No --> D[Debug];
+    D --> B;
+    C --> E[Relax];
+    E --> F[New Bug Found];
+    F --> A;
+`} />
+
+<Mermaid code={`
+sequenceDiagram
+    participant U as User
+    participant B as Blog
+    participant S as Server
+
+    U->>B: Visits Page
+    B->>S: Request Data
+    S-->>B: Return JSON
+    B-->>U: Render HTML
+`} />
+
+## Conclusion
+
+This page demonstrates that we have a robust set of tools for authoring technical content:
+1. **Typography** is clean and readable.
+2. **Code blocks** are syntax highlighted.
+3. **Charts** are interactive and responsive.
+4. **Diagrams** are easy to write in Markdown.
+5. **Callouts** draw attention where needed.
+
+Everything is ready for the "Solo Party"!
