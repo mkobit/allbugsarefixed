@@ -9,11 +9,11 @@ const { options, height = "400px", width = "100%" } = Astro.props;
 const id = `echart-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<astro-echart id={id} style={{ height, width, display: 'block' }} class="echart-container my-8 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-white/5 bg-white dark:bg-brand-surface/50">
-</astro-echart>
+<blog-echart id={id} style={{ height, width, display: 'block' }} class="echart-container my-8 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-white/5 bg-white dark:bg-brand-surface/50">
+</blog-echart>
 
 <script>
-  import './EChartElement';
+  import './ChartElement';
 </script>
 
 <script define:vars={{ id, options }}>

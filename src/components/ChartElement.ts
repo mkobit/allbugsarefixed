@@ -1,7 +1,11 @@
 import * as echarts from 'echarts';
 import type { EChartsOption } from 'echarts';
 
-export class AstroEChart extends HTMLElement {
+/**
+ * A Custom Element wrapper for Apache ECharts.
+ * Handles lifecycle, resizing, and theme changes.
+ */
+export class ChartElement extends HTMLElement {
   private _options: EChartsOption | null = null;
   private chart: echarts.ECharts | null = null;
 
@@ -19,11 +23,12 @@ export class AstroEChart extends HTMLElement {
   }
 
   connectedCallback() {
-    // Property Upgrade Pattern:
-    // If the 'options' property was set on the element instance before the custom element
-    // was upgraded (e.g. by an inline script running first), it exists as an own property,
-    // shadowing the getter/setter on the prototype. We need to delete the own property
-    // and re-set it to trigger the setter.
+    // "Property Upgrade" Pattern
+    // When a custom element is defined after the HTML is parsed, properties set on the
+    // element (like `el.options = ...`) might be created as own properties, shadowing
+    // the class accessors. We capture the value, delete the own property, and re-set it
+    // to trigger the setter on the prototype.
+    // See: https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties
     if (Object.prototype.hasOwnProperty.call(this, 'options')) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const value = (this as any).options;
@@ -111,4 +116,4 @@ export class AstroEChart extends HTMLElement {
   }
 }
 
-customElements.define('astro-echart', AstroEChart);
+customElements.define('blog-echart', ChartElement);
