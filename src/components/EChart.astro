@@ -1,4 +1,6 @@
 ---
+import EChartReact from './EChart';
+
 interface Props {
   options: Record<string, any>;
   height?: string;
@@ -6,19 +8,6 @@ interface Props {
 }
 
 const { options, height = "400px", width = "100%" } = Astro.props;
-const id = `echart-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<blog-echart id={id} style={{ height, width, display: 'block' }} class="echart-container my-8 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-white/5 bg-white dark:bg-brand-surface/50">
-</blog-echart>
-
-<script>
-  import './ChartElement';
-</script>
-
-<script define:vars={{ id, options }}>
-  const el = document.getElementById(id);
-  if (el) {
-    el.options = options;
-  }
-</script>
+<EChartReact client:only="react" options={options} height={height} width={width} />
