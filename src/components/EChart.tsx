@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import type { EChartsOption } from 'echarts';
+import { getThemeColor } from '../utils/theme';
 
 interface EChartProps {
   options: EChartsOption;
@@ -8,59 +9,85 @@ interface EChartProps {
   width?: string;
 }
 
+/**
+ * Hook to detect if the dark mode class is present on the document element.
+ * It uses a MutationObserver to react to class changes.
+ */
+function useDarkMode() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Initial check
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributeFilter: ['class'], attributes: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return isDark;
+}
+
 export default function EChart({ options, height = '400px', width = '100%' }: EChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
+  const isDark = useDarkMode();
 
+  // Initialize chart
   useEffect(() => {
     if (!chartRef.current) return;
 
-    // Initialize chart
     if (!chartInstance.current) {
       chartInstance.current = echarts.init(chartRef.current);
     }
 
+    // Cleanup on unmount
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.dispose();
+        chartInstance.current = null;
+      }
+    };
+  }, []);
+
+  // Update options when data or theme changes
+  useEffect(() => {
     const chart = chartInstance.current;
+    if (!chart) return;
 
-    const getThemeColor = (isDark: boolean) => (isDark ? '#e2e8f0' : '#1e293b');
-
-    const updateChart = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-
-      const finalOptions: EChartsOption = {
-        ...options,
-        backgroundColor: 'transparent',
-        darkMode: isDark,
-        textStyle: {
-          color: getThemeColor(isDark),
-          ...(options.textStyle || {}),
-        },
-      };
-
-      chart.setOption(finalOptions);
+    const finalOptions: EChartsOption = {
+      ...options,
+      backgroundColor: 'transparent',
+      darkMode: isDark,
+      textStyle: {
+        color: getThemeColor(isDark),
+        ...(options.textStyle || {}),
+      },
     };
 
-    updateChart();
+    chart.setOption(finalOptions);
+  }, [options, isDark]);
 
-    const handleResize = () => chart.resize();
-    window.addEventListener('resize', handleResize);
+  // Handle resizing with ResizeObserver
+  useEffect(() => {
+    const chart = chartInstance.current;
+    const container = chartRef.current;
+    if (!chart || !container) return;
 
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          updateChart();
-        }
-      });
+    const resizeObserver = new ResizeObserver(() => {
+      chart.resize();
     });
-    observer.observe(document.documentElement, { attributes: true });
+
+    resizeObserver.observe(container);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      observer.disconnect();
-      chart.dispose();
-      chartInstance.current = null;
+      resizeObserver.disconnect();
     };
-  }, [options]);
+  }, []);
 
   return (
     <div
