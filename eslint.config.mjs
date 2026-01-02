@@ -29,6 +29,7 @@ export default [
       },
       globals: {
         ...globals.node,
+        ...globals.browser, // Ensure browser globals are available for TS files which might be client-side
       },
     },
     plugins: {

@@ -1,4 +1,6 @@
 ---
+import EChartReact from './EChart';
+
 interface Props {
   options: Record<string, any>;
   height?: string;
@@ -6,61 +8,6 @@ interface Props {
 }
 
 const { options, height = "400px", width = "100%" } = Astro.props;
-const id = `echart-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<div id={id} style={{ height, width }} class="echart-container my-8 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-white/5 bg-white dark:bg-brand-surface/50"></div>
-
-<script define:vars={{ id, options }}>
-  // We need to wait for the ECharts library to load.
-  // Using dynamic import to load echarts client-side only
-  import * as echarts from 'echarts';
-
-  const chartDom = document.getElementById(id);
-  const myChart = echarts.init(chartDom);
-
-  function getThemeColor(isDark) {
-     return isDark ? '#e2e8f0' : '#1e293b'; // slate-200 : slate-800
-  }
-
-  // Inject some default styles if not present in options
-  if (!options.textStyle) {
-    options.textStyle = {};
-  }
-
-  // Simple theme detection
-  const isDark = document.documentElement.classList.contains('dark');
-  if (isDark) {
-    options.darkMode = true;
-    options.backgroundColor = 'transparent';
-    options.textStyle.color = getThemeColor(true);
-  } else {
-     options.backgroundColor = 'transparent';
-     options.textStyle.color = getThemeColor(false);
-  }
-
-  myChart.setOption(options);
-
-  // Responsive resize
-  window.addEventListener('resize', () => {
-    myChart.resize();
-  });
-
-  // Observer for theme changes
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === 'class') {
-        const isDarkNow = document.documentElement.classList.contains('dark');
-        myChart.setOption({
-            darkMode: isDarkNow,
-            textStyle: {
-                color: getThemeColor(isDarkNow)
-            }
-        });
-      }
-    });
-  });
-
-  observer.observe(document.documentElement, { attributes: true });
-
-</script>
+<EChartReact client:only="react" options={options} height={height} width={width} />
