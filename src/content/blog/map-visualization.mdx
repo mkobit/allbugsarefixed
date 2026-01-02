@@ -1,19 +1,19 @@
 ---
-title: "Visualizing Commute Times with an Interactive Map"
+title: "Visualizing commute times with an interactive map"
 pubDate: 2024-07-26
 description: "A demonstration of an interactive map component for visualizing data."
 tags: ["maps", "visualization", "astro", "leaflet"]
 ---
 
 {/* eslint-disable-next-line no-unused-vars */}
-import Map from '../../components/Map.astro';
+import { Map } from '../../components/Map.tsx';
 
-# Exploring Commute Data
+# Exploring commute data
 
 Visualizing geographical data can provide powerful insights. In this post, we'll use a new interactive map component to display a map of San Francisco. This is the first step towards building more complex visualizations, such as commute time overlays.
 
 Below is an interactive map centered on San Francisco. You can pan and zoom to explore the area.
 
-<div style="height: 400px; width: 100%;">
-  <Map latitude={37.7749} longitude={-122.4194} zoom={13} />
+<div style={{height: "400px", width: "100%"}}>
+  <Map client:only="react" latitude={37.7749} longitude={-122.4194} zoom={13} />
 </div>

@@ -1,5 +1,5 @@
 ---
-title: "Tech Demo: Charts, Code, and Callouts"
+title: "Tech demo: Charts, code, and callouts"
 pubDate: 2024-05-20
 description: "A showcase of the styling capabilities, interactive charts, and code snippets on All Bugs Are Fixed."
 tags: ["demo", "style", "components"]
@@ -9,8 +9,9 @@ tags: ["demo", "style", "components"]
 import Callout from '../../components/Callout.astro';
 import EChart from '../../components/EChart.astro';
 import Mermaid from '../../components/Mermaid.astro';
+import { Map } from '../../components/Map.tsx';
 
-# Welcome to the Tech Demo
+# Welcome to the tech demo
 
 This post serves as a living testbed for our blog's features. We want to ensure that writing technical content is seamless and beautiful, especially on mobile.
 
@@ -39,7 +40,7 @@ We use callouts to highlight important information.
   Use **error** callouts for things that are strictly forbidden or dangerous operations.
 </Callout>
 
-## 2. Code Snippets
+## 2. Code snippets
 
 We want our code to look good. Astro uses Shiki for syntax highlighting by default.
 
@@ -76,11 +77,11 @@ export async function getStaticPaths() {
 }
 ```
 
-## 3. Data Visualization
+## 3. Data visualization
 
 We integrate **Apache ECharts** for rich, interactive visualizations.
 
-### Monthly Bug Fixes
+### Monthly bug fixes
 A simple line chart showing our velocity.
 
 <EChart
@@ -118,7 +119,7 @@ A simple line chart showing our velocity.
   }}
 />
 
-### Project Distribution
+### Project distribution
 A donut chart example.
 
 <EChart
@@ -165,7 +166,7 @@ A donut chart example.
   }}
 />
 
-## 4. Mermaid Diagrams
+## 4. Mermaid diagrams
 
 For flowcharts, sequence diagrams, and more, we use **Mermaid**.
 
@@ -192,6 +193,23 @@ sequenceDiagram
     B-->>U: Render HTML
 `} />
 
+## 5. Interactive maps
+
+Here is an example of the new interactive map component.
+
+<Map
+  client:only="react"
+  latitude={37.7749}
+  longitude={-122.4194}
+  zoom={12}
+  height="400px"
+  markers={[
+    { lat: 37.7749, lng: -122.4194, title: "San Francisco" },
+    { lat: 37.8044, lng: -122.2712, title: "Oakland" }
+  ]}
+/>
+
+
 ## Conclusion
 
 This page demonstrates that we have a robust set of tools for authoring technical content:
@@ -200,5 +218,6 @@ This page demonstrates that we have a robust set of tools for authoring technica
 3. **Charts** are interactive and responsive.
 4. **Diagrams** are easy to write in Markdown.
 5. **Callouts** draw attention where needed.
+6. **Maps** are interactive and easy to embed.
 
 Everything is ready for the "Solo Party"!
