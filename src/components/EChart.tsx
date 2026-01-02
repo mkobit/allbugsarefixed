@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import type { EChartsOption } from 'echarts';
-import { getThemeColor } from '../utils/theme';
+import { getThemeColor } from '../lib/theme';
 import { useECharts } from '../hooks/useECharts';
 import { useDarkMode } from '../hooks/useDarkMode';
 
