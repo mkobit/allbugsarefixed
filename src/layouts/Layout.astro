@@ -1,7 +1,8 @@
 ---
-import { Temporal } from "@js-temporal/polyfill";
-import ThemeToggle from "../components/ThemeToggle.astro";
-import { SITE_TITLE, SITE_DESCRIPTION, NAV_LINKS, FOOTER_LINKS } from "../consts";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeInit from "../components/ThemeInit.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import "../styles/global.css";
 
 interface Props {
@@ -9,7 +10,6 @@ interface Props {
 }
 
 const { title } = Astro.props;
-const currentYear = Temporal.Now.plainDateISO().year;
 ---
 
 <!doctype html>
@@ -22,53 +22,14 @@ const currentYear = Temporal.Now.plainDateISO().year;
     <meta name="generator" content={Astro.generator} />
     <title>{title} | {SITE_TITLE}</title>
     <script>
-      import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
-      globalThis.Temporal = Temporal;
-      globalThis.Intl = Intl;
-      Date.prototype.toTemporalInstant = toTemporalInstant;
+      import "../utils/polyfills";
     </script>
-    <script is:inline>
-      /**
-       * Initialize the theme to prevent FOUC (Flash of Unstyled Content).
-       * Checks localStorage and system preference.
-       */
-      function getInitialTheme() {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          const storedTheme = localStorage.getItem('theme');
-          if (storedTheme === 'dark' || storedTheme === 'light') {
-             return storedTheme;
-          }
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
-        }
-        return 'light';
-      }
-
-      const theme = getInitialTheme();
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    </script>
+    <ThemeInit />
   </head>
   <body class="bg-gray-50 dark:bg-brand-bg text-gray-900 dark:text-brand-text flex flex-col min-h-screen transition-colors duration-300">
     <div class="h-1 w-full bg-brand-primary sticky top-0 z-50"></div>
 
-    <header class="w-full px-6 py-4 md:py-6 border-b border-gray-200 dark:border-white/10 backdrop-blur-sm bg-white/50 dark:bg-brand-bg/50 sticky top-1 z-40">
-      <div class="max-w-5xl mx-auto flex justify-between items-center">
-        <a href="/" class="text-xl font-bold tracking-tight hover:text-brand-primary transition-colors truncate max-w-[200px] md:max-w-none">
-          {SITE_TITLE}
-        </a>
-        <nav class="flex items-center gap-4 md:gap-6 font-medium text-sm">
-          {NAV_LINKS.map(link => (
-            <a href={link.href} class="hover:text-brand-primary transition-colors">{link.text}</a>
-          ))}
-          <ThemeToggle />
-        </nav>
-      </div>
-    </header>
+    <Header />
 
     <main class="flex-grow px-4 md:px-6 py-8 md:py-12">
       <div class="max-w-5xl mx-auto">
@@ -76,26 +37,6 @@ const currentYear = Temporal.Now.plainDateISO().year;
       </div>
     </main>
 
-    <footer class="mt-auto py-12 bg-gray-100 dark:bg-black/20 border-t border-gray-200 dark:border-white/10">
-      <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-
-        <div class="flex flex-col space-y-4">
-          <span class="font-bold text-lg">{SITE_TITLE}</span>
-          <p class="text-gray-600 dark:text-gray-400 max-w-xs">
-            {SITE_DESCRIPTION}
-          </p>
-          <p class="text-gray-500">
-            &copy; {currentYear} All Rights Reserved.
-          </p>
-        </div>
-
-        <div class="flex flex-col space-y-2">
-          <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-2">Navigation</h3>
-          {FOOTER_LINKS.general.map(link => (
-            <a href={link.href} class="text-gray-600 dark:text-gray-400 hover:text-brand-primary transition-colors">{link.text}</a>
-          ))}
-        </div>
-      </div>
-    </footer>
+    <Footer />
   </body>
 </html>

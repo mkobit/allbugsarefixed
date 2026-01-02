@@ -1,0 +1,25 @@
+<script is:inline>
+  /**
+   * Initialize the theme to prevent FOUC (Flash of Unstyled Content).
+   * Checks localStorage and system preference.
+   */
+  function getInitialTheme() {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      const storedTheme = localStorage.getItem('theme');
+      if (storedTheme === 'dark' || storedTheme === 'light') {
+         return storedTheme;
+      }
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  }
+
+  const theme = getInitialTheme();
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+</script>

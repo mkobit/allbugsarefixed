@@ -1,0 +1,18 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import { SITE_TITLE, NAV_LINKS } from "../consts";
+---
+
+<header class="w-full px-6 py-4 md:py-6 border-b border-gray-200 dark:border-white/10 backdrop-blur-sm bg-white/50 dark:bg-brand-bg/50 sticky top-1 z-40">
+  <div class="max-w-5xl mx-auto flex justify-between items-center">
+    <a href="/" class="text-xl font-bold tracking-tight hover:text-brand-primary transition-colors truncate max-w-[200px] md:max-w-none">
+      {SITE_TITLE}
+    </a>
+    <nav class="flex items-center gap-4 md:gap-6 font-medium text-sm">
+      {NAV_LINKS.map(link => (
+        <a href={link.href} class="hover:text-brand-primary transition-colors">{link.text}</a>
+      ))}
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
