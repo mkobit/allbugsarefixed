@@ -27,42 +27,35 @@ import {
 
 This post serves as a living testbed for our blog's features. We want to ensure that writing technical content is seamless and beautiful, especially on mobile.
 
-## 1. Icons & Styling
+## 1. Icons and styling
 
-We've integrated **Lucide React** icons to bring life to our UI. We use a reusable React component `IconBlock` to maintain consistency and ease of use.
+We've integrated **Lucide React** icons to bring life to our UI.
+We use a reusable React component `IconBlock` to maintain consistency and ease of use.
 
 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
   <IconBlock
     client:visible
     icon={Zap}
     label="Lightning Fast"
-    color="text-yellow-500"
-    bgColor="bg-gray-50 dark:bg-gray-800"
-    borderColor="border-gray-200 dark:border-gray-700"
+    variant="warning"
   />
   <IconBlock
     client:visible
     icon={Activity}
     label="Monitoring"
-    color="text-blue-500"
-    bgColor="bg-blue-50 dark:bg-blue-900/20"
-    borderColor="border-blue-100 dark:border-blue-800"
+    variant="info"
   />
   <IconBlock
     client:visible
     icon={ShieldCheck}
     label="Secure"
-    color="text-green-500"
-    bgColor="bg-green-50 dark:bg-green-900/20"
-    borderColor="border-green-100 dark:border-green-800"
+    variant="success"
   />
   <IconBlock
     client:visible
     icon={Terminal}
     label="CLI Tools"
-    color="text-purple-500"
-    bgColor="bg-purple-50 dark:bg-purple-900/20"
-    borderColor="border-purple-100 dark:border-purple-800"
+    variant="brand"
   />
 </div>
 
