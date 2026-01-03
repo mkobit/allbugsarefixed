@@ -1,5 +1,5 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro";
+import ThemeToggle from "./ThemeToggle";
 import { SITE_TITLE, NAV_LINKS } from "../consts";
 ---
 
@@ -12,7 +12,7 @@ import { SITE_TITLE, NAV_LINKS } from "../consts";
       {NAV_LINKS.map(link => (
         <a href={link.href} class="hover:text-brand-primary transition-colors">{link.text}</a>
       ))}
-      <ThemeToggle />
+      <ThemeToggle client:only="react" />
     </nav>
   </div>
 </header>
