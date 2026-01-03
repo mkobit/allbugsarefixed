@@ -7,8 +7,6 @@ export default {
       // Typography styles are handled via CSS components layer
     },
   },
-  plugins: [
-    // Typography plugin is loaded in CSS via @plugin
-  ],
+  plugins: [],
   darkMode: 'class',
 }

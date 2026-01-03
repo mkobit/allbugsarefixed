@@ -2,7 +2,7 @@ import React from 'react';
 import { Sun, Moon, Monitor, type LucideIcon } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 import { tv } from 'tailwind-variants';
-import { cn } from '../lib/utils';
+import { cn } from '../lib/ui';
 
 const themeButtonStyles = tv({
   base: 'p-1 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer',
