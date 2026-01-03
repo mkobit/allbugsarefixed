@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import type { Map as LeafletMap } from 'leaflet';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import type L from 'leaflet';
 
 // Leaflet styles must be loaded globally or via import in global css.
 // We assume 'leaflet/dist/leaflet.css' is imported in global.css.
@@ -24,7 +26,7 @@ export const Map: React.FC<MapProps> = ({
   markers = []
 }) => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<LeafletMap | null>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
     let cleanup: (() => void) | undefined;
@@ -33,18 +35,18 @@ export const Map: React.FC<MapProps> = ({
       if (!mapRef.current) return;
       if (mapInstanceRef.current) return; // Already initialized
 
-      // Dynamically import Leaflet to ensure it only runs on client
+      // Leaflet must be imported dynamically because it accesses 'window' on import.
+      // Even with client:only, the build process attempts to bundle imports, causing SSR failures.
       const L = (await import('leaflet')).default;
 
-      // Fix for default marker icons missing in Leaflet + Webpack/Vite
-      // This is often needed when using Leaflet with bundlers
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      delete (L.Icon.Default.prototype as any)._getIconUrl;
-      L.Icon.Default.mergeOptions({
-        iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-        iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+      // Configure default icon using imported assets
+      const DefaultIcon = L.icon({
+        iconAnchor: [12, 41],
+        iconSize: [25, 41],
+        iconUrl: icon.src, // Vite imports image as object with src
+        shadowUrl: iconShadow.src,
       });
+      L.Marker.prototype.options.icon = DefaultIcon;
 
       const map = L.map(mapRef.current).setView([latitude, longitude], zoom);
 
