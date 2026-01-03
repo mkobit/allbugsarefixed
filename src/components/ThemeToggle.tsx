@@ -1,19 +1,32 @@
 import React from 'react';
 import { Sun, Moon, Monitor, type LucideIcon } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { tv } from 'tailwind-variants';
+import { cn } from '../lib/utils';
+
+const themeButtonStyles = tv({
+  base: 'p-1 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer',
+  defaultVariants: {
+    selected: false
+  },
+  variants: {
+    selected: {
+      false: 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-300',
+      true: 'bg-white dark:bg-gray-600 text-brand-primary shadow-sm scale-110 z-10'
+    }
+  }
+});
 
 export default function ThemeToggle() {
   const { theme, setTheme, mounted } = useTheme();
 
   if (!mounted) {
-    // Return a placeholder of the same dimensions to minimize layout shift
-    // Dimensions match the container div below
     return <div className="w-[88px] h-[34px]" aria-hidden="true" />;
   }
 
   return (
     <div
-      className="flex items-center p-1 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 h-[34px]"
+      className={cn("flex items-center p-1 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 h-[34px]")}
       role="radiogroup"
       aria-label="Theme toggle"
     >
@@ -55,11 +68,7 @@ function ThemeButton({
   return (
     <button
       onClick={onClick}
-      className={`p-1 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary ${
-        selected
-          ? 'bg-white dark:bg-gray-600 text-brand-primary shadow-sm scale-110 z-10'
-          : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-300'
-      }`}
+      className={themeButtonStyles({ selected })}
       role="radio"
       aria-checked={selected}
       aria-label={label}

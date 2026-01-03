@@ -4,46 +4,95 @@
 
 @theme {
   /*
-     New Palette:
-     - Background: Deep Indigo/Slate (not pure black/blue)
-     - Primary: Vivid Violet/Purple
-     - Secondary: Cyan/Teal
-     - Accent: Amber/Orange for highlights
+     Define theme variables that map to CSS variables.
+     In Tailwind v4, this creates utilities like `bg-brand-bg` automatically.
   */
-  --color-brand-bg: hsl(222, 47%, 11%); /* Deep Slate Blue */
-  --color-brand-text: hsl(210, 40%, 98%);
+  --color-brand-bg: var(--color-brand-bg);
+  --color-brand-text: var(--color-brand-text);
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-secondary: var(--color-brand-secondary);
+  --color-brand-accent: var(--color-brand-accent);
+  --color-brand-surface: var(--color-brand-surface);
 
-  --color-brand-primary: hsl(265, 83%, 65%); /* Violet */
-  --color-brand-secondary: hsl(190, 90%, 50%); /* Cyan */
-  --color-brand-accent: hsl(35, 100%, 60%); /* Amber */
-
-  --color-brand-surface: hsl(222, 40%, 18%); /* Lighter slate for cards/code */
-
-  /* Light mode overrides handled via CSS vars logic in body class or specific selectors if needed */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", Menlo, monospace;
 }
 
-/* Base styles */
-html {
-  scroll-behavior: smooth;
+/*
+  Define the actual color values in CSS variables.
+  The .dark class selector handles the automatic switching.
+*/
+@layer base {
+  :root {
+    /* Light Mode / Default */
+    --color-brand-bg: hsl(210, 40%, 98%); /* Light text equivalent from before becomes bg */
+    --color-brand-text: hsl(222, 47%, 11%); /* Dark bg equivalent from before becomes text */
+
+    --color-brand-primary: hsl(265, 83%, 65%); /* Violet */
+    --color-brand-secondary: hsl(190, 90%, 50%); /* Cyan */
+    --color-brand-accent: hsl(35, 100%, 60%); /* Amber */
+    --color-brand-surface: hsl(210, 40%, 96%); /* Light surface */
+  }
+
+  .dark {
+    /* Dark Mode */
+    --color-brand-bg: hsl(222, 47%, 11%); /* Deep Slate Blue */
+    --color-brand-text: hsl(210, 40%, 98%);
+
+    --color-brand-primary: hsl(265, 83%, 65%);
+    --color-brand-secondary: hsl(190, 90%, 50%);
+    --color-brand-accent: hsl(35, 100%, 60%);
+    --color-brand-surface: hsl(222, 40%, 18%);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Apply base background and text color automatically */
+    @apply bg-brand-bg text-brand-text;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-500;
+  }
 }
 
-body {
-  @apply font-sans antialiased;
-}
+/*
+  Typography Customization
+  Tailwind v4 allows targeting typography styles via CSS.
+  We use the prose class and target internal elements.
+*/
+@layer components {
+  .prose {
+    @apply text-brand-text;
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+    a {
+      @apply text-brand-primary no-underline font-medium hover:text-brand-secondary hover:underline;
+    }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+    code {
+      @apply text-brand-primary bg-brand-surface px-1.5 py-0.5 rounded font-semibold;
+    }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
+    /* Dark mode overrides if needed, though CSS variables handle most colors */
+    .dark & code {
+      @apply text-brand-accent bg-[rgba(255,255,255,0.1)];
+    }
+  }
 }
