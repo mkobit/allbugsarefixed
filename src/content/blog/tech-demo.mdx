@@ -9,12 +9,70 @@ tags: ["demo", "style", "components"]
 import Callout from '../../components/Callout.astro';
 import EChart from '../../components/EChart.astro';
 import Mermaid from '../../components/Mermaid.astro';
+import IconBlock from '../../components/IconBlock';
+import {
+  Zap,
+  Activity,
+  ShieldCheck,
+  Terminal,
+  Cpu,
+  Globe,
+  Server,
+  Database,
+  Cloud,
+  Code
+} from 'lucide-react';
 
 # Welcome to the Tech Demo
 
 This post serves as a living testbed for our blog's features. We want to ensure that writing technical content is seamless and beautiful, especially on mobile.
 
-## 1. Callouts
+## 1. Icons and styling
+
+We've integrated **Lucide React** icons to bring life to our UI.
+We use a reusable React component `IconBlock` to maintain consistency and ease of use.
+
+<div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
+  <IconBlock
+    client:visible
+    icon={Zap}
+    label="Lightning Fast"
+    variant="warning"
+  />
+  <IconBlock
+    client:visible
+    icon={Activity}
+    label="Monitoring"
+    variant="info"
+  />
+  <IconBlock
+    client:visible
+    icon={ShieldCheck}
+    label="Secure"
+    variant="success"
+  />
+  <IconBlock
+    client:visible
+    icon={Terminal}
+    label="CLI Tools"
+    variant="brand"
+  />
+</div>
+
+### Inline Icons
+
+You can also use icons inline with text. For example, <Cpu className="inline-block w-4 h-4 text-red-500 align-text-bottom" /> **CPU Usage** is high, or verify the <Globe className="inline-block w-4 h-4 text-blue-400 align-text-bottom" /> **Network Status**.
+
+### Icon Palette
+
+<div className="flex flex-wrap gap-4 my-4 p-4 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
+  <Server className="text-gray-400" />
+  <Database className="text-pink-500" />
+  <Cloud className="text-sky-400" />
+  <Code className="text-brand-primary" />
+</div>
+
+## 2. Callouts
 
 We use callouts to highlight important information.
 
@@ -39,7 +97,7 @@ We use callouts to highlight important information.
   Use **error** callouts for things that are strictly forbidden or dangerous operations.
 </Callout>
 
-## 2. Code Snippets
+## 3. Code Snippets
 
 We want our code to look good. Astro uses Shiki for syntax highlighting by default.
 
@@ -76,7 +134,7 @@ export async function getStaticPaths() {
 }
 ```
 
-## 3. Data Visualization
+## 4. Data Visualization
 
 We integrate **Apache ECharts** for rich, interactive visualizations.
 
@@ -165,7 +223,7 @@ A donut chart example.
   }}
 />
 
-## 4. Mermaid Diagrams
+## 5. Mermaid Diagrams
 
 For flowcharts, sequence diagrams, and more, we use **Mermaid**.
 
@@ -200,5 +258,6 @@ This page demonstrates that we have a robust set of tools for authoring technica
 3. **Charts** are interactive and responsive.
 4. **Diagrams** are easy to write in Markdown.
 5. **Callouts** draw attention where needed.
+6. **Icons** provide visual cues and enhanced aesthetics.
 
 Everything is ready for the "Solo Party"!
