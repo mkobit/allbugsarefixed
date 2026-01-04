@@ -10,7 +10,7 @@ import type { EChartsOption, ECharts } from 'echarts';
  * @param theme - The theme to apply (e.g., 'light' or 'dark', or a custom object).
  * @returns A ref to attach to the chart container div.
  */
-export function useECharts(options: EChartsOption, theme?: string | object) {
+export function useECharts(options: Readonly<EChartsOption>, theme?: Readonly<string | object>) {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<ECharts | null>(null);
 
@@ -20,6 +20,7 @@ export function useECharts(options: EChartsOption, theme?: string | object) {
     if (!container) return;
 
     if (!chartInstance.current) {
+      // eslint-disable-next-line functional/immutable-data
       chartInstance.current = echarts.init(container);
     }
 
@@ -34,6 +35,7 @@ export function useECharts(options: EChartsOption, theme?: string | object) {
     return () => {
       resizeObserver.disconnect();
       chart.dispose();
+      // eslint-disable-next-line functional/immutable-data
       chartInstance.current = null;
     };
   }, []); // Run once on mount

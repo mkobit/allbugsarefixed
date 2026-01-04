@@ -53,10 +53,10 @@ export default function ThemeToggle() {
 }
 
 interface ThemeButtonProps {
-  selected: boolean;
-  onClick: () => void;
-  label: string;
-  icon: LucideIcon;
+  readonly selected: boolean;
+  readonly onClick: () => void;
+  readonly label: string;
+  readonly icon: LucideIcon;
 }
 
 function ThemeButton({
@@ -64,7 +64,7 @@ function ThemeButton({
   onClick,
   label,
   icon: Icon
-}: ThemeButtonProps) {
+}: Readonly<ThemeButtonProps>) {
   return (
     <button
       onClick={onClick}
