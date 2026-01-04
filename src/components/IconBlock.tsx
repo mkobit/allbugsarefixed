@@ -20,11 +20,18 @@ const iconBlockStyles = tv({
 });
 
 interface IconBlockProps extends VariantProps<typeof iconBlockStyles> {
-  icon: LucideIcon;
-  label?: string;
+  readonly icon: LucideIcon;
+  readonly label?: string;
 }
 
-const IconBlock: React.FC<IconBlockProps> = ({ icon: Icon, label, variant }) => {
+const IconBlock: React.FC<Readonly<IconBlockProps>> = ({ 
+  icon: Icon, 
+  label, 
+  variant 
+}) => {
+  if (!Icon) {
+    return null;
+  }
   return (
     <div className="flex flex-col items-center p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 shadow-sm hover:shadow-md transition-shadow">
       <div className={iconBlockStyles({ variant })}>

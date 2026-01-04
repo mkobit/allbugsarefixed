@@ -5,12 +5,12 @@ import { useECharts } from '../hooks/useECharts';
 import { useDarkMode } from '../hooks/useDarkMode';
 
 interface EChartProps {
-  options: EChartsOption;
-  height?: string;
-  width?: string;
+  readonly options: EChartsOption;
+  readonly height?: string;
+  readonly width?: string;
 }
 
-export default function EChart({ options, height = '400px', width = '100%' }: EChartProps) {
+export default function EChart({ options, height = '400px', width = '100%' }: Readonly<EChartProps>) {
   const isDark = useDarkMode();
 
   // Merge user options with theme-specific overrides

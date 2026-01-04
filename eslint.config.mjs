@@ -7,6 +7,7 @@ import { flat as mdxFlat, flatCodeBlocks as mdxFlatCodeBlocks } from "eslint-plu
 import prettierConfig from "eslint-config-prettier";
 import globals from "globals";
 import sortKeysPlugin from "eslint-plugin-sort-keys";
+import functionalPlugin from "eslint-plugin-functional";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -35,10 +36,12 @@ export default [
     plugins: {
       "@typescript-eslint": typescriptEslint,
       "sort-keys": sortKeysPlugin,
+      functional: functionalPlugin,
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,
       ...typescriptEslint.configs["stylistic"].rules,
+      ...functionalPlugin.configs.recommended.rules,
       // Key rules for type safety without being overly strict
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": "error",
@@ -46,6 +49,16 @@ export default [
       "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
       // Object key ordering rule
       "sort-keys": ["error", "asc", { caseSensitive: true, natural: true }],
+      // Functional rules override/tweak
+      "functional/no-let": "error",
+      "functional/immutable-data": "error",
+      "functional/no-try-statements": "off", // Functional programming uses Result types, but we are in a hybrid env
+      "functional/no-classes": "off", // Classes are used for Error boundaries and third-party lib integration
+      "functional/no-expression-statements": "off", // React hooks (useEffect) and event handlers often return void/cleanup
+      "functional/no-conditional-statements": "off", // Conditionals are standard in this codebase; pattern matching is not yet pervasive
+      "functional/no-return-void": "off", // React callbacks and effects rely on void returns
+      "functional/no-mixed-types": "off", // Common in TS/JS interop
+      "functional/functional-parameters": "off" // Too restrictive for standard React component props and event handlers
     },
   },
   // Playwright Tests
@@ -57,6 +70,10 @@ export default [
         ...globals.browser, // Playwright tests can sometimes look like they use browser globals inside evaluate()
       },
     },
+    rules: {
+      "functional/no-let": "off",
+      "functional/immutable-data": "off"
+    }
   },
   // Astro files
   {
