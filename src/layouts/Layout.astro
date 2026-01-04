@@ -1,40 +1,69 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { Container } from '../components/ui/container';
 import ThemeInit from "../components/ThemeInit.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import "../styles/global.css";
 
 interface Props {
-  title: string;
+  title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, image = '/placeholder-social.jpg' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={SITE_DESCRIPTION} />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | {SITE_TITLE}</title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+    <title>{title}</title>
+
     <script>
       import "../lib/polyfills";
     </script>
+
+    <!-- View Transitions -->
+    <ClientRouter />
+
+    <!-- Theme Initialization -->
     <ThemeInit />
   </head>
-  <body class="flex flex-col min-h-screen transition-colors duration-300">
+  <body class="min-h-screen flex flex-col">
     <div class="h-1 w-full bg-brand-primary sticky top-0 z-50"></div>
 
     <Header client:only="react" />
 
-    <main class="flex-grow px-4 md:px-6 py-8 md:py-12">
-      <div class="max-w-5xl mx-auto">
+    <main class="flex-grow py-8 sm:py-12">
+      <Container>
         <slot />
-      </div>
+      </Container>
     </main>
 
     <Footer client:only="react" />
