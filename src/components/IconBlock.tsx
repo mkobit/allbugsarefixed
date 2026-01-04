@@ -38,16 +38,16 @@ const VARIANT_STYLES: Record<IconVariant, { bg: string; border: string; color: s
 };
 
 interface IconBlockProps {
-  icon: LucideIcon;
-  label?: string;
-  variant?: IconVariant;
+  readonly icon: LucideIcon;
+  readonly label?: string;
+  readonly variant?: IconVariant;
 }
 
 export default function IconBlock({
   icon: IconComponent,
   label,
   variant = 'default'
-}: IconBlockProps) {
+}: Readonly<IconBlockProps>) {
   if (!IconComponent) {
     return null;
   }

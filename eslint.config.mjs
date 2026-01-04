@@ -7,6 +7,7 @@ import { flat as mdxFlat, flatCodeBlocks as mdxFlatCodeBlocks } from "eslint-plu
 import prettierConfig from "eslint-config-prettier";
 import globals from "globals";
 import sortKeysPlugin from "eslint-plugin-sort-keys";
+import functionalPlugin from "eslint-plugin-functional";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -35,10 +36,13 @@ export default [
     plugins: {
       "@typescript-eslint": typescriptEslint,
       "sort-keys": sortKeysPlugin,
+      functional: functionalPlugin,
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,
       ...typescriptEslint.configs["stylistic"].rules,
+      ...functionalPlugin.configs.recommended.rules,
+      ...functionalPlugin.configs.lite.rules,
       // Key rules for type safety without being overly strict
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": "error",
@@ -46,6 +50,16 @@ export default [
       "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
       // Object key ordering rule
       "sort-keys": ["error", "asc", { caseSensitive: true, natural: true }],
+      // Functional rules override/tweak
+      "functional/no-let": "error",
+      "functional/immutable-data": "error",
+      "functional/no-try-statements": "off", // Too strict for general use
+      "functional/no-classes": "off", // We use classes in some places
+      "functional/no-expression-statements": "off", // Too strict
+      "functional/no-conditional-statements": "off", // Too strict
+      "functional/no-return-void": "off", // Too strict
+      "functional/no-mixed-types": "off", // Too strict
+      "functional/functional-parameters": "off" // Too strict
     },
   },
   // Playwright Tests
@@ -57,6 +71,10 @@ export default [
         ...globals.browser, // Playwright tests can sometimes look like they use browser globals inside evaluate()
       },
     },
+    rules: {
+      "functional/no-let": "off",
+      "functional/immutable-data": "off"
+    }
   },
   // Astro files
   {

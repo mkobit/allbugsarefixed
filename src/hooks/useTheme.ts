@@ -25,12 +25,12 @@ export function useTheme() {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const applyTheme = (targetTheme: Theme) => {
-      let isDark = false;
+      const isDark =
+        targetTheme === 'system' ? mediaQuery.matches : targetTheme === 'dark';
+
       if (targetTheme === 'system') {
-        isDark = mediaQuery.matches;
         localStorage.removeItem('theme');
       } else {
-        isDark = targetTheme === 'dark';
         localStorage.setItem('theme', targetTheme);
       }
 
