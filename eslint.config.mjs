@@ -42,7 +42,6 @@ export default [
       ...typescriptEslint.configs.recommended.rules,
       ...typescriptEslint.configs["stylistic"].rules,
       ...functionalPlugin.configs.recommended.rules,
-      ...functionalPlugin.configs.lite.rules,
       // Key rules for type safety without being overly strict
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": "error",
@@ -53,13 +52,13 @@ export default [
       // Functional rules override/tweak
       "functional/no-let": "error",
       "functional/immutable-data": "error",
-      "functional/no-try-statements": "off", // Too strict for general use
-      "functional/no-classes": "off", // We use classes in some places
-      "functional/no-expression-statements": "off", // Too strict
-      "functional/no-conditional-statements": "off", // Too strict
-      "functional/no-return-void": "off", // Too strict
-      "functional/no-mixed-types": "off", // Too strict
-      "functional/functional-parameters": "off" // Too strict
+      "functional/no-try-statements": "off", // Functional programming uses Result types, but we are in a hybrid env
+      "functional/no-classes": "off", // Classes are used for Error boundaries and third-party lib integration
+      "functional/no-expression-statements": "off", // React hooks (useEffect) and event handlers often return void/cleanup
+      "functional/no-conditional-statements": "off", // Conditionals are standard in this codebase; pattern matching is not yet pervasive
+      "functional/no-return-void": "off", // React callbacks and effects rely on void returns
+      "functional/no-mixed-types": "off", // Common in TS/JS interop
+      "functional/functional-parameters": "off" // Too restrictive for standard React component props and event handlers
     },
   },
   // Playwright Tests

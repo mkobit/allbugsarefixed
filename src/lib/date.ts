@@ -1,6 +1,6 @@
 import type { Temporal } from "@js-temporal/polyfill";
 
-export function formatDateToHumanString(date: Date | Temporal.PlainDate): string {
+export function formatDateToHumanString(date: Readonly<Date | Temporal.PlainDate>): string {
   const dateObj: Date =
     date instanceof Date
       ? date

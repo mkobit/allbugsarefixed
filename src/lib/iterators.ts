@@ -6,7 +6,7 @@
  * Uses Array.prototype.values() for arrays to ensure lazy traversal.
  */
 
-export function lazyValues<T>(source: T[] | Iterable<T>): Iterator<T> {
+export function lazyValues<T>(source: readonly T[] | Iterable<T>): Iterator<T> {
   if (Array.isArray(source)) {
     return source.values();
   }
@@ -20,7 +20,7 @@ export function lazyValues<T>(source: T[] | Iterable<T>): Iterator<T> {
 }
 
 export function* lazyMap<T, U>(
-  source: T[] | Iterable<T>,
+  source: readonly T[] | Iterable<T>,
   mapFn: (item: T) => U
 ): Generator<U> {
   const iterator = lazyValues(source);
@@ -32,7 +32,7 @@ export function* lazyMap<T, U>(
 }
 
 export function* lazyFilter<T>(
-  source: T[] | Iterable<T>,
+  source: readonly T[] | Iterable<T>,
   predicate: (item: T) => boolean
 ): Generator<T> {
   const iterator = lazyValues(source);

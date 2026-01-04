@@ -43,7 +43,7 @@ export function useTheme() {
 
     applyTheme(theme);
 
-    const handleSystemChange = (e: MediaQueryListEvent) => {
+    const handleSystemChange = (e: Readonly<MediaQueryListEvent>) => {
       if (theme === 'system') {
         if (e.matches) root.classList.add('dark');
         else root.classList.remove('dark');
