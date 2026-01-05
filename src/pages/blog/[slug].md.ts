@@ -1,6 +1,10 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
+/**
+ * Returns a simplified Markdown representation of the post.
+ * This is "AI-friendly" - just the frontmatter and the body text.
+ */
 export const GET: APIRoute = async ({ params }) => {
   const { slug } = params;
 
@@ -9,18 +13,39 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   const posts = await getCollection('blog');
-  const post = posts.find((p) => p.id === slug || p.id === `${slug}/index.mdx` || p.id.startsWith(slug));
+
+  // Find the post. Since we strictly use folder-per-post with date prefixes now,
+  // the slug passed here (from getStaticPaths) matches the folder name logic.
+  // In getStaticPaths we strip /index.mdx.
+  const post = posts.find((p) => {
+      const normalizedId = p.id.replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '');
+      return normalizedId === slug;
+  });
 
   if (!post) {
     return new Response('Not found', { status: 404 });
   }
 
-  // We want to return the raw body
-  // Since we are using the glob loader, the body is available as standard.
-  // However, with Content Collections in Astro 5, `body` might not be directly exposed if using MDX?
-  // Actually, for `glob` loader with MDX, `body` is the raw content.
+  // Generate clean output
+  // We manually reconstruct a clean frontmatter to avoid leaking internal fields if any
+  const frontmatter = [
+    '---',
+    `title: "${post.data.title}"`,
+    `description: "${post.data.description}"`,
+    `pubDate: ${post.data.pubDate.toISOString()}`,
+    post.data.tags ? `tags: [${post.data.tags.join(', ')}]` : null,
+    '---',
+    '',
+  ].filter(Boolean).join('\n');
 
-  return new Response(post.body, {
+  // Simply return the raw body from the file
+  // This might include component imports, but that's acceptable for "raw" source
+  // The user requested "massive reduction", but stripping imports robustly with Regex is risky.
+  // Let's at least provide the direct file content which is standard for "Raw View".
+  // If we really want to strip imports:
+  const cleanBody = post.body.replace(/^import .*$/gm, '').trim();
+
+  return new Response(frontmatter + cleanBody, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
     },
@@ -30,11 +55,9 @@ export const GET: APIRoute = async ({ params }) => {
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => {
-    // Handle the ID which might be "folder/index" or just "id"
-    // We want the slug to be the folder name
-    const slug = post.id.endsWith('/index.mdx')
-        ? post.id.replace('/index.mdx', '')
-        : post.id.replace('.mdx', '');
+    // ID is like "2024-05-20-tech-demo/index.mdx"
+    // Slug should be "2024-05-20-tech-demo"
+    const slug = post.id.replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '');
 
     return {
       params: { slug },

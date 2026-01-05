@@ -59,6 +59,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "remark-reading-time": "^2.0.2",
     "tailwindcss": "^4.1.18",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.2"
   }
 }

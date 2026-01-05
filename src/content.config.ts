@@ -7,7 +7,8 @@ const blogCollection = defineCollection({
     base: "./src/content/blog",
     // Support both single files and folder-per-post index files
     // Explicitly exclude auxiliary files like outlines or data
-    pattern: ["**/*.{md,mdx}", "!**/AGENTS.md", "!**/CLAUDE.md", "!**/outline.md", "!**/_*.{md,mdx}"]
+    // Added !**/_*.{md,mdx} to exclude files starting with underscore (like _brief.md)
+    pattern: ["**/*.{md,mdx}", "!**/AGENTS.md", "!**/CLAUDE.md", "!**/_*.{md,mdx}"]
   }),
   schema: z.object({
     description: z.string(),

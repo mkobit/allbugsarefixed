@@ -15,7 +15,7 @@ const tsconfigRootDir = dirname(fileURLToPath(import.meta.url));
 
 export default [
   {
-    ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/", "playwright-report/", "test-results/"],
+    ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/", "playwright-report/", "test-results/", "scripts/verify-blog-structure.ts"],
   },
   js.configs.recommended,
   // TypeScript rules - balanced approach for Astro + Zod
