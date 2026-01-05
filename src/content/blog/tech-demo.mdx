@@ -1,5 +1,5 @@
 ---
-title: "Tech Demo: Charts, Code, and Callouts"
+title: "Tech demo: charts, code, and callouts"
 pubDate: 2024-05-20
 description: "A showcase of the styling capabilities, interactive charts, and code snippets on All Bugs Are Fixed."
 tags: ["demo", "style", "components"]
@@ -10,6 +10,7 @@ import Callout from '../../components/Callout.astro';
 import EChart from '../../components/EChart.astro';
 import Mermaid from '../../components/Mermaid.astro';
 import IconBlock from '../../components/IconBlock';
+import Latex from '../../components/Latex.astro';
 import {
   Zap,
   Activity,
@@ -59,11 +60,11 @@ We use a reusable React component `IconBlock` to maintain consistency and ease o
   />
 </div>
 
-### Inline Icons
+### Inline icons
 
 You can also use icons inline with text. For example, <Cpu className="inline-block w-4 h-4 text-red-500 align-text-bottom" /> **CPU Usage** is high, or verify the <Globe className="inline-block w-4 h-4 text-blue-400 align-text-bottom" /> **Network Status**.
 
-### Icon Palette
+### Icon palette
 
 <div className="flex flex-wrap gap-4 my-4 p-4 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
   <Server className="text-gray-400" />
@@ -80,7 +81,7 @@ We use callouts to highlight important information.
   This is an **info** callout. It's great for general notes or side comments that add context without breaking the flow.
 </Callout>
 
-<Callout type="tip" title="Pro Tip">
+<Callout type="tip" title="Pro tip">
   Use **tip** callouts for best practices or shortcuts.
 
   ```bash
@@ -89,19 +90,19 @@ We use callouts to highlight important information.
   ```
 </Callout>
 
-<Callout type="warning" title="Watch Out">
+<Callout type="warning" title="Watch out">
   **Warning** callouts are for things that require caution, like breaking changes or deprecated features.
 </Callout>
 
-<Callout type="error" title="Critical Error">
+<Callout type="error" title="Critical error">
   Use **error** callouts for things that are strictly forbidden or dangerous operations.
 </Callout>
 
-## 3. Code Snippets
+## 3. Code snippets
 
 We want our code to look good. Astro uses Shiki for syntax highlighting by default.
 
-### Kotlin (JS Target)
+### Kotlin (JS target)
 Here's a snippet of Kotlin code, as requested for "runnable" future-proofing.
 
 ```kotlin
@@ -134,11 +135,11 @@ export async function getStaticPaths() {
 }
 ```
 
-## 4. Data Visualization
+## 4. Data visualization
 
 We integrate **Apache ECharts** for rich, interactive visualizations.
 
-### Monthly Bug Fixes
+### Monthly bug fixes
 A simple line chart showing our velocity.
 
 <EChart
@@ -176,7 +177,7 @@ A simple line chart showing our velocity.
   }}
 />
 
-### Project Distribution
+### Project distribution
 A donut chart example.
 
 <EChart
@@ -223,7 +224,7 @@ A donut chart example.
   }}
 />
 
-## 5. Mermaid Diagrams
+## 5. Mermaid diagrams
 
 For flowcharts, sequence diagrams, and more, we use **Mermaid**.
 
@@ -250,6 +251,22 @@ sequenceDiagram
     B-->>U: Render HTML
 `} />
 
+## 6. Mathematical formulas
+
+We support **LaTeX** rendering for mathematical expressions, powered by our custom `<Latex />` component.
+
+### Inline equations
+You can write inline equations like <Latex formula="E = mc^2" inline /> or <Latex formula="e^{i\pi} + 1 = 0" inline /> directly in the text.
+
+### Block equations
+For more complex equations, use block syntax:
+
+<Latex formula="\mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + i \bar{\psi} \gamma^\mu D_\mu \psi + h.c. + \psi_i y_{ij} \psi_j \phi + h.c. + |D_\mu \phi|^2 - V(\phi)" />
+
+Another example, the Gaussian Integral:
+
+<Latex formula="\int_{-\infty}^{\infty} e^{-x^2} \,dx = \sqrt{\pi}" />
+
 ## Conclusion
 
 This page demonstrates that we have a robust set of tools for authoring technical content:
@@ -259,5 +276,6 @@ This page demonstrates that we have a robust set of tools for authoring technica
 4. **Diagrams** are easy to write in Markdown.
 5. **Callouts** draw attention where needed.
 6. **Icons** provide visual cues and enhanced aesthetics.
+7. **Math** is rendered beautifully.
 
 Everything is ready for the "Solo Party"!
