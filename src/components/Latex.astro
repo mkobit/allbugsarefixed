@@ -13,4 +13,12 @@ const html = katex.renderToString(formula, {
 });
 ---
 
-<span set:html={html} class:list={[{ 'inline-block': inline, 'block text-center my-4': !inline }]} />
+{
+  inline ? (
+    <span set:html={html} class="inline-block" />
+  ) : (
+    <div class="overflow-x-auto overflow-y-hidden my-4 text-center max-w-full">
+      <span set:html={html} class="inline-block" />
+    </div>
+  )
+}
