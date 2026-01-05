@@ -2,6 +2,8 @@ import React from 'react';
 import { tv } from 'tailwind-variants';
 import { getTagMetadata, type TagId } from '../lib/tags';
 
+// TagBadge: Renders a classifier label (Tag) for a blog post.
+// Not to be confused with Callouts, which are content annotations.
 const tagBadge = tv({
   base: 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border transition-colors',
   defaultVariants: {
@@ -26,9 +28,6 @@ interface TagBadgeProps {
 export const TagBadge: React.FC<TagBadgeProps> = ({ id }) => {
   const metadata = getTagMetadata(id);
 
-  // We assume strict type safety, so metadata should exist if id is valid.
-  // If not, we might crash or show a fallback, but per requirements we enforce valid tags.
-  // The '?' in metadata check is just for runtime safety.
   if (!metadata) return null;
 
   return (

@@ -1,13 +1,12 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from 'astro/loaders';
-import { isValidTag, TAG_DEFINITIONS } from './lib/tags';
+import { isValidTag, FLATTENED_TAGS } from './lib/tags';
 
 const blogCollection = defineCollection({
   loader: glob({
     base: "./src/content/blog",
     // Support both single files and folder-per-post index files
     // Explicitly exclude auxiliary files like outlines or data
-    // Added !**/_*.{md,mdx} to exclude files starting with underscore (like _brief.md)
     pattern: ["**/*.{md,mdx}", "!**/AGENTS.md", "!**/CLAUDE.md", "!**/_*.{md,mdx}"]
   }),
   schema: z.object({
@@ -19,12 +18,13 @@ const blogCollection = defineCollection({
 
     // Blog Post Status
     status: z.enum(['concept', 'draft', 'review', 'published', 'locked']).default('published'),
+
     // Enforce strict types for tags
     tags: z.array(z.string()).refine(
       (tags) => tags.every((tag) => isValidTag(tag)),
       (tags) => {
         const invalidTags = tags.filter(tag => !isValidTag(tag));
-        const validTags = Object.keys(TAG_DEFINITIONS).join(', ');
+        const validTags = Object.keys(FLATTENED_TAGS).join(', ');
         return { message: `Invalid tags found: ${invalidTags.join(', ')}. Valid tags are: ${validTags}` };
       }
     ).optional(),
