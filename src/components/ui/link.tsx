@@ -19,7 +19,7 @@ const linkStyles = tv({
 
 export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>, VariantProps<typeof linkStyles> {}
 
-export function Link({ className, variant, ...props }: Readonly<LinkProps>) {
+export function Link({ className, variant, ...props }: LinkProps) {
   return (
     <DataInteractive>
       <a className={cn(linkStyles({ variant }), className)} {...props} />

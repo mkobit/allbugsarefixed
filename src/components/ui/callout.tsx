@@ -27,7 +27,7 @@ export type CalloutProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<t
   title?: string
 }
 
-export function Callout({ children, className, title, type, ...props }: CalloutProps) {
+export function Callout({ children, className, title, type, ...props }: Readonly<CalloutProps>) {
   const Icon = icons[type || 'info']
 
   return (

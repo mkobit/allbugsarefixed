@@ -25,7 +25,6 @@
     "mermaid": "^11.12.2",
     "react": "19.2.3",
     "react-dom": "^19.2.3",
-    "remeda": "^2.33.1",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2"
   },
@@ -43,7 +42,6 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",
-    "eslint-plugin-functional": "^9.0.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-mdx": "^3.6.2",
     "eslint-plugin-prettier": "^5.5.4",

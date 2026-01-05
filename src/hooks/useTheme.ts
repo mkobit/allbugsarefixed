@@ -25,12 +25,12 @@ export function useTheme() {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const applyTheme = (targetTheme: Theme) => {
-      const isDark =
-        targetTheme === 'system' ? mediaQuery.matches : targetTheme === 'dark';
-
+      let isDark = false;
       if (targetTheme === 'system') {
+        isDark = mediaQuery.matches;
         localStorage.removeItem('theme');
       } else {
+        isDark = targetTheme === 'dark';
         localStorage.setItem('theme', targetTheme);
       }
 
@@ -43,7 +43,7 @@ export function useTheme() {
 
     applyTheme(theme);
 
-    const handleSystemChange = (e: Readonly<MediaQueryListEvent>) => {
+    const handleSystemChange = (e: MediaQueryListEvent) => {
       if (theme === 'system') {
         if (e.matches) root.classList.add('dark');
         else root.classList.remove('dark');

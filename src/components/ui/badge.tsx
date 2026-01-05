@@ -18,7 +18,7 @@ const badgeStyles = tv({
 
 export type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & VariantProps<typeof badgeStyles>
 
-export function Badge({ className, variant, ...props }: BadgeProps) {
+export function Badge({ variant, className, ...props }: Readonly<BadgeProps>) {
   return (
     <span className={badgeStyles({ className, variant })} {...props} />
   )

@@ -24,19 +24,9 @@ const buttonStyles = tv({
   },
 })
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonStyles> {
-  readonly asChild?: boolean;
-  readonly className?: string;
-  readonly fullWidth?: boolean;
-}
+export type ButtonProps = HeadlessButtonProps & VariantProps<typeof buttonStyles> & { className?: string }
 
-export const Button = ({ 
-  className, 
-  fullWidth, 
-  size, 
-  variant, 
-  ...props 
-}: Readonly<ButtonProps>) => {
+export function Button({ variant, size, className, ...props }: Readonly<ButtonProps>) {
   return (
     <HeadlessButton
       {...props}

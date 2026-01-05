@@ -7,6 +7,6 @@ const containerStyles = tv({
 
 export type ContainerProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof containerStyles>
 
-export function Container({ className, ...props }: ContainerProps) {
+export function Container({ className, ...props }: Readonly<ContainerProps>) {
   return <div className={containerStyles({ className })} {...props} />
 }

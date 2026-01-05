@@ -1,4 +1,3 @@
-/* eslint-disable functional/immutable-data */
 import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
 
 declare global {
