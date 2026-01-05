@@ -53,11 +53,14 @@ export default [
       "functional/no-let": "error",
       "functional/immutable-data": "error",
       "functional/no-try-statements": "off", // Functional programming uses Result types, but we are in a hybrid env
-      "functional/no-classes": "off", // Classes are used for Error boundaries and third-party lib integration
+      // functional/no-classes is enabled by default in recommended, so removing the disable line enables it.
       "functional/no-expression-statements": "off", // React hooks (useEffect) and event handlers often return void/cleanup
       "functional/no-conditional-statements": "off", // Conditionals are standard in this codebase; pattern matching is not yet pervasive
       "functional/no-return-void": "off", // React callbacks and effects rely on void returns
-      "functional/no-mixed-types": "off", // Common in TS/JS interop
+      // Enable strict functional rules where possible
+      "functional/no-mixed-types": "error", // Enforce strict type definitions, suppress where necessary
+      "functional/no-loop-statements": "error", // Prefer functional iteration (map, reduce, recursion)
+      "functional/no-this-expressions": "error", // Avoid 'this', use pure functions
       "functional/functional-parameters": "off" // Too restrictive for standard React component props and event handlers
     },
   },
@@ -72,7 +75,9 @@ export default [
     },
     rules: {
       "functional/no-let": "off",
-      "functional/immutable-data": "off"
+      "functional/immutable-data": "off",
+      "functional/no-loop-statements": "off", // Tests often use loops for retries or data setup
+      "functional/no-expression-statements": "off"
     }
   },
   // Astro files
