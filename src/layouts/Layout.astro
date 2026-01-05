@@ -4,6 +4,7 @@ import { Footer } from "../components/Footer";
 import ThemeInit from "../components/ThemeInit.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import "../styles/global.css";
+import { Container } from "../components/ui/container";
 
 interface Props {
   title: string;
@@ -31,10 +32,10 @@ const { title } = Astro.props;
 
     <Header client:only="react" />
 
-    <main class="flex-grow px-4 md:px-6 py-8 md:py-12">
-      <div class="max-w-5xl mx-auto">
+    <main class="flex-grow py-8 md:py-12">
+      <Container>
         <slot />
-      </div>
+      </Container>
     </main>
 
     <Footer client:only="react" />
