@@ -1,5 +1,10 @@
 ---
-import { formatDateToHumanString } from "../lib/date";
+import { Badge } from "./ui/badge";
+import { Heading } from "./ui/heading";
+import { Text } from "./ui/text";
+import { HStack, Stack } from "./ui/stack";
+import { Time } from "./ui/time";
+import { SlashSeparator } from "./ui/separator";
 
 interface Props {
   title: string;
@@ -10,21 +15,19 @@ const { title, pubDate } = Astro.props;
 ---
 
 <header class="mb-10 text-center max-w-3xl mx-auto pt-4">
-  <div class="mb-4">
-    <span class="text-brand-primary font-bold tracking-wide uppercase text-xs">
+  <Stack align="center" gap="md" className="mb-4">
+    <Badge variant="default">
       Blog Post
-    </span>
-  </div>
+    </Badge>
+  </Stack>
 
-  <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-brand-text mb-6 leading-tight">
+  <Heading level={1} as="h1">
     {title}
-  </h1>
+  </Heading>
 
-  <div class="flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400 font-mono">
-    <time datetime={pubDate.toISOString()}>
-      {formatDateToHumanString(pubDate)}
-    </time>
-    <span class="text-gray-300 dark:text-gray-700">/</span>
-    <span>General</span>
-  </div>
+  <HStack justify="center" gap="lg">
+    <Time date={pubDate} variant="muted" />
+    <SlashSeparator />
+    <Text as="span" variant="muted" size="sm" className="font-mono">General</Text>
+  </HStack>
 </header>
