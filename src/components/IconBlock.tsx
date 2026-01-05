@@ -37,6 +37,7 @@ const VARIANT_STYLES: Record<IconVariant, { bg: string; border: string; color: s
   }
 };
 
+// eslint-disable-next-line functional/no-mixed-types
 interface IconBlockProps {
   readonly icon: LucideIcon;
   readonly label?: string;
