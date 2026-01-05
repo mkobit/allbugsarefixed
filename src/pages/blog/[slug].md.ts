@@ -2,8 +2,14 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
 export const GET: APIRoute = async ({ params }) => {
+  const { slug } = params;
+
+  if (!slug) {
+    return new Response('Not found', { status: 404 });
+  }
+
   const posts = await getCollection('blog');
-  const post = posts.find((p) => p.id === params.slug || p.id === `${params.slug}/index.mdx` || p.id.startsWith(params.slug!));
+  const post = posts.find((p) => p.id === slug || p.id === `${slug}/index.mdx` || p.id.startsWith(slug));
 
   if (!post) {
     return new Response('Not found', { status: 404 });
