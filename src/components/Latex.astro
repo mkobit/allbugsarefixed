@@ -1,0 +1,16 @@
+---
+import katex from 'katex';
+
+interface Props {
+  formula: string;
+  inline?: boolean;
+}
+
+const { formula, inline = false } = Astro.props;
+const html = katex.renderToString(formula, {
+  throwOnError: false,
+  displayMode: !inline
+});
+---
+
+<span set:html={html} class:list={[{ 'inline-block': inline, 'block text-center my-4': !inline }]} />
