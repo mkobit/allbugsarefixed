@@ -6,11 +6,13 @@ tags: ["demo", "style", "components"]
 ---
 
 {/* eslint-disable no-unused-vars */}
-import { Callout } from '../../components/ui/callout';
-import EChart from '../../components/EChart.astro';
-import Mermaid from '../../components/Mermaid.astro';
-import IconBlock from '../../components/IconBlock';
-import Latex from '../../components/Latex.astro';
+import { Callout } from '../../../components/ui/callout';
+import EChart from '../../../components/EChart.astro';
+import Mermaid from '../../../components/Mermaid.astro';
+import IconBlock from '../../../components/IconBlock';
+import Latex from '../../../components/Latex.astro';
+import { csvParse } from 'd3-dsv';
+import rawData from './data.csv?raw';
 import {
   Zap,
   Activity,
@@ -23,6 +25,8 @@ import {
   Cloud,
   Code
 } from 'lucide-react';
+
+export const data = csvParse(rawData);
 
 # Welcome to the Tech Demo
 
@@ -212,13 +216,7 @@ A donut chart example.
             fontWeight: 'bold'
           }
         },
-        data: [
-          { value: 1048, name: 'Coding' },
-          { value: 735, name: 'Debugging' },
-          { value: 580, name: 'Planning' },
-          { value: 484, name: 'Coffee' },
-          { value: 300, name: 'Meetings' }
-        ]
+        data: data.map(d => ({ value: parseInt(d.bugs || '0'), name: d.month || '' }))
       }
     ]
   }}

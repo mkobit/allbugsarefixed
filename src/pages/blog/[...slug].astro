@@ -2,29 +2,107 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PostHeader from "../../components/PostHeader.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import PostMetadata from "../../components/PostMetadata.astro";
+import { TagBadge } from "../../components/TagBadge";
+import { FileText } from 'lucide-react';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+
+  // In production, filter out 'concept', 'draft', 'review'
+  // But for now, or depending on requirements, we might want to build them but hide them?
+  // The user asked for "concept/draft" to be "preview".
+  // Standard Astro SSG behavior: if we don't return path, it's 404.
+  // We can filter here.
+
+  const isProd = import.meta.env.PROD;
+
+  const filteredEntries = blogEntries.filter(entry => {
+    if (isProd) {
+      // In production, only show published and locked
+      return entry.data.status === 'published' || entry.data.status === 'locked';
+    }
+    // In dev, show everything
+    return true;
+  });
+
+  return filteredEntries.map((entry) => {
+    // Determine the slug from the ID.
+    // If folder-based: "my-post/index.mdx" -> "my-post"
+    let slug = entry.id;
+    if (slug.endsWith('/index.mdx')) {
+        slug = slug.replace('/index.mdx', '');
+    } else if (slug.endsWith('.mdx')) {
+        slug = slug.replace('.mdx', '');
+    }
+
+    return {
+        params: { slug },
+        props: { entry, slug },
+    };
+  });
 }
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { entry, slug } = Astro.props;
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+
+const readingTime = remarkPluginFrontmatter?.readingTime || "1 min read";
+// remark-reading-time usually provides words count in minutes,
+// to get words we might need a different config or just parse it.
+// Standard remark-reading-time result is an object if configured, or text.
+// Let's assume text for now.
+// For words, we can't easily get it without configured hook, but let's stick to time for now.
 ---
 
 <Layout title={entry.data.title}>
-  <article class="w-full">
-    <PostHeader title={entry.data.title} pubDate={entry.data.pubDate} />
+  <article class="w-full relative">
 
-    <div class="prose prose-lg dark:prose-invert max-w-3xl mx-auto
-      prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
-      prose-headings:font-bold prose-headings:tracking-tight
-      prose-img:rounded-xl prose-img:shadow-lg
-    ">
-      <Content />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+      {/* Main Content Column */}
+      <div class="lg:col-span-8 lg:col-start-3">
+        <PostHeader title={entry.data.title} pubDate={entry.data.pubDate} />
+
+        {/* Post Metadata & Tags */}
+        <div class="mb-8 border-b border-gray-100 dark:border-gray-800 pb-8">
+          <PostMetadata readingTime={readingTime} />
+
+          <div class="flex flex-wrap gap-2 mt-4">
+            {entry.data.tags?.map((tag) => (
+               <TagBadge client:visible id={tag} />
+            ))}
+          </div>
+
+          <div class="mt-4 flex gap-4">
+             <a href={`/blog/${slug}.md`} class="inline-flex items-center text-xs text-gray-500 hover:text-brand-primary transition-colors">
+                <FileText size={14} className="mr-1" />
+                View Raw Source
+             </a>
+             {entry.data.status !== 'published' && (
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-800 uppercase tracking-wide">
+                    {entry.data.status}
+                </span>
+             )}
+          </div>
+        </div>
+
+        <div class="prose prose-lg dark:prose-invert max-w-none
+          prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
+          prose-headings:font-bold prose-headings:tracking-tight
+          prose-img:rounded-xl prose-img:shadow-lg
+        ">
+          <Content />
+        </div>
+      </div>
+
+      {/* Sidebar / TOC Column - Hidden on mobile */}
+      <div class="hidden lg:block lg:col-span-2">
+         <div class="sticky top-24">
+             <TableOfContents headings={headings} />
+         </div>
+      </div>
+
     </div>
 
     <div class="h-24"></div>
