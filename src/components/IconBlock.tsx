@@ -19,6 +19,7 @@ const iconBlockStyles = tv({
   },
 });
 
+// eslint-disable-next-line functional/no-mixed-types
 interface IconBlockProps extends VariantProps<typeof iconBlockStyles> {
   icon: LucideIcon;
   label?: string;

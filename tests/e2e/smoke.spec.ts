@@ -3,9 +3,11 @@ import { test, expect } from '@playwright/test';
 test.describe('Smoke Test', () => {
   test('homepage loads with correct title and styling', async ({ page }) => {
     // 1. Check for console errors
+
     const consoleErrors: string[] = [];
     page.on('console', msg => {
       if (msg.type() === 'error') {
+        // eslint-disable-next-line functional/immutable-data
         consoleErrors.push(msg.text());
       }
     });

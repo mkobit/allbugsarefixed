@@ -52,6 +52,7 @@ export default function ThemeToggle() {
   );
 }
 
+// eslint-disable-next-line functional/no-mixed-types
 interface ThemeButtonProps {
   selected: boolean;
   onClick: () => void;

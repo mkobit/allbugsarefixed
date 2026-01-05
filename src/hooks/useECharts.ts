@@ -20,6 +20,7 @@ export function useECharts(options: EChartsOption, theme?: string | object) {
     if (!container) return;
 
     if (!chartInstance.current) {
+      // eslint-disable-next-line functional/immutable-data
       chartInstance.current = echarts.init(container);
     }
 
@@ -34,6 +35,7 @@ export function useECharts(options: EChartsOption, theme?: string | object) {
     return () => {
       resizeObserver.disconnect();
       chart.dispose();
+      // eslint-disable-next-line functional/immutable-data
       chartInstance.current = null;
     };
   }, []); // Run once on mount
