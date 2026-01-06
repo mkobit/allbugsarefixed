@@ -5,7 +5,6 @@ import PostHeader from "../../components/PostHeader.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 import PostMetadata from "../../components/PostMetadata.astro";
 import { LabelBadge } from "../../components/LabelBadge";
-import type { LabelId } from "../../lib/labels";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -54,7 +53,7 @@ const wordCount = readingTimeData?.words;
 
           <div class="flex flex-wrap gap-2 mt-4">
             {entry.data.labels?.map((label) => (
-               <LabelBadge client:visible id={label as LabelId} />
+               <LabelBadge client:visible id={label} />
             ))}
           </div>
 

@@ -14,7 +14,7 @@ interface BlogCardProps {
   readonly description: string;
   readonly pubDate: Date;
   readonly href: string;
-  readonly labels?: readonly string[]; // We accept string[] because that's what comes from content collections usually, but we cast to LabelId
+  readonly labels?: readonly LabelId[];
   readonly className?: string;
 }
 
@@ -27,7 +27,7 @@ export function BlogCard({ title, description, pubDate, href, labels, className 
       {labels && labels.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-2">
           {labels.map((label) => (
-             <LabelBadge key={label} id={label as LabelId} />
+             <LabelBadge key={label} id={label} />
           ))}
         </div>
       )}
