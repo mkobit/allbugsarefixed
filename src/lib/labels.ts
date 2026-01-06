@@ -1,3 +1,5 @@
+import { z } from 'astro/zod';
+
 // Defines the recursive tree structure for labels
 export interface LabelNode {
   readonly children?: Record<string, LabelNode>;
@@ -73,8 +75,13 @@ const flattenLabels = (tree: LabelTree, parentId?: string): FlattenedLabels => {
 // Computed flattened map
 export const FLATTENED_LABELS = flattenLabels(LABEL_TREE as unknown as LabelTree);
 
+// Create the Zod Schema
+// We cast to [string, ...string[]] because z.enum expects a non-empty array tuple
+const labelKeys = Object.keys(FLATTENED_LABELS) as [string, ...string[]];
+export const LabelIdSchema = z.enum(labelKeys);
+
 // The set of all valid label IDs
-export type LabelId = keyof typeof FLATTENED_LABELS;
+export type LabelId = z.infer<typeof LabelIdSchema>;
 
 export function getLabelMetadata(id: LabelId) {
   return FLATTENED_LABELS[id];
