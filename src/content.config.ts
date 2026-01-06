@@ -11,7 +11,6 @@ const blogCollection = defineCollection({
   }),
   schema: z.object({
     description: z.string(),
-    // Enforce strict types for labels using the LabelIdSchema
     labels: z.array(LabelIdSchema).optional(),
 
     // Optional: Explicit outline path if not using convention
