@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import { BlogCard } from "../../components/BlogCard";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -12,15 +13,14 @@ const posts = (await getCollection("blog"))
   <div class="space-y-8">
     {
       posts.map((post) => (
-        <a href={`/blog/${post.slug}/`} class="block p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{post.data.title}</h2>
-          <p class="font-normal text-gray-700 dark:text-gray-400">{post.data.description}</p>
-          <p class="text-sm text-gray-500 mt-4">
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
-            </time>
-          </p>
-        </a>
+        <BlogCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          href={`/blog/${post.id}/`}
+          labels={post.data.labels}
+          client:visible
+        />
       ))
     }
   </div>

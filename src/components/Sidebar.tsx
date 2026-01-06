@@ -57,7 +57,7 @@ interface SidebarProps {
   readonly allPosts: readonly Post[];
 }
 
-export function Sidebar({ recentPosts, allPosts }: SidebarProps) {
+export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 

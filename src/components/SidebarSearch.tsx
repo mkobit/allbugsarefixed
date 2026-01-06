@@ -42,12 +42,11 @@ interface SidebarSearchProps {
   readonly onExpand: () => void;
 }
 
-export function SidebarSearch({ allPosts, isCollapsed, onExpand }: SidebarSearchProps) {
+export function SidebarSearch({ allPosts, isCollapsed, onExpand }: Readonly<SidebarSearchProps>) {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [shouldFocus, setFocus] = useState(false);
 
-  // eslint-disable-next-line functional/no-mixed-types
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Fuse instance
