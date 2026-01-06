@@ -25,6 +25,21 @@ import {
   Cloud,
   Code
 } from 'lucide-react';
+import { DataTable } from '../../../components/ui/table';
+
+export const users = [
+  { id: 1, name: 'John Doe', role: 'Admin', status: 'Active' },
+  { id: 2, name: 'Jane Smith', role: 'User', status: 'Inactive' },
+  { id: 3, name: 'Bob Johnson', role: 'Editor', status: 'Active' },
+  { id: 4, name: 'Alice Williams', role: 'User', status: 'Active' },
+];
+
+export const userColumns = [
+  { header: 'ID', accessorKey: 'id' },
+  { header: 'Name', accessorKey: 'name' },
+  { header: 'Role', accessorKey: 'role' },
+  { header: 'Status', accessorKey: 'status' },
+];
 
 export const data = csvParse(rawData);
 
@@ -265,6 +280,12 @@ Another example, the Gaussian Integral:
 
 <Latex formula="\int_{-\infty}^{\infty} e^{-x^2} \,dx = \sqrt{\pi}" />
 
+## 7. Data Tables
+
+We have a robust table component that supports sorting. It uses **TanStack Table** under the hood.
+
+<DataTable client:load data={users} columns={userColumns} />
+
 ## Conclusion
 
 This page demonstrates that we have a robust set of tools for authoring technical content:
@@ -275,5 +296,6 @@ This page demonstrates that we have a robust set of tools for authoring technica
 5. **Callouts** draw attention where needed.
 6. **Icons** provide visual cues and enhanced aesthetics.
 7. **Math** is fully supported.
+8. **Tables** are sortable and styleable.
 
 Everything is ready for the "Solo Party"!
