@@ -14,11 +14,11 @@ const sidebarStyles = tv({
     nav: 'flex flex-col gap-2',
     navIcon: 'w-5 h-5 min-w-[20px]',
     navItem: 'flex items-center gap-3 px-3 py-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-brand-text transition-colors whitespace-nowrap',
-    overlay: 'fixed inset-0 bg-black/50 z-30 md:hidden transition-opacity duration-300',
+    overlay: 'fixed inset-0 bg-black/50 z-[55] md:hidden transition-opacity duration-300', // z-55 to be above sticky header (z-50) but below sidebar (z-60)
     recentPost: 'text-sm text-brand-text hover:text-brand-primary truncate px-3 py-1 block',
     sectionTitle: 'text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4 mb-2 px-3 whitespace-nowrap overflow-hidden',
     toggleBtn: 'p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-brand-text transition-colors',
-    wrapper: 'fixed top-0 left-0 h-full z-40 bg-brand-surface border-r border-gray-200 dark:border-white/10 transition-all duration-300 flex flex-col',
+    wrapper: 'fixed top-0 left-0 h-full z-[60] bg-brand-surface border-r border-gray-200 dark:border-white/10 transition-all duration-300 flex flex-col', // z-60 to cover everything
   },
   variants: {
     collapsed: {

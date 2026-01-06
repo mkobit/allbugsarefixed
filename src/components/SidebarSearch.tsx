@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { tv } from 'tailwind-variants';
 import { Search } from 'lucide-react';
 import Fuse from 'fuse.js';
@@ -45,24 +45,38 @@ interface SidebarSearchProps {
 export function SidebarSearch({ allPosts, isCollapsed, onExpand }: SidebarSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [shouldFocus, setFocus] = useState(false);
+
+  // eslint-disable-next-line functional/no-mixed-types
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Fuse instance
-  const fuse = new Fuse(allPosts, {
+  const fuse = useMemo(() => new Fuse(allPosts, {
     keys: ['title', 'description', 'labels'],
     threshold: 0.4,
-  });
+  }), [allPosts]);
 
   const searchResults = searchQuery ? fuse.search(searchQuery).map(r => r.item) : [];
 
   const { container, input, icon, results, resultItem, collapsedBtn } = searchStyles({ collapsed: isCollapsed });
 
+  // Handle focus when expanding
+  useEffect(() => {
+    if (!isCollapsed && shouldFocus && inputRef.current) {
+        // Small timeout to allow transition/rendering to complete if needed,
+        // though typically useEffect runs after render.
+        // If the expansion relies on CSS transitions, we might need it,
+        // but removing the arbitrary large timeout is better.
+        // Trying direct focus first.
+        inputRef.current.focus();
+        setFocus(false);
+    }
+  }, [isCollapsed, shouldFocus]);
+
   const handleSearchFocus = () => {
     if (isCollapsed) {
+      setFocus(true);
       onExpand();
-      // Wait for transition then focus?
-      setTimeout(() => {
-        document.getElementById('sidebar-search-input')?.focus();
-      }, 300);
     }
     setShowSearchResults(true);
   };
@@ -77,7 +91,7 @@ export function SidebarSearch({ allPosts, isCollapsed, onExpand }: SidebarSearch
             <>
                 <Search className={icon()} />
                 <input
-                    id="sidebar-search-input"
+                    ref={inputRef}
                     type="text"
                     placeholder="Search..."
                     className={input()}
