@@ -2,29 +2,87 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PostHeader from "../../components/PostHeader.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import PostMetadata from "../../components/PostMetadata.astro";
+import { LabelBadge } from "../../components/LabelBadge";
+import type { LabelId } from "../../lib/labels";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+
+  const isProd = import.meta.env.PROD;
+
+  const filteredEntries = blogEntries.filter(entry => {
+    if (isProd) {
+      return entry.data.status === 'published' || entry.data.status === 'locked';
+    }
+    return true;
+  });
+
+  return filteredEntries.map((entry) => {
+    const slug = entry.id.replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '');
+
+    return {
+        params: { slug },
+        props: { entry, slug },
+    };
+  });
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+
+// Reading time comes from the remark plugin injected into frontmatter
+const readingTimeData = remarkPluginFrontmatter?.readingTime;
+const readingTimeText = readingTimeData?.text || "1 min read";
+const wordCount = readingTimeData?.words;
+
 ---
 
 <Layout title={entry.data.title}>
-  <article class="w-full">
-    <PostHeader title={entry.data.title} pubDate={entry.data.pubDate} />
+  <article class="w-full relative">
 
-    <div class="prose prose-lg dark:prose-invert max-w-3xl mx-auto
-      prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
-      prose-headings:font-bold prose-headings:tracking-tight
-      prose-img:rounded-xl prose-img:shadow-lg
-    ">
-      <Content />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+      {/* Main Content Column */}
+      <div class="lg:col-span-8 lg:col-start-3">
+        <PostHeader title={entry.data.title} pubDate={entry.data.pubDate} />
+
+        {/* Post Metadata & Labels */}
+        <div class="mb-8 border-b border-gray-100 dark:border-gray-800 pb-8">
+          <PostMetadata readingTime={readingTimeText} words={wordCount} />
+
+          <div class="flex flex-wrap gap-2 mt-4">
+            {entry.data.labels?.map((label) => (
+               <LabelBadge client:visible id={label as LabelId} />
+            ))}
+          </div>
+
+          <div class="mt-4">
+             {entry.data.status !== 'published' && (
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-800 uppercase tracking-wide">
+                    {entry.data.status}
+                </span>
+             )}
+          </div>
+        </div>
+
+        <div class="prose prose-lg dark:prose-invert max-w-none
+          prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
+          prose-headings:font-bold prose-headings:tracking-tight
+          prose-img:rounded-xl prose-img:shadow-lg
+        ">
+          <Content />
+        </div>
+      </div>
+
+      {/* Sidebar / TOC Column - Hidden on mobile */}
+      <div class="hidden lg:block lg:col-span-2">
+         <div class="sticky top-24">
+             <TableOfContents headings={headings} />
+         </div>
+      </div>
+
     </div>
 
     <div class="h-24"></div>
