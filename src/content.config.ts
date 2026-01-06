@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from 'astro/loaders';
-import { isValidTag, FLATTENED_TAGS } from './lib/tags';
+import { isValidLabel, FLATTENED_LABELS } from './lib/labels';
 
 const blogCollection = defineCollection({
   loader: glob({
@@ -11,6 +11,16 @@ const blogCollection = defineCollection({
   }),
   schema: z.object({
     description: z.string(),
+    // Enforce strict types for labels
+    labels: z.array(z.string()).refine(
+      (labels) => labels.every((label) => isValidLabel(label)),
+      (labels) => {
+        const invalidLabels = labels.filter(label => !isValidLabel(label));
+        const validLabels = Object.keys(FLATTENED_LABELS).join(', ');
+        return { message: `Invalid labels found: ${invalidLabels.join(', ')}. Valid labels are: ${validLabels}` };
+      }
+    ).optional(),
+
     // Optional: Explicit outline path if not using convention
     outline: z.string().optional(),
 
@@ -18,16 +28,6 @@ const blogCollection = defineCollection({
 
     // Blog Post Status
     status: z.enum(['concept', 'draft', 'review', 'published', 'locked']).default('published'),
-
-    // Enforce strict types for tags
-    tags: z.array(z.string()).refine(
-      (tags) => tags.every((tag) => isValidTag(tag)),
-      (tags) => {
-        const invalidTags = tags.filter(tag => !isValidTag(tag));
-        const validTags = Object.keys(FLATTENED_TAGS).join(', ');
-        return { message: `Invalid tags found: ${invalidTags.join(', ')}. Valid tags are: ${validTags}` };
-      }
-    ).optional(),
 
     title: z.string(),
   }),

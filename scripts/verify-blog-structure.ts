@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { Temporal } from '@js-temporal/polyfill';
 
 const BLOG_DIR = path.join(process.cwd(), 'src/content/blog');
-// Matches YYYY-MM-DD_slug (underscore separator)
-const DATE_PREFIX_REGEX = /^\d{4}-\d{2}-\d{2}_/;
+const DATE_PREFIX_REGEX = /^(\d{4}-\d{2}-\d{2})_/;
 
 // Exclude these files/folders from checking
 const EXCLUDES = ['.DS_Store', 'AGENTS.md', 'CLAUDE.md'];
@@ -22,14 +22,19 @@ for (const entry of entries) {
   if (EXCLUDES.includes(entry.name)) continue;
 
   if (entry.isDirectory()) {
-    if (!DATE_PREFIX_REGEX.test(entry.name)) {
+    const match = entry.name.match(DATE_PREFIX_REGEX);
+    if (!match) {
       console.error(`[ERROR] Blog folder "${entry.name}" does not match pattern YYYY-MM-DD_slug.`);
       hasError = true;
     } else {
-        // Optional: strict temporal validation could go here
-        // const datePart = entry.name.split('_')[0];
-        // try { Temporal.PlainDate.from(datePart); } ...
-        console.log(`[OK] ${entry.name}`);
+        const dateStr = match[1];
+        try {
+            Temporal.PlainDate.from(dateStr);
+            console.log(`[OK] ${entry.name}`);
+        } catch (e) {
+            console.error(`[ERROR] Blog folder "${entry.name}" has an invalid date: ${dateStr}`);
+            hasError = true;
+        }
     }
   } else {
       console.warn(`[WARN] Found file "${entry.name}" in root of blog/ directory. Prefer using folders per post.`);
@@ -37,7 +42,7 @@ for (const entry of entries) {
 }
 
 if (hasError) {
-  console.error('\nVerification failed. Please rename folders to match YYYY-MM-DD_slug pattern.');
+  console.error('\nVerification failed. Please rename folders to match YYYY-MM-DD_slug pattern with a valid ISO date.');
   process.exit(1);
 } else {
   console.log('\nVerification passed.');
