@@ -15,3 +15,13 @@ runs:
       with:
         node-version: "25.2.1"
         cache: "pnpm"
+
+    - name: Cache build and lint artifacts
+      uses: actions/cache@v4
+      with:
+        path: |
+          .astro
+          .eslintcache
+        key: ${{ runner.os }}-build-lint-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-build-lint-
