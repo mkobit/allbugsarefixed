@@ -32,7 +32,7 @@ const sidebarStyles = tv({
         wrapper: 'w-64', // Expanded width
       },
       true: {
-        content: 'items-center px-2',
+        content: 'items-center px-1',
         logo: 'opacity-0 w-0',
         navItem: 'justify-center px-0',
         overlay: 'opacity-0 invisible pointer-events-none',
