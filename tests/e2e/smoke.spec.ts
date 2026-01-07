@@ -17,7 +17,8 @@ test.describe('Smoke Test', () => {
 
     // 3. Verify CSS is loaded (Brand primary color)
     // The top bar is <div class="h-1 w-full bg-brand-primary"></div>
-    const headerLine = page.locator('.bg-brand-primary').first();
+    // Note: Use .first() combined with visibility check because we have two such bars (mobile vs desktop)
+    const headerLine = page.locator('.bg-brand-primary').locator('visible=true').first();
     await expect(headerLine).toBeVisible();
 
     // Check computed style
