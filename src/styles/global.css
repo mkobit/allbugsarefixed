@@ -53,7 +53,7 @@
   }
 
   body {
-    @apply font-sans antialiased;
+    @apply font-sans antialiased text-sm;
   }
 
   /* Custom scrollbar */
