@@ -17,11 +17,41 @@ const themeButtonStyles = tv({
   }
 });
 
-export default function ThemeToggle() {
+const compactButtonStyles = tv({
+    base: 'p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-brand-text transition-colors flex items-center justify-center',
+});
+
+interface ThemeToggleProps {
+    readonly collapsed?: boolean;
+}
+
+export default function ThemeToggle({ collapsed = false }: Readonly<ThemeToggleProps>) {
   const { theme, setTheme, mounted } = useTheme();
 
   if (!mounted) {
-    return <div className="w-[88px] h-[34px]" aria-hidden="true" />;
+    return <div className={collapsed ? "w-9 h-9" : "w-[88px] h-[34px]"} aria-hidden="true" />;
+  }
+
+  const cycleTheme = () => {
+    if (theme === 'light') setTheme('dark');
+    else if (theme === 'dark') setTheme('system');
+    else setTheme('light');
+  };
+
+  const CurrentIcon = theme === 'dark' ? Moon : theme === 'system' ? Monitor : Sun;
+  const label = `Current theme: ${theme}. Click to cycle.`;
+
+  if (collapsed) {
+      return (
+          <button
+            onClick={cycleTheme}
+            className={compactButtonStyles()}
+            aria-label={label}
+            title={label}
+          >
+              <CurrentIcon size={20} />
+          </button>
+      );
   }
 
   return (
