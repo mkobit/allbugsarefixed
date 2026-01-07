@@ -42,10 +42,18 @@ function readAction() {
     if (step.uses && step.uses.startsWith('actions/setup-node')) {
       nodeVersion = String(step.with['node-version']);
     }
-    if (step.uses && step.uses.startsWith('pnpm/action-setup')) {
-      pnpmVersion = String(step.with['version']);
-    }
+    // pnpm version in action is now determined by package.json packageManager field
   });
+
+  const packageJsonPath = path.join(rootDir, 'package.json');
+  try {
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    if (packageJson.packageManager && packageJson.packageManager.startsWith('pnpm@')) {
+      pnpmVersion = packageJson.packageManager.split('@')[1];
+    }
+  } catch {
+    console.warn('Could not read package.json for pnpm version check');
+  }
 
   return {
     node: nodeVersion,

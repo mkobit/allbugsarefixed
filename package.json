@@ -1,6 +1,7 @@
 {
   "name": "allbugsarefixed",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.24.0",
   "main": "index.js",
   "repository": "git@github.com:mkobit/allbugsarefixed.git",
   "license": "MIT",
@@ -8,7 +9,7 @@
     "start": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview --host",
-    "lint": "eslint . --ext .js,.ts,.astro,.mdx",
+    "lint": "eslint . --ext .js,.ts,.astro,.mdx --cache",
     "test:e2e": "playwright test"
   },
   "dependencies": {
