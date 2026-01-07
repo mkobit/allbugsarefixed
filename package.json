@@ -1,6 +1,7 @@
 {
   "name": "allbugsarefixed",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.24.0",
   "main": "index.js",
   "repository": "git@github.com:mkobit/allbugsarefixed.git",
   "license": "MIT",
