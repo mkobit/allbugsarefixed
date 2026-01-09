@@ -25,6 +25,20 @@ const blogCollection = defineCollection({
   }),
 });
 
+const conceptsCollection = defineCollection({
+  loader: glob({
+    base: "./src/content/concepts",
+    pattern: ["**/*.{md,mdx}", "!**/AGENTS.md", "!**/CLAUDE.md", "!**/_*.{md,mdx}"]
+  }),
+  schema: z.object({
+    description: z.string().optional(),
+    labels: z.array(LabelIdSchema).optional(),
+    status: z.enum(['concept', 'draft', 'review', 'published', 'locked']).default('concept'),
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
+  concepts: conceptsCollection,
 };

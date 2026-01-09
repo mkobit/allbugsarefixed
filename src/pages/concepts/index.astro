@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const concepts = await getCollection('concepts');
+---
+
+<Layout title="Concepts & Drafts">
+  <div class="prose dark:prose-invert max-w-none">
+    <h1>Concepts & Drafts</h1>
+    <p>Early ideas, research, and outlines not yet ready for the main blog.</p>
+
+    <div class="grid gap-4 not-prose">
+      {concepts.map((post) => (
+        <a href={`/concepts/${post.id}`} class="block p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-primary transition-colors">
+          <h2 class="text-xl font-bold mb-2">{post.data.title}</h2>
+          {post.data.description && <p class="text-gray-600 dark:text-gray-400 mb-4">{post.data.description}</p>}
+          <div class="flex gap-2">
+            <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-mono">
+              {post.data.status}
+            </span>
+            {post.data.labels?.map(label => (
+              <span class="px-2 py-1 text-xs rounded bg-brand-primary/10 text-brand-primary font-medium">
+                {label}
+              </span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
