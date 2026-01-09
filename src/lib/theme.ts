@@ -8,7 +8,7 @@ export const THEME_COLORS = {
     backgroundColor: 'transparent',
     textColor: '#1e293b', // slate-800
   },
-};
+} as const;
 
 export function getThemeColor(isDark: boolean): string {
   return isDark ? THEME_COLORS.dark.textColor : THEME_COLORS.light.textColor;

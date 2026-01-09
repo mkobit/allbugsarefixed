@@ -10,12 +10,13 @@ import type { EChartsOption, ECharts } from 'echarts';
  * @param theme - The theme to apply (e.g., 'light' or 'dark', or a custom object).
  * @returns A ref to attach to the chart container div.
  */
-export function useECharts(options: Readonly<EChartsOption>, theme?: Readonly<string | object>) {
+export function useECharts(options: Readonly<EChartsOption>, theme?: Readonly<string | object>): React.MutableRefObject<HTMLDivElement | null> {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<ECharts | null>(null);
 
   // Initialize and dispose chart
   useEffect(() => {
+    // eslint-disable-next-line functional/prefer-immutable-types
     const container = chartRef.current;
     if (!container) return;
 
@@ -24,9 +25,11 @@ export function useECharts(options: Readonly<EChartsOption>, theme?: Readonly<st
       chartInstance.current = echarts.init(container);
     }
 
+    // eslint-disable-next-line functional/prefer-immutable-types
     const chart = chartInstance.current;
 
     // Handle Resize
+    // eslint-disable-next-line functional/prefer-immutable-types
     const resizeObserver = new ResizeObserver(() => {
       chart.resize();
     });

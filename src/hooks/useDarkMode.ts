@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
  *
  * @returns boolean - True if 'dark' class is present on document.documentElement
  */
-export function useDarkMode() {
+export function useDarkMode(): boolean {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -16,6 +16,7 @@ export function useDarkMode() {
     };
     checkTheme();
 
+    // eslint-disable-next-line functional/prefer-immutable-types
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, { attributeFilter: ['class'], attributes: true });
 

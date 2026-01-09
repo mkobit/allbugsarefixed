@@ -4,6 +4,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import { SITE_TITLE, SITE_DESCRIPTION, FOOTER_LINKS } from "../consts";
 import { Link } from "./ui/link";
 
+// eslint-disable-next-line functional/prefer-immutable-types
 const footerStyles = tv({
   slots: {
     base: 'mt-auto py-12 bg-gray-100 dark:bg-black/20 border-t border-gray-200 dark:border-white/10',
@@ -17,8 +18,9 @@ const footerStyles = tv({
   }
 });
 
-export function Footer() {
+export function Footer(): Readonly<React.JSX.Element> {
   const currentYear = Temporal.Now.plainDateISO().year;
+  // eslint-disable-next-line functional/prefer-immutable-types
   const { base, container, brandSection, brandTitle, brandDescription, copyright, navSection, navTitle } = footerStyles();
 
   return (
@@ -37,7 +39,7 @@ export function Footer() {
 
         <div className={navSection()}>
           <h3 className={navTitle()}>Navigation</h3>
-          {FOOTER_LINKS.general.map(link => (
+          {FOOTER_LINKS.general.map((link): Readonly<React.JSX.Element> => (
             <Link key={link.href} href={link.href} variant="default">
               {link.text}
             </Link>

@@ -1,0 +1,228 @@
+
+> allbugsarefixed@1.0.0 lint /app
+> eslint . --ext .js,.ts,.astro,.mdx --cache
+
+
+/app/src/components/BlogCard.tsx
+  8:7  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+
+/app/src/components/EChart.tsx
+   7:11  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/type-declaration-immutability
+  13:25  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  13:32  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")         functional/prefer-immutable-types
+  17:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")                  functional/prefer-immutable-types
+  17:32  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  29:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")                  functional/prefer-immutable-types
+
+/app/src/components/Footer.tsx
+   7:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")     functional/prefer-immutable-types
+  20:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+  40:37  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")    functional/prefer-immutable-types
+  40:37  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+
+/app/src/components/IconBlock.tsx
+   7:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")                  functional/prefer-immutable-types
+  41:11  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/type-declaration-immutability
+  47:25  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  47:35  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")         functional/prefer-immutable-types
+  56:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")                  functional/prefer-immutable-types
+
+/app/src/components/LabelBadge.tsx
+   7:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")     functional/prefer-immutable-types
+  15:14  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")     functional/prefer-immutable-types
+  15:54  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+
+/app/src/components/Sidebar.tsx
+    9:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+   47:11  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/type-declaration-immutability
+   55:11  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/type-declaration-immutability
+   60:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+   60:25  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")      functional/prefer-immutable-types
+  114:19  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  160:28  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")              functional/prefer-immutable-types
+  160:28  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  161:23  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  176:34  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")         functional/prefer-immutable-types
+  176:34  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+
+/app/src/components/SidebarSearch.tsx
+    6:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+   31:11  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/type-declaration-immutability
+   39:11  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/type-declaration-immutability
+   45:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+   45:31  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")      functional/prefer-immutable-types
+   50:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+   53:9   error  Variable should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")          functional/prefer-immutable-types
+   53:24  error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")       functional/prefer-immutable-types
+   58:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+   58:68  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")              functional/prefer-immutable-types
+   58:68  error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")       functional/prefer-immutable-types
+   98:32  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")              functional/prefer-immutable-types
+  100:29  error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")       functional/prefer-immutable-types
+  105:43  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  105:44  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")         functional/prefer-immutable-types
+
+/app/src/components/ThemeToggle.tsx
+   7:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")                  functional/prefer-immutable-types
+  20:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")                  functional/prefer-immutable-types
+  28:25  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  28:37  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")         functional/prefer-immutable-types
+  41:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")                  functional/prefer-immutable-types
+  86:11  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/type-declaration-immutability
+  93:10  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  93:22  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")         functional/prefer-immutable-types
+
+/app/src/components/ui/badge.tsx
+   5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  19:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  21:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  21:23  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/button.tsx
+   6:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  35:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  39:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  39:24  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/callout.tsx
+   5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  20:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  27:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  32:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  32:25  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/container.tsx
+   5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  20:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  22:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  22:27  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/heading.tsx
+   5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  22:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  26:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  26:25  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+  27:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+
+/app/src/components/ui/link.tsx
+   6:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  20:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  22:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  22:22  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/separator.tsx
+  10:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  10:32  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/stack.tsx
+   5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  43:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  47:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  47:23  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+  53:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  53:24  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+  57:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  57:24  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/table.tsx
+  14:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  26:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/type-declaration-immutability
+  31:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  31:42  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")      functional/prefer-immutable-types
+  35:10  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  37:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")               functional/prefer-immutable-types
+  55:42  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  55:43  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")              functional/prefer-immutable-types
+  57:42  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  57:43  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")              functional/prefer-immutable-types
+  85:44  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  85:45  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")              functional/prefer-immutable-types
+  91:48  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")            functional/prefer-immutable-types
+  91:49  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")              functional/prefer-immutable-types
+
+/app/src/components/ui/text.tsx
+   5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  27:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  31:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  31:22  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/components/ui/time.tsx
+   7:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  20:18  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")   functional/type-declaration-immutability
+  25:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  25:22  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+  27:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+
+/app/src/consts.ts
+  4:14  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+  9:14  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+
+/app/src/content.config.ts
+   5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Unknown")  functional/prefer-immutable-types
+  28:14  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+
+/app/src/hooks/useDarkMode.ts
+  19:11  error  Variable should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/prefer-immutable-types
+
+/app/src/hooks/useECharts.ts
+  13:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  13:28  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+  14:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  15:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  19:11  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  27:11  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  30:11  error  Variable should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")      functional/prefer-immutable-types
+  45:11  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+
+/app/src/hooks/useTheme.ts
+   9:17  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")        functional/prefer-immutable-types
+  24:11  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  25:11  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+  46:33  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+/app/src/lib/date.ts
+  3:41  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+  4:9   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")           functional/prefer-immutable-types
+
+/app/src/lib/iterators.ts
+   9:31  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")    functional/prefer-immutable-types
+   9:66  error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/prefer-immutable-types
+  23:3   error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")    functional/prefer-immutable-types
+  25:2   error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/prefer-immutable-types
+  26:9   error  Variable should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")     functional/prefer-immutable-types
+  27:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")          functional/prefer-immutable-types
+  35:3   error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")    functional/prefer-immutable-types
+  37:2   error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/prefer-immutable-types
+  38:9   error  Variable should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")     functional/prefer-immutable-types
+  39:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")          functional/prefer-immutable-types
+
+/app/src/lib/labels.ts
+   11:13  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")  functional/type-declaration-immutability
+   46:6   error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")  functional/type-declaration-immutability
+   52:24  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")         functional/prefer-immutable-types
+   52:59  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")       functional/prefer-immutable-types
+   53:55  error  Return type should have an immutability of at least "Immutable" (actual: "Mutable")       functional/prefer-immutable-types
+   53:56  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")         functional/prefer-immutable-types
+   53:61  error  Parameter should have an immutability of at least "Immutable" (actual: "Mutable")         functional/prefer-immutable-types
+   54:13  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")          functional/prefer-immutable-types
+   57:11  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")          functional/prefer-immutable-types
+   76:14  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")          functional/prefer-immutable-types
+   80:7   error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")          functional/prefer-immutable-types
+   81:14  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")          functional/prefer-immutable-types
+   99:47  error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/prefer-immutable-types
+  100:50  error  Return type should have an immutability of at least "Immutable" (actual: "ReadonlyDeep")  functional/prefer-immutable-types
+
+/app/src/lib/polyfills.ts
+  5:7   error  Variable should have an immutability of at least "Immutable" (actual: "Unknown")          functional/prefer-immutable-types
+  6:7   error  Variable should have an immutability of at least "Immutable" (actual: "Unknown")          functional/prefer-immutable-types
+  7:13  error  This type is declare to have an immutability of at least "Immutable" (actual: "Mutable")  functional/type-declaration-immutability
+
+/app/src/lib/theme.ts
+  2:14  error  Variable should have an immutability of at least "Immutable" (actual: "Mutable")  functional/prefer-immutable-types
+
+/app/src/lib/ui.ts
+  5:20  error  Parameter should have an immutability of at least "Immutable" (actual: "ReadonlyShallow")  functional/prefer-immutable-types
+
+✖ 160 problems (160 errors, 0 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.

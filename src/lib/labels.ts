@@ -1,14 +1,14 @@
 import { z } from 'astro/zod';
 
 // Defines the recursive tree structure for labels
-export interface LabelNode {
-  readonly children?: Record<string, LabelNode>;
+export type LabelNode = {
+  readonly children?: Readonly<Record<string, LabelNode>>;
   readonly description?: string;
   readonly label: string; // The display name
-}
+};
 
 // Root of the label tree
-export type LabelTree = Record<string, LabelNode>;
+export type LabelTree = Readonly<Record<string, LabelNode>>;
 
 // The Source of Truth for all labels in the system
 export const LABEL_TREE = {
@@ -43,7 +43,7 @@ export const LABEL_TREE = {
 // --- Helpers ---
 
 type FlattenedLabel = Omit<LabelNode, 'children'> & Readonly<{ parentId?: string }>;
-type FlattenedLabels = Record<string, FlattenedLabel>;
+type FlattenedLabels = Readonly<Record<string, FlattenedLabel>>;
 
 /**
  * Flattens the recursive tree into a single map of ID -> Metadata + ParentID.

@@ -6,7 +6,7 @@ function isTheme(value: unknown): value is Theme {
   return value === 'light' || value === 'dark' || value === 'system';
 }
 
-export function useTheme() {
+export function useTheme(): Readonly<{ mounted: boolean; setTheme: React.Dispatch<React.SetStateAction<Theme>>; theme: Theme }> {
   const [theme, setTheme] = useState<Theme>('system');
   const [mounted, setMounted] = useState(false);
 
@@ -21,7 +21,9 @@ export function useTheme() {
   useEffect(() => {
     if (!mounted) return;
 
+    // eslint-disable-next-line functional/prefer-immutable-types
     const root = document.documentElement;
+    // eslint-disable-next-line functional/prefer-immutable-types
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const applyTheme = (targetTheme: Theme) => {

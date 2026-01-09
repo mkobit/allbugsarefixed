@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Search } from 'lucide-react';
 import Fuse from 'fuse.js';
 
+// eslint-disable-next-line functional/prefer-immutable-types
 const searchStyles = tv({
   slots: {
     collapsedBtn: 'p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-gray-400',

@@ -2,6 +2,7 @@ import React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants'
 import { cn } from '../../lib/ui'
 
+// eslint-disable-next-line functional/prefer-immutable-types
 const badgeStyles = tv({
   base: 'inline-flex items-center font-bold tracking-wide uppercase',
   defaultVariants: {
@@ -16,9 +17,9 @@ const badgeStyles = tv({
   },
 })
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeStyles> {}
+export type BadgeProps = Readonly<React.HTMLAttributes<HTMLSpanElement>> & Readonly<VariantProps<typeof badgeStyles>>;
 
-export function Badge({ className, variant, ...props }: Readonly<BadgeProps>) {
+export function Badge({ className, variant, ...props }: Readonly<BadgeProps>): Readonly<React.JSX.Element> {
   return (
     <span className={cn(badgeStyles({ variant }), className)} {...props} />
   )

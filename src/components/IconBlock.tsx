@@ -4,7 +4,7 @@ import type { LucideIcon } from 'lucide-react';
 // Design tokens for semantic colors
 export type IconVariant = 'default' | 'brand' | 'success' | 'warning' | 'danger' | 'info';
 
-const VARIANT_STYLES: Record<IconVariant, { bg: string; border: string; color: string }> = {
+const VARIANT_STYLES: Readonly<Record<IconVariant, Readonly<{ bg: string; border: string; color: string }>>> = {
   brand: {
     bg: 'bg-purple-50 dark:bg-purple-900/20',
     border: 'border-purple-100 dark:border-purple-800',
@@ -37,7 +37,7 @@ const VARIANT_STYLES: Record<IconVariant, { bg: string; border: string; color: s
   }
 };
 
-// eslint-disable-next-line functional/no-mixed-types
+// eslint-disable-next-line functional/no-mixed-types, functional/type-declaration-immutability
 interface IconBlockProps {
   readonly icon: LucideIcon;
   readonly label?: string;
@@ -48,7 +48,7 @@ export default function IconBlock({
   icon: IconComponent,
   label,
   variant = 'default'
-}: Readonly<IconBlockProps>) {
+}: Readonly<IconBlockProps>): Readonly<React.JSX.Element | null> {
   if (!IconComponent) {
     return null;
   }

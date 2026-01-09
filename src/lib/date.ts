@@ -1,6 +1,7 @@
 import type { Temporal } from "@js-temporal/polyfill";
 
 export function formatDateToHumanString(date: Readonly<Date | Temporal.PlainDate>): string {
+  // eslint-disable-next-line functional/prefer-immutable-types
   const dateObj: Date =
     date instanceof Date
       ? date

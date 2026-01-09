@@ -1,5 +1,6 @@
 /* eslint-disable functional/no-loop-statements */
 /* eslint-disable functional/no-let */
+/* eslint-disable functional/prefer-immutable-types */
 
 /**
  * Functional utility for lazy iteration over arrays and other iterables.

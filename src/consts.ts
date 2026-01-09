@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION = 'A developer blog about fixing bugs and learning
 export const NAV_LINKS = [
   { href: '/blog/', text: 'Blog' },
   { href: '/about/', text: 'About' },
-];
+] as const;
 
 export const FOOTER_LINKS = {
   general: [
@@ -12,4 +12,4 @@ export const FOOTER_LINKS = {
     { href: '/blog/', text: 'Blog' },
     { href: '/about/', text: 'About' },
   ],
-};
+} as const;

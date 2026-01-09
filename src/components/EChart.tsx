@@ -5,12 +5,12 @@ import { useECharts } from '../hooks/useECharts';
 import { useDarkMode } from '../hooks/useDarkMode';
 
 interface EChartProps {
-  readonly options: EChartsOption;
+  readonly options: Readonly<EChartsOption>;
   readonly height?: string;
   readonly width?: string;
 }
 
-export default function EChart({ options, height = '400px', width = '100%' }: Readonly<EChartProps>) {
+export default function EChart({ options, height = '400px', width = '100%' }: Readonly<EChartProps>): Readonly<React.JSX.Element> {
   const isDark = useDarkMode();
 
   // Merge user options with theme-specific overrides
@@ -23,9 +23,10 @@ export default function EChart({ options, height = '400px', width = '100%' }: Re
         color: getThemeColor(isDark),
         ...(options.textStyle || {}),
       },
-    } as EChartsOption;
+    } as Readonly<EChartsOption>;
   }, [options, isDark]);
 
+  // eslint-disable-next-line functional/prefer-immutable-types
   const chartRef = useECharts(finalOptions);
 
   return (

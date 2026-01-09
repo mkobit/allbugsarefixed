@@ -6,6 +6,7 @@ import { Link } from './ui/link';
 import { NAV_LINKS } from '../consts';
 import { SidebarSearch } from './SidebarSearch';
 
+// eslint-disable-next-line functional/prefer-immutable-types
 const sidebarStyles = tv({
   slots: {
     content: 'flex-1 overflow-y-auto overflow-x-hidden flex flex-col gap-4 p-4',
@@ -57,11 +58,12 @@ interface SidebarProps {
   readonly allPosts: readonly Post[];
 }
 
-export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>) {
+export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>): Readonly<React.JSX.Element> {
   // Default to collapsed (true) to prevent flash of expanded sidebar on mobile
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
+  // eslint-disable-next-line functional/prefer-immutable-types
   const { wrapper, content, header, logo, toggleBtn, nav, navItem, navIcon, sectionTitle, recentPost, overlay } = sidebarStyles({ collapsed: isCollapsed });
 
   useEffect(() => {
@@ -157,7 +159,7 @@ export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>) {
                 {!isCollapsed && <span>Home</span>}
             </Link>
 
-            {NAV_LINKS.map(link => {
+            {NAV_LINKS.map((link): Readonly<React.JSX.Element> => {
                 const Icon = getIcon(link.text);
                 return (
                     <Link key={link.href} href={link.href} className={navItem()} variant="unstyled">

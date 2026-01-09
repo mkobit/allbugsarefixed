@@ -5,6 +5,7 @@ import { Time } from './ui/time';
 import { LabelBadge } from './LabelBadge';
 import type { LabelId } from '../lib/labels';
 
+// eslint-disable-next-line functional/prefer-immutable-types
 const cardStyles = tv({
   base: 'block p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-colors',
 });
@@ -12,13 +13,13 @@ const cardStyles = tv({
 interface BlogCardProps {
   readonly title: string;
   readonly description: string;
-  readonly pubDate: Date;
+  readonly pubDate: Readonly<Date>;
   readonly href: string;
   readonly labels?: readonly LabelId[];
   readonly className?: string;
 }
 
-export function BlogCard({ title, description, pubDate, href, labels, className }: Readonly<BlogCardProps>) {
+export function BlogCard({ title, description, pubDate, href, labels, className }: Readonly<BlogCardProps>): Readonly<React.JSX.Element> {
   return (
     <a href={href} className={cn(cardStyles(), className)}>
       <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h2>
@@ -26,7 +27,7 @@ export function BlogCard({ title, description, pubDate, href, labels, className 
 
       {labels && labels.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-2">
-          {labels.map((label) => (
+          {labels.map((label): Readonly<React.JSX.Element> => (
              <LabelBadge key={label} id={label} />
           ))}
         </div>

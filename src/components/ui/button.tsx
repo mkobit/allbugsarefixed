@@ -3,6 +3,7 @@ import { Button as HeadlessButton } from '@headlessui/react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { cn } from '../../lib/ui'
 
+// eslint-disable-next-line functional/prefer-immutable-types
 const buttonStyles = tv({
   base: [
     'inline-flex items-center justify-center gap-2 rounded-lg py-2 px-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer'
@@ -32,11 +33,11 @@ const buttonStyles = tv({
   }
 })
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonStyles> {
+export type ButtonProps = Readonly<React.ButtonHTMLAttributes<HTMLButtonElement>> & Readonly<VariantProps<typeof buttonStyles>> & {
   readonly asChild?: boolean
-}
+};
 
-export function Button({ className, fullWidth, size, variant, ...props }: Readonly<ButtonProps>) {
+export function Button({ className, fullWidth, size, variant, ...props }: Readonly<ButtonProps>): Readonly<React.JSX.Element> {
   return (
     <HeadlessButton
       className={cn(buttonStyles({ fullWidth, size, variant }), className)}

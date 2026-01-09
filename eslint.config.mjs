@@ -61,9 +61,6 @@ export default [
       // Enable strict functional rules where possible
       "functional/no-this-expressions": "error", // Avoid 'this', use pure functions
       "functional/functional-parameters": "off", // Too restrictive for standard React component props and event handlers
-      // Adjust immutability rules to be practical
-      "functional/prefer-immutable-types": "off",
-      "functional/type-declaration-immutability": "off"
       // Remove redundant rules as they are default errors in recommended
     },
   },
