@@ -43,6 +43,8 @@ export default [
       ...typescriptEslint.configs["stylistic"].rules,
       ...functionalPlugin.configs.recommended.rules,
       ...functionalPlugin.configs.noMutations.rules,
+      ...functionalPlugin.configs.externalTypeScriptRecommended.rules,
+      ...functionalPlugin.configs.stylistic.rules,
       // Key rules for type safety without being overly strict
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": "error",
