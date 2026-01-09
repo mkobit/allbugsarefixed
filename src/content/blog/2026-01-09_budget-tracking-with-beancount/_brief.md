@@ -1,26 +1,16 @@
-# Blog Post Outline: Budget Tracking with Beancount
+# Blog post outline: Budget tracking with Beancount
 
-## Introduction & Usage
-*   Introduction to Beancount as a plain-text accounting tool.
-*   Why I chose it over other tools (Mint, YNAB, Excel).
-*   My personal workflow:
-    *   Importing data from banks.
-    *   Categorizing transactions.
-    *   Monthly reconciliation process.
+## Introduction and usage
+*   Research notes
+*   How I use it
 
-## Getting Insights
-*   The core value of tracking: knowing where the money goes.
-*   Examples of insights:
-    *   Monthly burn rate.
-    *   Category breakdown (Food, Rent, Tech).
-    *   Net worth tracking over time.
-*   Visualizing the data (charts/graphs).
+## Getting insights
+*   Getting insights from your finances
 
-## Research & Automation
-*   Source code examples:
-    *   Custom importers for specific banks.
-    *   Scripts for generating reports.
-*   Engineering aspects:
-    *   Using Python for customization.
-    *   Version control (Git) for financial data (Privacy/Security).
-    *   CI/CD for automatic validation (maybe?).
+## Research and automation
+*   Source code examples
+
+## Questions and considerations
+*   Specific workflow details?
+*   Comparison with other tools?
+*   Specific insights to highlight?
