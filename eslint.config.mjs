@@ -59,13 +59,12 @@ export default [
       "functional/no-conditional-statements": "off", // Conditionals are standard in this codebase; pattern matching is not yet pervasive
       "functional/no-return-void": "off", // React callbacks and effects rely on void returns
       // Enable strict functional rules where possible
-      "functional/no-mixed-types": "error", // Enforce strict type definitions, suppress where necessary
-      "functional/no-loop-statements": "error", // Prefer functional iteration (map, reduce, recursion)
       "functional/no-this-expressions": "error", // Avoid 'this', use pure functions
       "functional/functional-parameters": "off", // Too restrictive for standard React component props and event handlers
       // Adjust immutability rules to be practical
       "functional/prefer-immutable-types": "off",
       "functional/type-declaration-immutability": "off"
+      // Remove redundant rules as they are default errors in recommended
     },
   },
   // Playwright Tests
