@@ -7,7 +7,7 @@ import { cn } from '../../lib/ui';
 // Or actually, a general Separator is usually a line.
 // Given the context "Time, span, and others", maybe I should create a "MetaSeparator" or just use a span with consistent style.
 
-export function SlashSeparator({ className }: { readonly className?: string }) {
+export function SlashSeparator({ className }: Readonly<{ className?: string }>) {
   return (
     <span className={cn("text-gray-300 dark:text-gray-700 font-mono", className)} aria-hidden="true">
       /

@@ -42,7 +42,7 @@ export const LABEL_TREE = {
 
 // --- Helpers ---
 
-type FlattenedLabel = Omit<LabelNode, 'children'> & { readonly parentId?: string };
+type FlattenedLabel = Omit<LabelNode, 'children'> & Readonly<{ parentId?: string }>;
 type FlattenedLabels = Record<string, FlattenedLabel>;
 
 /**
