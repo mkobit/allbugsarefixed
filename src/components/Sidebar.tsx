@@ -29,7 +29,7 @@ const sidebarStyles = tv({
         overlay: 'opacity-100 visible',
         recentPost: 'block',
         sectionTitle: 'block',
-        wrapper: 'w-64', // Expanded width
+        wrapper: 'w-64 translate-x-0', // Expanded: always visible and wide
       },
       true: {
         content: 'items-center px-1',
@@ -38,7 +38,7 @@ const sidebarStyles = tv({
         overlay: 'opacity-0 invisible pointer-events-none',
         recentPost: 'hidden',
         sectionTitle: 'hidden',
-        wrapper: 'w-12', // Sliver width
+        wrapper: 'w-64 -translate-x-full md:w-12 md:translate-x-0', // Mobile: hidden off-screen. Desktop: sliver.
       },
     }
   }
@@ -58,7 +58,8 @@ interface SidebarProps {
 }
 
 export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // Default to collapsed (true) to prevent flash of expanded sidebar on mobile
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   const { wrapper, content, header, logo, toggleBtn, nav, navItem, navIcon, sectionTitle, recentPost, overlay } = sidebarStyles({ collapsed: isCollapsed });
@@ -69,9 +70,9 @@ export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>) {
     // Set initial state based on viewport
     const mobile = checkMobile();
     setIsMobile(mobile);
-    // On mount, if mobile, collapse it. If desktop, keep expanded (default).
-    if (mobile) setIsCollapsed(true);
-    else setIsCollapsed(false);
+
+    // On mount, if desktop, expand it. If mobile, keep collapsed (default).
+    if (!mobile) setIsCollapsed(false);
 
     const handleResize = () => {
       const isNowMobile = checkMobile();
@@ -86,13 +87,14 @@ export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>) {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobile]);
 
-  // Update CSS variable for layout pushing (Desktop only)
+  // Update CSS variable for layout pushing
   useEffect(() => {
     if (!isMobile) {
         const width = isCollapsed ? '3rem' : '16rem';
         document.documentElement.style.setProperty('--sidebar-width', width);
     } else {
-        document.documentElement.style.setProperty('--sidebar-width', '3rem');
+        // On mobile, sidebar does not push content (overlay mode)
+        document.documentElement.style.setProperty('--sidebar-width', '0rem');
     }
   }, [isCollapsed, isMobile]);
 
@@ -119,6 +121,15 @@ export function Sidebar({ recentPosts, allPosts }: Readonly<SidebarProps>) {
 
   return (
     <>
+        {/* Mobile Top Navbar */}
+        <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-brand-surface border-b border-gray-200 dark:border-white/10 z-[50] flex items-center justify-between px-4 transition-colors duration-300">
+           <div className="absolute top-0 left-0 right-0 h-1 bg-brand-primary"></div>
+           <span className="font-bold text-base text-brand-text">All Bugs Are Fixed</span>
+           <button onClick={toggleSidebar} className="p-2 -mr-2 text-brand-text" aria-label="Open menu">
+             <Menu className="w-6 h-6" />
+           </button>
+        </div>
+
         {/* Overlay for mobile expanded state */}
         <div className={overlay()} onClick={handleOverlayClick} aria-hidden="true" />
 

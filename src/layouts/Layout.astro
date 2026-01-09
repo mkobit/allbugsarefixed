@@ -54,7 +54,7 @@ const recentPosts = allPosts.slice(0, 5);
       }
       @media (max-width: 768px) {
         :root {
-          --sidebar-width: 3rem; /* Default Mobile Collapsed (Sliver) */
+          --sidebar-width: 0rem; /* Mobile: Sidebar hidden by default */
         }
       }
     </style>
@@ -66,10 +66,10 @@ const recentPosts = allPosts.slice(0, 5);
     <!-- Main Content Wrapper -->
     <!-- Used style={{ paddingLeft: 'var(--sidebar-width)' }} approach for dynamic sidebar width adjustment -->
     <div
-        class="flex-grow flex flex-col w-full min-w-0 transition-[padding] duration-300"
+        class="flex-grow flex flex-col w-full min-w-0 transition-[padding] duration-300 pt-14 md:pt-0"
         style="padding-left: var(--sidebar-width);"
     >
-       <div class="h-1 w-full bg-brand-primary sticky top-0 z-50"></div>
+       <div class="hidden md:block h-1 w-full bg-brand-primary sticky top-0 z-50"></div>
 
        <main class="flex-grow py-8 md:py-12">
           <Container>
