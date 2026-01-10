@@ -1,7 +1,3 @@
-import type { LucideIcon } from "lucide-react";
-import type { ComponentProps } from "react";
-import type React from "react";
-
 export interface MapConfig {
   readonly center: readonly [number, number];
   readonly markers?: readonly MapMarker[];
@@ -11,7 +7,7 @@ export interface MapConfig {
 
 export interface MapMarker {
   readonly description?: string;
-  readonly icon?: LucideIcon | React.ComponentType<ComponentProps<"svg">>;
+  readonly icon?: string;
   readonly lat: number;
   readonly lng: number;
   readonly title: string;

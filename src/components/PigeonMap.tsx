@@ -1,6 +1,12 @@
+import { MapPin, Navigation, type LucideIcon } from "lucide-react";
 import { Map as PigeonMap, Marker, Overlay } from "pigeon-maps";
 import type { MapConfig, MapMarker, MapShape } from "../lib/map";
 import { cn } from "../lib/ui";
+
+const ICONS: Record<string, LucideIcon> = {
+  MapPin,
+  Navigation,
+};
 
 type MapProps = Readonly<{
   className?: string;
@@ -9,7 +15,7 @@ type MapProps = Readonly<{
 
 export default function Map({ className, config }: MapProps) {
   return (
-    <div className={cn("h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800", className)}>
+    <div className={cn("relative h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900", className)}>
       <PigeonMap
         center={config.center}
         defaultCenter={config.center}
@@ -29,7 +35,9 @@ export default function Map({ className, config }: MapProps) {
 
 function MapMarkerItem({ marker }: Readonly<{ marker: MapMarker }>) {
   if (marker.icon) {
-    const Icon = marker.icon;
+    const Icon = ICONS[marker.icon];
+    if (!Icon) return null;
+
     return (
       <Overlay anchor={[marker.lat, marker.lng]} offset={[12, 24]}>
         <div className="group relative -translate-x-1/2 -translate-y-full cursor-pointer">

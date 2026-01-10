@@ -1,4 +1,3 @@
-import { MapPin, Navigation } from "lucide-react";
 import type { MapConfig } from "../../../lib/map";
 
 export const demoMapData: MapConfig = {
@@ -6,14 +5,14 @@ export const demoMapData: MapConfig = {
   markers: [
     {
       description: "Tech Hub",
-      icon: MapPin,
+      icon: "MapPin",
       lat: 37.7749,
       lng: -122.4194,
       title: "San Francisco",
     },
     {
       description: "Shopping District",
-      icon: Navigation,
+      icon: "Navigation",
       lat: 37.7849,
       lng: -122.4094,
       title: "Market Street",
