@@ -7,7 +7,7 @@ This repository contains a personal blog and research notes.
 - **Build:** `pnpm build` (builds the Astro site)
 - **Dev:** `pnpm dev` (starts the dev server)
 - **Test:** `pnpm test:e2e` (runs Playwright tests)
-- **New Idea:** `pnpm new-idea "My Title"` (scaffolds a new blog post folder)
+- **New idea:** `pnpm new-idea "My Title"` (scaffolds a new blog post folder)
 
 ## General guidelines
 - **Linting:** Always run `pnpm lint` after making changes. Fix all lint errors.
@@ -19,8 +19,8 @@ For instructions on how to handle blog posts, drafts, and research notes, strict
 **`src/content/blog/AGENTS.md`**
 
 **Key Highlights:**
-- **New Ideas:** Use `pnpm new-idea "Title"` to automatically create the folder and `notebook.md`.
-- **Ideas/Research:** Go into `notebook.md` inside a `YYYY-MM-DD_slug` folder.
+- **New ideas:** Use `pnpm new-idea "Title"` to automatically create the folder and `notebook.md`.
+- **Ideas/research:** Go into `notebook.md` inside a `YYYY-MM-DD_slug` folder.
 - **Drafts:** Live in `index.mdx` in the same folder.
 - **Do not** create `index.mdx` until the user is ready to draft the post.
 
