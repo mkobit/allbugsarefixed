@@ -1,4 +1,6 @@
+import dynamicIconImports from "lucide-react/dynamicIconImports";
 import { Map as PigeonMap, Marker, Overlay } from "pigeon-maps";
+import { Suspense, lazy } from "react";
 import type { MapConfig, MapMarker, MapShape } from "../lib/map";
 import { cn } from "../lib/ui";
 
@@ -7,9 +9,13 @@ type MapProps = Readonly<{
   config: MapConfig;
 }>;
 
+const FallbackIcon = () => (
+  <div className="h-6 w-6 animate-pulse rounded-full bg-slate-400 opacity-50" />
+);
+
 export default function Map({ className, config }: MapProps) {
   return (
-    <div className={cn("h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800", className)}>
+    <div className={cn("relative h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900", className)}>
       <PigeonMap
         center={config.center}
         defaultCenter={config.center}
@@ -29,11 +35,19 @@ export default function Map({ className, config }: MapProps) {
 
 function MapMarkerItem({ marker }: Readonly<{ marker: MapMarker }>) {
   if (marker.icon) {
-    const Icon = marker.icon;
+    const iconName = marker.icon as keyof typeof dynamicIconImports;
+    const IconImport = dynamicIconImports[iconName];
+
+    if (!IconImport) return null;
+
+    const Icon = lazy(IconImport);
+
     return (
       <Overlay anchor={[marker.lat, marker.lng]} offset={[12, 24]}>
         <div className="group relative -translate-x-1/2 -translate-y-full cursor-pointer">
-          <Icon className="h-6 w-6 text-violet-600 drop-shadow-md transition-transform group-hover:scale-110 dark:text-violet-400" />
+          <Suspense fallback={<FallbackIcon />}>
+            <Icon className="h-6 w-6 text-violet-600 drop-shadow-md transition-transform group-hover:scale-110 dark:text-violet-400" />
+          </Suspense>
           {(marker.title || marker.description) && (
              <div className="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded bg-slate-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:block group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
               {marker.title && <div className="font-bold">{marker.title}</div>}
