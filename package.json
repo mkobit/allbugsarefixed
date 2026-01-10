@@ -38,6 +38,7 @@
     "@iarna/toml": "^2.2.5",
     "@js-temporal/polyfill": "^0.4.4",
     "@playwright/test": "^1.57.0",
+    "@shikijs/transformers": "^3.21.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.7",

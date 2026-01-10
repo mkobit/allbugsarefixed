@@ -1,6 +1,12 @@
 
 import { visit } from 'unist-util-visit';
 import { createHighlighter } from 'shiki';
+import {
+  transformerMetaHighlight,
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight
+} from '@shikijs/transformers';
 
 let highlighter;
 
@@ -16,7 +22,7 @@ export function remarkCodeToComponent() {
           themes: ['github-dark'],
           langs: [
             'javascript', 'typescript', 'tsx', 'jsx', 'json', 'css', 'html', 'bash', 'shell',
-            'markdown', 'yaml', 'python', 'rust', 'go', 'java', 'c', 'cpp'
+            'markdown', 'yaml', 'python', 'rust', 'go', 'java', 'c', 'cpp', 'kotlin'
           ]
         });
       } catch (e) {
@@ -31,24 +37,52 @@ export function remarkCodeToComponent() {
     });
 
     for (const { node, index, parent } of nodesToTransform) {
-      const lang = node.lang || 'plaintext';
-      const code = node.value;
+      let lang = node.lang || 'plaintext';
+      let code = node.value;
       const meta = node.meta || '';
 
-      // Extract title from meta
+      // Extract title
       const titleMatch = meta.match(/title=(["'])(.*?)\1/);
       const title = titleMatch ? titleMatch[2] : undefined;
+
+      // Extract line numbers flag
+      const showLineNumbers = /\b(showLineNumbers|numbers)\b/.test(meta);
+
+      // Extract lines subset (e.g., lines="2-5" or lines="2..5")
+      const linesMatch = meta.match(/lines=(["']?)(\d+)(?:[-..]+)(\d+)\1/);
+      let startLine = 1;
+
+      if (linesMatch) {
+        const start = parseInt(linesMatch[2], 10);
+        const end = parseInt(linesMatch[3], 10);
+
+        if (!isNaN(start) && !isNaN(end) && start <= end) {
+           const lines = code.split('\n');
+           // Slice is 0-indexed, so start-1. End is inclusive in user intent, so end.
+           // However, if lines < start, handle gracefully.
+           code = lines.slice(Math.max(0, start - 1), end).join('\n');
+           startLine = start;
+        }
+      }
 
       // Highlight the code
       let html = '';
       try {
         html = highlighter.codeToHtml(code, {
           lang,
-          theme: 'github-dark'
+          theme: 'github-dark',
+          transformers: [
+            transformerMetaHighlight(), // Handles {1-3} from meta
+            transformerNotationDiff(),
+            transformerNotationHighlight(),
+            transformerNotationWordHighlight()
+          ],
+          meta: {
+             __raw: meta // Pass meta for transformerMetaHighlight
+          }
         });
       } catch (e) {
         console.warn(`Failed to highlight code block (lang: ${lang}):`, e.message);
-        // Fallback to plain text
         html = `<pre><code>${code}</code></pre>`;
       }
 
@@ -68,9 +102,12 @@ export function remarkCodeToComponent() {
         mdxNode.attributes.push({ type: 'mdxJsxAttribute', name: 'title', value: title });
       }
 
-      // Pass raw meta if needed
-      if (meta) {
-         mdxNode.attributes.push({ type: 'mdxJsxAttribute', name: 'meta', value: meta });
+      if (showLineNumbers) {
+        mdxNode.attributes.push({ type: 'mdxJsxAttribute', name: 'showLineNumbers', value: "true" });
+      }
+
+      if (startLine !== 1) {
+        mdxNode.attributes.push({ type: 'mdxJsxAttribute', name: 'startLine', value: String(startLine) });
       }
 
       // Replace the original code node with the MDX component node

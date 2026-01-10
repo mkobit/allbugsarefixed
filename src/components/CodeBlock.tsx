@@ -9,6 +9,8 @@ interface CodeBlockProps {
   readonly html?: string;
   readonly lang?: string;
   readonly title?: string;
+  readonly showLineNumbers?: boolean | string;
+  readonly startLine?: number | string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly [key: string]: any;
 }
@@ -21,6 +23,8 @@ export default function CodeBlock(props: CodeBlockProps) {
     html,
     children,
     className,
+    showLineNumbers,
+    startLine = 1,
     ...rest
   } = props;
 
@@ -79,7 +83,12 @@ export default function CodeBlock(props: CodeBlockProps) {
                  <div
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     ref={codeRef as any}
-                    className={cn("!m-0 !p-0 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent shiki-container", className)}
+                    className={cn(
+                        "!m-0 !p-0 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent shiki-container",
+                        showLineNumbers && "show-line-numbers",
+                        className
+                    )}
+                    style={{ '--start-line': startLine } as React.CSSProperties}
                     dangerouslySetInnerHTML={{ __html: html }}
                     {...rest}
                  />
