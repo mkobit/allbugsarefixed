@@ -1,14 +1,8 @@
----
-title: "Flavor forensics: the truth behind blue raspberry"
-status: concept
-labels: ["food"]
-description: "Exploring the origin of seemingly nonsense flavors like blue raspberry and Gatorade."
----
+# Flavor forensics: the truth behind blue raspberry
 
-{/* eslint-disable no-unused-vars */}
-import { Callout } from '../../components/ui/callout';
-
-# Flavor forensics
+> **Status:** Concept
+> **Labels:** Food
+> **Description:** Exploring the origin of seemingly nonsense flavors like blue raspberry and Gatorade.
 
 Initial research notes on flavors that don't make sense.
 
@@ -21,9 +15,7 @@ Initial research notes on flavors that don't make sense.
     *   Gold Medal (sno-cones) vs ICEE. Who was first?
     *   **Blue No. 1 (Brilliant Blue FCF):** The specific dye used.
 
-<Callout type="info" title="Research Note">
-  Check the impact of tongue staining on marketing to children. Was that a happy accident or the goal?
-</Callout>
+> **Research Note:** Check the impact of tongue staining on marketing to children. Was that a happy accident or the goal?
 
 ## Gatorade
 
