@@ -14,6 +14,13 @@ export type LabelTree = Record<string, LabelNode>;
 export const LABEL_TREE = {
   // Root level specific topics
   demo: { label: 'Demo' },
+  finance: {
+    children: {
+      budget: { label: 'Budgeting' },
+    },
+    description: 'Personal finance and money management',
+    label: 'Finance',
+  },
   process: {
     description: 'Workflows, agile, and management',
     label: 'Process'
