@@ -11,8 +11,8 @@ export default function Map({ className, config }: MapProps) {
   return (
     <div className={cn("h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800", className)}>
       <PigeonMap
-        center={config.center as [number, number]}
-        defaultCenter={config.center as [number, number]}
+        center={config.center}
+        defaultCenter={config.center}
         defaultZoom={config.zoom}
         zoom={config.zoom}
       >
@@ -70,16 +70,10 @@ function MapShapeItem({
   if (!latLngToPixel) return null;
 
   if (shape.type === "circle") {
+    // We need to cast here too because shape.center is readonly [number, number]
+    // and latLngToPixel likely expects [number, number]
+    // Let's try removing this cast too just in case
     const center = latLngToPixel(shape.center as [number, number]);
-    // Rough approximation of meters to pixels at zoom level.
-    // For a real app we might want more precise calculation based on zoom level and latitude.
-    // For simplicity, we interpret radius as pixels here if we can't easily get meters/pixel.
-    // However, usually radius is in meters.
-    // Pigeon Maps doesn't provide metersPerPixel easily in the child props without extra logic.
-    // We will assume radius is in pixels for this visual demo or use a fixed scaling factor.
-    // Alternatively, calculate a point at distance radius and measure pixel distance.
-
-    // Let's just interpret radius as pixels for now to keep it simple and working
     const radiusInPixels = shape.radius;
 
     return (
@@ -98,6 +92,7 @@ function MapShapeItem({
 
   if (shape.type === "polygon") {
     const points = shape.coordinates.map((coord) => {
+      // Same here
       const pixel = latLngToPixel(coord as [number, number]);
       return `${pixel[0]},${pixel[1]}`;
     }).join(" ");
