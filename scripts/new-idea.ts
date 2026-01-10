@@ -26,23 +26,25 @@ const dateStr = now.toString();
 const folderName = `${dateStr}_${slug}`;
 const folderPath = path.join(BLOG_DIR, folderName);
 
-if (fs.existsSync(folderPath)) {
-  console.error(`Folder already exists: ${folderPath}`);
-  process.exit(1);
+if (!fs.existsSync(folderPath)) {
+  fs.mkdirSync(folderPath, { recursive: true });
+  console.log(`Created folder: ${folderPath}`);
+} else {
+  console.log(`Folder already exists: ${folderPath}`);
 }
 
-fs.mkdirSync(folderPath, { recursive: true });
+const notebookPath = path.join(folderPath, 'notebook.md');
 
-// Notebook template (no frontmatter as per instructions for scratchpad)
-const notebookContent = `# ${title}
+if (!fs.existsSync(notebookPath)) {
+  // Notebook template (no frontmatter as per instructions for scratchpad)
+  const notebookContent = `# ${title}
 
 ## Idea
 
 ## References
 `;
-
-const notebookPath = path.join(folderPath, 'notebook.md');
-fs.writeFileSync(notebookPath, notebookContent);
-
-console.log(`Created new idea: ${folderPath}`);
-console.log(`Notebook: ${notebookPath}`);
+  fs.writeFileSync(notebookPath, notebookContent);
+  console.log(`Created notebook: ${notebookPath}`);
+} else {
+  console.log(`Notebook already exists: ${notebookPath}`);
+}
