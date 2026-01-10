@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 import { cn } from '../../lib/ui';
 
 const calloutStyles = tv({
-  base: 'p-4 my-6 rounded-lg border flex gap-3',
+  base: 'p-3 sm:p-4 my-6 rounded-lg border flex gap-3 w-fit max-w-full',
   defaultVariants: {
     type: 'info'
   },
