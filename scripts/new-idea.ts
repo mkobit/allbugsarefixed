@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { Temporal } from '@js-temporal/polyfill';
 
 const BLOG_DIR = path.join(process.cwd(), 'src/content/blog');
 
@@ -19,8 +20,8 @@ const slug = title
   .replace(/^-+|-+$/g, '');
 
 // Get current date as YYYY-MM-DD
-const now = new Date();
-const dateStr = now.toISOString().split('T')[0];
+const now = Temporal.Now.plainDateISO();
+const dateStr = now.toString();
 
 const folderName = `${dateStr}_${slug}`;
 const folderPath = path.join(BLOG_DIR, folderName);
