@@ -12,6 +12,12 @@ export type LabelTree = Record<string, LabelNode>;
 
 // The Source of Truth for all labels in the system
 export const LABEL_TREE = {
+  culture: {
+    children: {
+      food: { label: 'Food' },
+    },
+    label: 'Culture',
+  },
   // Root level specific topics
   demo: { label: 'Demo' },
   finance: {
