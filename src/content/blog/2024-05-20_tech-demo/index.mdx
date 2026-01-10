@@ -11,6 +11,8 @@ import EChart from '../../../components/EChart.astro';
 import Mermaid from '../../../components/Mermaid.astro';
 import IconBlock from '../../../components/IconBlock';
 import Latex from '../../../components/Latex.astro';
+import Map from '../../../components/Map';
+import { demoMapData } from './map-data';
 import { csvParse } from 'd3-dsv';
 import rawData from './data.csv?raw';
 import {
@@ -237,7 +239,13 @@ A donut chart example.
   }}
 />
 
-## 5. Mermaid diagrams
+## 5. Interactive Maps
+
+We support config-driven maps using **Pigeon Maps**.
+
+<Map client:load config={demoMapData} />
+
+## 6. Mermaid diagrams
 
 For flowcharts, sequence diagrams, and more, we use **Mermaid**.
 
@@ -264,7 +272,7 @@ sequenceDiagram
     B-->>U: Render HTML
 `} />
 
-## 6. Mathematical formulas
+## 7. Mathematical formulas
 
 We support **LaTeX** rendering for mathematical expressions, powered by our custom `<Latex />` component.
 
@@ -280,7 +288,7 @@ Another example, the Gaussian Integral:
 
 <Latex formula="\int_{-\infty}^{\infty} e^{-x^2} \,dx = \sqrt{\pi}" />
 
-## 7. Data Tables
+## 8. Data Tables
 
 We have a robust table component that supports sorting. It uses **TanStack Table** under the hood.
 
@@ -295,7 +303,8 @@ This page demonstrates that we have a robust set of tools for authoring technica
 4. **Diagrams** are easy to write in Markdown.
 5. **Callouts** draw attention where needed.
 6. **Icons** provide visual cues and enhanced aesthetics.
-7. **Math** is fully supported.
-8. **Tables** are sortable and styleable.
+7. **Maps** allow easy geolocation visualization.
+8. **Math** is fully supported.
+9. **Tables** are sortable and styleable.
 
 Everything is ready for the "Solo Party"!
