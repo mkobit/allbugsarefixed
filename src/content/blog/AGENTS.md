@@ -1,4 +1,4 @@
-# Blog Agents Instructions
+# Blog agent instructions
 
 This directory contains the user's blog posts and research ideas.
 
@@ -7,9 +7,9 @@ This directory contains the user's blog posts and research ideas.
 - The date in the folder name represents the **Conception Date** (when the idea was started), not necessarily the publication date.
 - The `slug` should be kebab-case and descriptive.
 
-## Workflow & Lifecycle
+## Workflow & lifecycle
 
-### 1. Ideation (Notebook Phase)
+### 1. Ideation (notebook phase)
 - **Goal:** Brainstorming, collecting links, rough outlines.
 - **Action:** Create a new folder with the `YYYY-MM-DD_slug` convention.
 - **File:** Create `notebook.md` inside this folder.
