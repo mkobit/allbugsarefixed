@@ -22,6 +22,29 @@ export default defineConfig({
     react()
   ],
   markdown: {
+    shikiConfig: {
+      transformers: [
+        {
+          name: "meta-to-attributes",
+          preprocess(code, options) {
+            // We can capture meta here if needed, but 'pre' hook is better for modifying the node.
+            // options.meta contains the string e.g. 'title="foo.ts"'
+            this.meta = options.meta?.__raw || options.meta;
+            // Astro might pass meta as string or object.
+            return code;
+          },
+          pre(node) {
+            if (this.meta) {
+              node.properties['data-meta'] = this.meta;
+              const titleMatch = this.meta.match(/title=(["'])(.*?)\1/);
+              if (titleMatch) {
+                node.properties['data-title'] = titleMatch[2];
+              }
+            }
+          }
+        }
+      ]
+    },
     remarkPlugins: [
         remarkReadingTime,
         () => {
