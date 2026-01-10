@@ -5,14 +5,14 @@ export const demoMapData: MapConfig = {
   markers: [
     {
       description: "Tech Hub",
-      icon: "MapPin",
+      icon: "map-pin",
       lat: 37.7749,
       lng: -122.4194,
       title: "San Francisco",
     },
     {
       description: "Shopping District",
-      icon: "Navigation",
+      icon: "navigation",
       lat: 37.7849,
       lng: -122.4094,
       title: "Market Street",
