@@ -26,6 +26,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.562.0",
     "mermaid": "^11.12.2",
+    "pigeon-maps": "^0.22.1",
     "react": "19.2.3",
     "react-dom": "^19.2.3",
     "remeda": "^2.33.1",
