@@ -1,5 +1,5 @@
 ---
-import { Sidebar } from "../components/Sidebar";
+import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import ThemeInit from "../components/ThemeInit.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
@@ -13,12 +13,12 @@ interface Props {
 
 const { title } = Astro.props;
 
-// Fetch posts for sidebar
+// Fetch posts for search
 const posts = await getCollection('blog', ({ data }) => {
     return data.status === 'published';
 });
 
-// Sort by date desc
+// Sort by date desc (though for search it doesn't strictly matter, but good for consistency)
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Data for fuzzy search (all published posts)
@@ -29,9 +29,6 @@ const allPosts = sortedPosts.map(post => ({
     pubDate: post.data.pubDate.toISOString(),
     labels: post.data.labels
 }));
-
-// Recent posts (top 5)
-const recentPosts = allPosts.slice(0, 5);
 ---
 
 <!doctype html>
@@ -47,30 +44,14 @@ const recentPosts = allPosts.slice(0, 5);
       import "../lib/polyfills";
     </script>
     <ThemeInit />
-    <style>
-      /* Default sidebar width variables to minimize CLS */
-      :root {
-        --sidebar-width: 16rem; /* Default Desktop Expanded */
-      }
-      @media (max-width: 768px) {
-        :root {
-          --sidebar-width: 0rem; /* Mobile: Sidebar hidden by default */
-        }
-      }
-    </style>
   </head>
-  <body class="flex min-h-screen transition-colors duration-300">
-    <!-- Sidebar component with client:load for hydration but SSR HTML -->
-    <Sidebar client:load recentPosts={recentPosts} allPosts={allPosts} />
+  <body class="flex flex-col min-h-screen transition-colors duration-300">
+    <!-- Header with client:load for interactivity -->
+    <Header client:load allPosts={allPosts} />
 
     <!-- Main Content Wrapper -->
-    <!-- Used style={{ paddingLeft: 'var(--sidebar-width)' }} approach for dynamic sidebar width adjustment -->
-    <div
-        class="flex-grow flex flex-col w-full min-w-0 transition-[padding] duration-300 pt-14 md:pt-0"
-        style="padding-left: var(--sidebar-width);"
-    >
-       <div class="hidden md:block h-1 w-full bg-brand-primary sticky top-0 z-50"></div>
-
+    <!-- Added pt-14 (header height) to ensure content isn't hidden behind fixed header -->
+    <div class="flex-grow flex flex-col w-full min-w-0 pt-14">
        <main class="flex-grow py-8 md:py-12">
           <Container>
             <slot />
