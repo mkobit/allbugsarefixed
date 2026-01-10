@@ -1,35 +1,40 @@
 import React, { useRef, useState } from 'react';
-import { Copy, Check, Terminal, FileCode } from 'lucide-react';
+import { Copy, Check, FileCode } from 'lucide-react';
 import { cn } from '../lib/ui';
 
-type CodeBlockProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement> & {
-  'data-language'?: string;
-  'data-title'?: string;
-  'data-meta'?: string;
-};
+interface CodeBlockProps {
+  readonly children?: React.ReactNode;
+  readonly className?: string;
+  readonly code?: string;
+  readonly html?: string;
+  readonly lang?: string;
+  readonly title?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly [key: string]: any;
+}
 
 export default function CodeBlock(props: CodeBlockProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { children, className, 'data-language': language, 'data-title': title, 'data-meta': meta, ...rest } = props;
+  const {
+    title,
+    lang = 'plaintext',
+    code,
+    html,
+    children,
+    className,
+    ...rest
+  } = props;
+
   const [copied, setCopied] = useState(false);
   const codeRef = useRef<HTMLElement>(null);
 
-  // Extract text content for copy
-  const getCodeText = () => {
-    // If children is a code element string (from Astro Shiki), we need to extract text.
-    // However, Shiki renders a table or spans.
-    // The easiest way is to use innerText of the ref if available.
-    if (codeRef.current) {
-        return codeRef.current.innerText;
-    }
-    return '';
-  };
-
   const handleCopy = async () => {
-    const text = getCodeText();
-    if (text) {
+    // If raw code is provided via prop (from remark plugin), use it.
+    // Otherwise try to get text from ref (fallback).
+    const textToCopy = code || (codeRef.current ? codeRef.current.innerText : '');
+
+    if (textToCopy) {
       try {
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(textToCopy);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (err) {
@@ -38,12 +43,7 @@ export default function CodeBlock(props: CodeBlockProps) {
     }
   };
 
-  // Determine icon based on language or title
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const Icon = title ? FileCode : Terminal;
-
-  // Clean up language label
-  const langLabel = language === 'plaintext' ? 'Text' : language;
+  const langLabel = lang === 'plaintext' ? 'Text' : lang;
 
   return (
     <div className="group relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-900 shadow-md">
@@ -56,7 +56,6 @@ export default function CodeBlock(props: CodeBlockProps) {
             </div>
 
             <div className="flex items-center gap-2">
-                 {/* If we have a title, show language on the right too? Maybe overkill. */}
                  {title && <span className="uppercase font-mono font-bold text-[10px] tracking-wider text-gray-600">{langLabel}</span>}
 
                  <button
@@ -75,11 +74,20 @@ export default function CodeBlock(props: CodeBlockProps) {
         </div>
 
         {/* Code Content */}
-        {/* We pass the original props to pre but override className to ensure styling */}
         <div className="relative overflow-x-auto">
-             <pre ref={codeRef} className={cn("!m-0 !p-4 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent", className)} {...rest}>
-                {children}
-             </pre>
+             {html ? (
+                 <div
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    ref={codeRef as any}
+                    className={cn("!m-0 !p-0 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent shiki-container", className)}
+                    dangerouslySetInnerHTML={{ __html: html }}
+                    {...rest}
+                 />
+             ) : (
+                <pre ref={codeRef} className={cn("!m-0 !p-4 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent", className)} {...rest}>
+                    {children || code}
+                </pre>
+             )}
         </div>
     </div>
   );
