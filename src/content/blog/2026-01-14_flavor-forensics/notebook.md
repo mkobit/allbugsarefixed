@@ -19,6 +19,10 @@
 ### Candy Flavors
 *   General investigation into candy flavor profiles.
 
+### Pink Lemonade
+*   Investigate the origins of pink lemonade.
+*   Why is it pink?
+
 ---
 
 ## Potential Research Avenues (AI Suggestions)
