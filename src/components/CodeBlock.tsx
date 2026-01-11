@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Copy, Check, FileCode } from 'lucide-react';
+import type { BundledLanguage } from 'shiki';
 import { cn } from '../lib/ui';
 
 interface CodeBlockProps {
@@ -7,12 +8,10 @@ interface CodeBlockProps {
   readonly className?: string;
   readonly code?: string;
   readonly html?: string;
-  readonly lang?: string;
+  readonly lang?: BundledLanguage | 'plaintext';
   readonly title?: string;
   readonly showLineNumbers?: boolean | string;
   readonly startLine?: number | string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly [key: string]: any;
 }
 
 export default function CodeBlock(props: CodeBlockProps) {

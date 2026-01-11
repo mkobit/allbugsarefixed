@@ -21,8 +21,24 @@ export function remarkCodeToComponent() {
         highlighter = await createHighlighter({
           themes: ['github-dark'],
           langs: [
-            'javascript', 'typescript', 'tsx', 'jsx', 'json', 'css', 'html', 'bash', 'shell',
-            'markdown', 'yaml', 'python', 'rust', 'go', 'java', 'c', 'cpp', 'kotlin'
+            'javascript',
+            'typescript',
+            'tsx',
+            'jsx',
+            'json',
+            'css',
+            'html',
+            'bash',
+            'shell',
+            'markdown',
+            'yaml',
+            'python',
+            'rust',
+            'go',
+            'java',
+            'c',
+            'cpp',
+            'kotlin'
           ]
         });
       } catch (e) {
