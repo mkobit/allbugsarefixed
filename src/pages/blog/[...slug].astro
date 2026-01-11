@@ -5,6 +5,7 @@ import PostHeader from "../../components/PostHeader.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 import PostMetadata from "../../components/PostMetadata.astro";
 import { LabelBadge } from "../../components/LabelBadge";
+import CodeBlock from "../../components/CodeBlock";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -71,7 +72,7 @@ const wordCount = readingTimeData?.words;
           prose-headings:font-bold prose-headings:tracking-tight
           prose-img:rounded-xl prose-img:shadow-lg
         ">
-          <Content />
+          <Content components={{ CodeBlock }} />
         </div>
       </div>
 

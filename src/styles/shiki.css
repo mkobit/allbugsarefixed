@@ -1,0 +1,47 @@
+
+/* Shiki Customizations */
+
+/* Line Numbering */
+.shiki-container.show-line-numbers code {
+  counter-reset: line calc(var(--start-line, 1) - 1);
+}
+
+.shiki-container.show-line-numbers .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: right;
+  color: #6e7681; /* gray-500 */
+  font-size: 0.85em;
+  opacity: 0.7;
+  user-select: none;
+}
+
+/* Line Highlighting */
+.shiki-container .line.highlighted {
+  background-color: rgba(200, 200, 255, 0.1); /* Light highlight */
+  display: inline-block;
+  width: 100%;
+}
+
+.shiki-container .line.diff.add {
+  background-color: rgba(46, 160, 67, 0.15);
+}
+.shiki-container .line.diff.add::before {
+    content: '+';
+    color: #3fb950;
+    position: absolute;
+    left: 10px;
+}
+
+.shiki-container .line.diff.remove {
+  background-color: rgba(248, 81, 73, 0.15);
+}
+.shiki-container .line.diff.remove::before {
+    content: '-';
+    color: #f85149;
+    position: absolute;
+    left: 10px;
+}

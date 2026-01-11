@@ -39,6 +39,7 @@
     "@iarna/toml": "^2.2.5",
     "@js-temporal/polyfill": "^0.4.4",
     "@playwright/test": "^1.57.0",
+    "@shikijs/transformers": "^3.21.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.7",
@@ -64,8 +65,10 @@
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "remark-reading-time": "^2.0.2",
+    "shiki": "^3.21.0",
     "tailwindcss": "^4.1.18",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "unist-util-visit": "^5.0.0"
   }
 }
