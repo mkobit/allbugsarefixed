@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview --host",
     "lint": "eslint . --ext .js,.ts,.astro,.mdx --cache",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "new-idea": "tsx scripts/new-idea.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

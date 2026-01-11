@@ -20,7 +20,8 @@
     "eslint.config.mjs",
     "prettier.config.mjs",
     "playwright.config.ts",
-    "tests/**/*.ts"
+    "tests/**/*.ts",
+    "scripts/**/*.ts"
   ],
   "exclude": ["node_modules", "dist", ".astro"]
 }
