@@ -8,7 +8,37 @@ import {
   transformerNotationWordHighlight
 } from '@shikijs/transformers';
 
-let highlighter;
+let highlighterPromise;
+
+// Initialize highlighter once
+async function getHighlighter() {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighter({
+      themes: ['github-dark'],
+      langs: [
+        'javascript',
+        'typescript',
+        'tsx',
+        'jsx',
+        'json',
+        'css',
+        'html',
+        'bash',
+        'shell',
+        'markdown',
+        'yaml',
+        'python',
+        'rust',
+        'go',
+        'java',
+        'c',
+        'cpp',
+        'kotlin'
+      ]
+    });
+  }
+  return highlighterPromise;
+}
 
 /**
  * Remark plugin to transform code blocks into <CodeBlock /> MDX components.
@@ -16,34 +46,11 @@ let highlighter;
  */
 export function remarkCodeToComponent() {
   return async (tree) => {
-    if (!highlighter) {
-      try {
-        highlighter = await createHighlighter({
-          themes: ['github-dark'],
-          langs: [
-            'javascript',
-            'typescript',
-            'tsx',
-            'jsx',
-            'json',
-            'css',
-            'html',
-            'bash',
-            'shell',
-            'markdown',
-            'yaml',
-            'python',
-            'rust',
-            'go',
-            'java',
-            'c',
-            'cpp',
-            'kotlin'
-          ]
-        });
-      } catch (e) {
-        console.error('remarkCodeToComponent: Failed to init highlighter', e);
-      }
+    let highlighter;
+    try {
+      highlighter = await getHighlighter();
+    } catch (e) {
+      throw new Error(`remarkCodeToComponent: Failed to init highlighter: ${e.message}`);
     }
 
     const nodesToTransform = [];
@@ -52,10 +59,10 @@ export function remarkCodeToComponent() {
       nodesToTransform.push({ node, index, parent });
     });
 
-    for (const { node, index, parent } of nodesToTransform) {
-      let lang = node.lang || 'plaintext';
-      let code = node.value;
+    await Promise.all(nodesToTransform.map(async ({ node, index, parent }) => {
+      const lang = node.lang || 'plaintext';
       const meta = node.meta || '';
+      let code = node.value;
 
       // Extract title
       const titleMatch = meta.match(/title=(["'])(.*?)\1/);
@@ -128,6 +135,6 @@ export function remarkCodeToComponent() {
 
       // Replace the original code node with the MDX component node
       parent.children[index] = mdxNode;
-    }
+    }));
   };
 }

@@ -80,8 +80,7 @@ export default function CodeBlock(props: CodeBlockProps) {
         <div className="relative overflow-x-auto">
              {html ? (
                  <div
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    ref={codeRef as any}
+                    ref={codeRef as React.RefObject<HTMLDivElement>}
                     className={cn(
                         "!m-0 !p-0 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent shiki-container",
                         showLineNumbers && "show-line-numbers",
