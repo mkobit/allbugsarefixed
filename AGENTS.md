@@ -7,7 +7,7 @@ This repository contains a personal blog and research notes.
 - **Build:** `pnpm build` (builds the Astro site)
 - **Dev:** `pnpm dev` (starts the dev server)
 - **Test:** `pnpm test:e2e` (runs Playwright tests)
-- **New idea:** `pnpm new-idea "My Title"` (scaffolds a new blog post folder)
+- **New idea:** `pnpm new-idea "My Title"` (use this to start a new research notebook or blog post)
 
 ## General guidelines
 - **Linting:** Always run `pnpm lint` after making changes. Fix all lint errors.
