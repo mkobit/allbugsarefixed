@@ -9,7 +9,7 @@ import { Search } from './Search';
 const headerStyles = tv({
   slots: {
     desktopNav: 'hidden md:flex items-center gap-6',
-    logo: 'font-bold text-lg text-brand-text hover:text-brand-primary transition-colors',
+    logo: 'font-mono font-bold text-lg text-brand-text hover:text-brand-primary transition-colors hover:animate-wiggle inline-block origin-center',
     mobileMenu: 'fixed inset-x-0 top-14 bottom-0 bg-brand-surface z-40 p-4 flex flex-col gap-4 border-t border-gray-200 dark:border-white/10 transition-transform duration-300 md:hidden overflow-y-auto',
     mobileNavItem: 'flex items-center gap-3 p-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-brand-text font-medium text-base',
     mobileNavToggle: 'md:hidden p-2 -mr-2 text-brand-text hover:bg-black/5 dark:hover:bg-white/10 rounded-md',
