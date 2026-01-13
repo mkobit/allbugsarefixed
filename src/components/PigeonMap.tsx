@@ -9,19 +9,17 @@ type MapProps = Readonly<{
   config: MapConfig;
 }>;
 
-const FallbackIcon = () => (
-  <div className="h-6 w-6 animate-pulse rounded-full bg-slate-400 opacity-50" />
-);
+const FallbackIcon = () => <div className="h-6 w-6 animate-pulse rounded-full bg-slate-400 opacity-50" />;
 
 export default function Map({ className, config }: MapProps) {
   return (
-    <div className={cn("relative h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900", className)}>
-      <PigeonMap
-        center={config.center}
-        defaultCenter={config.center}
-        defaultZoom={config.zoom}
-        zoom={config.zoom}
-      >
+    <div
+      className={cn(
+        "relative h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900",
+        className,
+      )}
+    >
+      <PigeonMap center={config.center} defaultCenter={config.center} defaultZoom={config.zoom} zoom={config.zoom}>
         {config.markers?.map((marker, index) => (
           <MapMarkerItem key={`${marker.lat}-${marker.lng}-${index}`} marker={marker} />
         ))}
@@ -49,7 +47,7 @@ function MapMarkerItem({ marker }: Readonly<{ marker: MapMarker }>) {
             <Icon className="h-6 w-6 text-violet-600 drop-shadow-md transition-transform group-hover:scale-110 dark:text-violet-400" />
           </Suspense>
           {(marker.title || marker.description) && (
-             <div className="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded bg-slate-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:block group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
+            <div className="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded bg-slate-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:block group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900">
               {marker.title && <div className="font-bold">{marker.title}</div>}
               {marker.description && <div>{marker.description}</div>}
               <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900 dark:border-t-slate-100" />
@@ -75,10 +73,10 @@ function MapMarkerItem({ marker }: Readonly<{ marker: MapMarker }>) {
 // Helper component that receives map state via props injected by PigeonMap
 function MapShapeItem({
   shape,
-  latLngToPixel
+  latLngToPixel,
 }: Readonly<{
   shape: MapShape;
-  latLngToPixel?: (latLng: [number, number]) => [number, number]
+  latLngToPixel?: (latLng: [number, number]) => [number, number];
 }>) {
   // Pigeon Maps injects latLngToPixel into children
   if (!latLngToPixel) return null;
@@ -105,11 +103,13 @@ function MapShapeItem({
   }
 
   if (shape.type === "polygon") {
-    const points = shape.coordinates.map((coord) => {
-      // Same here
-      const pixel = latLngToPixel(coord as [number, number]);
-      return `${pixel[0]},${pixel[1]}`;
-    }).join(" ");
+    const points = shape.coordinates
+      .map((coord) => {
+        // Same here
+        const pixel = latLngToPixel(coord as [number, number]);
+        return `${pixel[0]},${pixel[1]}`;
+      })
+      .join(" ");
 
     return (
       <svg className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-visible">

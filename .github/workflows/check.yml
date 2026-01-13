@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - "main"
       - "gh-pages"
-      - 'dependabot/**' #avoid duplicates: only run the PR, not the push
+      - "dependabot/**" #avoid duplicates: only run the PR, not the push
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 

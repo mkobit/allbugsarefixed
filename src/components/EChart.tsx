@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import type { EChartsOption } from 'echarts';
-import { getThemeColor } from '../lib/theme';
-import { useECharts } from '../hooks/useECharts';
-import { useDarkMode } from '../hooks/useDarkMode';
+import React, { useMemo } from "react";
+import type { EChartsOption } from "echarts";
+import { getThemeColor } from "../lib/theme";
+import { useECharts } from "../hooks/useECharts";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 interface EChartProps {
   readonly options: EChartsOption;
@@ -10,14 +10,14 @@ interface EChartProps {
   readonly width?: string;
 }
 
-export default function EChart({ options, height = '400px', width = '100%' }: Readonly<EChartProps>) {
+export default function EChart({ options, height = "400px", width = "100%" }: Readonly<EChartProps>) {
   const isDark = useDarkMode();
 
   // Merge user options with theme-specific overrides
   const finalOptions = useMemo(() => {
     return {
       ...options,
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
       darkMode: isDark,
       textStyle: {
         color: getThemeColor(isDark),

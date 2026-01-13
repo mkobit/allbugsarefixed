@@ -1,6 +1,7 @@
 # Tech Demo Brief
 
 ## Objectives
+
 - Showcase all components.
 - Verify mobile responsiveness.
 - Test code highlighting.
@@ -8,4 +9,5 @@
 - Serve as a harness for testing accessibility and other aspects.
 
 ## Notes
+
 - Need to make sure ECharts resizes correctly.

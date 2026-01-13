@@ -1,18 +1,18 @@
-import React from 'react';
-import { tv, type VariantProps } from 'tailwind-variants';
-import { cn } from '../../lib/ui';
-import { formatDateToHumanString } from '../../lib/date';
-import type { Temporal } from '@js-temporal/polyfill';
+import React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
+import { cn } from "../../lib/ui";
+import { formatDateToHumanString } from "../../lib/date";
+import type { Temporal } from "@js-temporal/polyfill";
 
 const timeStyles = tv({
-  base: 'font-mono text-sm text-gray-500 dark:text-gray-400',
+  base: "font-mono text-sm text-gray-500 dark:text-gray-400",
   defaultVariants: {
-    variant: 'default',
+    variant: "default",
   },
   variants: {
     variant: {
-      default: '',
-      muted: 'text-gray-500 dark:text-gray-400',
+      default: "",
+      muted: "text-gray-500 dark:text-gray-400",
     },
   },
 });

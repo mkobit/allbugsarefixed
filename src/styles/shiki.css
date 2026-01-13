@@ -1,4 +1,3 @@
-
 /* Shiki Customizations */
 
 /* Line Numbering */
@@ -30,18 +29,18 @@
   background-color: rgba(46, 160, 67, 0.15);
 }
 .shiki-container .line.diff.add::before {
-    content: '+';
-    color: #3fb950;
-    position: absolute;
-    left: 10px;
+  content: "+";
+  color: #3fb950;
+  position: absolute;
+  left: 10px;
 }
 
 .shiki-container .line.diff.remove {
   background-color: rgba(248, 81, 73, 0.15);
 }
 .shiki-container .line.diff.remove::before {
-    content: '-';
-    color: #f85149;
-    position: absolute;
-    left: 10px;
+  content: "-";
+  color: #f85149;
+  position: absolute;
+  left: 10px;
 }

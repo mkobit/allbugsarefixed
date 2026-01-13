@@ -1,12 +1,12 @@
 // Centralized theme colors for charts and visualizations
 export const THEME_COLORS = {
   dark: {
-    backgroundColor: 'transparent',
-    textColor: '#e2e8f0', // slate-200
+    backgroundColor: "transparent",
+    textColor: "#e2e8f0", // slate-200
   },
   light: {
-    backgroundColor: 'transparent',
-    textColor: '#1e293b', // slate-800
+    backgroundColor: "transparent",
+    textColor: "#1e293b", // slate-800
   },
 };
 

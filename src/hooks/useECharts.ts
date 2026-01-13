@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import * as echarts from 'echarts';
-import type { EChartsOption, ECharts } from 'echarts';
+import { useEffect, useRef } from "react";
+import * as echarts from "echarts";
+import type { EChartsOption, ECharts } from "echarts";
 
 /**
  * Custom hook to initialize and manage an Apache ECharts instance.
@@ -52,7 +52,6 @@ export function useECharts(options: Readonly<EChartsOption>, theme?: Readonly<st
     // Theme updates usually require disposing and re-initializing in ECharts if passing a registered theme string name,
     // but explicit style options (like we do for dark mode text color) can be updated via setOption.
     // Since we handle "theme" via option overrides in the consumer, this effect mainly syncs options.
-
   }, [options, theme]);
 
   return chartRef;

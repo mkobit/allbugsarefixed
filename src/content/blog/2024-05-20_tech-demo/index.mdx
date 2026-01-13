@@ -16,31 +16,31 @@ import { demoMapData } from './map-data';
 import { csvParse } from 'd3-dsv';
 import rawData from './data.csv?raw';
 import {
-  Zap,
-  Activity,
-  ShieldCheck,
-  Terminal,
-  Cpu,
-  Globe,
-  Server,
-  Database,
-  Cloud,
-  Code
+Zap,
+Activity,
+ShieldCheck,
+Terminal,
+Cpu,
+Globe,
+Server,
+Database,
+Cloud,
+Code
 } from 'lucide-react';
 import { DataTable } from '../../../components/ui/table';
 
 export const users = [
-  { id: 1, name: 'John Doe', role: 'Admin', status: 'Active' },
-  { id: 2, name: 'Jane Smith', role: 'User', status: 'Inactive' },
-  { id: 3, name: 'Bob Johnson', role: 'Editor', status: 'Active' },
-  { id: 4, name: 'Alice Williams', role: 'User', status: 'Active' },
+  { id: 1, name: "John Doe", role: "Admin", status: "Active" },
+  { id: 2, name: "Jane Smith", role: "User", status: "Inactive" },
+  { id: 3, name: "Bob Johnson", role: "Editor", status: "Active" },
+  { id: 4, name: "Alice Williams", role: "User", status: "Active" },
 ];
 
 export const userColumns = [
-  { header: 'ID', accessorKey: 'id' },
-  { header: 'Name', accessorKey: 'name' },
-  { header: 'Role', accessorKey: 'role' },
-  { header: 'Status', accessorKey: 'status' },
+  { header: "ID", accessorKey: "id" },
+  { header: "Name", accessorKey: "name" },
+  { header: "Role", accessorKey: "role" },
+  { header: "Status", accessorKey: "status" },
 ];
 
 export const data = csvParse(rawData);
@@ -55,30 +55,10 @@ We've integrated **Lucide React** icons to bring life to our UI.
 We use a reusable React component `IconBlock` to maintain consistency and ease of use.
 
 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
-  <IconBlock
-    client:visible
-    icon={Zap}
-    label="Lightning Fast"
-    variant="warning"
-  />
-  <IconBlock
-    client:visible
-    icon={Activity}
-    label="Monitoring"
-    variant="info"
-  />
-  <IconBlock
-    client:visible
-    icon={ShieldCheck}
-    label="Secure"
-    variant="success"
-  />
-  <IconBlock
-    client:visible
-    icon={Terminal}
-    label="CLI Tools"
-    variant="brand"
-  />
+  <IconBlock client:visible icon={Zap} label="Lightning Fast" variant="warning" />
+  <IconBlock client:visible icon={Activity} label="Monitoring" variant="info" />
+  <IconBlock client:visible icon={ShieldCheck} label="Secure" variant="success" />
+  <IconBlock client:visible icon={Terminal} label="CLI Tools" variant="brand" />
 </div>
 
 ### Inline icons
@@ -105,10 +85,11 @@ We use callouts to highlight important information.
 <Callout type="tip" title="Pro tip">
   Use **tip** callouts for best practices or shortcuts.
 
-  ```bash
-  # You can even put code inside!
-  pnpm install super-cool-package
-  ```
+```bash
+# You can even put code inside!
+pnpm install super-cool-package
+```
+
 </Callout>
 
 <Callout type="warning" title="Watch out">
@@ -124,6 +105,7 @@ We use callouts to highlight important information.
 We want our code to look good. Astro uses Shiki for syntax highlighting by default.
 
 ### Kotlin (JS target)
+
 Here's a snippet of Kotlin code, as requested for "runnable" future-proofing.
 
 ```kotlin
@@ -144,12 +126,13 @@ fun fix(bug: String) {
 ```
 
 ### TypeScript / Astro
+
 And here is how we might fetch data in this very blog:
 
 ```typescript
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }));
@@ -161,81 +144,83 @@ export async function getStaticPaths() {
 We integrate **Apache ECharts** for rich, interactive visualizations.
 
 ### Monthly bug fixes
+
 A simple line chart showing our velocity.
 
 <EChart
   height="400px"
   options={{
     title: {
-      text: 'Bugs Fixed Per Month',
-      left: 'center'
+      text: "Bugs Fixed Per Month",
+      left: "center",
     },
     tooltip: {
-      trigger: 'axis'
+      trigger: "axis",
     },
     xAxis: {
-      type: 'category',
-      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
+      type: "category",
+      data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
     },
     yAxis: {
-      type: 'value'
+      type: "value",
     },
     series: [
       {
         data: [8, 15, 22, 19, 35, 42, 50],
-        type: 'line',
+        type: "line",
         smooth: true,
         lineStyle: {
           width: 3,
           shadowBlur: 10,
-          shadowColor: 'rgba(100,100,255,0.5)'
+          shadowColor: "rgba(100,100,255,0.5)",
         },
         itemStyle: {
-          color: '#8b5cf6' // Brand Primary (Violet)
-        }
-      }
-    ]
+          color: "#8b5cf6", // Brand Primary (Violet)
+        },
+      },
+    ],
   }}
 />
 
 ### Project distribution
+
 A donut chart example.
 
 <EChart
   height="350px"
   options={{
     tooltip: {
-      trigger: 'item'
+      trigger: "item",
     },
     legend: {
-      top: '5%',
-      left: 'center'
+      top: "5%",
+      left: "center",
     },
     series: [
       {
-        name: 'Time Spent',
-        type: 'pie',
-        radius: ['40%', '70%'],
+        name: "Time Spent",
+        type: "pie",
+        radius: ["40%", "70%"],
         avoidLabelOverlap: false,
         itemStyle: {
           borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
+          borderColor: "#fff",
+          borderWidth: 2,
         },
         label: {
           show: false,
-          position: 'center'
+          position: "center",
         },
         emphasis: {
           label: {
             show: true,
             fontSize: 20,
-            fontWeight: 'bold'
-          }
+            fontWeight: "bold",
+          },
         },
-        data: data.map(d => ({ value: parseInt(d.bugs || '0'), name: d.month || '' }))
-      }
-    ]
+        data: data.map((d) => ({ value: parseInt(d.bugs || "0"), name: d.month || "" })),
+      },
+    ],
   }}
 />
 
@@ -249,7 +234,8 @@ We support config-driven maps using **Pigeon Maps**.
 
 For flowcharts, sequence diagrams, and more, we use **Mermaid**.
 
-<Mermaid code={`
+<Mermaid
+  code={`
 graph TD
     A[Start] --> B{Is it fixed?};
     B -- Yes --> C[Deploy];
@@ -258,7 +244,8 @@ graph TD
     C --> E[Relax];
     E --> F[New Bug Found];
     F --> A;
-`} />
+`}
+/>
 
 <Mermaid code={`
 sequenceDiagram
@@ -270,6 +257,7 @@ sequenceDiagram
     B->>S: Request Data
     S-->>B: Return JSON
     B-->>U: Render HTML
+
 `} />
 
 ## 7. Mathematical formulas
@@ -277,9 +265,11 @@ sequenceDiagram
 We support **LaTeX** rendering for mathematical expressions, powered by our custom `<Latex />` component.
 
 ### Inline equations
+
 You can write inline equations like <Latex formula="E = mc^2" inline /> or <Latex formula="e^{i\pi} + 1 = 0" inline /> directly in the text.
 
 ### Block equations
+
 For more complex equations, use block syntax:
 
 <Latex formula="\mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + i \bar{\psi} \gamma^\mu D_\mu \psi + h.c. + \psi_i y_{ij} \psi_j \phi + h.c. + |D_\mu \phi|^2 - V(\phi)" />
@@ -297,6 +287,7 @@ We have a robust table component that supports sorting. It uses **TanStack Table
 ## Conclusion
 
 This page demonstrates that we have a robust set of tools for authoring technical content:
+
 1. **Typography** is clean and readable.
 2. **Code blocks** are syntax highlighted.
 3. **Charts** are interactive and responsive.

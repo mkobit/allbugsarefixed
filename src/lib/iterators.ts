@@ -19,10 +19,7 @@ export function lazyValues<T>(source: readonly T[] | Iterable<T>): Iterator<T> {
   return [][Symbol.iterator]();
 }
 
-export function* lazyMap<T, U>(
-  source: readonly T[] | Iterable<T>,
-  mapFn: (item: T) => U
-): Generator<U> {
+export function* lazyMap<T, U>(source: readonly T[] | Iterable<T>, mapFn: (item: T) => U): Generator<U> {
   const iterator = lazyValues(source);
   let next = iterator.next();
   while (!next.done) {
@@ -31,10 +28,7 @@ export function* lazyMap<T, U>(
   }
 }
 
-export function* lazyFilter<T>(
-  source: readonly T[] | Iterable<T>,
-  predicate: (item: T) => boolean
-): Generator<T> {
+export function* lazyFilter<T>(source: readonly T[] | Iterable<T>, predicate: (item: T) => boolean): Generator<T> {
   const iterator = lazyValues(source);
   let next = iterator.next();
   while (!next.done) {

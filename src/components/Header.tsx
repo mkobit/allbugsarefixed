@@ -1,31 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { tv } from 'tailwind-variants';
-import { Menu, X, Home, BookOpen, Info } from 'lucide-react';
-import { NAV_LINKS } from '../consts';
-import { Link } from './ui/link';
-import ThemeToggle from './ThemeToggle';
-import { Search } from './Search';
+import React, { useState, useEffect } from "react";
+import { tv } from "tailwind-variants";
+import { Menu, X, Home, BookOpen, Info } from "lucide-react";
+import { NAV_LINKS } from "../consts";
+import { Link } from "./ui/link";
+import ThemeToggle from "./ThemeToggle";
+import { Search } from "./Search";
 
 const headerStyles = tv({
   slots: {
-    desktopNav: 'hidden md:flex items-center gap-6',
-    logo: 'font-mono font-bold text-lg text-brand-text hover:text-brand-primary transition-colors hover:animate-wiggle inline-block origin-center',
-    mobileMenu: 'fixed inset-x-0 top-14 bottom-0 bg-brand-surface z-40 p-4 flex flex-col gap-4 border-t border-gray-200 dark:border-white/10 transition-transform duration-300 md:hidden overflow-y-auto',
-    mobileNavItem: 'flex items-center gap-3 p-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-brand-text font-medium text-base',
-    mobileNavToggle: 'md:hidden p-2 -mr-2 text-brand-text hover:bg-black/5 dark:hover:bg-white/10 rounded-md',
-    navItem: 'flex items-center gap-2 text-sm font-medium text-brand-text hover:text-brand-primary transition-colors',
-    wrapper: 'fixed top-0 left-0 right-0 h-14 bg-brand-surface border-b border-gray-200 dark:border-white/10 z-50 flex items-center justify-between px-4 lg:px-6 transition-colors duration-300',
+    desktopNav: "hidden md:flex items-center gap-6",
+    logo: "font-mono font-bold text-lg text-brand-text hover:text-brand-primary transition-colors hover:animate-wiggle inline-block origin-center",
+    mobileMenu:
+      "fixed inset-x-0 top-14 bottom-0 bg-brand-surface z-40 p-4 flex flex-col gap-4 border-t border-gray-200 dark:border-white/10 transition-transform duration-300 md:hidden overflow-y-auto",
+    mobileNavItem:
+      "flex items-center gap-3 p-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-brand-text font-medium text-base",
+    mobileNavToggle: "md:hidden p-2 -mr-2 text-brand-text hover:bg-black/5 dark:hover:bg-white/10 rounded-md",
+    navItem: "flex items-center gap-2 text-sm font-medium text-brand-text hover:text-brand-primary transition-colors",
+    wrapper:
+      "fixed top-0 left-0 right-0 h-14 bg-brand-surface border-b border-gray-200 dark:border-white/10 z-50 flex items-center justify-between px-4 lg:px-6 transition-colors duration-300",
   },
   variants: {
     menuOpen: {
       false: {
-        mobileMenu: 'translate-x-full',
+        mobileMenu: "translate-x-full",
       },
       true: {
-        mobileMenu: 'translate-x-0',
-      }
-    }
-  }
+        mobileMenu: "translate-x-0",
+      },
+    },
+  },
 });
 
 interface Post {
@@ -49,20 +52,22 @@ export function Header({ allPosts }: Readonly<HeaderProps>) {
         setIsMenuOpen(false);
       }
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const { wrapper, logo, desktopNav, mobileNavToggle, mobileMenu, navItem, mobileNavItem } = headerStyles({ menuOpen: isMenuOpen });
+  const { wrapper, logo, desktopNav, mobileNavToggle, mobileMenu, navItem, mobileNavItem } = headerStyles({
+    menuOpen: isMenuOpen,
+  });
 
   // Helper for Icon mapping (optional, but nice for mobile menu)
   const getIcon = (text: string) => {
     const lower = text.toLowerCase();
-    if (lower.includes('blog')) return BookOpen;
-    if (lower.includes('about')) return Info;
+    if (lower.includes("blog")) return BookOpen;
+    if (lower.includes("about")) return Info;
     return Home;
   };
 
@@ -76,14 +81,14 @@ export function Header({ allPosts }: Readonly<HeaderProps>) {
         {/* Desktop Navigation */}
         <div className={desktopNav()}>
           <nav className="flex items-center gap-6">
-             <Link href="/" className={navItem()} variant="unstyled">
-                Home
-             </Link>
-             {NAV_LINKS.map(link => (
-                <Link key={link.href} href={link.href} className={navItem()} variant="unstyled">
-                  {link.text}
-                </Link>
-             ))}
+            <Link href="/" className={navItem()} variant="unstyled">
+              Home
+            </Link>
+            {NAV_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className={navItem()} variant="unstyled">
+                {link.text}
+              </Link>
+            ))}
           </nav>
 
           <div className="w-64">
@@ -102,7 +107,7 @@ export function Header({ allPosts }: Readonly<HeaderProps>) {
       {/* Mobile Menu */}
       <div className={mobileMenu()}>
         <div className="mb-2">
-            <Search allPosts={allPosts} />
+          <Search allPosts={allPosts} />
         </div>
 
         <nav className="flex flex-col gap-1">
@@ -110,20 +115,20 @@ export function Header({ allPosts }: Readonly<HeaderProps>) {
             <Home className="w-5 h-5" />
             Home
           </Link>
-          {NAV_LINKS.map(link => {
+          {NAV_LINKS.map((link) => {
             const Icon = getIcon(link.text);
             return (
-                <Link key={link.href} href={link.href} className={mobileNavItem()} variant="unstyled" onClick={closeMenu}>
-                    <Icon className="w-5 h-5" />
-                    {link.text}
-                </Link>
+              <Link key={link.href} href={link.href} className={mobileNavItem()} variant="unstyled" onClick={closeMenu}>
+                <Icon className="w-5 h-5" />
+                {link.text}
+              </Link>
             );
           })}
         </nav>
 
         <div className="mt-auto pt-4 border-t border-gray-200 dark:border-white/10 flex justify-between items-center">
-            <span className="text-sm text-gray-500">Switch Theme</span>
-            <ThemeToggle />
+          <span className="text-sm text-gray-500">Switch Theme</span>
+          <ThemeToggle />
         </div>
       </div>
     </>
