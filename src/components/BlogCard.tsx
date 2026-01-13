@@ -4,6 +4,7 @@ import { cn } from "../lib/ui";
 import { Time } from "./ui/time";
 import { LabelBadge } from "./LabelBadge";
 import type { LabelId } from "../lib/labels";
+import type { Temporal } from "@js-temporal/polyfill";
 
 const cardStyles = tv({
   base: "block p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-colors",
@@ -12,7 +13,7 @@ const cardStyles = tv({
 interface BlogCardProps {
   readonly title: string;
   readonly description: string;
-  readonly pubDate: Date;
+  readonly pubDate: Temporal.PlainDate;
   readonly href: string;
   readonly labels?: readonly LabelId[];
   readonly className?: string;
