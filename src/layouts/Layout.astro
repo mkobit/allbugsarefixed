@@ -14,20 +14,20 @@ interface Props {
 const { title } = Astro.props;
 
 // Fetch posts for search
-const posts = await getCollection('blog', ({ data }) => {
-    return data.status === 'published';
+const posts = await getCollection("blog", ({ data }) => {
+  return data.status === "published";
 });
 
 // Sort by date desc (though for search it doesn't strictly matter, but good for consistency)
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Data for fuzzy search (all published posts)
-const allPosts = sortedPosts.map(post => ({
-    title: post.data.title,
-    slug: post.id,
-    description: post.data.description,
-    pubDate: post.data.pubDate.toISOString(),
-    labels: post.data.labels
+const allPosts = sortedPosts.map((post) => ({
+  title: post.data.title,
+  slug: post.id,
+  description: post.data.description,
+  pubDate: post.data.pubDate.toISOString(),
+  labels: post.data.labels,
 }));
 ---
 
@@ -52,13 +52,13 @@ const allPosts = sortedPosts.map(post => ({
     <!-- Main Content Wrapper -->
     <!-- Added pt-14 (header height) to ensure content isn't hidden behind fixed header -->
     <div class="flex-grow flex flex-col w-full min-w-0 pt-14">
-       <main class="flex-grow py-8 md:py-12">
-          <Container>
-            <slot />
-          </Container>
-       </main>
+      <main class="flex-grow py-8 md:py-12">
+        <Container>
+          <slot />
+        </Container>
+      </main>
 
-       <Footer client:only="react" />
+      <Footer client:only="react" />
     </div>
   </body>
 </html>

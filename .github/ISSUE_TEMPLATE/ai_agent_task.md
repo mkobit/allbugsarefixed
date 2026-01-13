@@ -1,8 +1,8 @@
 ---
 name: Task
 about: A structured task for a contributor.
-title: 'feat: [Short description of the feature]'
-labels: 'task'
+title: "feat: [Short description of the feature]"
+labels: "task"
 ---
 
 ### Task

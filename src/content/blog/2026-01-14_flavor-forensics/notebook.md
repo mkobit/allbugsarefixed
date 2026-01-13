@@ -7,34 +7,38 @@
 ## Core Topics (User Notes)
 
 ### Blue Raspberry
-*   What actually is blue raspberry?
-*   Why is it blue?
-*   Origins of the flavor.
+
+- What actually is blue raspberry?
+- Why is it blue?
+- Origins of the flavor.
 
 ### Gatorade Flavors
-*   Origins of Gatorade flavors.
-*   Specific flavors to look into:
-    *   Riptide Rush.
+
+- Origins of Gatorade flavors.
+- Specific flavors to look into:
+  - Riptide Rush.
 
 ### Candy Flavors
-*   General investigation into candy flavor profiles.
+
+- General investigation into candy flavor profiles.
 
 ### Pink Lemonade
-*   Investigate the origins of pink lemonade.
-*   Why is it pink?
+
+- Investigate the origins of pink lemonade.
+- Why is it pink?
 
 ---
 
 ## Potential Research Avenues (AI Suggestions)
 
-*   **Blue Raspberry:**
-    *   Check if it was created to distinguish from other red flavors (cherry, strawberry, watermelon).
-    *   Look for connections to food dye regulations (why blue dye?).
+- **Blue Raspberry:**
+  - Check if it was created to distinguish from other red flavors (cherry, strawberry, watermelon).
+  - Look for connections to food dye regulations (why blue dye?).
 
-*   **Gatorade:**
-    *   Investigate the timeline of flavor releases.
-    *   What exactly is the "Riptide Rush" flavor profile? (Grape? Berry?).
+- **Gatorade:**
+  - Investigate the timeline of flavor releases.
+  - What exactly is the "Riptide Rush" flavor profile? (Grape? Berry?).
 
-*   **General:**
-    *   "Mystery" flavors (e.g., Dum Dums, Airheads) - how are they made?
-    *   Why do some artificial flavors (like grape or banana) taste different from the real fruit?
+- **General:**
+  - "Mystery" flavors (e.g., Dum Dums, Airheads) - how are they made?
+  - Why do some artificial flavors (like grape or banana) taste different from the real fruit?

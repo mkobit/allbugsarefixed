@@ -6,24 +6,26 @@ interface Props {
 const { code } = Astro.props;
 ---
 
-<div class="mermaid my-8 bg-white dark:bg-brand-surface p-4 rounded-xl shadow-sm border border-gray-100 dark:border-white/5 flex justify-center overflow-x-auto">
+<div
+  class="mermaid my-8 bg-white dark:bg-brand-surface p-4 rounded-xl shadow-sm border border-gray-100 dark:border-white/5 flex justify-center overflow-x-auto"
+>
   {code}
 </div>
 
 <script>
-  import mermaid from 'mermaid';
+  import mermaid from "mermaid";
 
   // Initialize mermaid
   // We check for the theme to set basic config
   function initMermaid() {
-      const isDark = document.documentElement.classList.contains('dark');
-      mermaid.initialize({
-        startOnLoad: true,
-        theme: isDark ? 'dark' : 'default',
-        securityLevel: 'loose', // Needed for some interactions, but 'strict' is safer. 'loose' for demo.
-        fontFamily: 'inherit'
-      });
-      mermaid.run(); // Re-run if needed for dynamic content, but startOnLoad handles initial.
+    const isDark = document.documentElement.classList.contains("dark");
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: isDark ? "dark" : "default",
+      securityLevel: "loose", // Needed for some interactions, but 'strict' is safer. 'loose' for demo.
+      fontFamily: "inherit",
+    });
+    mermaid.run(); // Re-run if needed for dynamic content, but startOnLoad handles initial.
   }
 
   // Initial load

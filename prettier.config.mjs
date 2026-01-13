@@ -5,6 +5,7 @@ const config = {
   singleQuote: false,
   printWidth: 120,
   tabWidth: 2,
+  useTabs: false,
   arrowParens: "always",
   semi: true,
   bracketSpacing: true,

@@ -1,5 +1,5 @@
-import React from 'react';
-import { cn } from '../../lib/ui';
+import React from "react";
+import { cn } from "../../lib/ui";
 
 // Since the user used a text slash "/", maybe they want a semantic separator or just a visual one.
 // The slash in the blog header is inline text.

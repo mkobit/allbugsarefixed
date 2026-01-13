@@ -30,7 +30,7 @@ export const demoMapData: MapConfig = {
       coordinates: [
         [37.78, -122.42],
         [37.79, -122.41],
-        [37.78, -122.40],
+        [37.78, -122.4],
       ],
       type: "polygon",
     },

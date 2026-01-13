@@ -1,4 +1,4 @@
-import { z } from 'astro/zod';
+import { z } from "astro/zod";
 
 // Defines the recursive tree structure for labels
 export interface LabelNode {
@@ -14,48 +14,48 @@ export type LabelTree = Record<string, LabelNode>;
 export const LABEL_TREE = {
   culture: {
     children: {
-      food: { label: 'Food' },
+      food: { label: "Food" },
     },
-    label: 'Culture',
+    label: "Culture",
   },
   // Root level specific topics
-  demo: { label: 'Demo' },
+  demo: { label: "Demo" },
   finance: {
     children: {
-      budget: { label: 'Budgeting' },
+      budget: { label: "Budgeting" },
     },
-    description: 'Personal finance and money management',
-    label: 'Finance',
+    description: "Personal finance and money management",
+    label: "Finance",
   },
   process: {
-    description: 'Workflows, agile, and management',
-    label: 'Process'
+    description: "Workflows, agile, and management",
+    label: "Process",
   },
   tech: {
     children: {
-      ai: { label: 'Artificial Intelligence' },
-      mobile: { label: 'Mobile Development' },
+      ai: { label: "Artificial Intelligence" },
+      mobile: { label: "Mobile Development" },
       web: {
         children: {
-          astro: { label: 'Astro' },
-          components: { label: 'Components' },
-          leaflet: { label: 'Leaflet' },
-          maps: { label: 'Maps' },
-          react: { label: 'React' },
-          typescript: { label: 'TypeScript' },
-          visualization: { label: 'Visualization' },
+          astro: { label: "Astro" },
+          components: { label: "Components" },
+          leaflet: { label: "Leaflet" },
+          maps: { label: "Maps" },
+          react: { label: "React" },
+          typescript: { label: "TypeScript" },
+          visualization: { label: "Visualization" },
         },
-        label: 'Web Development',
+        label: "Web Development",
       },
     },
-    description: 'Technical topics and engineering',
-    label: 'Technology',
+    description: "Technical topics and engineering",
+    label: "Technology",
   },
 } as const satisfies LabelTree;
 
 // --- Helpers ---
 
-type FlattenedLabel = Omit<LabelNode, 'children'> & Readonly<{ parentId?: string }>;
+type FlattenedLabel = Omit<LabelNode, "children"> & Readonly<{ parentId?: string }>;
 type FlattenedLabels = Record<string, FlattenedLabel>;
 
 /**
@@ -68,7 +68,7 @@ const flattenLabels = (tree: LabelTree, parentId?: string): FlattenedLabels => {
 
     // Base object for this node
     const current: FlattenedLabels = {
-      [key]: { ...meta, parentId }
+      [key]: { ...meta, parentId },
     };
 
     // If no children, just return current accumulated with this node
@@ -80,7 +80,7 @@ const flattenLabels = (tree: LabelTree, parentId?: string): FlattenedLabels => {
     return {
       ...acc,
       ...current,
-      ...flattenLabels(children, key)
+      ...flattenLabels(children, key),
     };
   }, {});
 };

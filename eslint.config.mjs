@@ -15,7 +15,16 @@ const tsconfigRootDir = dirname(fileURLToPath(import.meta.url));
 
 export default [
   {
-    ignores: [".astro/", "dist/", "node_modules/", "build/", "coverage/", "playwright-report/", "test-results/", "scripts/verify-blog-structure.ts"],
+    ignores: [
+      ".astro/",
+      "dist/",
+      "node_modules/",
+      "build/",
+      "coverage/",
+      "playwright-report/",
+      "test-results/",
+      "scripts/verify-blog-structure.ts",
+    ],
   },
   js.configs.recommended,
   // TypeScript rules - balanced approach for Astro + Zod
@@ -63,7 +72,7 @@ export default [
       "functional/functional-parameters": "off", // Too restrictive for standard React component props and event handlers
       // Adjust immutability rules to be practical
       "functional/prefer-immutable-types": "off",
-      "functional/type-declaration-immutability": "off"
+      "functional/type-declaration-immutability": "off",
       // Remove redundant rules as they are default errors in recommended
     },
   },
@@ -82,8 +91,8 @@ export default [
       "functional/no-loop-statements": "off", // Tests often use loops for retries or data setup
       "functional/no-expression-statements": "off",
       "functional/prefer-immutable-types": "off",
-      "functional/type-declaration-immutability": "off"
-    }
+      "functional/type-declaration-immutability": "off",
+    },
   },
   // Astro files
   {

@@ -1,14 +1,14 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { Temporal } from '@js-temporal/polyfill';
+import fs from "node:fs";
+import path from "node:path";
+import { Temporal } from "@js-temporal/polyfill";
 
-const BLOG_DIR = path.join(process.cwd(), 'src/content/blog');
+const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 
 // Join all arguments after the script name to form the title
-const title = process.argv.slice(2).join(' ');
+const title = process.argv.slice(2).join(" ");
 
 if (!title) {
-  console.error('Please provide a title for the new idea.');
+  console.error("Please provide a title for the new idea.");
   console.error('Usage: pnpm new-idea "My Idea Title"');
   process.exit(1);
 }
@@ -16,8 +16,8 @@ if (!title) {
 // Generate slug
 const slug = title
   .toLowerCase()
-  .replace(/[^a-z0-9]+/g, '-')
-  .replace(/^-+|-+$/g, '');
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-+|-+$/g, "");
 
 // Get current date as YYYY-MM-DD
 const now = Temporal.Now.plainDateISO();
@@ -33,7 +33,7 @@ if (!fs.existsSync(folderPath)) {
   console.log(`Folder already exists: ${folderPath}`);
 }
 
-const notebookPath = path.join(folderPath, 'notebook.md');
+const notebookPath = path.join(folderPath, "notebook.md");
 
 if (!fs.existsSync(notebookPath)) {
   // Notebook template (no frontmatter as per instructions for scratchpad)

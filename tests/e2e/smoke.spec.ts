@@ -1,27 +1,27 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('Smoke Test', () => {
-  test('homepage loads with correct title and styling', async ({ page }) => {
+test.describe("Smoke Test", () => {
+  test("homepage loads with correct title and styling", async ({ page }) => {
     // 1. Check for console errors
     const consoleErrors: string[] = [];
-    page.on('console', msg => {
-      if (msg.type() === 'error') {
+    page.on("console", (msg) => {
+      if (msg.type() === "error") {
         consoleErrors.push(msg.text());
       }
     });
 
-    await page.goto('/');
+    await page.goto("/");
 
     // 2. Verify Title
     await expect(page).toHaveTitle(/Welcome to All Bugs Are Fixed/);
 
     // 3. Verify CSS is loaded and Header is present
     // The new layout uses a <header> element.
-    const header = page.locator('header');
+    const header = page.locator("header");
     await expect(header).toBeVisible();
 
     // Verify the logo text color to ensure CSS variables are working
-    const logo = header.locator('text=All Bugs Are Fixed').first();
+    const logo = header.locator("text=All Bugs Are Fixed").first();
     await expect(logo).toBeVisible();
 
     // The logo uses 'text-brand-text'.

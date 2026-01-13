@@ -20,29 +20,29 @@ export default defineConfig({
       // We need a small plugin to bridge this.
       extendMarkdownConfig: true,
     }),
-    react()
+    react(),
   ],
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [
-        remarkReadingTime,
-        remarkCodeToComponent,
-        () => {
-            return function (tree, file) {
-                if (file.data.readingTime) {
-                    // @ts-ignore
-                    file.data.astro.frontmatter.readingTime = file.data.readingTime;
-                }
-            };
-        }
-    ]
+      remarkReadingTime,
+      remarkCodeToComponent,
+      () => {
+        return function (tree, file) {
+          if (file.data.readingTime) {
+            // @ts-ignore
+            file.data.astro.frontmatter.readingTime = file.data.readingTime;
+          }
+        };
+      },
+    ],
   },
   trailingSlash: "always",
   output: "static",
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ['leaflet'],
-    }
+      include: ["leaflet"],
+    },
   },
 });
