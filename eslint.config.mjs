@@ -74,6 +74,13 @@ export default [
       "functional/prefer-immutable-types": "off",
       "functional/type-declaration-immutability": "off",
       // Remove redundant rules as they are default errors in recommended
+      "no-restricted-globals": [
+        "error",
+        {
+          name: "Date",
+          message: "Use Temporal instead of Date. Import Temporal from @js-temporal/polyfill.",
+        },
+      ],
     },
   },
   // Playwright Tests
@@ -119,6 +126,13 @@ export default [
     rules: {
       ...astroPlugin.configs.recommended.rules,
       ...astroPlugin.configs["jsx-a11y-recommended"].rules,
+      "no-restricted-globals": [
+        "error",
+        {
+          name: "Date",
+          message: "Use Temporal instead of Date. Import Temporal from @js-temporal/polyfill.",
+        },
+      ],
     },
   },
   // Astro <script> blocks (browser context)

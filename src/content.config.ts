@@ -1,6 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 import { LabelIdSchema } from "./lib/labels";
+import { Temporal } from "@js-temporal/polyfill";
 
 const blogCollection = defineCollection({
   loader: glob({
@@ -16,7 +17,9 @@ const blogCollection = defineCollection({
     // Optional: Explicit outline path if not using convention
     outline: z.string().optional(),
 
-    pubDate: z.date(),
+    pubDate: z
+      .date()
+      .transform((d) => Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO("UTC").toPlainDate()),
 
     // Blog Post Status
     status: z.enum(["concept", "draft", "review", "published", "locked"]).default("published"),
