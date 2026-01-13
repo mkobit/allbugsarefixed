@@ -1,14 +1,14 @@
-import { defineConfig } from "astro/config";
-import mdx from "@astrojs/mdx";
-import react from "@astrojs/react";
-import tailwindcss from "@tailwindcss/vite";
-import remarkReadingTime from "remark-reading-time";
-import { remarkCodeToComponent } from "./src/lib/remark-code-component.mjs";
+import { defineConfig } from 'astro/config'
+import mdx from '@astrojs/mdx'
+import react from '@astrojs/react'
+import tailwindcss from '@tailwindcss/vite'
+import remarkReadingTime from 'remark-reading-time'
+import { remarkCodeToComponent } from './src/lib/remark-code-component.mjs'
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://allbugsarefixed.com",
-  base: "/",
+  site: 'https://allbugsarefixed.com',
+  base: '/',
   integrations: [
     mdx({
       remarkPlugins: [remarkReadingTime, remarkCodeToComponent],
@@ -31,18 +31,18 @@ export default defineConfig({
         return function (tree, file) {
           if (file.data.readingTime) {
             // @ts-ignore
-            file.data.astro.frontmatter.readingTime = file.data.readingTime;
+            file.data.astro.frontmatter.readingTime = file.data.readingTime
           }
-        };
+        }
       },
     ],
   },
-  trailingSlash: "always",
-  output: "static",
+  trailingSlash: 'always',
+  output: 'static',
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["leaflet"],
+      include: ['leaflet'],
     },
   },
-});
+})

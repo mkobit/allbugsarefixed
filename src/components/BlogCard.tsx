@@ -1,22 +1,22 @@
-import React from "react";
-import { tv } from "tailwind-variants";
-import { cn } from "../lib/ui";
-import { Time } from "./ui/time";
-import { LabelBadge } from "./LabelBadge";
-import type { LabelId } from "../lib/labels";
-import type { Temporal } from "@js-temporal/polyfill";
+import React from 'react'
+import { tv } from 'tailwind-variants'
+import { cn } from '../lib/ui'
+import { Time } from './ui/time'
+import { LabelBadge } from './LabelBadge'
+import type { LabelId } from '../lib/labels'
+import type { Temporal } from '@js-temporal/polyfill'
 
 const cardStyles = tv({
-  base: "block p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-colors",
-});
+  base: 'block p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-colors',
+})
 
 interface BlogCardProps {
-  readonly title: string;
-  readonly description: string;
-  readonly pubDate: Temporal.PlainDate;
-  readonly href: string;
-  readonly labels?: readonly LabelId[];
-  readonly className?: string;
+  readonly title: string
+  readonly description: string
+  readonly pubDate: Temporal.PlainDate
+  readonly href: string
+  readonly labels?: readonly LabelId[]
+  readonly className?: string
 }
 
 export function BlogCard({ title, description, pubDate, href, labels, className }: Readonly<BlogCardProps>) {
@@ -27,7 +27,7 @@ export function BlogCard({ title, description, pubDate, href, labels, className 
 
       {labels && labels.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-2">
-          {labels.map((label) => (
+          {labels.map(label => (
             <LabelBadge key={label} id={label} />
           ))}
         </div>
@@ -37,5 +37,5 @@ export function BlogCard({ title, description, pubDate, href, labels, className 
         <Time date={pubDate} />
       </div>
     </a>
-  );
+  )
 }

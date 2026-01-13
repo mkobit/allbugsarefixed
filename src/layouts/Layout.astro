@@ -1,28 +1,28 @@
 ---
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import ThemeInit from "../components/ThemeInit.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import "../styles/global.css";
-import { Container } from "../components/ui/container";
-import { getCollection } from "astro:content";
+import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
+import ThemeInit from '../components/ThemeInit.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+import '../styles/global.css'
+import { Container } from '../components/ui/container'
+import { getCollection } from 'astro:content'
 
 interface Props {
-  title: string;
+  title: string
 }
 
-const { title } = Astro.props;
+const { title } = Astro.props
 
 // Fetch posts for search
-const posts = await getCollection("blog", ({ data }) => {
-  return data.status === "published";
-});
+const posts = await getCollection('blog', ({ data }) => {
+  return data.status === 'published'
+})
 
 // Sort by date desc (though for search it doesn't strictly matter, but good for consistency)
-const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
 // Data for fuzzy search (all published posts)
-const allPosts = sortedPosts.map((post) => ({
+const allPosts = sortedPosts.map(post => ({
   title: post.data.title,
   slug: post.id,
   description: post.data.description,
@@ -39,10 +39,16 @@ const allPosts = sortedPosts.map((post) => ({
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | {SITE_TITLE}</title>
+    <title>
+      {title}
+      {' '}
+      |
+      {' '}
+      {SITE_TITLE}
+    </title>
     <script>
-      import "../lib/polyfills";
-    </script>
+      import '../lib/polyfills'
+</script>
     <ThemeInit />
   </head>
   <body class="flex flex-col min-h-screen transition-colors duration-300">

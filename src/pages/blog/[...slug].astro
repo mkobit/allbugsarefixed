@@ -1,40 +1,40 @@
 ---
-import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import PostHeader from "../../components/PostHeader.astro";
-import TableOfContents from "../../components/TableOfContents.astro";
-import PostMetadata from "../../components/PostMetadata.astro";
-import { LabelBadge } from "../../components/LabelBadge";
-import CodeBlock from "../../components/CodeBlock";
+import { getCollection, render } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import PostHeader from '../../components/PostHeader.astro'
+import TableOfContents from '../../components/TableOfContents.astro'
+import PostMetadata from '../../components/PostMetadata.astro'
+import { LabelBadge } from '../../components/LabelBadge'
+import CodeBlock from '../../components/CodeBlock'
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
+  const blogEntries = await getCollection('blog')
 
-  const isProd = import.meta.env.PROD;
+  const isProd = import.meta.env.PROD
 
   const filteredEntries = blogEntries.filter((entry) => {
     if (isProd) {
-      return entry.data.status === "published" || entry.data.status === "locked";
+      return entry.data.status === 'published' || entry.data.status === 'locked'
     }
-    return true;
-  });
+    return true
+  })
 
   return filteredEntries.map((entry) => {
-    const slug = entry.id.replace(/\/index\.mdx$/, "").replace(/\.mdx?$/, "");
+    const slug = entry.id.replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '')
 
     return {
       params: { slug },
       props: { entry, slug },
-    };
-  });
+    }
+  })
 }
 
-const { entry } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const { entry } = Astro.props
+const { Content, headings, remarkPluginFrontmatter } = await render(entry)
 
 // Reading time comes from the remark plugin injected into frontmatter
-const readingTimeData = remarkPluginFrontmatter?.readingTime;
-const readingTimeText = readingTimeData?.text || "1 min read";
+const readingTimeData = remarkPluginFrontmatter?.readingTime
+const readingTimeText = readingTimeData?.text || '1 min read'
 const wordCount = readingTimeData?.words;
 ---
 
@@ -50,12 +50,12 @@ const wordCount = readingTimeData?.words;
           <PostMetadata readingTime={readingTimeText} words={wordCount} />
 
           <div class="flex flex-wrap gap-2 mt-4">
-            {entry.data.labels?.map((label) => <LabelBadge client:visible id={label} />)}
+            {entry.data.labels?.map(label => <LabelBadge client:visible id={label} />)}
           </div>
 
           <div class="mt-4">
             {
-              entry.data.status !== "published" && (
+              entry.data.status !== 'published' && (
                 <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-800 uppercase tracking-wide">
                   {entry.data.status}
                 </span>

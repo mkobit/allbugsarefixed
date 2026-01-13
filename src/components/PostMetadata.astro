@@ -1,9 +1,9 @@
 ---
-import { Clock, AlignLeft } from "lucide-react";
+import { Clock, AlignLeft } from 'lucide-react'
 
 interface Props {
-  readonly readingTime: string; // "X min read"
-  readonly words?: number;
+  readonly readingTime: string // "X min read"
+  readonly words?: number
 }
 
 const { readingTime, words } = Astro.props;
@@ -18,7 +18,11 @@ const { readingTime, words } = Astro.props;
     words && (
       <div class="flex items-center gap-1" title="Word count">
         <AlignLeft size={14} />
-        <span>{words} words</span>
+        <span>
+          {words}
+          {' '}
+          words
+        </span>
       </div>
     )
   }
