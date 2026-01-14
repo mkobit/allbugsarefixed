@@ -25,7 +25,6 @@
     "vscode": {
       "extensions": [
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
         "astro-build.astro-vscode",
         "unifiedjs.vscode-mdx",
         "dsznajder.es7-react-js-snippets",
@@ -36,39 +35,31 @@
       ],
       "settings": {
         "[typescript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint",
           "editor.formatOnSave": true
         },
         "[typescriptreact]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint",
           "editor.formatOnSave": true
         },
         "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint",
           "editor.formatOnSave": true
         },
         "[javascriptreact]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint",
           "editor.formatOnSave": true
         },
         "[mjs]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
-          "editor.formatOnSave": true
-        },
-        "[json]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
-          "editor.formatOnSave": true
-        },
-        "[jsonc]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint",
           "editor.formatOnSave": true
         },
         "[astro]": {
-          "editor.defaultFormatter": "astro-build.astro-vscode",
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint",
           "editor.formatOnSave": true
         },
         "[mdx]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint",
           "editor.formatOnSave": true
         },
         "editor.codeActionsOnSave": {
@@ -76,7 +67,7 @@
         },
         "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "astro", "mdx"],
         "cSpell.language": "en",
-        "cSpell.userWords": ["devcontainer", "vite", "astro", "asciidoc", "mdx", "eslint", "prettier"],
+        "cSpell.userWords": ["devcontainer", "vite", "astro", "asciidoc", "mdx", "eslint"],
         "cSpell.enabledFileTypes": {
           "*": true,
           "gitignore": false,

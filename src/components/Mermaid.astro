@@ -1,6 +1,6 @@
 ---
 interface Props {
-  code: string;
+  code: string
 }
 
 const { code } = Astro.props;
@@ -13,23 +13,23 @@ const { code } = Astro.props;
 </div>
 
 <script>
-  import mermaid from "mermaid";
+  import mermaid from 'mermaid'
 
   // Initialize mermaid
   // We check for the theme to set basic config
   function initMermaid() {
-    const isDark = document.documentElement.classList.contains("dark");
+    const isDark = document.documentElement.classList.contains('dark')
     mermaid.initialize({
       startOnLoad: true,
-      theme: isDark ? "dark" : "default",
-      securityLevel: "loose", // Needed for some interactions, but 'strict' is safer. 'loose' for demo.
-      fontFamily: "inherit",
-    });
-    mermaid.run(); // Re-run if needed for dynamic content, but startOnLoad handles initial.
-  }
+      theme: isDark ? 'dark' : 'default',
+      securityLevel: 'loose', // Needed for some interactions, but 'strict' is safer. 'loose' for demo.
+      fontFamily: 'inherit',
+    })
+  mermaid.run() // Re-run if needed for dynamic content, but startOnLoad handles initial.
+}
 
   // Initial load
-  initMermaid();
+  initMermaid()
 
   // Watch for theme changes to re-render diagrams (Mermaid requires re-render for theme change usually)
   // Re-rendering mermaid is tricky without full reload or component re-mount.

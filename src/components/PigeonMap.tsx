@@ -1,21 +1,21 @@
-import dynamicIconImports from "lucide-react/dynamicIconImports";
-import { Map as PigeonMap, Marker, Overlay } from "pigeon-maps";
-import { Suspense, lazy } from "react";
-import type { MapConfig, MapMarker, MapShape } from "../lib/map";
-import { cn } from "../lib/ui";
+import dynamicIconImports from 'lucide-react/dynamicIconImports'
+import { Map as PigeonMap, Marker, Overlay } from 'pigeon-maps'
+import { Suspense, lazy } from 'react'
+import type { MapConfig, MapMarker, MapShape } from '../lib/map'
+import { cn } from '../lib/ui'
 
 type MapProps = Readonly<{
-  className?: string;
-  config: MapConfig;
-}>;
+  className?: string
+  config: MapConfig
+}>
 
-const FallbackIcon = () => <div className="h-6 w-6 animate-pulse rounded-full bg-slate-400 opacity-50" />;
+const FallbackIcon = () => <div className="h-6 w-6 animate-pulse rounded-full bg-slate-400 opacity-50" />
 
 export default function Map({ className, config }: MapProps) {
   return (
     <div
       className={cn(
-        "relative h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900",
+        'relative h-[400px] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900',
         className,
       )}
     >
@@ -28,17 +28,17 @@ export default function Map({ className, config }: MapProps) {
         ))}
       </PigeonMap>
     </div>
-  );
+  )
 }
 
 function MapMarkerItem({ marker }: Readonly<{ marker: MapMarker }>) {
   if (marker.icon) {
-    const iconName = marker.icon as keyof typeof dynamicIconImports;
-    const IconImport = dynamicIconImports[iconName];
+    const iconName = marker.icon as keyof typeof dynamicIconImports
+    const IconImport = dynamicIconImports[iconName]
 
-    if (!IconImport) return null;
+    if (!IconImport) return null
 
-    const Icon = lazy(IconImport);
+    const Icon = lazy(IconImport)
 
     return (
       <Overlay anchor={[marker.lat, marker.lng]} offset={[12, 24]}>
@@ -55,7 +55,7 @@ function MapMarkerItem({ marker }: Readonly<{ marker: MapMarker }>) {
           )}
         </div>
       </Overlay>
-    );
+    )
   }
 
   return (
@@ -67,7 +67,7 @@ function MapMarkerItem({ marker }: Readonly<{ marker: MapMarker }>) {
         // Optional: handle click
       }}
     />
-  );
+  )
 }
 
 // Helper component that receives map state via props injected by PigeonMap
@@ -75,18 +75,18 @@ function MapShapeItem({
   shape,
   latLngToPixel,
 }: Readonly<{
-  shape: MapShape;
-  latLngToPixel?: (latLng: [number, number]) => [number, number];
+  shape: MapShape
+  latLngToPixel?: (latLng: [number, number]) => [number, number]
 }>) {
   // Pigeon Maps injects latLngToPixel into children
-  if (!latLngToPixel) return null;
+  if (!latLngToPixel) return null
 
-  if (shape.type === "circle") {
+  if (shape.type === 'circle') {
     // We need to cast here too because shape.center is readonly [number, number]
     // and latLngToPixel likely expects [number, number]
     // Let's try removing this cast too just in case
-    const center = latLngToPixel(shape.center as [number, number]);
-    const radiusInPixels = shape.radius;
+    const center = latLngToPixel(shape.center as [number, number])
+    const radiusInPixels = shape.radius
 
     return (
       <svg className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-visible">
@@ -94,34 +94,34 @@ function MapShapeItem({
           cx={center[0]}
           cy={center[1]}
           r={radiusInPixels}
-          fill={shape.color ?? "rgba(124, 58, 237, 0.2)"}
-          stroke={shape.color ?? "#7c3aed"}
+          fill={shape.color ?? 'rgba(124, 58, 237, 0.2)'}
+          stroke={shape.color ?? '#7c3aed'}
           strokeWidth={2}
         />
       </svg>
-    );
+    )
   }
 
-  if (shape.type === "polygon") {
+  if (shape.type === 'polygon') {
     const points = shape.coordinates
       .map((coord) => {
         // Same here
-        const pixel = latLngToPixel(coord as [number, number]);
-        return `${pixel[0]},${pixel[1]}`;
+        const pixel = latLngToPixel(coord as [number, number])
+        return `${pixel[0]},${pixel[1]}`
       })
-      .join(" ");
+      .join(' ')
 
     return (
       <svg className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-visible">
         <polygon
           points={points}
-          fill={shape.color ?? "rgba(124, 58, 237, 0.2)"}
-          stroke={shape.color ?? "#7c3aed"}
+          fill={shape.color ?? 'rgba(124, 58, 237, 0.2)'}
+          stroke={shape.color ?? '#7c3aed'}
           strokeWidth={2}
         />
       </svg>
-    );
+    )
   }
 
-  return null;
+  return null
 }

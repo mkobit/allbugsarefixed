@@ -1,20 +1,20 @@
 ---
-import type { MarkdownHeading } from "astro";
+import type { MarkdownHeading } from 'astro'
 
 interface Props {
-  headings: MarkdownHeading[];
+  headings: MarkdownHeading[]
 }
 
-const { headings } = Astro.props;
+const { headings } = Astro.props
 
-const filteredHeadings = headings.filter((h) => h.depth <= 3);
+const filteredHeadings = headings.filter(h => h.depth <= 3);
 ---
 
 <nav class="toc">
   <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2 uppercase tracking-wider">On this page</h2>
   <ul class="space-y-2 text-sm">
     {
-      filteredHeadings.map((heading) => (
+      filteredHeadings.map(heading => (
         <li class={`pl-${(heading.depth - 1) * 2} border-l-2 border-transparent hover:border-brand-primary`}>
           <a
             href={`#${heading.slug}`}

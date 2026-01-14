@@ -1,13 +1,13 @@
 ---
-import EChartReact from "./EChart";
+import EChartReact from './EChart'
 
 interface Props {
-  options: Record<string, any>;
-  height?: string;
-  width?: string;
+  options: Record<string, any>
+  height?: string
+  width?: string
 }
 
-const { options, height = "400px", width = "100%" } = Astro.props;
+const { options, height = '400px', width = '100%' } = Astro.props;
 ---
 
 <EChartReact client:only="react" options={options} height={height} width={width} />

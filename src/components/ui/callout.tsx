@@ -1,37 +1,37 @@
-import React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
-import { cn } from "../../lib/ui";
+import React from 'react'
+import { tv, type VariantProps } from 'tailwind-variants'
+import { cn } from '../../lib/ui'
 
 const calloutStyles = tv({
-  base: "p-3 sm:p-4 my-6 rounded-lg border flex gap-3 w-fit max-w-full",
+  base: 'p-3 sm:p-4 my-6 rounded-lg border flex gap-3 w-fit max-w-full',
   defaultVariants: {
-    type: "info",
+    type: 'info',
   },
   variants: {
     type: {
-      error: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200",
-      info: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200",
-      tip: "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200",
+      error: 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200',
+      info: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200',
+      tip: 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200',
       warning:
-        "bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200",
+        'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200',
     },
   },
-});
+})
 
 const icons = {
-  error: "🚫",
-  info: "ℹ️",
-  tip: "💡",
-  warning: "⚠️",
-};
-
-export interface CalloutProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof calloutStyles> {
-  readonly title?: string;
-  readonly type?: "info" | "warning" | "tip" | "error";
+  error: '🚫',
+  info: 'ℹ️',
+  tip: '💡',
+  warning: '⚠️',
 }
 
-export function Callout({ className, title, type = "info", children, ...props }: Readonly<CalloutProps>) {
-  const icon = icons[type || "info"];
+export interface CalloutProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof calloutStyles> {
+  readonly title?: string
+  readonly type?: 'info' | 'warning' | 'tip' | 'error'
+}
+
+export function Callout({ className, title, type = 'info', children, ...props }: Readonly<CalloutProps>) {
+  const icon = icons[type || 'info']
 
   return (
     <div className={cn(calloutStyles({ type }), className)} {...props}>
@@ -43,5 +43,5 @@ export function Callout({ className, title, type = "info", children, ...props }:
         </div>
       </div>
     </div>
-  );
+  )
 }

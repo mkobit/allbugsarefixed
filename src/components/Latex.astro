@@ -1,12 +1,12 @@
 ---
-import katex from "katex";
+import katex from 'katex'
 
 interface Props {
-  formula: string;
-  inline?: boolean;
+  formula: string
+  inline?: boolean
 }
 
-const { formula, inline = false } = Astro.props;
+const { formula, inline = false } = Astro.props
 const html = katex.renderToString(formula, {
   throwOnError: false,
   displayMode: !inline,
@@ -14,11 +14,13 @@ const html = katex.renderToString(formula, {
 ---
 
 {
-  inline ? (
-    <span set:html={html} class="inline-block" />
-  ) : (
-    <div class="overflow-x-auto overflow-y-hidden my-4 text-center max-w-full">
-      <span set:html={html} class="inline-block" />
-    </div>
-  )
+  inline
+    ? (
+        <span set:html={html} class="inline-block" />
+      )
+    : (
+        <div class="overflow-x-auto overflow-y-hidden my-4 text-center max-w-full">
+          <span set:html={html} class="inline-block" />
+        </div>
+      )
 }
