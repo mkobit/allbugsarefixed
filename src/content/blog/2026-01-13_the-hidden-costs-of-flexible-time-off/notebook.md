@@ -1,9 +1,10 @@
-# The Hidden Costs of Flexible Time Off: Research & Strategy Notes
+# The hidden costs of flexible time off: research & strategy notes
 
-## Core Thesis
-The shift to Flexible Time Off (FTO) is primarily a financial strategy to remove liabilities from the corporate balance sheet, often marketed as a cultural benefit ("trust"). This shift transfers financial risk from the employer to the employee and introduces psychological barriers that result in employees taking less time off.
+## Core thesis
+The shift to Flexible Time Off (FTO) is primarily a financial strategy to remove liabilities from the corporate balance sheet, often marketed as a cultural benefit ("trust").
+This shift transfers financial risk from the employer to the employee and introduces psychological barriers that result in employees taking less time off.
 
-## 1. The Accounting "Wipe"
+## 1. The accounting "wipe"
 *Focus: The "Corporate Why" is financial, not cultural.*
 
 *   **The Problem (for Companies):** Traditional PTO is an "Accrued Vacation Liability." It sits on the balance sheet as a debt that must be paid.
@@ -15,19 +16,19 @@ The shift to Flexible Time Off (FTO) is primarily a financial strategy to remove
 **Reference:**
 *   [ADP Guide on PTO Accrual and Liabilities](https://www.adp.com/resources/articles-and-insights/articles/p/pto-accrual.aspx)
 *   [Illinois Dept. of Labor: Vacation FAQ](https://labor.illinois.gov/faqs/vacation-faq.html) (Confirming earned vacation must be paid).
+*   [California Labor Code § 227.3](https://law.justia.com/codes/california/code-lab/division-2/part-1/chapter-1/article-1/section-227-3/) (California statute on vacation payout).
+*   [Colorado Dept. of Labor INFO #3E](https://cdle.colorado.gov/sites/cdle/files/info_%233e_payment_of_earned_vacation_upon_separation_of_employment_05.29.2024_accessible.pdf) (Payment of earned vacation upon separation).
 
-## 2. The Math of the Exit
+## 2. The math of the exit
 *Focus: Quantifying the loss for the employee.*
 
 **Scenario:**
 *   **Role:** Senior Professional / Software Engineer
-*   **Salary:** $150,000 / year
+*   **Salary:** $100,000 / year
 *   **Accrued Time:** 15 days (3 weeks / 120 hours) at time of departure.
 
 **Calculation:**
-*   **Daily Rate:** $150,000 / 260 working days ≈ $576.92
-*   **Hourly Rate:** $150,000 / 2,080 hours ≈ $72.12
-*   **Value of 15 Days:** $576.92 * 15 ≈ **$8,653.85**
+*   *Note: We will map out holidays, across different quantities of employees, and different vacation rates for comparison in the final post.*
 
 **The Payout You Lose Table:**
 
@@ -35,11 +36,11 @@ The shift to Flexible Time Off (FTO) is primarily a financial strategy to remove
 | :--- | :--- | :--- |
 | **Balance Sheet Status** | Liability (Debt) | None |
 | **Employee "Ownership"** | Earned Wage (Asset) | None |
-| **Exit Payout (15 Days)** | **~$8,650** | **$0** |
+| **Exit Payout** | **Guaranteed** | **$0** |
 
-*Under FTO, the employee effectively forfeits ~$8,650 of compensation they would have received under a traditional plan.*
+*Under FTO, the employee effectively forfeits the compensation they would have received under a traditional plan.*
 
-## 3. The Unlimited Paradox
+## 3. The unlimited paradox
 *Focus: Why "No Limits" feels like "No Permission".*
 
 *   **The "Floor" Problem:** Traditional plans have a cap (ceiling) but also an implied floor ("I have 20 days, I should use them"). FTO removes the floor.
@@ -52,7 +53,7 @@ The shift to Flexible Time Off (FTO) is primarily a financial strategy to remove
 **Reference:**
 *   [Aflac 2025 Time Away Study](https://investors.aflac.com/press-releases/press-release-details/2025/Aflac-study-reveals-the-impact-of-paid-leave-on-employers-and-employees/default.aspx)
 
-## 4. The "Grind" Perspective
+## 4. The "grind" perspective
 *Focus: High-performance cultures and the "Results-Oriented" trap.*
 
 *   **The Mechanism:** In high-output roles (e.g., Engineering, Sales), FTO is paired with "Results-Oriented Work Environments" (ROWE).
