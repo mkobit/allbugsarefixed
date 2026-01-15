@@ -2,10 +2,29 @@
 import { getCollection } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import { BlogCard } from '../../components/BlogCard'
+import { Temporal } from '@js-temporal/polyfill'
+
+const isProd = import.meta.env.PROD
 
 const posts = (await getCollection('blog'))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .filter((post) => {
+    if (isProd) {
+      return post.data.status === 'published' || post.data.status === 'locked'
+    }
+    return true
+  })
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()); // Date sorting
+
+function getSlug(id: string) {
+  return id
+    .replace(/^src\/content\/blog\//, '')
+    .replace(/\/index\.mdx$/, '')
+    .replace(/\.mdx?$/, '')
+}
+
+function toTemporal(date: Date) {
+  return Temporal.PlainDate.from(date.toISOString().split('T')[0]);
+}
 ---
 
 <Layout title="All posts">
@@ -16,8 +35,8 @@ const posts = (await getCollection('blog'))
         <BlogCard
           title={post.data.title}
           description={post.data.description}
-          pubDate={post.data.pubDate}
-          href={`/blog/${post.id}/`}
+          pubDate={toTemporal(post.data.pubDate)}
+          href={`/blog/${getSlug(post.id)}/`}
           labels={post.data.labels}
           client:visible
         />
