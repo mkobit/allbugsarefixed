@@ -6,7 +6,10 @@ import { BlogCard } from '../../components/BlogCard'
 
 const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
   .filter((post: CollectionEntry<'blog'>) => post.data.status !== 'draft' && post.data.status !== 'concept')
-  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => Temporal.PlainDate.compare(b.data.pubDate, a.data.pubDate));
+  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => Temporal.PlainDate.compare(
+    Temporal.PlainDate.from(b.data.pubDate),
+    Temporal.PlainDate.from(a.data.pubDate)
+  ));
 ---
 
 <Layout title="All posts">
