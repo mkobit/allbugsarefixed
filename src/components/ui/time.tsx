@@ -18,7 +18,7 @@ const timeStyles = tv({
 })
 
 export interface TimeProps extends React.TimeHTMLAttributes<HTMLTimeElement>, VariantProps<typeof timeStyles> {
-  readonly date: Temporal.PlainDate | Temporal.DateLike
+  readonly date: Temporal.PlainDate | string | object
   readonly format?: boolean
 }
 

@@ -33,7 +33,7 @@ export function DataTable<TData, TValue>({ columns, data }: Readonly<DataTablePr
 
   const table = useReactTable({
     columns: columns as ColumnDef<TData, TValue>[],
-    data,
+    data: data as TData[],
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,

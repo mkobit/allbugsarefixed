@@ -19,7 +19,12 @@ export default function Map({ className, config }: MapProps) {
         className,
       )}
     >
-      <PigeonMap center={config.center} defaultCenter={config.center} defaultZoom={config.zoom} zoom={config.zoom}>
+      <PigeonMap
+        center={config.center as unknown as [number, number]}
+        defaultCenter={config.center as unknown as [number, number]}
+        defaultZoom={config.zoom}
+        zoom={config.zoom}
+      >
         {config.markers?.map((marker, index) => (
           <MapMarkerItem key={`${marker.lat}-${marker.lng}-${index}`} marker={marker} />
         ))}

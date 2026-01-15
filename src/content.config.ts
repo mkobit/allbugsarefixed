@@ -19,7 +19,7 @@ const blogCollection = defineCollection({
 
     pubDate: z
       .date()
-      .transform(d => Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate()),
+      .transform((d: Date) => Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate()),
 
     // Blog Post Status
     status: z.enum(['concept', 'draft', 'review', 'published', 'locked']).default('published'),

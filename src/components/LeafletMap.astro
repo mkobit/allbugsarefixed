@@ -10,20 +10,26 @@ const { latitude, longitude, zoom } = Astro.props
 const mapId = `map-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<div id={mapId} class="leaflet-map" style="height: 400px; width: 100%;"></div>
+<div id={mapId} class="leaflet-map" style="height: 400px; width: 100%;" data-latitude={latitude} data-longitude={longitude} data-zoom={zoom}></div>
 
-<script define:vars={{ mapId, latitude, longitude, zoom }}>
-
+<script>
   import L from 'leaflet'
 
-  // We need to check if the map has already been initialized.
-  // Astro's HMR can sometimes cause scripts to run multiple times.
-  const mapElement = document.getElementById(mapId)
-if (mapElement && !mapElement._leaflet_id) {
-    const map = L.map(mapId).setView([latitude, longitude], zoom)
+  const maps = document.querySelectorAll('.leaflet-map')
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maps.forEach((mapElement) => {
+    // We need to check if the map has already been initialized.
+    // Astro's HMR can sometimes cause scripts to run multiple times.
+    if ((mapElement as any)._leaflet_id) return
+
+    const latitude = Number(mapElement.getAttribute('data-latitude'))
+    const longitude = Number(mapElement.getAttribute('data-longitude'))
+    const zoom = Number(mapElement.getAttribute('data-zoom'))
+
+    const map = L.map(mapElement as HTMLElement).setView([latitude, longitude], zoom)
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map)
-}
+  })
 </script>

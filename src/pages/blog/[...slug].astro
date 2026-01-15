@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content'
+import { getCollection, render, type CollectionEntry } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import PostHeader from '../../components/PostHeader.astro'
 import TableOfContents from '../../components/TableOfContents.astro'
@@ -12,14 +12,14 @@ export async function getStaticPaths() {
 
   const isProd = import.meta.env.PROD
 
-  const filteredEntries = blogEntries.filter((entry) => {
+  const filteredEntries = blogEntries.filter((entry: CollectionEntry<'blog'>) => {
     if (isProd) {
       return entry.data.status === 'published' || entry.data.status === 'locked'
     }
     return true
   })
 
-  return filteredEntries.map((entry) => {
+  return filteredEntries.map((entry: CollectionEntry<'blog'>) => {
     const slug = entry.id.replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '')
 
     return {
@@ -27,6 +27,11 @@ export async function getStaticPaths() {
       props: { entry, slug },
     }
   })
+}
+
+interface Props {
+  entry: CollectionEntry<'blog'>
+  slug: string
 }
 
 const { entry } = Astro.props
@@ -50,7 +55,7 @@ const wordCount = readingTimeData?.words;
           <PostMetadata readingTime={readingTimeText} words={wordCount} />
 
           <div class="flex flex-wrap gap-2 mt-4">
-            {entry.data.labels?.map(label => <LabelBadge client:visible id={label} />)}
+            {entry.data.labels?.map((label: string) => <LabelBadge client:visible id={label} />)}
           </div>
 
           <div class="mt-4">
