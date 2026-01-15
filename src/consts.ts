@@ -1,5 +1,5 @@
 export const SITE_TITLE = 'All Bugs Are Fixed'
-export const SITE_DESCRIPTION = 'A developer blog about fixing bugs and learning.'
+export const SITE_DESCRIPTION = 'A personal journal of debugging, development, and the endless quest for perfect code.'
 
 export const NAV_LINKS = [
   { href: '/blog/', text: 'Blog' },
