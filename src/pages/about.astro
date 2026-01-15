@@ -1,13 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
+import { SITE_DESCRIPTION } from '../consts'
 ---
 
 <Layout title="About">
   <main class="prose prose-lg dark:prose-invert max-w-3xl mx-auto py-12">
-    <h1>About Me</h1>
+    <h1>About</h1>
     <p>
-      This is the about page. It's a placeholder for now, but will eventually contain more information about the author
-      and the blog.
+      {SITE_DESCRIPTION}
+    </p>
+    <p>
+      This blog is a collection of technical deep dives, quick tips, and lessons learned from the
+      trenches of software development.
     </p>
   </main>
 </Layout>
