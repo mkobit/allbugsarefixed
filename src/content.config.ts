@@ -23,7 +23,7 @@ const blogCollection = defineCollection({
     pubDate: z
       .date()
       .transform((d: Date) => {
-          return Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate().toString()
+        return Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate().toString()
       }),
 
     // Blog Post Status
