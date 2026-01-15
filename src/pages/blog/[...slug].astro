@@ -1,5 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content'
+import { Temporal } from '@js-temporal/polyfill'
 import Layout from '../../layouts/Layout.astro'
 import PostHeader from '../../components/PostHeader.astro'
 import TableOfContents from '../../components/TableOfContents.astro'
@@ -20,7 +21,10 @@ export async function getStaticPaths() {
   })
 
   return filteredEntries.map((entry: CollectionEntry<'blog'>) => {
-    const slug = entry.id.replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '')
+    const slug = entry.id
+      .replace(/^src\/content\/blog\//, '')
+      .replace(/\/index\.mdx$/, '')
+      .replace(/\.mdx?$/, '')
 
     return {
       params: { slug },
@@ -48,7 +52,7 @@ const wordCount = readingTimeData?.words;
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
       {/* Main Content Column */}
       <div class="lg:col-span-8 lg:col-start-3">
-        <PostHeader title={entry.data.title} pubDate={entry.data.pubDate} />
+        <PostHeader title={entry.data.title} pubDate={Temporal.PlainDate.from(entry.data.pubDate)} />
 
         {/* Post Metadata & Labels */}
         <div class="mb-8 border-b border-gray-100 dark:border-gray-800 pb-8">
