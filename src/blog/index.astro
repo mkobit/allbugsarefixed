@@ -1,8 +1,9 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { Temporal } from '@js-temporal/polyfill'
 import Layout from '../layouts/Layout.astro'
 
-const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => Temporal.PlainDate.compare(b.data.pubDate, a.data.pubDate));
 ---
 
 <Layout title="Blog Posts">
@@ -11,11 +12,11 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
     {
       posts.map(post => (
         <li>
-          <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          <a href={`/blog/${post.id.replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '')}/`}>{post.data.title}</a>
           <p>
             <small>
               Published on:
-              {post.data.pubDate.toLocaleDateString()}
+              {post.data.pubDate.toLocaleString()}
             </small>
           </p>
           <p>{post.data.description}</p>

@@ -18,7 +18,7 @@ export default function CodeBlock(props: CodeBlockProps) {
   const { title, lang = 'plaintext', code, html, children, className, showLineNumbers, startLine = 1, ...rest } = props
 
   const [copied, setCopied] = useState(false)
-  const codeRef = useRef<HTMLElement>(null)
+  const codeRef = useRef<HTMLPreElement | HTMLDivElement>(null)
 
   const handleCopy = async () => {
     // If raw code is provided via prop (from remark plugin), use it.
@@ -89,7 +89,7 @@ export default function CodeBlock(props: CodeBlockProps) {
             )
           : (
               <pre
-                ref={codeRef}
+                ref={codeRef as React.RefObject<HTMLPreElement>}
                 className={cn(
                   '!m-0 !p-4 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent',
                   className,

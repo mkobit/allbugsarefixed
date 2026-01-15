@@ -10,6 +10,9 @@
     "build": "astro build",
     "preview": "astro preview --host",
     "lint": "eslint . --ext .js,.ts,.astro,.mdx --cache",
+    "typecheck": "astro check && tsc --noEmit",
+    "test": "echo 'No unit tests yet'",
+    "coverage": "echo 'No coverage yet'",
     "test:e2e": "playwright test",
     "new-idea": "tsx scripts/new-idea.ts"
   },
@@ -37,6 +40,7 @@
     "tailwind-variants": "^3.2.2"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.6",
     "@eslint/js": "^9.39.2",
     "@iarna/toml": "^2.2.5",
     "@js-temporal/polyfill": "^0.4.4",

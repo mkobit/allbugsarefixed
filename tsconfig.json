@@ -23,5 +23,5 @@
     "tests/**/*.ts",
     "scripts/**/*.ts"
   ],
-  "exclude": ["node_modules", "dist", ".astro"]
+  "exclude": ["node_modules", "dist"]
 }
