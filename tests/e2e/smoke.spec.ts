@@ -12,8 +12,8 @@ test.describe('Smoke Test', () => {
 
     await page.goto('/')
 
-    // 2. Verify Title
-    await expect(page).toHaveTitle(/Welcome to All Bugs Are Fixed/)
+    // 2. Verify Title - Expect redirect to blog which has "All posts" in title
+    await expect(page).toHaveTitle(/All posts | All Bugs Are Fixed/)
 
     // 3. Verify CSS is loaded and Header is present
     // The new layout uses a <header> element.
