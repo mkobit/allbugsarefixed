@@ -6,24 +6,33 @@ import { Temporal } from '@js-temporal/polyfill'
 
 const isProd = import.meta.env.PROD
 
-const posts = (await getCollection('blog'))
+const allPosts = await getCollection('blog')
+console.log('DEBUG: allPosts count', allPosts.length)
+
+function toTemporal(date: Date) {
+  return Temporal.PlainDate.from(date.toISOString().split('T')[0])
+}
+
+const posts = allPosts
   .filter((post) => {
+    const status = post.data.status
+    console.log(`DEBUG: post ${post.id} status: ${status}`)
     if (isProd) {
-      return post.data.status === 'published' || post.data.status === 'locked'
+      return status === 'published' || status === 'locked'
     }
     return true
   })
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()); // Date sorting
+  .sort((a, b) => {
+    const dateA = toTemporal(a.data.pubDate)
+    const dateB = toTemporal(b.data.pubDate)
+    return Temporal.PlainDate.compare(dateB, dateA)
+  })
 
 function getSlug(id: string) {
   return id
     .replace(/^src\/content\/blog\//, '')
     .replace(/\/index\.mdx$/, '')
     .replace(/\.mdx?$/, '')
-}
-
-function toTemporal(date: Date) {
-  return Temporal.PlainDate.from(date.toISOString().split('T')[0]);
 }
 ---
 

@@ -39,10 +39,10 @@ const { Content, headings, remarkPluginFrontmatter } = await render(entry)
 // Reading time comes from the remark plugin injected into frontmatter
 const readingTimeData = remarkPluginFrontmatter?.readingTime
 const readingTimeText = readingTimeData?.text || '1 min read'
-const wordCount = readingTimeData?.words;
+const wordCount = readingTimeData?.words
 
 function toTemporal(date: Date) {
-  return Temporal.PlainDate.from(date.toISOString().split('T')[0]);
+  return Temporal.PlainDate.from(date.toISOString().split('T')[0])
 }
 ---
 

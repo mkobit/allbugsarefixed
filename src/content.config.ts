@@ -1,7 +1,6 @@
 import { defineCollection, z } from 'astro:content'
 import { glob } from 'astro/loaders'
 import { LabelIdSchema } from './lib/labels'
-import { Temporal } from '@js-temporal/polyfill'
 
 const blogCollection = defineCollection({
   loader: glob({
