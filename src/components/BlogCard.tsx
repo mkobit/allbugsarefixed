@@ -13,7 +13,7 @@ const cardStyles = tv({
 interface BlogCardProps {
   readonly title: string
   readonly description: string
-  readonly pubDate: Temporal.PlainDate
+  readonly pubDate: Temporal.PlainDate | string
   readonly href: string
   readonly labels?: readonly LabelId[]
   readonly className?: string

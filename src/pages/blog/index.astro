@@ -20,7 +20,7 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
         <BlogCard
           title={post.data.title}
           description={post.data.description}
-          pubDate={Temporal.PlainDate.from(post.data.pubDate)}
+          pubDate={post.data.pubDate}
           href={`/blog/${post.id.replace(/^src\/content\/blog\//, '').replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '')}/`}
           labels={post.data.labels}
           client:visible
