@@ -22,7 +22,7 @@ const posts = await getCollection('blog', ({ data }: CollectionEntry<'blog'>) =>
 // Sort by date desc (though for search it doesn't strictly matter, but good for consistency)
 const sortedPosts = posts.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => Temporal.PlainDate.compare(
   Temporal.PlainDate.from(b.data.pubDate),
-  Temporal.PlainDate.from(a.data.pubDate)
+  Temporal.PlainDate.from(a.data.pubDate),
 ))
 
 // Data for fuzzy search (all published posts)
