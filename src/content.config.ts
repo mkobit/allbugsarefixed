@@ -5,10 +5,13 @@ import { Temporal } from '@js-temporal/polyfill'
 
 const blogCollection = defineCollection({
   loader: glob({
-    base: './src/content/blog',
-    // Support both single files and folder-per-post index files
-    // Explicitly exclude auxiliary files like outlines or data
-    pattern: ['**/*.{md,mdx}', '!**/AGENTS.md', '!**/CLAUDE.md', '!**/_*.{md,mdx}', '!**/notebook.md'],
+    pattern: [
+      'src/content/blog/**/*.{md,mdx}',
+      '!src/content/blog/**/AGENTS.md',
+      '!src/content/blog/**/CLAUDE.md',
+      '!src/content/blog/**/_*.{md,mdx}',
+      '!src/content/blog/**/notebook.md',
+    ],
   }),
   schema: z.object({
     description: z.string(),
@@ -19,7 +22,9 @@ const blogCollection = defineCollection({
 
     pubDate: z
       .date()
-      .transform((d: Date) => Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate()),
+      .transform((d: Date) => {
+        return Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate().toString()
+      }),
 
     // Blog Post Status
     status: z.enum(['concept', 'draft', 'review', 'published', 'locked']).default('published'),
