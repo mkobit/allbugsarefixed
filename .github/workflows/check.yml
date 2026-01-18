@@ -20,16 +20,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Verify tool versions
+        id: verify
         run: node scripts/verify-versions.mjs
       - name: Lint code
+        if: !cancelled() && steps.verify.outcome == 'success'
         run: pnpm lint
       - name: Typecheck
+        if: !cancelled() && steps.verify.outcome == 'success'
         run: pnpm typecheck
       - name: Test
+        if: !cancelled() && steps.verify.outcome == 'success'
         run: pnpm test
       - name: Coverage
+        if: !cancelled() && steps.verify.outcome == 'success'
         run: pnpm coverage
       - name: Build site
+        if: !cancelled() && steps.verify.outcome == 'success'
         run: pnpm build
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
