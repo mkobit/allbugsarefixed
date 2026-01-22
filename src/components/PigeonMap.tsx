@@ -1,4 +1,4 @@
-import dynamicIconImports from 'lucide-react/dynamicIconImports'
+import dynamicIconImports from 'lucide-react/dynamicIconImports.mjs'
 import { Map as PigeonMap, Marker, Overlay } from 'pigeon-maps'
 import { Suspense, lazy } from 'react'
 import type { MapConfig, MapMarker, MapShape } from '../lib/map'
