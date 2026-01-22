@@ -1,7 +1,7 @@
 ---
-title: "Tech demo: charts, code, and callouts"
+title: "Feature Reference & Demo"
 pubDate: 2024-05-20
-description: "A showcase of the styling capabilities, interactive charts, and code snippets on All Bugs Are Fixed."
+description: "Documentation and usage examples for available components and Markdown features."
 labels: ["demo", "components"]
 ---
 
@@ -45,14 +45,13 @@ export const userColumns = [
 
 export const data = csvParse(rawData);
 
-# Welcome to the Tech Demo
+# Feature Reference
 
-This post serves as a living testbed for our blog's features. We want to ensure that writing technical content is seamless and beautiful, especially on mobile.
+This page documents the custom components and Markdown features available for use in blog posts. It serves as a reference for content creation and a testbed for styling.
 
 ## 1. Icons and styling
 
-We've integrated **Lucide React** icons to bring life to our UI.
-We use a reusable React component `IconBlock` to maintain consistency and ease of use.
+Import icons from **Lucide React**. Use the `IconBlock` component to create featured icon grids with consistent styling.
 
 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
   <IconBlock client:visible icon={Zap} label="Lightning Fast" variant="warning" />
@@ -63,9 +62,11 @@ We use a reusable React component `IconBlock` to maintain consistency and ease o
 
 ### Inline icons
 
-You can also use icons inline with text. For example, <Cpu className="inline-block w-4 h-4 text-red-500 align-text-bottom" /> **CPU Usage** is high, or verify the <Globe className="inline-block w-4 h-4 text-blue-400 align-text-bottom" /> **Network Status**.
+Render icons inline with text by adjusting `className` properties. For example, <Cpu className="inline-block w-4 h-4 text-red-500 align-text-bottom" /> **CPU Usage** or <Globe className="inline-block w-4 h-4 text-blue-400 align-text-bottom" /> **Network Status**.
 
 ### Icon palette
+
+Example of an ad-hoc flex container for icons:
 
 <div className="flex flex-wrap gap-4 my-4 p-4 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
   <Server className="text-gray-400" />
@@ -76,37 +77,35 @@ You can also use icons inline with text. For example, <Cpu className="inline-blo
 
 ## 2. Callouts
 
-We use callouts to highlight important information.
+Use the `<Callout>` component to highlight important information. The component supports `type` props: `info`, `tip`, `warning`, and `error`.
 
-<Callout type="info" title="Did you know?">
-  This is an **info** callout. It's great for general notes or side comments that add context without breaking the flow.
+<Callout type="info" title="Info">
+  Use **info** callouts for general notes or context.
 </Callout>
 
 <Callout type="tip" title="Pro tip">
   Use **tip** callouts for best practices or shortcuts.
 
 ```bash
-# You can even put code inside!
+# Code blocks are supported inside callouts
 pnpm install super-cool-package
 ```
 
 </Callout>
 
-<Callout type="warning" title="Watch out">
-  **Warning** callouts are for things that require caution, like breaking changes or deprecated features.
+<Callout type="warning" title="Warning">
+  Use **warning** callouts for caution, breaking changes, or deprecations.
 </Callout>
 
 <Callout type="error" title="Critical error">
-  Use **error** callouts for things that are strictly forbidden or dangerous operations.
+  Use **error** callouts for strictly forbidden or dangerous operations.
 </Callout>
 
 ## 3. Code snippets
 
-We want our code to look good. Astro uses Shiki for syntax highlighting by default.
+Standard Markdown code fences are supported. Shiki handles syntax highlighting automatically.
 
 ### Kotlin (JS target)
-
-Here's a snippet of Kotlin code, as requested for "runnable" future-proofing.
 
 ```kotlin
 fun main() {
@@ -127,8 +126,6 @@ fun fix(bug: String) {
 
 ### TypeScript / Astro
 
-And here is how we might fetch data in this very blog:
-
 ```typescript
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -141,11 +138,9 @@ export async function getStaticPaths() {
 
 ## 4. Data visualization
 
-We integrate **Apache ECharts** for rich, interactive visualizations.
+Use the `<EChart>` component to render interactive visualizations powered by **Apache ECharts**.
 
-### Monthly bug fixes
-
-A simple line chart showing our velocity.
+### Line Chart
 
 <EChart
   height="400px"
@@ -182,9 +177,7 @@ A simple line chart showing our velocity.
   }}
 />
 
-### Project distribution
-
-A donut chart example.
+### Donut Chart
 
 <EChart
   height="350px"
@@ -226,13 +219,13 @@ A donut chart example.
 
 ## 5. Interactive Maps
 
-We support config-driven maps using **Pigeon Maps**.
+Use the `<Map>` component to render config-driven maps via **Pigeon Maps**.
 
 <Map client:load config={demoMapData} />
 
 ## 6. Mermaid diagrams
 
-For flowcharts, sequence diagrams, and more, we use **Mermaid**.
+Use the `<Mermaid>` component for flowcharts and sequence diagrams. Pass the diagram definition string to the `code` prop.
 
 <Mermaid
   code={`
@@ -262,40 +255,36 @@ sequenceDiagram
 
 ## 7. Mathematical formulas
 
-We support **LaTeX** rendering for mathematical expressions, powered by our custom `<Latex />` component.
+Use the `<Latex>` component for mathematical expressions.
 
 ### Inline equations
 
-You can write inline equations like <Latex formula="E = mc^2" inline /> or <Latex formula="e^{i\pi} + 1 = 0" inline /> directly in the text.
+Set the `inline` prop for inline rendering: <Latex formula="E = mc^2" inline /> or <Latex formula="e^{i\pi} + 1 = 0" inline />.
 
 ### Block equations
 
-For more complex equations, use block syntax:
+Omit the `inline` prop for block-level equations:
 
 <Latex formula="\mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + i \bar{\psi} \gamma^\mu D_\mu \psi + h.c. + \psi_i y_{ij} \psi_j \phi + h.c. + |D_\mu \phi|^2 - V(\phi)" />
-
-Another example, the Gaussian Integral:
 
 <Latex formula="\int_{-\infty}^{\infty} e^{-x^2} \,dx = \sqrt{\pi}" />
 
 ## 8. Data Tables
 
-We have a robust table component that supports sorting. It uses **TanStack Table** under the hood.
+Use the `<DataTable>` component for sortable tables powered by **TanStack Table**.
 
 <DataTable client:load data={users} columns={userColumns} />
 
-## Conclusion
+## Summary
 
-This page demonstrates that we have a robust set of tools for authoring technical content:
+The following tools are available for content authoring:
 
-1. **Typography** is clean and readable.
-2. **Code blocks** are syntax highlighted.
-3. **Charts** are interactive and responsive.
-4. **Diagrams** are easy to write in Markdown.
-5. **Callouts** draw attention where needed.
-6. **Icons** provide visual cues and enhanced aesthetics.
-7. **Maps** allow easy geolocation visualization.
-8. **Math** is fully supported.
-9. **Tables** are sortable and styleable.
-
-Everything is ready for the "Solo Party"!
+1. **Typography**: Standard markdown styling.
+2. **Code blocks**: Syntax highlighting via Shiki.
+3. **Charts**: `<EChart>` for interactive visualizations.
+4. **Diagrams**: `<Mermaid>` for graphs and sequence diagrams.
+5. **Callouts**: `<Callout>` for alerts and tips.
+6. **Icons**: `lucide-react` icons and `<IconBlock>`.
+7. **Maps**: `<Map>` for geolocation.
+8. **Math**: `<Latex>` for KaTeX rendering.
+9. **Tables**: `<DataTable>` for sortable data.
