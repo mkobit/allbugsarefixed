@@ -2,19 +2,36 @@
 
 This repository contains a personal blog and research notes.
 
-## Core commands
+## CI Required Commands
 
-- **Lint:** `pnpm lint` (runs ESLint)
-- **Build:** `pnpm build` (builds the Astro site)
-- **Dev:** `pnpm dev` (starts the dev server)
-- **Test:** `pnpm test:e2e` (runs Playwright tests)
+You **MUST** run the following commands before submitting any changes. These commands mirror the steps in the Continuous Integration (CI) pipeline, and running them locally ensures that your PR will not fail CI.
+
+**CI Workflow File:** [.github/workflows/check.yml](.github/workflows/check.yml)
+
+1.  **Verify Versions:** `node scripts/verify-versions.mjs`
+    - Checks that node and pnpm versions match requirements.
+2.  **Lint:** `pnpm lint`
+    - Runs ESLint on .js, .ts, .tsx, .astro, .mdx files.
+3.  **Typecheck:** `pnpm typecheck`
+    - Runs `astro check` and `tsc` to verify types.
+4.  **Unit Tests:** `pnpm test`
+    - Runs Vitest unit tests.
+5.  **Coverage:** `pnpm coverage`
+    - Runs Vitest coverage analysis.
+6.  **Build:** `pnpm build`
+    - Builds the Astro site for production.
+7.  **E2E Tests:** `pnpm test:e2e`
+    - Runs Playwright end-to-end tests.
+
+## Other Commands
+
+- **Dev:** `pnpm start` (starts the dev server)
 - **New idea:** `pnpm new-idea "My Title"` (use this to start a new research notebook or blog post)
 
 ## General guidelines
 
-- **Linting:** Always run `pnpm lint` after making changes. Fix all lint errors.
-- **Building:** Run `pnpm build` to verify that your changes compile correctly.
-- **Formatting:** Prettier is used for formatting.
+- **Formatting:** ESLint is used for formatting (Prettier is NOT used).
+- **Strictness:** Do not bypass checks. All tests and linting must pass.
 
 ## Blog & research
 
