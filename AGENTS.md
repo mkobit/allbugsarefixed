@@ -33,6 +33,16 @@ You **MUST** run the following commands before submitting any changes. These com
 - **Formatting:** ESLint is used for formatting (Prettier is NOT used).
 - **Strictness:** Do not bypass checks. All tests and linting must pass.
 
+## Architecture & Style
+
+- **Astro as Glue, React for UI:**
+  - Logic and styled components should reside in React (`.tsx`) files, typically in `src/components/ui`.
+  - Astro (`.astro`) files should act as "glue" code: fetching data, handling routing, and rendering top-level React components.
+  - Avoid heavy business logic or complex styling in `.astro` files.
+- **Writing Style:**
+  - Use **Sentence case** for headings and titles.
+  - Use **semantic line breaks** (one sentence per line) in Markdown and MDX files to improve diff readability.
+
 ## Blog & research
 
 For instructions on how to handle blog posts, drafts, and research notes, strictly follow the guidelines in:

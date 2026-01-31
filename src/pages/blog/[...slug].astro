@@ -2,11 +2,11 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content'
 import { Temporal } from '@js-temporal/polyfill'
 import Layout from '../../layouts/Layout.astro'
-import PostHeader from '../../components/PostHeader.astro'
+import { PostHeader } from '../../components/ui/PostHeader'
 import TableOfContents from '../../components/TableOfContents.astro'
-import PostMetadata from '../../components/PostMetadata.astro'
+import { PostMetadata } from '../../components/ui/PostMetadata'
 import { LabelBadge } from '../../components/LabelBadge'
-import CodeBlock from '../../components/CodeBlock'
+import { MDXComponents } from '../../lib/mdx-components'
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog')
@@ -79,7 +79,7 @@ const wordCount = readingTimeData?.words;
           prose-headings:font-bold prose-headings:tracking-tight
           prose-img:rounded-xl prose-img:shadow-lg"
         >
-          <Content components={{ CodeBlock }} />
+          <Content components={MDXComponents} />
         </div>
       </div>
 
