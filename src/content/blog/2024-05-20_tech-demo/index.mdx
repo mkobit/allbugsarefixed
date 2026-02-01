@@ -1,5 +1,5 @@
 ---
-title: "Feature Reference & Demo"
+title: "Feature reference & demo"
 pubDate: 2024-05-20
 description: "Documentation and usage examples for available components and Markdown features."
 labels: ["demo", "components"]
@@ -45,7 +45,7 @@ export const userColumns = [
 
 export const data = csvParse(rawData);
 
-# Feature Reference
+# Feature reference
 
 This page documents the custom components and Markdown features available for use in blog posts. It serves as a reference for content creation and a testbed for styling.
 
@@ -54,15 +54,15 @@ This page documents the custom components and Markdown features available for us
 Import icons from **Lucide React**. Use the `IconBlock` component to create featured icon grids with consistent styling.
 
 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
-  <IconBlock client:visible icon={Zap} label="Lightning Fast" variant="warning" />
+  <IconBlock client:visible icon={Zap} label="Lightning fast" variant="warning" />
   <IconBlock client:visible icon={Activity} label="Monitoring" variant="info" />
   <IconBlock client:visible icon={ShieldCheck} label="Secure" variant="success" />
-  <IconBlock client:visible icon={Terminal} label="CLI Tools" variant="brand" />
+  <IconBlock client:visible icon={Terminal} label="CLI tools" variant="brand" />
 </div>
 
 ### Inline icons
 
-Render icons inline with text by adjusting `className` properties. For example, <Cpu className="inline-block w-4 h-4 text-red-500 align-text-bottom" /> **CPU Usage** or <Globe className="inline-block w-4 h-4 text-blue-400 align-text-bottom" /> **Network Status**.
+Render icons inline with text by adjusting `className` properties. For example, <Cpu className="inline-block w-4 h-4 text-red-500 align-text-bottom" /> **CPU usage** or <Globe className="inline-block w-4 h-4 text-blue-400 align-text-bottom" /> **Network status**.
 
 ### Icon palette
 
@@ -140,13 +140,13 @@ export async function getStaticPaths() {
 
 Use the `<EChart>` component to render interactive visualizations powered by **Apache ECharts**.
 
-### Line Chart
+### Line chart
 
 <EChart
   height="400px"
   options={{
     title: {
-      text: "Bugs Fixed Per Month",
+      text: "Bugs fixed per month",
       left: "center",
     },
     tooltip: {
@@ -177,7 +177,7 @@ Use the `<EChart>` component to render interactive visualizations powered by **A
   }}
 />
 
-### Donut Chart
+### Donut chart
 
 <EChart
   height="350px"
@@ -191,7 +191,7 @@ Use the `<EChart>` component to render interactive visualizations powered by **A
     },
     series: [
       {
-        name: "Time Spent",
+        name: "Time spent",
         type: "pie",
         radius: ["40%", "70%"],
         avoidLabelOverlap: false,
@@ -217,7 +217,7 @@ Use the `<EChart>` component to render interactive visualizations powered by **A
   }}
 />
 
-## 5. Interactive Maps
+## 5. Interactive maps
 
 Use the `<Map>` component to render config-driven maps via **Pigeon Maps**.
 
@@ -269,7 +269,7 @@ Omit the `inline` prop for block-level equations:
 
 <Latex formula="\int_{-\infty}^{\infty} e^{-x^2} \,dx = \sqrt{\pi}" />
 
-## 8. Data Tables
+## 8. Data tables
 
 Use the `<DataTable>` component for sortable tables powered by **TanStack Table**.
 

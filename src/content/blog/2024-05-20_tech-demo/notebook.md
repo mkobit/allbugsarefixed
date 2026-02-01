@@ -1,4 +1,4 @@
-# Tech Demo Brief
+# Tech demo brief
 
 ## Objectives
 
