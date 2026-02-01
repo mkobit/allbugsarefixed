@@ -1,0 +1,129 @@
+---
+import { Copy, Check, FileCode } from 'lucide-react'
+
+interface Props {
+  code?: string
+  html?: string
+  lang?: string
+  title?: string
+  showLineNumbers?: boolean | string
+  startLine?: number | string
+  class?: string
+}
+
+const { title, lang = 'plaintext', code, html, showLineNumbers, startLine = 1, class: className } = Astro.props
+
+const langLabel = lang === 'plaintext' ? 'Text' : lang;
+---
+
+<div class:list={['group relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-900 shadow-md', className]} data-code={code}>
+  {/* Header Bar */}
+  <div class="flex items-center justify-between px-4 py-2 bg-transparent text-xs text-gray-400">
+    <div class="flex items-center gap-2">
+      {title && <FileCode className="w-4 h-4 text-brand-primary" />}
+      {!title && (
+        <span class="uppercase font-mono font-bold text-[10px] tracking-wider text-gray-500">{langLabel}</span>
+      )}
+      {title && <span class="font-mono text-gray-300">{title}</span>}
+    </div>
+
+    <div class="flex items-center gap-2">
+      {title && (
+        <span class="uppercase font-mono font-bold text-[10px] tracking-wider text-gray-600">{langLabel}</span>
+      )}
+
+      <button
+        class="copy-btn p-1.5 rounded-md transition-all duration-200 hover:bg-gray-700 hover:text-white text-gray-400"
+        aria-label="Copy code"
+        title="Copy to clipboard"
+      >
+        <span class="icon-copy"><Copy className="w-4 h-4" /></span>
+        <span class="icon-check hidden"><Check className="w-4 h-4" /></span>
+      </button>
+    </div>
+  </div>
+
+  {/* Code Content */}
+  <div class="relative overflow-x-auto">
+    {html
+? (
+      <div
+        class:list={[
+          '!m-0 !p-0 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent shiki-container',
+          showLineNumbers && 'show-line-numbers',
+          className,
+        ]}
+        style={{ '--start-line': startLine }}
+        set:html={html}
+      />
+    )
+: (
+      <pre
+        class:list={[
+          '!m-0 !p-4 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent',
+          className,
+        ]}
+      >
+        <slot>{code}</slot>
+      </pre>
+    )}
+  </div>
+</div>
+
+<script>
+  // Use event delegation or attach to all buttons
+  // Since MDX content might be loaded dynamically (unlikely here but possible), delegation is safer?
+  // But Astro scripts run once per page load.
+  // We'll attach to all buttons.
+
+  function initCopyButtons() {
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      // Avoid double binding if re-run
+      if (btn.hasAttribute('data-init')) return
+    btn.setAttribute('data-init', 'true')
+
+    btn.addEventListener('click', async () => {
+        const container = btn.closest('.group')
+      let text = container.getAttribute('data-code')
+
+      if (!text) {
+          // Fallback to text content
+          const pre = container.querySelector('.shiki-container, pre')
+        if (pre) {
+            text = pre.textContent
+        }
+        }
+
+        if (text) {
+          try {
+            await navigator.clipboard.writeText(text)
+
+          // Visual feedback
+          const iconCopy = btn.querySelector('.icon-copy')
+          const iconCheck = btn.querySelector('.icon-check')
+
+          iconCopy.classList.add('hidden')
+          iconCheck.classList.remove('hidden')
+          btn.classList.add('text-green-400')
+          btn.classList.remove('text-gray-400')
+
+          setTimeout(() => {
+              iconCopy.classList.remove('hidden')
+            iconCheck.classList.add('hidden')
+            btn.classList.remove('text-green-400')
+            btn.classList.add('text-gray-400')
+          }, 2000)
+        }
+ catch (err) {
+            console.error('Failed to copy:', err)
+        }
+        }
+      })
+  })
+  }
+
+  initCopyButtons()
+
+// If we had client-side navigation (View Transitions), we'd hook into 'astro:page-load'
+document.addEventListener('astro:page-load', initCopyButtons)
+</script>

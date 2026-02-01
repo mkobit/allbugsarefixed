@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
 import tailwindcss from '@tailwindcss/vite'
+import rehypeSlug from 'rehype-slug'
 import remarkReadingTime from 'remark-reading-time'
 import { remarkCodeToComponent } from './src/lib/remark-code-component.mjs'
 
@@ -24,6 +25,7 @@ export default defineConfig({
   ],
   markdown: {
     syntaxHighlight: false,
+    rehypePlugins: [rehypeSlug],
     remarkPlugins: [
       remarkReadingTime,
       remarkCodeToComponent,
