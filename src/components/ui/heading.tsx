@@ -9,12 +9,12 @@ const headingStyles = tv({
   },
   variants: {
     level: {
-      1: 'text-4xl md:text-5xl font-extrabold mb-6 leading-tight',
-      2: 'text-3xl md:text-4xl font-bold mb-4',
-      3: 'text-2xl md:text-3xl font-bold mb-3',
-      4: 'text-xl md:text-2xl font-semibold mb-2',
-      5: 'text-lg md:text-xl font-semibold mb-2',
-      6: 'text-base md:text-lg font-semibold mb-2',
+      1: 'text-4xl md:text-5xl font-extrabold mb-3 mt-6 leading-tight',
+      2: 'text-3xl md:text-4xl font-bold mb-2 mt-5',
+      3: 'text-2xl md:text-3xl font-bold mb-2 mt-4',
+      4: 'text-xl md:text-2xl font-semibold mb-1 mt-3',
+      5: 'text-lg md:text-xl font-semibold mb-1 mt-3',
+      6: 'text-base md:text-lg font-semibold mb-1 mt-3',
     },
   },
 })

@@ -14,7 +14,8 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "new-idea": "tsx scripts/new-idea.ts"
+    "new-idea": "tsx scripts/new-idea.ts",
+    "validate:mermaid": "node scripts/validate-mermaid.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -56,6 +57,7 @@
     "@vitest/coverage-v8": "^4.0.17",
     "astro-eslint-parser": "^1.2.2",
     "d3-dsv": "^3.0.1",
+    "dompurify": "^3.3.1",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-functional": "^9.0.2",
@@ -66,6 +68,7 @@
     "eslint-plugin-sort-keys": "^2.3.5",
     "globals": "^16.5.0",
     "js-yaml": "^4.1.1",
+    "jsdom": "^27.4.0",
     "jsonc-parser": "^3.3.1",
     "playwright": "^1.57.0",
     "remark-reading-time": "^2.0.2",

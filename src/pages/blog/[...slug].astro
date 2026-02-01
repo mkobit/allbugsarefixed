@@ -22,7 +22,6 @@ export async function getStaticPaths() {
 
   return filteredEntries.map((entry: CollectionEntry<'blog'>) => {
     const slug = entry.id
-      .replace(/^src\/content\/blog\//, '')
       .replace(/\/index\.mdx$/, '')
       .replace(/\.mdx?$/, '')
 
