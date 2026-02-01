@@ -30,7 +30,7 @@ export default defineConfig({
       remarkReadingTime,
       remarkCodeToComponent,
       () => {
-        return function (tree, file) {
+        return function (_tree, file) {
           if (file.data.readingTime) {
             // @ts-ignore
             file.data.astro.frontmatter.readingTime = file.data.readingTime
