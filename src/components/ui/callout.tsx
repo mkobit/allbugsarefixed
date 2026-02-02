@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import { cn } from '../../lib/ui'
 
 const calloutStyles = tv({
-  base: 'p-2 sm:p-3 my-6 rounded-lg border flex flex-col gap-2 w-fit max-w-full',
+  base: 'p-3 sm:p-4 my-6 rounded-lg border flex items-start gap-3 w-full',
   defaultVariants: {
     type: 'info',
   },
@@ -35,12 +35,12 @@ export function Callout({ className, title, type = 'info', children, ...props }:
 
   return (
     <div className={cn(calloutStyles({ type }), className)} {...props}>
-      <div className="flex items-center gap-2">
-        <div className="flex-shrink-0 select-none text-xl leading-none">{icon}</div>
+      <div className="flex-shrink-0 select-none text-xl leading-none mt-0.5">{icon}</div>
+      <div className="flex flex-col gap-1 min-w-0 w-full">
         {title && <h3 className="font-bold text-inherit leading-tight m-0">{title}</h3>}
-      </div>
-      <div className="w-full min-w-0 prose prose-sm dark:prose-invert max-w-none text-inherit prose-p:my-0 prose-a:text-current">
-        {children}
+        <div className="prose prose-sm dark:prose-invert max-w-none text-inherit prose-p:my-0 prose-a:text-current">
+          {children}
+        </div>
       </div>
     </div>
   )

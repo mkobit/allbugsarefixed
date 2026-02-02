@@ -50,7 +50,7 @@ const wordCount = readingTimeData?.words;
   <article class="w-full relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
       {/* Main Content Column */}
-      <div class="lg:col-span-8 lg:col-start-3">
+      <div class="lg:col-span-9">
         <PostHeader title={entry.data.title} pubDate={Temporal.PlainDate.from(entry.data.pubDate)} />
 
         {/* Post Metadata & Labels */}
@@ -83,7 +83,7 @@ const wordCount = readingTimeData?.words;
       </div>
 
       {/* Sidebar / TOC Column - Hidden on mobile */}
-      <div class="hidden lg:block lg:col-span-2">
+      <div class="hidden lg:block lg:col-span-3">
         <div class="sticky top-24">
           <TableOfContents headings={headings} />
         </div>

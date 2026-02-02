@@ -49,7 +49,7 @@ export const data = csvParse(rawData);
 
 This page documents the custom components and Markdown features available for use in blog posts. It serves as a reference for content creation and a testbed for styling.
 
-## 1. Icons and styling
+## Icons and styling
 
 Import icons from **Lucide React**. Use the `IconBlock` component to create featured icon grids with consistent styling.
 
@@ -75,7 +75,7 @@ Example of an ad-hoc flex container for icons:
   <Code className="text-brand-primary" />
 </div>
 
-## 2. Callouts
+## Callouts
 
 Use the `<Callout>` component to highlight important information. The component supports `type` props: `info`, `tip`, `warning`, and `error`.
 
@@ -105,7 +105,7 @@ pnpm install super-cool-package
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </Callout>
 
-## 3. Code snippets
+## Code snippets
 
 Standard Markdown code fences are supported. Shiki handles syntax highlighting automatically.
 
@@ -140,7 +140,7 @@ export async function getStaticPaths() {
 }
 ```
 
-## 4. Data visualization
+## Data visualization
 
 Use the `<EChart>` component to render interactive visualizations powered by **Apache ECharts**.
 
@@ -221,13 +221,13 @@ Use the `<EChart>` component to render interactive visualizations powered by **A
   }}
 />
 
-## 5. Interactive maps
+## Interactive maps
 
 Use the `<Map>` component to render config-driven maps via **Pigeon Maps**.
 
 <Map client:load config={demoMapData} />
 
-## 6. Mermaid diagrams
+## Mermaid diagrams
 
 Use the `<Mermaid>` component for flowcharts and sequence diagrams. Pass the diagram definition string to the `code` prop.
 
@@ -257,7 +257,7 @@ sequenceDiagram
 
 `} />
 
-## 7. Mathematical formulas
+## Mathematical formulas
 
 Use the `<Latex>` component for mathematical expressions.
 
@@ -273,7 +273,7 @@ Omit the `inline` prop for block-level equations:
 
 <Latex formula="\int_{-\infty}^{\infty} e^{-x^2} \,dx = \sqrt{\pi}" />
 
-## 8. Data tables
+## Data tables
 
 Use the `<DataTable>` component for sortable tables powered by **TanStack Table**.
 

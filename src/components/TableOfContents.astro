@@ -15,7 +15,10 @@ const filteredHeadings = headings.filter(h => h.depth <= 3);
   <ul class="space-y-2 text-sm">
     {
       filteredHeadings.map(heading => (
-        <li class={`pl-${(heading.depth - 1) * 2} border-l-2 border-transparent hover:border-brand-primary`}>
+        <li
+          class="border-l-2 border-transparent hover:border-brand-primary transition-colors duration-200"
+          style={{ paddingLeft: `${0.5 + (heading.depth - 2) * 1}rem` }}
+        >
           <a
             href={`#${heading.slug}`}
             class="block text-gray-600 dark:text-gray-400 hover:text-brand-primary transition-colors duration-200"
