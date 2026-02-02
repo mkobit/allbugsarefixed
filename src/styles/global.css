@@ -126,8 +126,10 @@
       @apply text-brand-accent bg-[rgba(255,255,255,0.1)];
     }
 
+    ul > li,
     ol > li {
-      margin-bottom: 0.25em;
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 }
