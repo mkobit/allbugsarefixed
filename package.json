@@ -70,7 +70,7 @@
     "js-yaml": "^4.1.1",
     "jsdom": "^27.4.0",
     "jsonc-parser": "^3.3.1",
-    "playwright": "^1.57.0",
+    "playwright": "^1.58.1",
     "remark-reading-time": "^2.0.2",
     "shiki": "^3.21.0",
     "tailwindcss": "^4.1.18",
