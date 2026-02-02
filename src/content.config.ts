@@ -5,12 +5,13 @@ import { Temporal } from '@js-temporal/polyfill'
 
 const blogCollection = defineCollection({
   loader: glob({
+    base: 'src/content/blog',
     pattern: [
-      'src/content/blog/**/*.{md,mdx}',
-      '!src/content/blog/**/AGENTS.md',
-      '!src/content/blog/**/CLAUDE.md',
-      '!src/content/blog/**/_*.{md,mdx}',
-      '!src/content/blog/**/notebook.md',
+      '**/*.{md,mdx}',
+      '!**/AGENTS.md',
+      '!**/CLAUDE.md',
+      '!**/_*.{md,mdx}',
+      '!**/notebook.md',
     ],
   }),
   schema: z.object({
