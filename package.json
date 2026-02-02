@@ -14,8 +14,7 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "new-idea": "tsx scripts/new-idea.ts",
-    "validate:mermaid": "node scripts/validate-mermaid.mjs"
+    "new-idea": "tsx scripts/new-idea.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
