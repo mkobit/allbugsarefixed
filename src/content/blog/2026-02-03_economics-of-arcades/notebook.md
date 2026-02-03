@@ -4,21 +4,21 @@
 Analyzing the cost of playing games in modern arcades, specifically focusing on the credit system, conversion rates, and the high cost per game.
 
 ## Key observations
-- The user observed a modern arcade using a card swipe system instead of coins.
+- I observed a modern arcade using a card swipe system instead of coins.
 - Games appeared insanely expensive.
 - A shooter game cost roughly $2.50 per play.
 - Credit bundles had varying price points:
   - Entry level: $20.
   - High tier: $120.
-- The conversion rate seemed to be around 10.4 credits per dollar.
+- The conversion rate was around 10.4 credits per dollar (likely for the base tier, but better at higher tiers).
 
 ## Research questions
-- **Pricing structure:** Verify the "10.4 credits per dollar" conversion rate.
-  - If 10.4 credits = $1.00, then 1 credit ≈ $0.096.
+- **Pricing structure:** Analyze the pricing tiers.
+  - If 10.4 credits = $1.00 (base rate), then 1 credit ≈ $0.096.
+  - Need to calculate the "bonus" credits at higher tiers (e.g., the $120 tier) to see how the cost-per-credit drops.
 - **Game cost:**
-  - The user mentioned a shooter game costing "$2.50".
-  - If the game costs ~26 credits (at $0.096/credit), that equals ~$2.50.
-  - If the user meant "2.5 credits", that would be ~$0.24 (very cheap, unlikely for "insanely expensive").
+  - I noted a shooter game costing "$2.50".
+  - At the base rate ($0.096/credit), a $2.50 game would cost ~26 credits.
   - **Hypothesis:** Modern arcade games often cost 10-20+ chips/credits.
   - A "premium" shooter could easily be 25-30 credits ($2.50-$3.00).
 - **Credit packages:**
