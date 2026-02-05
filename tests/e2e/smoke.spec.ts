@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Smoke Test', () => {
-  test('homepage loads with correct title and styling', async ({ page }) => {
+  test('homepage loads with correct title and semantic structure', async ({ page }) => {
     // 1. Check for console errors
     const consoleErrors: string[] = []
     page.on('console', (msg) => {
@@ -12,33 +12,25 @@ test.describe('Smoke Test', () => {
 
     await page.goto('/')
 
-    // 2. Verify Title - Expect redirect to blog which has "All posts" in title
-    await expect(page).toHaveTitle(/All posts | All Bugs Are Fixed/)
+    // 2. Verify Title
+    await expect(page).toHaveTitle('Home | All Bugs Are Fixed')
 
-    // 3. Verify CSS is loaded and Header is present
-    // The new layout uses a <header> element.
+    // 3. Verify Semantic Elements
     const header = page.locator('header')
     await expect(header).toBeVisible()
 
-    // Verify the logo text color to ensure CSS variables are working
-    const logo = header.locator('text=All Bugs Are Fixed').first()
+    const main = page.locator('main')
+    await expect(main).toBeVisible()
+
+    const footer = page.locator('footer')
+    await expect(footer).toBeVisible()
+
+    // 4. Verify Critical Content
+    // The logo text is "All Bugs Are Fixed" inside a link
+    const logo = header.getByRole('link', { name: 'All Bugs Are Fixed' })
     await expect(logo).toBeVisible()
 
-    // The logo uses 'text-brand-text'.
-    // In light mode (default), brand-text is usually dark.
-    // Let's just verify it's not the default user-agent blue link color or something unexpected if that was the concern.
-    // Or we can check if the background of the body or header is correct.
-
-    // Check header background color
-    const headerBgColor = await header.evaluate((el) => {
-      return window.getComputedStyle(el).backgroundColor
-    })
-
-    // It should be 'bg-brand-surface'. In global.css, this maps to something specific.
-    // But simply checking it's not empty is a good basic check.
-    expect(headerBgColor).toBeTruthy()
-
-    // 4. Verify no console errors occurred
+    // 5. Verify no console errors occurred
     expect(consoleErrors).toEqual([])
   })
 })
