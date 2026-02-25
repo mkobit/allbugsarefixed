@@ -7,6 +7,7 @@ import TableOfContents from '../../components/TableOfContents.astro'
 import { PostMetadata } from '../../components/ui/PostMetadata'
 import { LabelBadge } from '../../components/LabelBadge'
 import { MDXComponents } from '../../lib/mdx-components'
+import { ScrollProgress } from '../../components/ui/ScrollProgress'
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog')
@@ -92,4 +93,5 @@ const wordCount = readingTimeData?.words;
 
     <div class="h-24"></div>
   </article>
+  <ScrollProgress client:load />
 </Layout>
