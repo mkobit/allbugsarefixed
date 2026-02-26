@@ -35,7 +35,7 @@ export function Callout({ className, title, type = 'info', children, ...props }:
 
   return (
     <div className={cn(calloutStyles({ type }), className)} {...props}>
-      <div className="flex-shrink-0 select-none text-xl leading-none mt-0.5">{icon}</div>
+      <div className="flex-shrink-0 select-none text-xl leading-none">{icon}</div>
       <div className="flex flex-col gap-1 min-w-0 w-full">
         {title && <h3 className="font-bold text-inherit leading-tight m-0">{title}</h3>}
         <div className="prose prose-sm dark:prose-invert max-w-none text-inherit prose-p:my-0 prose-a:text-current">
