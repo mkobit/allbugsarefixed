@@ -73,7 +73,7 @@
     "playwright": "^1.57.0",
     "remark-reading-time": "^2.0.2",
     "shiki": "^3.21.0",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.2.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.2",
     "unist-util-visit": "^5.1.0",
