@@ -6,8 +6,12 @@ on:
       - "main"
       - "gh-pages"
       - "dependabot/**" #avoid duplicates: only run the PR, not the push
+    paths-ignore:
+      - ".jules/env_setup.sh"
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore:
+      - ".jules/env_setup.sh"
 
 jobs:
   build-and-test:

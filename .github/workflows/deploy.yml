@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - ".jules/env_setup.sh"
   workflow_dispatch:
 
 concurrency:
