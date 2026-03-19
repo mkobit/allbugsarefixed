@@ -23,9 +23,9 @@ echo "------------------------------"
 # Install mise
 echo "Installing mise..."
 curl -s https://mise.run | bash
-~/.local/bin/mise trust
-eval "$(~/.local/bin/mise activate bash)"
-~/.local/bin/mise doctor
+mise trust
+eval "$(mise activate bash)"
+mise doctor
 
 # Install pnpm if not present
 if ! command -v pnpm &> /dev/null; then
