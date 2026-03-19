@@ -15,28 +15,28 @@ jobs:
     if: (github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')))
     steps:
       - uses: actions/checkout@v6
-      - name: Setup Node, PNPM, and Cache
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Setup Node, Bun, and Cache
+        uses: ./.github/actions/setup-node-bun
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Verify tool versions
         id: verify
         run: node scripts/verify-versions.mjs
       - name: Lint code
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
-        run: pnpm lint
+        run: bun run lint
       - name: Typecheck
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
-        run: pnpm typecheck
+        run: bun run typecheck
       - name: Test
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
-        run: pnpm test
+        run: bun run test
       - name: Coverage
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
-        run: pnpm coverage
+        run: bun run coverage
       - name: Build site
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
-        run: pnpm build
+        run: bun run build
       - name: Upload build artifact
         uses: actions/upload-artifact@v7
         with:
@@ -49,16 +49,16 @@ jobs:
     if: (github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')))
     steps:
       - uses: actions/checkout@v6
-      - name: Setup Node, PNPM, and Cache
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Setup Node, Bun, and Cache
+        uses: ./.github/actions/setup-node-bun
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Download build artifact
         uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps chromium
+        run: bunx playwright install --with-deps chromium
       - name: Run E2E Tests
-        run: pnpm test:e2e
+        run: bun run test:e2e

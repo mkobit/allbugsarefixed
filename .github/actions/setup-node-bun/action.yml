@@ -1,14 +1,14 @@
-name: Setup Node.js and PNPM
+name: Setup Node.js and Bun
 
-description: Checks out code, sets up Node.js and pnpm, and caches dependencies.
+description: Checks out code, sets up Node.js and Bun, and caches dependencies.
 
 runs:
   using: "composite"
   steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
       with:
-        cache: true
+        bun-version: 1.3.11
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -21,8 +21,7 @@ runs:
         path: |
           .astro
           .eslintcache
-          node_modules/.cache
           ~/.cache/ms-playwright
-        key: ${{ runner.os }}-build-lint-${{ hashFiles('**/pnpm-lock.yaml') }}
+        key: ${{ runner.os }}-build-lint-${{ hashFiles('**/bun.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-lint-

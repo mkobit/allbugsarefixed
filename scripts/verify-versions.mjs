@@ -9,7 +9,7 @@ const rootDir = process.cwd()
 const files = {
   mise: path.join(rootDir, 'mise.toml'),
   devcontainer: path.join(rootDir, '.devcontainer/devcontainer.json'),
-  action: path.join(rootDir, '.github/actions/setup-node-pnpm/action.yml'),
+  action: path.join(rootDir, '.github/actions/setup-node-bun/action.yml'),
 }
 
 function readMise() {
@@ -17,7 +17,7 @@ function readMise() {
   const data = toml.parse(content)
   return {
     node: data.tools.node,
-    pnpm: data.tools.pnpm,
+    bun: data.tools.bun,
   }
 }
 
@@ -25,9 +25,14 @@ function readDevcontainer() {
   const content = fs.readFileSync(files.devcontainer, 'utf8')
   const data = parseJsonc(content)
   const nodeFeature = data.features['ghcr.io/devcontainers/features/node:1']
+
+  const postCreateCommand = data.postCreateCommand || ''
+  const bunMatch = postCreateCommand.match(/bun@([0-9.]+)/)
+  const bunVersion = bunMatch ? bunMatch[1] : undefined
+
   return {
     node: nodeFeature.version,
-    pnpm: nodeFeature.pnpm,
+    bun: bunVersion,
   }
 }
 
@@ -36,29 +41,20 @@ function readAction() {
   const data = yaml.load(content)
 
   let nodeVersion
-  let pnpmVersion
+  let bunVersion
 
   data.runs.steps.forEach((step) => {
     if (step.uses && step.uses.startsWith('actions/setup-node')) {
       nodeVersion = String(step.with['node-version'])
     }
-    // pnpm version in action is now determined by package.json packageManager field
-  })
-
-  const packageJsonPath = path.join(rootDir, 'package.json')
-  try {
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
-    if (packageJson.packageManager && packageJson.packageManager.startsWith('pnpm@')) {
-      pnpmVersion = packageJson.packageManager.split('@')[1]
+    if (step.uses && step.uses.startsWith('oven-sh/setup-bun')) {
+      bunVersion = String(step.with['bun-version'])
     }
-  }
-  catch {
-    console.warn('Could not read package.json for pnpm version check')
-  }
+  })
 
   return {
     node: nodeVersion,
-    pnpm: pnpmVersion,
+    bun: bunVersion,
   }
 }
 
@@ -78,15 +74,15 @@ try {
   if (miseVersions.node !== devVersions.node) {
     errors.push(`Node version mismatch: Mise (${miseVersions.node}) != Devcontainer (${devVersions.node})`)
   }
-  if (miseVersions.pnpm !== devVersions.pnpm) {
-    errors.push(`PNPM version mismatch: Mise (${miseVersions.pnpm}) != Devcontainer (${devVersions.pnpm})`)
+  if (miseVersions.bun !== devVersions.bun) {
+    errors.push(`Bun version mismatch: Mise (${miseVersions.bun}) != Devcontainer (${devVersions.bun})`)
   }
 
   if (miseVersions.node !== actionVersions.node) {
     errors.push(`Node version mismatch: Mise (${miseVersions.node}) != Action (${actionVersions.node})`)
   }
-  if (miseVersions.pnpm !== actionVersions.pnpm) {
-    errors.push(`PNPM version mismatch: Mise (${miseVersions.pnpm}) != Action (${actionVersions.pnpm})`)
+  if (miseVersions.bun !== actionVersions.bun) {
+    errors.push(`Bun version mismatch: Mise (${miseVersions.bun}) != Action (${actionVersions.bun})`)
   }
 
   if (errors.length > 0) {

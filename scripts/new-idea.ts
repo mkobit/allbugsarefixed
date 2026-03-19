@@ -9,7 +9,7 @@ const title = process.argv.slice(2).join(' ')
 
 if (!title) {
   console.error('Please provide a title for the new idea.')
-  console.error('Usage: pnpm new-idea "My Idea Title"')
+  console.error('Usage: bun run new-idea "My Idea Title"')
   process.exit(1)
 }
 
