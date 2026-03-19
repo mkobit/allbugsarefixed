@@ -20,6 +20,13 @@ echo "Git Commit Hash: ${GIT_COMMIT_HASH}"
 echo "Git Commit Date: ${GIT_COMMIT_DATE}"
 echo "------------------------------"
 
+# Install mise
+echo "Installing mise..."
+curl -s https://mise.run | bash
+mise trust
+eval "$(mise activate bash)"
+mise doctor
+
 # Install pnpm if not present
 if ! command -v pnpm &> /dev/null; then
     echo "Installing pnpm..."
@@ -27,7 +34,7 @@ if ! command -v pnpm &> /dev/null; then
 fi
 
 echo "Installing dependencies..."
-pnpm install
+pnpm install --frozen-lockfile
 
 
 echo " Environment ready"
