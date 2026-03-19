@@ -1,7 +1,7 @@
 {
   "name": "allbugsarefixed",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "bun@1.3.11",
   "main": "index.js",
   "repository": "git@github.com:mkobit/allbugsarefixed.git",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "new-idea": "tsx scripts/new-idea.ts"
+    "new-idea": "bun scripts/new-idea.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

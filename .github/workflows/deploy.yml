@@ -21,14 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Setup Node, PNPM, and Cache
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Setup Node, Bun, and Cache
+        uses: ./.github/actions/setup-node-bun
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Lint code
-        run: pnpm lint
+        run: bun run lint
       - name: Build site
-        run: pnpm build
+        run: bun run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         id: deployment

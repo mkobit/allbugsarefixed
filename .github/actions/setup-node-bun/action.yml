@@ -1,0 +1,22 @@
+name: Setup Bun
+
+description: Checks out code, sets up Bun, and caches dependencies.
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 1.3.11
+
+    - name: Cache build and lint artifacts
+      uses: actions/cache@v4
+      with:
+        path: |
+          .astro
+          .eslintcache
+          ~/.cache/ms-playwright
+        key: ${{ runner.os }}-build-lint-${{ hashFiles('**/bun.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-lint-

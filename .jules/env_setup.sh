@@ -9,7 +9,7 @@ echo "Setting up allbugsarefixed environment..."
 echo "--- Diagnostic Information ---"
 echo "User: $(whoami)"
 echo "Node version: $(node -v)"
-echo "PNPM version: $(pnpm -v)"
+echo "Bun version: $(bun -v || echo 'Not installed')"
 echo "Environment variables:"
 env
 GIT_COMMIT_HASH=$(git rev-parse HEAD)
@@ -24,17 +24,12 @@ echo "------------------------------"
 echo "Installing mise..."
 curl -s https://mise.run | bash
 mise trust
+mise install
 eval "$(mise activate bash)"
 mise doctor
 
-# Install pnpm if not present
-if ! command -v pnpm &> /dev/null; then
-    echo "Installing pnpm..."
-    npm install -g pnpm
-fi
-
 echo "Installing dependencies..."
-pnpm install --frozen-lockfile
+bun install --frozen-lockfile
 
 
 echo " Environment ready"

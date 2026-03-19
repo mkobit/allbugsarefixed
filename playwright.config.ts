@@ -17,7 +17,7 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'pnpm preview',
+    command: 'bun run preview',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
     url: 'http://localhost:4321',
