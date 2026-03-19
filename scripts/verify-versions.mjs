@@ -16,7 +16,6 @@ function readMise() {
   const content = fs.readFileSync(files.mise, 'utf8')
   const data = toml.parse(content)
   return {
-    node: data.tools.node,
     bun: data.tools.bun,
   }
 }
@@ -24,14 +23,12 @@ function readMise() {
 function readDevcontainer() {
   const content = fs.readFileSync(files.devcontainer, 'utf8')
   const data = parseJsonc(content)
-  const nodeFeature = data.features['ghcr.io/devcontainers/features/node:1']
 
   const postCreateCommand = data.postCreateCommand || ''
-  const bunMatch = postCreateCommand.match(/bun@([0-9.]+)/)
+  const bunMatch = postCreateCommand.match(/bun-v([0-9.]+)/)
   const bunVersion = bunMatch ? bunMatch[1] : undefined
 
   return {
-    node: nodeFeature.version,
     bun: bunVersion,
   }
 }
@@ -40,20 +37,15 @@ function readAction() {
   const content = fs.readFileSync(files.action, 'utf8')
   const data = yaml.load(content)
 
-  let nodeVersion
   let bunVersion
 
   data.runs.steps.forEach((step) => {
-    if (step.uses && step.uses.startsWith('actions/setup-node')) {
-      nodeVersion = String(step.with['node-version'])
-    }
     if (step.uses && step.uses.startsWith('oven-sh/setup-bun')) {
       bunVersion = String(step.with['bun-version'])
     }
   })
 
   return {
-    node: nodeVersion,
     bun: bunVersion,
   }
 }
@@ -71,16 +63,10 @@ try {
 
   const errors = []
 
-  if (miseVersions.node !== devVersions.node) {
-    errors.push(`Node version mismatch: Mise (${miseVersions.node}) != Devcontainer (${devVersions.node})`)
-  }
   if (miseVersions.bun !== devVersions.bun) {
     errors.push(`Bun version mismatch: Mise (${miseVersions.bun}) != Devcontainer (${devVersions.bun})`)
   }
 
-  if (miseVersions.node !== actionVersions.node) {
-    errors.push(`Node version mismatch: Mise (${miseVersions.node}) != Action (${actionVersions.node})`)
-  }
   if (miseVersions.bun !== actionVersions.bun) {
     errors.push(`Bun version mismatch: Mise (${miseVersions.bun}) != Action (${actionVersions.bun})`)
   }

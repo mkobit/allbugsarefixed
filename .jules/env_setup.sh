@@ -24,14 +24,9 @@ echo "------------------------------"
 echo "Installing mise..."
 curl -s https://mise.run | bash
 mise trust
+mise install
 eval "$(mise activate bash)"
 mise doctor
-
-# Install bun if not present
-if ! command -v bun &> /dev/null; then
-    echo "Installing bun..."
-    npm install -g bun@1.3.11
-fi
 
 echo "Installing dependencies..."
 bun install --frozen-lockfile
