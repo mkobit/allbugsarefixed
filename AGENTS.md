@@ -60,3 +60,10 @@ For instructions on how to handle blog posts, drafts, and research notes, strict
 - `src/content/blog/`: Contains all blog posts and research notebooks.
 - `src/components/`: React and Astro components.
 - `src/lib/`: Shared utilities and logic.
+
+## Package Management
+
+We have configured a `minimumReleaseAge` of 14 days for package installs in `bunfig.toml` to mitigate supply chain risks.
+If you encounter an error when installing a recently released package, be aware that it might be blocked by this configuration. In such cases, **do not spin your wheels** trying to force the installation. Instead:
+- Use an older version of the package (released more than 14 days ago).
+- Notify the user of the limitation.
