@@ -63,7 +63,9 @@ For instructions on how to handle blog posts, drafts, and research notes, strict
 
 ## Package Management
 
-We have configured a `minimumReleaseAge` of 14 days for package installs in `bunfig.toml` to mitigate supply chain risks.
-If you encounter an error when installing a recently released package, be aware that it might be blocked by this configuration. In such cases, **do not spin your wheels** trying to force the installation. Instead:
-- Use an older version of the package (released more than 14 days ago).
+We have configured a `minimumReleaseAge` for package installs in `bunfig.toml` to mitigate supply chain risks.
+If you encounter an error when installing a recently released package, be aware that it might be blocked by this configuration.
+In such cases, **do not spin your wheels** trying to force the installation.
+Instead:
+- Use an older version of the package.
 - Notify the user of the limitation.
