@@ -10,6 +10,8 @@ updates:
     rebase-strategy: auto
     assignees:
       - "mkobit"
+    cooldown:
+      default-days: 14
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
