@@ -75,7 +75,7 @@
     "shiki": "^3.21.0",
     "tailwindcss": "^4.2.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.2",
+    "typescript": "^6.0.2",
     "unist-util-visit": "^5.1.0",
     "vitest": "^4.0.17"
   }
