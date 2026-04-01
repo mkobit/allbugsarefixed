@@ -71,7 +71,7 @@
     "jsdom": "^28.1.0",
     "jsonc-parser": "^3.3.1",
     "playwright": "^1.57.0",
-    "remark-reading-time": "^2.0.2",
+    "remark-reading-time": "^2.1.0",
     "shiki": "^3.21.0",
     "tailwindcss": "^4.2.1",
     "tsx": "^4.21.0",
