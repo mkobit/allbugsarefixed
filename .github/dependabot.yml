@@ -3,8 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "cron"
-      cron: "0 0 1,15 * *"
+      interval: "weekly"
     commit-message:
       prefix: "chore(deps)"
     open-pull-requests-limit: 10
@@ -18,8 +17,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "cron"
-      cron: "0 0 1,15 * *"
+      interval: "weekly"
     commit-message:
       prefix: "chore(actions)"
     open-pull-requests-limit: 10
