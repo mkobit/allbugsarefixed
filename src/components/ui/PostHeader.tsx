@@ -1,7 +1,5 @@
 import React from 'react'
 import { Badge } from './badge'
-import { Heading } from './heading'
-import { Text } from './text'
 import { HStack, Stack } from './stack'
 import { Time } from './time'
 import { SlashSeparator } from './separator'
@@ -19,16 +17,16 @@ export function PostHeader({ title, pubDate }: Readonly<PostHeaderProps>) {
         <Badge variant="default">Blog Post</Badge>
       </Stack>
 
-      <Heading level={1} as="h1">
+      <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl mb-4">
         {title}
-      </Heading>
+      </h1>
 
       <HStack justify="center" gap="lg">
         <Time date={pubDate} variant="muted" />
         <SlashSeparator />
-        <Text as="span" variant="muted" size="sm" className="font-mono">
+        <span className="text-gray-500 dark:text-gray-400 text-sm font-mono">
           General
-        </Text>
+        </span>
       </HStack>
     </header>
   )
