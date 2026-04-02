@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import rehypeSlug from 'rehype-slug'
 import remarkReadingTime from 'remark-reading-time'
 import { remarkCodeToComponent } from './src/lib/remark-code-component.mjs'
+import { remarkCallout } from './src/lib/remark-callout.ts'
 import { remarkValidateMermaid } from './src/lib/remark-mermaid-validate.mjs'
 
 // https://astro.build/config
@@ -13,7 +14,7 @@ export default defineConfig({
   base: '/',
   integrations: [
     mdx({
-      remarkPlugins: [remarkReadingTime, remarkCodeToComponent, remarkValidateMermaid],
+      remarkPlugins: [remarkCallout, remarkReadingTime, remarkCodeToComponent, remarkValidateMermaid],
       // We need to extend the frontmatter with the reading time data
       // This is often done via a custom remark plugin wrapper, but
       // with Astro's mdx integration, we can access it via `remarkPluginFrontmatter` prop in the layout.
@@ -29,6 +30,7 @@ export default defineConfig({
     rehypePlugins: [rehypeSlug],
     remarkPlugins: [
       remarkReadingTime,
+      remarkCallout,
       remarkCodeToComponent,
       remarkValidateMermaid,
       () => {

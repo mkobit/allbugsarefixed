@@ -22,8 +22,13 @@ test('ScrollProgress meter appears on blog posts', async ({ page }) => {
   await expect(scrollProgress).toHaveClass(/opacity-0/)
   await expect(scrollProgress).toHaveCSS('pointer-events', 'none')
 
-  // Scroll down
-  await page.evaluate(() => window.scrollTo(0, 500))
+  // Setting scroll height explicitly in evaluation and dispatching event
+  await page.evaluate(() => {
+      Object.defineProperty(document.documentElement, 'scrollHeight', { value: 2000, configurable: true });
+      Object.defineProperty(window, 'innerHeight', { value: 1000, configurable: true });
+      window.scrollTo(0, 500);
+      window.dispatchEvent(new Event('scroll'));
+  })
 
   // Wait for transition
   await page.waitForTimeout(500) // wait for transition
