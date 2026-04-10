@@ -50,7 +50,7 @@ export function remarkCodeToComponent() {
       highlighter = await getHighlighter()
     }
     catch (e) {
-      throw new Error(`remarkCodeToComponent: Failed to init highlighter: ${e.message}`)
+      throw new Error(`remarkCodeToComponent: Failed to init highlighter: ${e.message}`, { cause: e })
     }
 
     const nodesToTransform = []
@@ -90,7 +90,7 @@ export function remarkCodeToComponent() {
         }
 
         // Highlight the code
-        let html = ''
+        let html
         try {
           html = highlighter.codeToHtml(code, {
             lang,
