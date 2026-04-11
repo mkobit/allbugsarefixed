@@ -46,7 +46,7 @@ export function remarkValidateMermaid() {
         }
 
         // Throw an error to fail the build
-        throw new Error(`Mermaid Syntax Error in ${file.path}:\n${e.message}`)
+        throw new Error(`Mermaid Syntax Error in ${file.path}:\n${e.message}`, { cause: e })
       }
     }
   }
