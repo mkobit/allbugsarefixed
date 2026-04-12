@@ -26,13 +26,8 @@ export function ScrollProgress() {
       setIsVisible(scrollTop > 100)
     }
 
-    const testForceVisible = () => {
-      setIsVisible(true)
-    }
-
     window.addEventListener('scroll', updateScroll)
     window.addEventListener('resize', updateScroll)
-    window.addEventListener('test-force-scroll-visible', testForceVisible)
 
     // Initial check
     updateScroll()
@@ -40,7 +35,6 @@ export function ScrollProgress() {
     return () => {
       window.removeEventListener('scroll', updateScroll)
       window.removeEventListener('resize', updateScroll)
-      window.removeEventListener('test-force-scroll-visible', testForceVisible)
     }
   }, [])
 

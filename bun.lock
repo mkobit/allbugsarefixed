@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 1,
   "workspaces": {
     "": {
       "name": "allbugsarefixed",
@@ -58,12 +57,15 @@
         "js-yaml": "^4.1.1",
         "jsdom": "^28.1.0",
         "jsonc-parser": "^3.3.1",
+        "mdast": "^3.0.0",
         "playwright": "^1.57.0",
         "remark-reading-time": "^2.0.2",
         "shiki": "^3.21.0",
         "tailwindcss": "^4.2.1",
         "tsx": "^4.21.0",
         "typescript": "^5.9.2",
+        "unified": "^11.0.5",
+        "unist": "^0.0.1",
         "unist-util-visit": "^5.1.0",
         "vitest": "^4.0.17",
       },
@@ -1436,6 +1438,8 @@
 
     "math-intrinsics": ["math-intrinsics@1.1.0", "", {}, "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="],
 
+    "mdast": ["mdast@3.0.0", "", {}, "sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g=="],
+
     "mdast-util-definitions": ["mdast-util-definitions@6.0.0", "", { "dependencies": { "@types/mdast": "4.0.4", "@types/unist": "3.0.3", "unist-util-visit": "5.1.0" } }, "sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ=="],
 
     "mdast-util-find-and-replace": ["mdast-util-find-and-replace@3.0.2", "", { "dependencies": { "@types/mdast": "4.0.4", "escape-string-regexp": "5.0.0", "unist-util-is": "6.0.1", "unist-util-visit-parents": "6.0.2" } }, "sha512-Tmd1Vg/m3Xz43afeNxDIhWRtFZgM2VLyaf4vSTYwudTyeuTneoL3qtWMA5jeLyz/O1vDJmmV4QuScFCA2tBPwg=="],
@@ -1991,6 +1995,8 @@
     "unified-engine": ["unified-engine@11.2.2", "", { "dependencies": { "@types/concat-stream": "2.0.3", "@types/debug": "4.1.12", "@types/is-empty": "1.2.3", "@types/node": "22.19.13", "@types/unist": "3.0.3", "concat-stream": "2.0.0", "debug": "4.4.3", "extend": "3.0.2", "glob": "10.5.0", "ignore": "6.0.2", "is-empty": "1.2.0", "is-plain-obj": "4.1.0", "load-plugin": "6.0.3", "parse-json": "7.1.1", "trough": "2.2.0", "unist-util-inspect": "8.1.0", "vfile": "6.0.3", "vfile-message": "4.0.3", "vfile-reporter": "8.1.1", "vfile-statistics": "3.0.0", "yaml": "2.8.2" } }, "sha512-15g/gWE7qQl9tQ3nAEbMd5h9HV1EACtFs6N9xaRBZICoCwnNGbal1kOs++ICf4aiTdItZxU2s/kYWhW7htlqJg=="],
 
     "unifont": ["unifont@0.7.4", "", { "dependencies": { "css-tree": "3.1.0", "ofetch": "1.5.1", "ohash": "2.0.11" } }, "sha512-oHeis4/xl42HUIeHuNZRGEvxj5AaIKR+bHPNegRq5LV1gdc3jundpONbjglKpihmJf+dswygdMJn3eftGIMemg=="],
+
+    "unist": ["unist@0.0.1", "", {}, "sha512-bnzuF8b6d47WubA4a5yLqFbuZz/v/NS6eRwUIdOaDmsqzwTlyv8yS1g3M7ISdtBQrigPD3qKK87Cu7zhEfCF3A=="],
 
     "unist-util-find-after": ["unist-util-find-after@5.0.0", "", { "dependencies": { "@types/unist": "3.0.3", "unist-util-is": "6.0.1" } }, "sha512-amQa0Ep2m6hE2g72AugUItjbuM8X8cGQnFoHk0pGfrFeT9GZhzN5SW8nRsiGKK7Aif4CrACPENkA6P/Lw6fHGQ=="],
 

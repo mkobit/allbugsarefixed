@@ -1,11 +1,20 @@
 import { visit } from 'unist-util-visit'
-import type { Node, Parent } from 'unist'
-import type { Blockquote, Paragraph, Text } from 'mdast'
+import type { Plugin, Transformer } from 'unified'
+import type { Root, Blockquote, Paragraph, Text } from 'mdast'
+import type { Parent } from 'unist'
 
 const CALLOUT_REGEX = /^\[!(\w+)\]\s*(.*)$/
+const VALID_TYPES = ['info', 'warning', 'tip', 'error'] as const
 
-export function remarkCallout() {
-  return (tree: Node) => {
+type CalloutType = typeof VALID_TYPES[number]
+
+function toSentenceCase(str: string): string {
+  if (!str) return str
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+}
+
+export const remarkCallout: Plugin<[], Root> = () => {
+  const transformer: Transformer<Root> = (tree: Root) => {
     visit(tree, 'blockquote', (node: Blockquote, index?: number, parent?: Parent) => {
       if (!parent || index === undefined) return
 
@@ -22,26 +31,29 @@ export function remarkCallout() {
       const match = textValue.match(CALLOUT_REGEX)
       if (!match) return
 
-      const type = match[1]
-      const title = match[2].trim()
+      const typeRaw = match[1].toLowerCase()
+
+      if (!VALID_TYPES.includes(typeRaw as CalloutType)) {
+        throw new Error(`Invalid callout type "${typeRaw}". Supported types are: ${VALID_TYPES.join(', ')}`)
+      }
+
+      const type = typeRaw as CalloutType
+      const title = toSentenceCase(match[2].trim())
 
       const newTextValue = textValue.replace(CALLOUT_REGEX, '').replace(/^\n/, '')
 
       if (newTextValue) {
-        // eslint-disable-next-line functional/immutable-data
         textNode.value = newTextValue
       }
       else {
-        // eslint-disable-next-line functional/immutable-data
         paragraph.children.shift()
       }
 
       if (paragraph.children.length === 0) {
-        // eslint-disable-next-line functional/immutable-data
         node.children.shift()
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       const mdxNode: any = {
         attributes: [
           { name: 'type', type: 'mdxJsxAttribute', value: type },
@@ -59,8 +71,9 @@ export function remarkCallout() {
         })
       }
 
-      // eslint-disable-next-line functional/immutable-data
       parent.children[index] = mdxNode
     })
   }
+
+  return transformer
 }
