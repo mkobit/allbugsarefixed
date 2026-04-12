@@ -53,7 +53,6 @@ export const remarkCallout: Plugin<[], Root> = () => {
         node.children.shift()
       }
 
-
       const mdxNode: any = {
         attributes: [
           { name: 'type', type: 'mdxJsxAttribute', value: type },
