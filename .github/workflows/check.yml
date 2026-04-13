@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   pull_request:
@@ -42,7 +42,6 @@ jobs:
   integration-test:
     needs: ci
     runs-on: ubuntu-latest
-    # Temporarily disabled per user request
     if: false
     steps:
       - uses: actions/checkout@v6
