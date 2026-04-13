@@ -1,22 +1,14 @@
-name: Build Astro site
+name: ci
 
 on:
-  push:
-    branches-ignore:
-      - "main"
-      - "gh-pages"
-      - "dependabot/**" #avoid duplicates: only run the PR, not the push
-    paths-ignore:
-      - ".jules/env_setup.sh"
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
       - ".jules/env_setup.sh"
 
 jobs:
-  build-and-test:
+  ci:
     runs-on: ubuntu-latest
-    if: (github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/')))
     steps:
       - uses: actions/checkout@v6
       - name: Setup Node, Bun, and Cache
@@ -48,10 +40,10 @@ jobs:
           path: dist/
 
   integration-test:
-    needs: build-and-test
+    needs: ci
     runs-on: ubuntu-latest
     # Temporarily disabled per user request
-    if: false && ((github.event_name != 'pull_request' && ! github.event.pull_request.head.repo.fork) || (github.event_name == 'pull_request' && (github.event.pull_request.head.repo.fork || startsWith(github.head_ref, 'dependabot/'))))
+    if: false
     steps:
       - uses: actions/checkout@v6
       - name: Setup Node, Bun, and Cache
