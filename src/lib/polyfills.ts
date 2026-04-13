@@ -4,5 +4,7 @@ import { Temporal as TemporalImpl, Intl as IntlImpl, toTemporalInstant } from '@
 
 // @ts-expect-error TypeScript 6 now defines Temporal globally, but we still need to polyfill it at runtime
 globalThis.Temporal = TemporalImpl
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 globalThis.Intl = IntlImpl as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 Date.prototype.toTemporalInstant = toTemporalInstant as any
