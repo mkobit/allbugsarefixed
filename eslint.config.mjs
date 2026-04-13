@@ -87,6 +87,17 @@ export default [
       ],
     },
   },
+
+  // Remark plugins often need to mutate AST nodes
+  {
+    files: ['src/lib/remark/**/*.ts', 'src/lib/remark/**/*.mjs', 'src/lib/remark/**/*.js'],
+    rules: {
+      'functional/immutable-data': 'off',
+      'functional/no-expression-statements': 'off',
+      'functional/no-throw-statements': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
   // Playwright Tests
   {
     files: ['tests/e2e/**/*.ts', 'playwright.config.ts'],

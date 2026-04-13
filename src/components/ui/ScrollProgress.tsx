@@ -28,6 +28,7 @@ export function ScrollProgress() {
 
     window.addEventListener('scroll', updateScroll)
     window.addEventListener('resize', updateScroll)
+
     // Initial check
     updateScroll()
 
