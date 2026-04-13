@@ -98,6 +98,13 @@ export default [
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
+  // Disable functional/immutable-data for useTheme hook as it crashes with TS 6
+  {
+    files: ['src/hooks/useTheme.ts'],
+    rules: {
+      'functional/immutable-data': 'off',
+    },
+  },
   // Playwright Tests
   {
     files: ['tests/e2e/**/*.ts', 'playwright.config.ts'],
