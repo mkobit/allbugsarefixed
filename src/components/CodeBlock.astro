@@ -9,14 +9,25 @@ interface Props {
   showLineNumbers?: boolean | string
   startLine?: number | string
   class?: string
+  [key: string]: any
 }
 
-const { title, lang = 'plaintext', code, html, showLineNumbers, startLine = 1, class: className } = Astro.props
+const { title, lang = 'plaintext', code, html, showLineNumbers, startLine = 1, class: className, copy, ...rest } = Astro.props
+
+const dataAttrs = Object.fromEntries(
+  Object.entries(rest).map(([key, value]) => [`data-${key}`, value]),
+)
+
+const showCopy = copy !== 'false' && copy !== false
 
 const langLabel = lang === 'plaintext' ? 'Text' : lang;
 ---
 
-<div class:list={['group relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-900 shadow-md', className]} data-code={code}>
+<div
+  class:list={['group relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-900 shadow-md', className]}
+  data-code={code}
+  {...dataAttrs}
+>
   {/* Header Bar */}
   <div class="flex items-center justify-between px-4 py-2 bg-transparent text-xs text-gray-400">
     <div class="flex items-center gap-2">
@@ -32,14 +43,16 @@ const langLabel = lang === 'plaintext' ? 'Text' : lang;
         <span class="uppercase font-mono font-bold text-[10px] tracking-wider text-gray-600">{langLabel}</span>
       )}
 
-      <button
-        class="copy-btn p-1.5 rounded-md transition-all duration-200 hover:bg-gray-700 hover:text-white text-gray-400"
-        aria-label="Copy code"
-        title="Copy to clipboard"
-      >
-        <span class="icon-copy"><Copy className="w-4 h-4" /></span>
-        <span class="icon-check hidden"><Check className="w-4 h-4" /></span>
-      </button>
+      {showCopy && (
+        <button
+          class="copy-btn p-1.5 rounded-md transition-all duration-200 hover:bg-gray-700 hover:text-white text-gray-400"
+          aria-label="Copy code"
+          title="Copy to clipboard"
+        >
+          <span class="icon-copy"><Copy className="w-4 h-4" /></span>
+          <span class="icon-check hidden"><Check className="w-4 h-4" /></span>
+        </button>
+      )}
     </div>
   </div>
 
