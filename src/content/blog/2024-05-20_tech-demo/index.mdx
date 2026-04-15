@@ -132,9 +132,10 @@ fun fix(bug: String) {
 }
 ```
 
+
 ### TypeScript / Astro
 
-```typescript
+```typescript title="src/pages/index.astro" showLineNumbers path="/src/pages/index.astro" copy="false" runnable="true" mode="dark"
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({

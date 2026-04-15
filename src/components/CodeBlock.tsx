@@ -12,10 +12,16 @@ interface CodeBlockProps {
   readonly title?: string
   readonly showLineNumbers?: boolean | string
   readonly startLine?: number | string
+  readonly [key: string]: unknown
 }
 
 export default function CodeBlock(props: CodeBlockProps) {
-  const { title, lang = 'plaintext', code, html, children, className, showLineNumbers, startLine = 1, ...rest } = props
+  const { title, lang = 'plaintext', code, html, children, className, showLineNumbers, startLine = 1, copy, ...rest } = props
+  const showCopy = copy !== 'false' && copy !== false
+
+  const dataAttrs = Object.fromEntries(
+    Object.entries(rest).map(([key, value]) => [`data-${key}`, value]),
+  )
 
   const [copied, setCopied] = useState(false)
   const codeRef = useRef<HTMLPreElement | HTMLDivElement>(null)
@@ -40,7 +46,10 @@ export default function CodeBlock(props: CodeBlockProps) {
   const langLabel = lang === 'plaintext' ? 'Text' : lang
 
   return (
-    <div className="group relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-900 shadow-md">
+    <div
+      className="group relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-900 shadow-md"
+      {...dataAttrs}
+    >
       {/* Header Bar */}
       <div className="flex items-center justify-between px-4 py-2 bg-gray-800/50 border-b border-gray-700 text-xs text-gray-400">
         <div className="flex items-center gap-2">
@@ -56,18 +65,20 @@ export default function CodeBlock(props: CodeBlockProps) {
             <span className="uppercase font-mono font-bold text-[10px] tracking-wider text-gray-600">{langLabel}</span>
           )}
 
-          <button
-            onClick={handleCopy}
-            className={cn(
-              'p-1.5 rounded-md transition-all duration-200',
-              'hover:bg-gray-700 hover:text-white',
-              copied ? 'text-green-400' : 'text-gray-400',
-            )}
-            aria-label="Copy code"
-            title="Copy to clipboard"
-          >
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-          </button>
+          {showCopy && (
+            <button
+              onClick={handleCopy}
+              className={cn(
+                'p-1.5 rounded-md transition-all duration-200',
+                'hover:bg-gray-700 hover:text-white',
+                copied ? 'text-green-400' : 'text-gray-400',
+              )}
+              aria-label="Copy code"
+              title="Copy to clipboard"
+            >
+              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            </button>
+          )}
         </div>
       </div>
 
@@ -84,7 +95,6 @@ export default function CodeBlock(props: CodeBlockProps) {
                 )}
                 style={{ '--start-line': startLine } as React.CSSProperties}
                 dangerouslySetInnerHTML={{ __html: html }}
-                {...rest}
               />
             )
           : (
@@ -94,7 +104,6 @@ export default function CodeBlock(props: CodeBlockProps) {
                   '!m-0 !p-4 !bg-transparent overflow-auto text-sm leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent',
                   className,
                 )}
-                {...rest}
               >
                 {children || code}
               </pre>

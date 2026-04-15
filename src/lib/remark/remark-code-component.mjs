@@ -89,6 +89,19 @@ export function remarkCodeToComponent() {
           }
         }
 
+        // Dynamically parse all other arbitrary attributes
+        const extraAttrs = {}
+        const handledAttrs = ['title', 'showLineNumbers', 'numbers', 'lines']
+        const attrRegex = /([a-zA-Z][a-zA-Z0-9_-]*)(?:=(?:(["'])(.*?)\2|([^\s"']+)))?/g
+        let attrMatch
+        while ((attrMatch = attrRegex.exec(meta)) !== null) {
+          const key = attrMatch[1]
+          const value = attrMatch[3] !== undefined ? attrMatch[3] : (attrMatch[4] !== undefined ? attrMatch[4] : 'true')
+          if (!handledAttrs.includes(key)) {
+            extraAttrs[key] = value
+          }
+        }
+
         // Highlight the code
         let html
         try {
@@ -133,6 +146,11 @@ export function remarkCodeToComponent() {
 
         if (startLine !== 1) {
           mdxNode.attributes.push({ type: 'mdxJsxAttribute', name: 'startLine', value: String(startLine) })
+        }
+
+        // Add dynamically parsed extra attributes
+        for (const [key, value] of Object.entries(extraAttrs)) {
+          mdxNode.attributes.push({ type: 'mdxJsxAttribute', name: key, value })
         }
 
         // Replace the original code node with the MDX component node
