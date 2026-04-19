@@ -8,6 +8,8 @@ import { PostMetadata } from '../../components/ui/PostMetadata'
 import { LabelBadge } from '../../components/LabelBadge'
 import { MDXComponents } from '../../lib/mdx-components'
 import { ScrollProgress } from '../../components/ui/ScrollProgress'
+import Mermaid from '../../components/Mermaid.astro'
+import Latex from '../../components/Latex.astro'
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog')
@@ -79,7 +81,7 @@ const wordCount = readingTimeData?.words;
           prose-headings:font-bold prose-headings:tracking-tight
           prose-img:rounded-xl prose-img:shadow-lg"
         >
-          <Content components={MDXComponents} />
+          <Content components={{ ...MDXComponents, Mermaid, Latex }} />
         </div>
       </div>
 

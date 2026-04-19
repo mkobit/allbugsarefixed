@@ -7,6 +7,9 @@ import remarkReadingTime from 'remark-reading-time'
 import { remarkCodeToComponent } from './src/lib/remark/remark-code-component.mjs'
 import { remarkCallout } from './src/lib/remark/remark-callout.ts'
 import { remarkValidateMermaid } from './src/lib/remark/remark-mermaid-validate.mjs'
+import { remarkMermaidToComponent } from './src/lib/remark/remark-mermaid-component.mjs'
+import remarkMath from 'remark-math'
+import { remarkMathToComponent } from './src/lib/remark/remark-math-component.mjs'
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +17,7 @@ export default defineConfig({
   base: '/',
   integrations: [
     mdx({
-      remarkPlugins: [remarkCallout, remarkReadingTime, remarkCodeToComponent, remarkValidateMermaid],
+      remarkPlugins: [remarkCallout, remarkReadingTime, remarkMath, remarkMathToComponent, remarkCodeToComponent, remarkValidateMermaid, remarkMermaidToComponent],
       // We need to extend the frontmatter with the reading time data
       // This is often done via a custom remark plugin wrapper, but
       // with Astro's mdx integration, we can access it via `remarkPluginFrontmatter` prop in the layout.
@@ -31,8 +34,11 @@ export default defineConfig({
     remarkPlugins: [
       remarkReadingTime,
       remarkCallout,
+      remarkMath,
+      remarkMathToComponent,
       remarkCodeToComponent,
       remarkValidateMermaid,
+      remarkMermaidToComponent,
       () => {
         return function (_tree, file) {
           if (file.data.readingTime) {

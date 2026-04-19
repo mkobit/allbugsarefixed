@@ -23,6 +23,7 @@ async function getHighlighter() {
         'css',
         'html',
         'bash',
+        'mermaid',
         'shell',
         'markdown',
         'yaml',
