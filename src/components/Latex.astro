@@ -3,10 +3,11 @@ import katex from 'katex'
 
 interface Props {
   formula: string
-  inline?: boolean
+  inline?: boolean | string
 }
 
-const { formula, inline = false } = Astro.props
+const { formula } = Astro.props
+const inline = Astro.props.inline === true || Astro.props.inline === 'true'
 const html = katex.renderToString(formula, {
   throwOnError: false,
   displayMode: !inline,

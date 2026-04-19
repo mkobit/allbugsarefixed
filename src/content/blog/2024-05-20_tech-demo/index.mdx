@@ -8,9 +8,7 @@ labels: ["demo", "components"]
 {/* eslint-disable no-unused-vars */}
 import { Callout } from '../../../components/ui/callout';
 import EChart from '../../../components/EChart.astro';
-import Mermaid from '../../../components/Mermaid.astro';
 import IconBlock from '../../../components/IconBlock';
-import Latex from '../../../components/Latex.astro';
 import Map from '../../../components/PigeonMap';
 import { demoMapData } from './map-data';
 import { csvParse } from 'd3-dsv';
@@ -236,8 +234,7 @@ Use the `<Map>` component to render config-driven maps via **Pigeon Maps**.
 
 Use the `<Mermaid>` component for flowcharts and sequence diagrams. Pass the diagram definition string to the `code` prop.
 
-<Mermaid
-  code={`
+```mermaid
 graph TD
     A[Start] --> B{Is it fixed?}
     B -- Yes --> C[Deploy]
@@ -246,10 +243,9 @@ graph TD
     C --> E[Relax]
     E --> F[New Bug Found]
     F --> A
-`}
-/>
+```
 
-<Mermaid code={`
+```mermaid
 sequenceDiagram
     participant U as User
     participant B as Blog
@@ -259,8 +255,7 @@ sequenceDiagram
     B->>S: Request Data
     S-->>B: Return JSON
     B-->>U: Render HTML
-
-`} />
+```
 
 ## Mathematical formulas
 
