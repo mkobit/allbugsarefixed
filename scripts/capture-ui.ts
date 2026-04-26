@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-let, functional/no-loop-statements, functional/immutable-data, @typescript-eslint/no-explicit-any, sort-keys, no-undef */
+/* eslint-disable functional/no-let, functional/no-loop-statements, functional/immutable-data, @typescript-eslint/no-explicit-any */
 import fs from 'fs'
 import path from 'path'
 import { parseArgs } from 'util'
@@ -18,7 +18,8 @@ try {
     },
   })
   values = parsed.values
-} catch (e: any) {
+}
+catch (e: any) {
   console.error('Error parsing arguments:', e.message)
   process.exit(1)
 }
@@ -153,10 +154,11 @@ async function capture() {
 
       console.log(`\nScreenshot saved:`)
       console.log(`![${deviceConfig.name} capture](./screenshots/${filename})`)
-
-    } catch (e) {
+    }
+    catch (e) {
       console.error(`Error during capture for ${deviceConfig.name}:`, e)
-    } finally {
+    }
+    finally {
       await context.close()
     }
   }
