@@ -69,3 +69,15 @@ In such cases, **do not spin your wheels** trying to force the installation.
 Instead:
 - Use an older version of the package.
 - Notify the user of the limitation.
+
+## UI Development & "Eyes" Workflow
+
+Jules has a utility script (`scripts/capture-ui.ts`) to provide visual feedback and a structural layout summary of UI components. This gives Jules "eyes" into how changes actually look and render in the browser.
+
+When working on UI components, layouts, or CSS changes, follow these rules:
+1. **Always verify visual changes:** Whenever you create or modify a UI component or layout, you **MUST** run the capture script to verify your work.
+   - Command: `bun run scripts/capture-ui.ts --url <page-url> [--selector <css-selector>] [--device desktop|mobile|both]`
+   - Example: `bun run scripts/capture-ui.ts --url /test-callout/ --selector "#my-component"`
+2. **Present the screenshots:** Use the markdown image syntax output by the script to present the generated screenshots in the chat thread so the user can easily review the visual changes.
+3. **Analyze the layout snapshot:** Use the text-based layout snapshot (bounding boxes, alignment, text content) printed to the console to programmatically verify structural alignment, spacing, and hierarchy, allowing you to self-correct CSS/styling issues autonomously.
+4. **Transient artifacts:** The generated screenshots are transient and saved in the `.gitignore`d `screenshots/` directory. **NEVER** commit these screenshots to version control.

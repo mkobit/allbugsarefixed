@@ -231,3 +231,4 @@ test-results/
 
 # Ignore root PNG files
 /*.png
+screenshots/
