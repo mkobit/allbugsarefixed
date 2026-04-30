@@ -69,3 +69,16 @@ In such cases, **do not spin your wheels** trying to force the installation.
 Instead:
 - Use an older version of the package.
 - Notify the user of the limitation.
+
+## UI Development & Component Sandbox Workflow
+
+To effectively build and fix UI components, you have access to a dedicated sandbox environment and capture script. This provides you with isolated visual feedback (screenshots) and structural text data (accessibility trees).
+
+When working on UI components or modifying styling, follow these rules:
+1. **Use the Sandbox:** Do not try to capture screenshots of components deeply embedded in complex pages. Instead, place the component you are working on inside `src/pages/sandbox.astro`.
+2. **Add the attribute:** Wrap your isolated component instances in a container with the `data-sandbox="<descriptive-name>"` attribute.
+3. **Capture & Verify:** Run the sandbox capture script to generate screenshots and accessibility trees.
+   - Command: `bun run scripts/capture-sandbox.ts [--device desktop|mobile|both]`
+4. **Present the screenshots:** Use the generated markdown image paths (e.g., `![UI Screenshot](./screenshots/callout-info_desktop.png)`) to present the screenshots in the chat thread so the user can review them.
+5. **Self-correct:** Use the JSON accessibility tree printed in the console to verify that roles, text, and structure match your expectations.
+6. **Transient artifacts:** The generated screenshots are transient and saved in the `.gitignore`d `screenshots/` directory. **NEVER** commit these screenshots to version control.
