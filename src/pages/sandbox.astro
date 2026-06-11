@@ -1,0 +1,45 @@
+---
+import '../styles/global.css'
+import ThemeInit from '../components/ThemeInit.astro'
+import { Callout } from '../components/ui/callout'
+
+if (import.meta.env.PROD) {
+  return Astro.redirect('/404')
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Jules Sandbox</title>
+    <ThemeInit />
+  </head>
+  <body class="bg-brand-surface text-brand-text min-h-screen p-8 transition-colors duration-300">
+    <h1 class="text-2xl font-bold mb-8">Component Sandbox</h1>
+    <p class="mb-8 text-gray-500">This page is strictly for testing individual components in isolation. Elements with `data-sandbox` will be captured by the testing script.</p>
+
+    <div class="space-y-12">
+      <!-- Callout: Info -->
+      <section>
+        <h2 class="text-sm font-mono mb-2 text-gray-400">Callout (Info)</h2>
+        <div data-sandbox="callout-info" class="inline-block w-full max-w-2xl">
+          <Callout type="info" title="Sandbox Info">
+            This is a component rendered in isolation inside the sandbox.
+          </Callout>
+        </div>
+      </section>
+
+      <!-- Callout: Warning -->
+      <section>
+        <h2 class="text-sm font-mono mb-2 text-gray-400">Callout (Warning)</h2>
+        <div data-sandbox="callout-warning" class="inline-block w-full max-w-2xl">
+          <Callout type="warning" title="Watch out!">
+            Warnings stand out visually.
+          </Callout>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
