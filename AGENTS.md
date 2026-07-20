@@ -8,7 +8,7 @@ You **MUST** run the following commands before submitting any changes. These com
 
 **CI Workflow File:** [.github/workflows/check.yml](.github/workflows/check.yml)
 
-1.  **Verify Versions:** `node scripts/verify-versions.mjs`
+1.  **Verify Versions:** `bun scripts/verify-versions.mjs`
     - Checks that node and bun versions match requirements.
 2.  **Lint:** `bun lint`
     - Runs ESLint on .js, .ts, .tsx, .astro, .mdx files.
