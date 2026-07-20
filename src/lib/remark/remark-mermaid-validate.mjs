@@ -7,6 +7,7 @@ import createDOMPurify from 'dompurify'
 const dom = new JSDOM('<!DOCTYPE html>')
 global.window = dom.window
 global.document = dom.window.document
+global.Element = dom.window.Element
 
 // Setup DOMPurify to avoid Mermaid errors
 const DOMPurify = createDOMPurify(dom.window)
