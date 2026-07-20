@@ -16,19 +16,11 @@ export default defineConfig({
   site: 'https://allbugsarefixed.com',
   base: '/',
   integrations: [
-    mdx({
-      remarkPlugins: [remarkCallout, remarkReadingTime, remarkMath, remarkMathToComponent, remarkCodeToComponent, remarkValidateMermaid, remarkMermaidToComponent],
-      // We need to extend the frontmatter with the reading time data
-      // This is often done via a custom remark plugin wrapper, but
-      // with Astro's mdx integration, we can access it via `remarkPluginFrontmatter` prop in the layout.
-      // However, remark-reading-time puts it in file.data.readingTime.
-      // Astro exposes file.data.astro.frontmatter.
-      // We need a small plugin to bridge this.
-      extendMarkdownConfig: true,
-    }),
+    mdx({ extendMarkdownConfig: true }),
     react(),
   ],
   markdown: {
+    processor: '@astrojs/markdown-remark',
     syntaxHighlight: false,
     rehypePlugins: [rehypeSlug],
     remarkPlugins: [

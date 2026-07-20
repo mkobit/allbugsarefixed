@@ -40,10 +40,12 @@
     "remark-math": "^6.0.0",
     "remeda": "^2.39.0",
     "tailwind-merge": "^3.6.0",
-    "tailwind-variants": "^3.2.2"
+    "tailwind-variants": "^3.2.2",
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/markdown-remark": "7.2.0",
     "@eslint/js": "^10.0.1",
     "@iarna/toml": "^2.2.5",
     "@js-temporal/polyfill": "^0.5.1",
@@ -57,11 +59,11 @@
     "@typescript-eslint/eslint-plugin": "^8.62.0",
     "@typescript-eslint/parser": "^8.62.0",
     "@vitest/coverage-v8": "^4.1.9",
-    "astro-eslint-parser": "^2.1.0",
+    "astro-eslint-parser": "^3.0.0",
     "d3-dsv": "^3.0.1",
     "dompurify": "^3.4.11",
     "eslint": "^10.5.0",
-    "eslint-plugin-astro": "^2.1.1",
+    "eslint-plugin-astro": "^3.0.0",
     "eslint-plugin-functional": "^10.0.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-mdx": "^3.8.1",

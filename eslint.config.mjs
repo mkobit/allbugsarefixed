@@ -1,6 +1,6 @@
 import js from '@eslint/js'
 import astroPlugin from 'eslint-plugin-astro'
-import astroEslintParser from 'astro-eslint-parser'
+import * as astroEslintParser from 'astro-eslint-parser'
 import typescriptEslint from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 import { flat as mdxFlat, flatCodeBlocks as mdxFlatCodeBlocks } from 'eslint-plugin-mdx'
