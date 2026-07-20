@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import * as yaml from 'js-yaml'
+import actionData from '../.github/actions/setup-node-bun/action.yml' with { type: 'yaml' }
 import toml from '@iarna/toml'
 import { parse as parseJsonc } from 'jsonc-parser'
 
@@ -34,8 +34,7 @@ function readDevcontainer() {
 }
 
 function readAction() {
-  const content = fs.readFileSync(files.action, 'utf8')
-  const data = yaml.load(content)
+  const data = actionData
 
   let bunVersion
 
