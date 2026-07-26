@@ -1,2 +1,5 @@
 [install]
 minimumReleaseAge = 1209600 # days in seconds
+
+[run]
+bun = true # alias node -> bun for all scripts, so tools with a node shebang (e.g. bunx) run on bun

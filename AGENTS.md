@@ -12,21 +12,38 @@ You **MUST** run the following commands before submitting any changes. These com
     - Checks that node and bun versions match requirements.
 2.  **Lint:** `bun lint`
     - Runs ESLint on .js, .ts, .tsx, .astro, .mdx files.
-3.  **Typecheck:** `bun typecheck`
+3.  **Validate specs:** `bun openspec:validate`
+    - Validates OpenSpec changes and specs under `openspec/`.
+4.  **Typecheck:** `bun typecheck`
     - Runs `astro check` and `tsc` to verify types.
-4.  **Unit Tests:** `bun test`
+5.  **Unit Tests:** `bun test`
     - Runs Vitest unit tests.
-5.  **Coverage:** `bun coverage`
+6.  **Coverage:** `bun coverage`
     - Runs Vitest coverage analysis.
-6.  **Build:** `bun build`
+7.  **Build:** `bun build`
     - Builds the Astro site for production.
-7.  **E2E Tests:** `bun test:e2e`
+8.  **E2E Tests:** `bun test:e2e`
     - Runs Playwright end-to-end tests.
 
 ## Other Commands
 
 - **Dev:** `bun start` (starts the dev server)
 - **New idea:** `bun new-idea "My Title"` (use this to start a new research notebook or blog post)
+
+## Issue tracking
+
+This project uses `bd` (beads) for issue tracking.
+Run `bd prime` for full workflow context before creating or updating issues.
+Key commands: `bd ready` (unblocked work), `bd create "Title" --type task` (new issue), `bd close <id>` (complete).
+Push local issue history to origin with `bd dolt push` after closing work.
+
+## Specs
+
+This project uses OpenSpec for spec-driven development, with a project-local `beads-driven` schema at `openspec/schemas/beads-driven/`.
+Artifact flow: proposal → specs → design → tasks → retrospective → reflection.
+`design.md` must include an `## Adversarial review and mitigations` section before `tasks.md` is created or beads issues are staged.
+After writing `tasks.md`, hydrate it into beads with `bd mol pour openspec-sync --var change_name=<name>`.
+Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work with specs.
 
 ## General guidelines
 
