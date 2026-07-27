@@ -1,7 +1,6 @@
 name: Beads lint
 
 on:
-  push:
   schedule:
     - cron: "0 9 * * 1"
   workflow_dispatch:
@@ -9,9 +8,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    # For push events, only run when the Dolt data ref itself moved (bd dolt push);
-    # normal code pushes are covered by the weekly schedule instead.
-    if: github.event_name != 'push' || startsWith(github.ref, 'refs/dolt/')
+    # Empirically confirmed (2026-07-27): GitHub Actions does not trigger workflow
+    # runs for pushes to custom refs like refs/dolt/data (bd dolt push), even with
+    # an unfiltered `on: push`. Weekly cron + manual dispatch only.
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7.0.0
