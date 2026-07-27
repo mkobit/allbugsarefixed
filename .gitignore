@@ -231,3 +231,14 @@ test-results/
 
 # Ignore root PNG files
 /*.png
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+
+# Beads auto-export/interactions log — rewritten on every bd command, pollutes diffs.
+# Dolt is the source of truth (bd dolt push/pull); config.yaml/metadata.json stay tracked.
+.beads/issues.jsonl
+.beads/interactions.jsonl

@@ -1,0 +1,30 @@
+schema: beads-driven
+
+# Project context
+# This block is injected into `openspec instructions` for every artifact.
+# Stale entries mislead agents: when a tooling or architecture decision changes,
+# update this context in the same PR as the change.
+context: |
+  Tech stack: Astro 7, React 19, TypeScript (strict), Bun, MDX.
+  Architecture: Astro is glue (routing, data fetching, top-level rendering);
+    React owns logic and styled components under src/components/ui.
+  Domain: personal blog and research notebooks, content lives in src/content/blog/
+    as YYYY-MM-DD_slug/ folders (notebook.md for research, index.mdx for the draft/post).
+  Standards:
+    - ESLint is the formatter (Prettier is not used).
+    - Semantic line breaks (one sentence per line) in Markdown/MDX.
+    - CI required commands: bun lint, bun typecheck, bun test, bun coverage, bun build, bun test:e2e.
+
+# Per-artifact rules
+rules:
+  proposal:
+    - State which parts of the site/build are affected (a specific blog post's
+      content, a shared component, build/CI config, etc.).
+  design:
+    - Note any new dependency and whether it needs a bunfig.toml minimumReleaseAge
+      exception.
+  tasks:
+    - Every task must include a Validation step (the specific CI command or
+      manual check that proves it's done).
+    - When creating Beads issues, use `bd create --validate --acceptance "..."`
+      so the issue passes `bd lint` immediately.

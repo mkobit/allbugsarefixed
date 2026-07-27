@@ -1,0 +1,32 @@
+name: Beads lint
+
+on:
+  push:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    # For push events, only run when the Dolt data ref itself moved (bd dolt push);
+    # normal code pushes are covered by the weekly schedule instead.
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/dolt/')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.0
+
+      - name: Setup mise
+        uses: jdx/mise-action@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cache: true
+
+      - name: Bootstrap Beads
+        run: bd bootstrap --yes
+
+      - name: Sync Beads from remote
+        run: bd dolt pull
+
+      - name: Lint Beads
+        run: bd lint
