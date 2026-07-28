@@ -8,6 +8,11 @@ updates:
       all:
         patterns:
           - "*"
+    ignore:
+      # typescript@7.x drops the programmatic API astro check relies on and
+      # breaks @typescript-eslint@8.x's peer range (<6.1.0). See abf-0yc.3.
+      - dependency-name: "typescript"
+        versions: [">=6.1.0"]
     commit-message:
       prefix: "chore(deps)"
     open-pull-requests-limit: 10
