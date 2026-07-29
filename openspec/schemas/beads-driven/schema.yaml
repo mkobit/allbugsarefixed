@@ -230,8 +230,8 @@ artifacts:
 
       2. Beads: `bd query "label=meta:openspec:<change-name> AND status=closed"`
 
-      3. CI commands: latest `bun lint`/`bun typecheck`/`bun test`/`bun build`
-      results
+      3. CI commands: latest `bun run lint`/`bun run typecheck`/`bun run test`/`bun run build`
+      results (use `bun run <script>`, not bare `bun <script>` — `test`/`build` collide with Bun's own reserved subcommands)
 
 
       **ANALYSIS**: Summarize Wins, Misses, Surprises, and Promote candidates

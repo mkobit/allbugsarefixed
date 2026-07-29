@@ -6,23 +6,25 @@ This repository contains a personal blog and research notes.
 
 You **MUST** run the following commands before submitting any changes. These commands mirror the steps in the Continuous Integration (CI) pipeline, and running them locally ensures that your PR will not fail CI.
 
-**CI Workflow File:** [.github/workflows/check.yml](.github/workflows/check.yml)
+**CI Workflow File:** [.github/workflows/check.yml](.github/workflows/check.yml) (see [reusable-check.yml](.github/workflows/reusable-check.yml) for the actual commands CI runs)
+
+**Use `bun run <script>`, not bare `bun <script>`.** `test` and `build` are Bun's own reserved subcommands (Bun's built-in test runner and bundler, respectively) — the bare form silently does the wrong thing instead of running this project's npm script, even though most other script names (`lint`, `typecheck`, `coverage`, etc.) work fine either way.
 
 1.  **Verify Versions:** `bun scripts/verify-versions.mjs`
     - Checks that node and bun versions match requirements.
-2.  **Lint:** `bun lint`
+2.  **Lint:** `bun run lint`
     - Runs ESLint on .js, .ts, .tsx, .astro, .mdx files.
-3.  **Validate specs:** `bun openspec:validate`
+3.  **Validate specs:** `bun run openspec:validate`
     - Validates OpenSpec changes and specs under `openspec/`.
-4.  **Typecheck:** `bun typecheck`
+4.  **Typecheck:** `bun run typecheck`
     - Runs `astro check` and `tsc` to verify types.
-5.  **Unit Tests:** `bun test`
-    - Runs Vitest unit tests.
-6.  **Coverage:** `bun coverage`
+5.  **Unit Tests:** `bun run test`
+    - Runs Vitest unit tests. (Bare `bun test` invokes Bun's own test runner instead, which will try and fail to run the Playwright specs under `tests/e2e/`.)
+6.  **Coverage:** `bun run coverage`
     - Runs Vitest coverage analysis.
-7.  **Build:** `bun build`
-    - Builds the Astro site for production.
-8.  **E2E Tests:** `bun test:e2e`
+7.  **Build:** `bun run build`
+    - Builds the Astro site for production. (Bare `bun build` errors with "Missing entrypoints" — it's Bun's bundler, not this script.)
+8.  **E2E Tests:** `bun run test:e2e`
     - Runs Playwright end-to-end tests.
 
 ## Other Commands
@@ -77,6 +79,11 @@ For instructions on how to handle blog posts, drafts, and research notes, strict
 - `src/content/blog/`: Contains all blog posts and research notebooks.
 - `src/components/`: React and Astro components.
 - `src/lib/`: Shared utilities and logic.
+
+## Jules agents
+
+See `.jules/AGENTS.md`.
+Check existing tooling and `.jules/` prompt files before adding a new automation script.
 
 ## Package Management
 
