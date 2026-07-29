@@ -27,7 +27,7 @@
 
 ## 4. Backfill molecules for pre-existing notebook-only folders
 
-- [ ] 4.1 For each of the 6 folders with `notebook.md` but no `index.mdx` and no bead (everything under `src/content/blog/` except the 3 in Group 2), check for an existing `blog`-labeled bead by slug first, then pour `blog-lifecycle` and close its `seed` bead immediately (research has already started, so leave the molecule sitting at `stage:researching`)
+- [ ] 4.1 For each folder with `notebook.md` but no `index.mdx` and no bead (everything under `src/content/blog/` except the 3 in Group 2 — enumerate fresh at execution time, don't hardcode a count), check for an existing `blog`-labeled bead by slug first, then pour `blog-lifecycle` and close its `seed` bead immediately (research has already started, so leave the molecule sitting at `stage:researching`)
 
 ## 5. Notebook template rework
 

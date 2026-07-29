@@ -27,7 +27,7 @@ const blogCollection = defineCollection({
         return Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate().toString()
       }),
 
-    title: z.string(),
+    title: z.string().min(1).max(200),
 
     // Build visibility. hidden: dev-only, no prod page built.
     // unlisted: prod page built, reachable by direct URL, excluded from listings/search.
