@@ -5,7 +5,7 @@ A new blog post idea SHALL be captured by pouring the `blog-lifecycle` beads for
 
 #### Scenario: Capturing a fleeting idea
 - **WHEN** the user has a post idea and no research has started yet
-- **THEN** `bd mol pour blog-lifecycle --var slug=<kebab-slug> --var title="..."` creates a root epic labeled `blog` plus one child bead per lifecycle stage (`stage:seed`, `stage:researching`, `stage:drafting`, `stage:review`, `stage:published`), each stage after `seed` explicitly blocked on the previous via `after_step`/`depends_on`, and no `src/content/blog/` folder is created yet
+- **THEN** `bd mol pour blog-lifecycle --var slug=<kebab-slug> --var title="..."` creates a root epic labeled `blog` plus one child bead per lifecycle stage (`stage:seed`, `stage:researching`, `stage:drafting`, `stage:review`, `stage:published`), each stage after `seed` explicitly blocked on the previous via `depends_on`, and no `src/content/blog/` folder is created yet
 
 #### Scenario: Avoiding a duplicate pour
 - **WHEN** an agent or the user is about to capture an idea
@@ -34,11 +34,15 @@ Lifecycle state (seed → researching → drafting → review → published) SHA
 - **THEN** the code/data is added as a separate auxiliary file in the post's folder (e.g. `data.csv`, `map.ts`), not pasted into `notebook.md`
 
 ### Requirement: Frontmatter only controls build visibility
-Post frontmatter SHALL carry a single `draft: boolean` field for Astro build visibility, replacing the multi-value `status` enum; it SHALL NOT be the source of truth for planning/lifecycle state.
+Post frontmatter SHALL carry a single `visibility: 'hidden' | 'unlisted' | 'visible'` field for Astro build visibility, replacing the multi-value `status` enum; it SHALL NOT be the source of truth for planning/lifecycle state. `hidden` posts build no prod page; `unlisted` posts build a page reachable by direct URL but excluded from listings and search; `visible` posts build a page and appear in listings and search.
 
 #### Scenario: Publishing a post
 - **WHEN** a post is ready to publish
-- **THEN** `draft` is flipped to `false` in `index.mdx` frontmatter, the `stage:review` bead is closed, and the now-unblocked `stage:published` bead is closed with `bd close <id> --reason "published"`
+- **THEN** `visibility` is flipped to `"visible"` in `index.mdx` frontmatter, the `stage:review` bead is closed, and the now-unblocked `stage:published` bead is closed with `bd close <id> --reason "published"`
+
+#### Scenario: Sharing a post before full announcement
+- **WHEN** a post is finished but the user isn't ready to list it in the main index/search yet
+- **THEN** `visibility` is set to `"unlisted"`, producing a real built page reachable by direct URL without appearing in listings or search results
 
 ### Requirement: The backlog is queryable without new tooling
 The set of in-flight post ideas SHALL be visible via `bd query`/`bd list` filtered on the `blog` label, without requiring a new dashboard tool.

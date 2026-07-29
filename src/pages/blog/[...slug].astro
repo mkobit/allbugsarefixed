@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 
   const filteredEntries = blogEntries.filter((entry: CollectionEntry<'blog'>) => {
     if (isProd) {
-      return entry.data.status === 'published' || entry.data.status === 'locked'
+      return entry.data.visibility !== 'hidden'
     }
     return true
   })
@@ -66,9 +66,9 @@ const wordCount = readingTimeData?.words;
 
           <div class="mt-4">
             {
-              entry.data.status !== 'published' && (
+              entry.data.visibility !== 'visible' && (
                 <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-800 uppercase tracking-wide">
-                  {entry.data.status}
+                  {entry.data.visibility}
                 </span>
               )
             }

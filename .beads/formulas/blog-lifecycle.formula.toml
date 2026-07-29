@@ -48,4 +48,4 @@ title = "Published: {{title}}"
 type = "task"
 labels = ["blog", "stage:published"]
 depends_on = ["review"]
-description = "Flip draft: false in index.mdx frontmatter, then close this step with a reason of 'published'."
+description = "Flip visibility: \"visible\" in index.mdx frontmatter, then close this step with a reason of 'published'."

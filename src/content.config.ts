@@ -27,8 +27,10 @@ const blogCollection = defineCollection({
         return Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTimeISO('UTC').toPlainDate().toString()
       }),
 
-    // Blog Post Status
-    status: z.enum(['concept', 'draft', 'review', 'published', 'locked']).default('published'),
+    // Build visibility. hidden: dev-only, no prod page built.
+    // unlisted: prod page built, reachable by direct URL, excluded from listings/search.
+    // visible: prod page built and listed everywhere.
+    visibility: z.enum(['hidden', 'unlisted', 'visible']),
 
     title: z.string(),
   }),
