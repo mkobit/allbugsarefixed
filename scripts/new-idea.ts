@@ -37,12 +37,21 @@ else {
 const notebookPath = path.join(folderPath, 'notebook.md')
 
 if (!fs.existsSync(notebookPath)) {
-  // Notebook template (no frontmatter as per instructions for scratchpad)
+  // Notebook template (no frontmatter as per instructions for scratchpad).
+  // Headers are capture buckets, not essay sections -- none of them should
+  // read as "write the post here". Publish-ready prose belongs in index.mdx,
+  // written by the human, not here.
   const notebookContent = `# ${title}
 
-## Idea
+## Links & sources
 
-## References
+## Facts & data
+
+## Rough thoughts (human)
+
+## Agent research notes
+
+## Open questions
 `
   fs.writeFileSync(notebookPath, notebookContent)
   console.log(`Created notebook: ${notebookPath}`)

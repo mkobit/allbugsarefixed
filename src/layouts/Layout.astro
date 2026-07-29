@@ -16,7 +16,7 @@ const { title } = Astro.props
 
 // Fetch posts for search
 const posts = await getCollection('blog', ({ data }: CollectionEntry<'blog'>) => {
-  return data.status === 'published'
+  return data.visibility === 'visible'
 })
 
 // Sort by date desc (though for search it doesn't strictly matter, but good for consistency)
