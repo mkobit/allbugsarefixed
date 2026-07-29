@@ -85,6 +85,7 @@ Order matters: frontmatter for every existing `index.mdx` is migrated **before**
 
 - If `seed`-stage beads (captured ideas with no research yet) pile up unused for a long time, is the "pour the whole molecule at capture" decision (Decision 1) still the right default, or should capture go back to a bare `bd create`/`bd q` with the fuller molecule poured only on promotion? Revisit after a few months of real usage — not blocking for this change.
 - Exact `notebook.md` template headers (Decision 3) are left to `tasks.md`/implementation rather than pinned here, since the important constraint is "no heading that reads as an essay section," not the specific wording.
+- Raised mid-implementation, deliberately deferred rather than decided ad hoc: should `notebook.md`/`index.mdx` stay two permanent files, or move to a single file per post with a scratch section that gets purged/stripped by tooling at generation/publish time? Tracked as its own decision bead (`abf-zdv.4.17`), not blocking this change — the two-file split stands as implemented here until that decision resolves.
 
 ## Adversarial review and mitigations
 
