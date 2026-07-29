@@ -1,0 +1,51 @@
+formula = "blog-lifecycle"
+description = "Lifecycle tracking for a blog post idea, from capture through publish."
+version = 1
+type = "workflow"
+
+[vars.slug]
+description = "Kebab-case post slug, matching (or intended for) the src/content/blog/YYYY-MM-DD_slug folder name"
+required = true
+
+[vars.title]
+description = "Human-readable post title"
+required = true
+
+[[steps]]
+id = "seed"
+title = "Seed: {{title}}"
+type = "task"
+labels = ["blog", "stage:seed"]
+description = "A fleeting post idea with no research started yet. No src/content/blog/ folder exists yet for {{slug}}. Close this step when research begins; that creates the YYYY-MM-DD_{{slug}}/notebook.md folder and unblocks the researching step."
+
+[[steps]]
+id = "researching"
+title = "Researching: {{title}}"
+type = "task"
+labels = ["blog", "stage:researching"]
+depends_on = ["seed"]
+description = "notebook.md is a scratchpad ONLY: facts, links, quotes, rough human notes, agent-research findings. Do NOT write publish-ready prose or anything trying to sound like a finished blog post here -- that is index.mdx's job, written by the human. Code or data needed for research (scripts, datasets) goes in a separate auxiliary file in the post's folder (e.g. data.csv, map.ts), never pasted inline into notebook.md. Close this step when the user is ready to start drafting prose; that creates index.mdx and unblocks the drafting step."
+
+[[steps]]
+id = "drafting"
+title = "Drafting: {{title}}"
+type = "task"
+labels = ["blog", "stage:drafting"]
+depends_on = ["researching"]
+description = "index.mdx now exists. The human writes the narrative prose; an agent's role here is research support and fact-checking, not ghostwriting or mimicking the user's voice. Close this step when the draft is ready for review."
+
+[[steps]]
+id = "review"
+title = "Review: {{title}}"
+type = "task"
+labels = ["blog", "stage:review"]
+depends_on = ["drafting"]
+description = "Final read-through before publish. Close this step when the post is approved to publish."
+
+[[steps]]
+id = "published"
+title = "Published: {{title}}"
+type = "task"
+labels = ["blog", "stage:published"]
+depends_on = ["review"]
+description = "Flip draft: false in index.mdx frontmatter, then close this step with a reason of 'published'."
