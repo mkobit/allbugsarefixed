@@ -38,6 +38,7 @@ This project uses `bd` (beads) for issue tracking.
 Run `bd prime` for full workflow context before creating or updating issues.
 Key commands: `bd ready` (unblocked work), `bd create "Title" --type task` (new issue), `bd close <id>` (complete).
 Push local issue history to origin with `bd dolt push` after closing work.
+When the implementation approach isn't decided yet, describe the problem/goal in the issue and leave the solution open for the design phase — don't bake in a specific technical approach until it's actually been verified or decided.
 
 ## Specs
 
