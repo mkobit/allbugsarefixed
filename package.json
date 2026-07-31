@@ -77,7 +77,10 @@
     "jsdom": "^29.1.1",
     "jsonc-parser": "^3.3.1",
     "mdast": "^3.0.0",
+    "mdast-util-to-string": "^4.0.0",
     "playwright": "^1.61.1",
+    "remark-mdx": "^3.1.1",
+    "remark-parse": "^11.0.0",
     "remark-reading-time": "^2.1.0",
     "shiki": "^4.3.0",
     "tailwindcss": "^4.3.2",
@@ -86,6 +89,7 @@
     "unified": "^11.0.5",
     "unist": "^0.0.1",
     "unist-util-visit": "^5.1.0",
+    "vfile": "^6.0.3",
     "vitest": "^4.1.9"
   }
 }
