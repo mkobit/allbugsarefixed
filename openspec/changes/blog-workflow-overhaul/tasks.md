@@ -42,3 +42,37 @@
 
 - [x] 7.1 Run the full CI gate locally per `AGENTS.md`: `bun run lint`, `bun run openspec:validate`, `bun run typecheck`, `bun run test`, `bun run coverage`, `bun run build`, `bun run test:e2e` — fix any failures before merge. (Note: use `bun run <script>`, not bare `bun <script>` — `bun test`/`bun coverage` collide with Bun's own reserved subcommands and silently do the wrong thing.)
 - [x] 7.2 Start the dev server and manually confirm: all 3 existing posts render with correct visibility (2 `visible`, 1 `hidden`-in-dev-only), blog listing pages show the expected set, and the `[...slug].astro` badge appears only on the non-`visible` post
+
+<!--
+  Tasks below (8-12) implement the single-file-per-post mechanism
+  (abf-zdv.4.18, design.md Decisions 5-7), added after 1-7 above shipped.
+-->
+
+## 8. Scratch-section infrastructure
+
+- [ ] 8.1 Add dev dependencies: `remark-parse`, `remark-mdx`, `mdast-util-to-string` (parse-only, no `remark-stringify` — see `design.md` Decision 6).
+- [ ] 8.2 Write `src/lib/remark/scratch-section.ts` exporting `findScratchSection(tree)` per `design.md` Decision 6.
+- [ ] 8.3 Write `src/lib/remark/remark-strip-scratch.ts`; register **first** in both `astro.config.mjs` remark-plugin lists, ahead of `remarkReadingTime`.
+- [ ] 8.4 Verify the strip for real: a fixture post with a `## Scratch` section, a fenced-code-block negative fixture containing the literal text `## Scratch`, and a `## **Scratch**`-formatted-heading fixture. Run `bun run start`; confirm scratch content is absent from rendered HTML and excluded from the reading-time badge.
+
+## 9. Purge script
+
+- [ ] 9.1 Write `scripts/purge-scratch.ts` per `design.md` Decision 6: parse read-only via `remark-parse`+`remark-mdx`, call `findScratchSection`, slice the raw source string at the returned offsets, never round-trip through `remark-stringify`.
+- [ ] 9.2 Add `"purge-scratch": "bun scripts/purge-scratch.ts"` to `package.json` `scripts`.
+- [ ] 9.3 Verify the purge for real against the fixtures from 8.4: confirm only the true scratch section is removed, the fenced-code fixture is untouched, and remaining content is byte-identical apart from the removed range.
+
+## 10. Content pipeline updates
+
+- [ ] 10.1 Update `scripts/new-idea.ts`: create `index.mdx` (not `notebook.md`) with `visibility: "hidden"` frontmatter and a `## Scratch` section using the current capture-bucket headers demoted to depth 3.
+- [ ] 10.2 Update `src/content.config.ts`: remove the now-meaningless `!**/notebook.md` glob exclude.
+- [ ] 10.3 Rewrite `src/content/blog/AGENTS.md`: Structure/Files/Workflow sections for the single-file shape; `index.mdx` creation moves to the `stage:researching` trigger; Publishing step gains the `purge-scratch` action; reserved-heading constraint documented alongside the existing DO/DON'T table.
+
+## 11. Migrate existing content
+
+- [ ] 11.1 Enumerate existing notebook-only folders fresh at execution time (the `abf-mol-*` molecules currently at `stage:researching`); for each, merge `notebook.md`'s content into a new `index.mdx` under `## Scratch`, then delete `notebook.md`.
+- [ ] 11.2 Confirm the 3 already-published/hidden posts have no `notebook.md` to merge (verify at execution time — no action needed if confirmed).
+
+## 12. Verification (single-file mechanism)
+
+- [ ] 12.1 Run the full CI gate locally per `AGENTS.md`: `bun run lint`, `bun run openspec:validate`, `bun run typecheck`, `bun run test`, `bun run coverage`, `bun run build`, `bun run test:e2e`.
+- [ ] 12.2 Start the dev server and manually confirm: a real migrated post renders correctly with scratch content absent and a correct reading-time badge, and `bun run purge-scratch <slug>` against it produces a clean, correctly-purged file.
