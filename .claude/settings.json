@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun scripts/verify-versions.mjs)",
+      "Bash(bun run lint *)",
+      "Bash(bun run openspec:validate *)",
+      "Bash(bun run typecheck *)",
+      "Bash(bun run test *)",
+      "Bash(bun run coverage *)",
+      "Bash(bun run build *)",
+      "Bash(bun run test:e2e *)"
+    ]
+  }
+}
