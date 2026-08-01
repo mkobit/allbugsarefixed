@@ -16,7 +16,8 @@
     "coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "new-idea": "bun scripts/new-idea.ts",
-    "openspec:validate": "openspec validate --all --no-interactive"
+    "openspec:validate": "openspec validate --all --no-interactive",
+    "purge-scratch": "bun scripts/purge-scratch.ts"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.1",
