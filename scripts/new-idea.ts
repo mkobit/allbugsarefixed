@@ -34,28 +34,41 @@ else {
   console.log(`Folder already exists: ${folderPath}`)
 }
 
-const notebookPath = path.join(folderPath, 'notebook.md')
+const indexPath = path.join(folderPath, 'index.mdx')
 
-if (!fs.existsSync(notebookPath)) {
-  // Notebook template (no frontmatter as per instructions for scratchpad).
-  // Headers are capture buckets, not essay sections -- none of them should
-  // read as "write the post here". Publish-ready prose belongs in index.mdx,
-  // written by the human, not here.
-  const notebookContent = `# ${title}
+if (!fs.existsSync(indexPath)) {
+  // Everything lives in one index.mdx now: frontmatter plus a `## Scratch`
+  // section for research capture. The capture-bucket headers are demoted to
+  // depth 3 so they nest inside `## Scratch` instead of ending it early --
+  // findScratchSection() only breaks on a heading at depth <= 2. None of the
+  // headers should read as "write the post here"; publish-ready prose goes
+  // outside `## Scratch`, written by the human.
+  //
+  // `description` has no schema default and there's no post content yet to
+  // summarize, so it's seeded with the title as a placeholder for the human
+  // to replace once real content exists.
+  const indexContent = `---
+title: "${title}"
+pubDate: ${dateStr}
+visibility: "hidden"
+description: "${title}"
+---
 
-## Links & sources
+## Scratch
 
-## Facts & data
+### Links & sources
 
-## Rough thoughts (human)
+### Facts & data
 
-## Agent research notes
+### Rough thoughts (human)
 
-## Open questions
+### Agent research notes
+
+### Open questions
 `
-  fs.writeFileSync(notebookPath, notebookContent)
-  console.log(`Created notebook: ${notebookPath}`)
+  fs.writeFileSync(indexPath, indexContent)
+  console.log(`Created index: ${indexPath}`)
 }
 else {
-  console.log(`Notebook already exists: ${notebookPath}`)
+  console.log(`Index already exists: ${indexPath}`)
 }
