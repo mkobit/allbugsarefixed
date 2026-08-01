@@ -11,7 +11,6 @@ const blogCollection = defineCollection({
       '!**/AGENTS.md',
       '!**/CLAUDE.md',
       '!**/_*.{md,mdx}',
-      '!**/notebook.md',
     ],
   }),
   schema: z.object({
