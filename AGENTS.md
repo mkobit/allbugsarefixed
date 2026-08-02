@@ -62,6 +62,9 @@ Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work w
 - **Writing Style:**
   - Use **Sentence case** for headings and titles.
   - Use **semantic line breaks** (one sentence per line) in Markdown and MDX files to improve diff readability.
+- **Frontend guidance skill:**
+  - The user-global `modern-web-guidance` skill covers current web-platform best practices.
+  - Invoke it before HTML/CSS or client-side JS work in this repo, regardless of which agent tool is running.
 
 ## Blog & research
 
