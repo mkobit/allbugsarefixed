@@ -11,6 +11,7 @@ import { remarkValidateMermaid } from './src/lib/remark/remark-mermaid-validate.
 import { remarkMermaidToComponent } from './src/lib/remark/remark-mermaid-component.mjs'
 import remarkMath from 'remark-math'
 import { remarkMathToComponent } from './src/lib/remark/remark-math-component.mjs'
+import { remarkReadingTimeFrontmatter } from './src/lib/remark/remark-reading-time-frontmatter.ts'
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,13 +19,11 @@ export default defineConfig({
   base: '/',
   integrations: [
     mdx({
-      remarkPlugins: [remarkStripScratch, remarkCallout, remarkReadingTime, remarkMath, remarkMathToComponent, remarkCodeToComponent, remarkValidateMermaid, remarkMermaidToComponent],
-      // We need to extend the frontmatter with the reading time data
-      // This is often done via a custom remark plugin wrapper, but
-      // with Astro's mdx integration, we can access it via `remarkPluginFrontmatter` prop in the layout.
-      // However, remark-reading-time puts it in file.data.readingTime.
-      // Astro exposes file.data.astro.frontmatter.
-      // We need a small plugin to bridge this.
+      // extendMarkdownConfig only merges markdown.remarkPlugins in when this
+      // list is left undefined -- since we set it explicitly, every plugin
+      // needed for .mdx (all posts are .mdx) must be listed here too,
+      // including the reading-time frontmatter bridge below.
+      remarkPlugins: [remarkStripScratch, remarkCallout, remarkReadingTime, remarkReadingTimeFrontmatter, remarkMath, remarkMathToComponent, remarkCodeToComponent, remarkValidateMermaid, remarkMermaidToComponent],
       extendMarkdownConfig: true,
     }),
     react(),
@@ -35,20 +34,13 @@ export default defineConfig({
     remarkPlugins: [
       remarkStripScratch,
       remarkReadingTime,
+      remarkReadingTimeFrontmatter,
       remarkCallout,
       remarkMath,
       remarkMathToComponent,
       remarkCodeToComponent,
       remarkValidateMermaid,
       remarkMermaidToComponent,
-      () => {
-        return function (_tree, file) {
-          if (file.data.readingTime) {
-            // @ts-ignore
-            file.data.astro.frontmatter.readingTime = file.data.readingTime
-          }
-        }
-      },
     ],
   },
   trailingSlash: 'always',
