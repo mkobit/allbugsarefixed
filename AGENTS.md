@@ -10,27 +10,21 @@ You **MUST** run the following commands before submitting any changes. These com
 
 **Use `bun run <script>`, not bare `bun <script>`.** `test` and `build` are Bun's own reserved subcommands (Bun's built-in test runner and bundler, respectively) — the bare form silently does the wrong thing instead of running this project's npm script, even though most other script names (`lint`, `typecheck`, `coverage`, etc.) work fine either way.
 
-1.  **Verify Versions:** `bun scripts/verify-versions.mjs`
-    - Checks that node and bun versions match requirements.
+1.  **Verify versions:** `bun scripts/verify-versions.mjs`
 2.  **Lint:** `bun run lint`
-    - Runs ESLint on .js, .ts, .tsx, .astro, .mdx files.
 3.  **Validate specs:** `bun run openspec:validate`
-    - Validates OpenSpec changes and specs under `openspec/`.
 4.  **Typecheck:** `bun run typecheck`
-    - Runs `astro check` and `tsc` to verify types.
-5.  **Unit Tests:** `bun run test`
-    - Runs Vitest unit tests. (Bare `bun test` invokes Bun's own test runner instead, which will try and fail to run the Playwright specs under `tests/e2e/`.)
+5.  **Unit tests:** `bun run test`
+    - Bare `bun test` invokes Bun's own test runner instead, which will try and fail to run the Playwright specs under `tests/e2e/`.
 6.  **Coverage:** `bun run coverage`
-    - Runs Vitest coverage analysis.
 7.  **Build:** `bun run build`
-    - Builds the Astro site for production. (Bare `bun build` errors with "Missing entrypoints" — it's Bun's bundler, not this script.)
-8.  **E2E Tests:** `bun run test:e2e`
-    - Runs Playwright end-to-end tests.
+    - Bare `bun build` errors with "Missing entrypoints" — it's Bun's bundler, not this script.
+8.  **E2E tests:** `bun run test:e2e`
 
 ## Other Commands
 
 - **Dev:** `bun start` (starts the dev server)
-- **New idea:** `bun new-idea "My Title"` (use this to start a new research notebook or blog post)
+- **New idea:** `bun new-idea "My Title"` (creates the post folder and `index.mdx`)
 
 ## Issue tracking
 
@@ -71,16 +65,9 @@ Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work w
 For instructions on how to handle blog posts, drafts, and research notes, strictly follow the guidelines in:
 **`src/content/blog/AGENTS.md`**
 
-**Key Highlights:**
-
-- **New ideas:** Use `bun new-idea "Title"` to automatically create the folder and `notebook.md`.
-- **Ideas/research:** Go into `notebook.md` inside a `YYYY-MM-DD_slug` folder.
-- **Drafts:** Live in `index.mdx` in the same folder.
-- **Do not** create `index.mdx` until the user is ready to draft the post.
-
 ## File structure
 
-- `src/content/blog/`: Contains all blog posts and research notebooks.
+- `src/content/blog/`: Contains all blog posts and research (one `index.mdx` per post — see `src/content/blog/AGENTS.md`).
 - `src/components/`: React and Astro components.
 - `src/lib/`: Shared utilities and logic.
 
