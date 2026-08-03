@@ -16,7 +16,7 @@ id = "seed"
 title = "Seed: {{title}}"
 type = "task"
 labels = ["blog", "stage:seed"]
-description = "A fleeting post idea with no research started yet. No src/content/blog/ folder exists yet for {{slug}}. Close this step when research begins; that creates the YYYY-MM-DD_{{slug}}/notebook.md folder and unblocks the researching step."
+description = "A fleeting post idea with no research started yet. No src/content/blog/ folder exists yet for {{slug}}. Close this step when research begins; that creates the YYYY-MM-DD_{{slug}}/index.mdx file (via `bun new-idea`, with visibility: \"hidden\") and unblocks the researching step."
 
 [[steps]]
 id = "researching"
@@ -24,7 +24,7 @@ title = "Researching: {{title}}"
 type = "task"
 labels = ["blog", "stage:researching"]
 depends_on = ["seed"]
-description = "notebook.md is a scratchpad ONLY: facts, links, quotes, rough human notes, agent-research findings. Do NOT write publish-ready prose or anything trying to sound like a finished blog post here -- that is index.mdx's job, written by the human. Code or data needed for research (scripts, datasets) goes in a separate auxiliary file in the post's folder (e.g. data.csv, map.ts), never pasted inline into notebook.md. Close this step when the user is ready to start drafting prose; that creates index.mdx and unblocks the drafting step."
+description = "The reserved `## Scratch` heading inside index.mdx is a scratchpad ONLY: facts, links, quotes, rough human notes, agent-research findings. Do NOT write publish-ready prose or anything trying to sound like a finished blog post here -- that's the job of the rest of index.mdx, written by the human. Code or data needed for research (scripts, datasets) goes in a separate auxiliary file in the post's folder (e.g. data.csv, map.ts), never pasted inline into `## Scratch`. Close this step when the user is ready to start drafting prose outside `## Scratch`; that unblocks the drafting step (index.mdx already exists from this stage)."
 
 [[steps]]
 id = "drafting"
@@ -32,7 +32,7 @@ title = "Drafting: {{title}}"
 type = "task"
 labels = ["blog", "stage:drafting"]
 depends_on = ["researching"]
-description = "index.mdx now exists. The human writes the narrative prose; an agent's role here is research support and fact-checking, not ghostwriting or mimicking the user's voice. Close this step when the draft is ready for review."
+description = "index.mdx already exists (created during researching). The human writes the narrative prose outside `## Scratch`; an agent's role here is research support and fact-checking, not ghostwriting or mimicking the user's voice. Close this step when the draft is ready for review."
 
 [[steps]]
 id = "review"
