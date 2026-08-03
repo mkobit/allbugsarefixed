@@ -171,6 +171,11 @@ artifacts:
       - **Risks / Trade-offs**: Known limitations, things that could go wrong.
       Format: [Risk] → Mitigation
 
+      - **Adversarial review and mitigations**: Poke holes in the design —
+      likely failure modes, edge cases, or objections — and how each is
+      mitigated. **REQUIRED**: this section must exist before tasks.md is
+      created or beads issues are staged.
+
       - **Migration Plan**: Steps to deploy, rollback strategy (if applicable)
 
       - **Open Questions**: Outstanding decisions or unknowns to resolve

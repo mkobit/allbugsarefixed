@@ -17,3 +17,8 @@
 ## Risks / Trade-offs
 
 <!-- Known risks and trade-offs -->
+
+## Adversarial review and mitigations
+
+<!-- Likely failure modes, edge cases, or objections, and how each is mitigated -->
+<!-- Required before tasks.md is created or beads issues are staged -->
