@@ -10,7 +10,7 @@ interface PostMetadataProps {
 
 export function PostMetadata({ readingTime, words }: Readonly<PostMetadataProps>) {
   return (
-    <HStack gap="md" className="mt-2 mb-6 text-gray-500 dark:text-gray-400">
+    <HStack gap="md" className="mt-2 mb-6 text-ui-text-muted">
       <HStack gap="sm" title="Reading time">
         <Clock size={14} />
         <Text as="span" variant="mono" size="xs">

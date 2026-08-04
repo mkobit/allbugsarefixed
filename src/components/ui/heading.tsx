@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import { cn } from '../../lib/ui'
 
 const headingStyles = tv({
-  base: 'font-bold tracking-tight text-gray-900 dark:text-brand-text scroll-mt-20',
+  base: 'font-bold tracking-tight text-brand-text scroll-mt-20',
   defaultVariants: {
     level: 1,
   },

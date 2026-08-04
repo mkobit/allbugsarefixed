@@ -10,7 +10,7 @@ const linkStyles = tv({
   },
   variants: {
     variant: {
-      default: 'text-gray-600 dark:text-gray-400 hover:text-brand-primary',
+      default: 'text-ui-text-muted hover:text-brand-primary',
       nav: 'text-sm font-medium hover:text-brand-primary transition-colors',
       primary: 'text-brand-primary hover:text-brand-secondary',
       unstyled: '',

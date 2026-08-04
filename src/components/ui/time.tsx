@@ -5,14 +5,14 @@ import { formatDateToHumanString } from '../../lib/date'
 import { Temporal } from '@js-temporal/polyfill'
 
 const timeStyles = tv({
-  base: 'font-mono text-sm text-gray-500 dark:text-gray-400',
+  base: 'font-mono text-sm text-ui-text-muted',
   defaultVariants: {
     variant: 'default',
   },
   variants: {
     variant: {
       default: '',
-      muted: 'text-gray-500 dark:text-gray-400',
+      muted: 'text-ui-text-muted',
     },
   },
 })

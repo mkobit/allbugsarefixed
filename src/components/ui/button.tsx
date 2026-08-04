@@ -24,10 +24,10 @@ const buttonStyles = tv({
     },
     variant: {
       ghost:
-        'bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-gray-500',
+        'bg-transparent hover:bg-ui-surface-hover text-brand-text focus:ring-gray-500',
       link: 'text-brand-primary hover:underline underline-offset-4 bg-transparent p-0 height-auto',
       outline:
-        'border border-gray-300 dark:border-gray-700 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-gray-500',
+        'border border-ui-border-strong bg-transparent hover:bg-ui-surface-hover text-brand-text focus:ring-gray-500',
       primary: 'bg-brand-primary text-white hover:bg-brand-primary/90 focus:ring-brand-primary',
       secondary: 'bg-brand-secondary text-white hover:bg-brand-secondary/90 focus:ring-brand-secondary',
     },

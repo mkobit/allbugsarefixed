@@ -21,6 +21,27 @@
   --color-brand-accent: var(--color-brand-accent);
   --color-brand-surface: var(--color-brand-surface);
 
+  /* Tier 3: UI-level tokens shared across components (see openspec/changes/design-token-audit) */
+  --color-ui-text-muted: var(--color-ui-text-muted);
+  --color-ui-text-dim: var(--color-ui-text-dim);
+  --color-ui-border: var(--color-ui-border);
+  --color-ui-border-strong: var(--color-ui-border-strong);
+  --color-ui-surface-hover: var(--color-ui-surface-hover);
+
+  /* Tier 4: Callout component tokens, one bg/border/text triple per semantic state */
+  --color-callout-error-bg: var(--color-callout-error-bg);
+  --color-callout-error-border: var(--color-callout-error-border);
+  --color-callout-error-text: var(--color-callout-error-text);
+  --color-callout-info-bg: var(--color-callout-info-bg);
+  --color-callout-info-border: var(--color-callout-info-border);
+  --color-callout-info-text: var(--color-callout-info-text);
+  --color-callout-tip-bg: var(--color-callout-tip-bg);
+  --color-callout-tip-border: var(--color-callout-tip-border);
+  --color-callout-tip-text: var(--color-callout-tip-text);
+  --color-callout-warning-bg: var(--color-callout-warning-bg);
+  --color-callout-warning-border: var(--color-callout-warning-border);
+  --color-callout-warning-text: var(--color-callout-warning-text);
+
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", Menlo, monospace;
 
@@ -63,6 +84,31 @@
     --color-brand-secondary: hsl(190, 90%, 50%); /* Cyan */
     --color-brand-accent: hsl(35, 100%, 60%); /* Amber */
     --color-brand-surface: hsl(210, 40%, 96%); /* Light surface */
+
+    /*
+      Tier 3/4 values below are copied verbatim from tailwindcss@4.3.3's default
+      theme (node_modules/tailwindcss/theme.css), not retyped, to reproduce the
+      raw-gray-scale/palette colors they replace exactly. See
+      openspec/changes/design-token-audit/design.md Decisions 2 and 4.
+    */
+    --color-ui-text-muted: oklch(55.1% 0.027 264.364); /* gray-500 */
+    --color-ui-text-dim: oklch(87.2% 0.01 258.338); /* gray-300 */
+    --color-ui-border: oklch(92.8% 0.006 264.531); /* gray-200 */
+    --color-ui-border-strong: oklch(87.2% 0.01 258.338); /* gray-300 */
+    --color-ui-surface-hover: oklch(96.7% 0.003 264.542); /* gray-100 */
+
+    --color-callout-error-bg: oklch(97.1% 0.013 17.38); /* red-50 */
+    --color-callout-error-border: oklch(88.5% 0.062 18.334); /* red-200 */
+    --color-callout-error-text: oklch(44.4% 0.177 26.899); /* red-800 */
+    --color-callout-info-bg: oklch(97% 0.014 254.604); /* blue-50 */
+    --color-callout-info-border: oklch(88.2% 0.059 254.128); /* blue-200 */
+    --color-callout-info-text: oklch(42.4% 0.199 265.638); /* blue-800 */
+    --color-callout-tip-bg: oklch(97.9% 0.021 166.113); /* emerald-50 */
+    --color-callout-tip-border: oklch(90.5% 0.093 164.15); /* emerald-200 */
+    --color-callout-tip-text: oklch(43.2% 0.095 166.913); /* emerald-800 */
+    --color-callout-warning-bg: oklch(98.7% 0.026 102.212); /* yellow-50 */
+    --color-callout-warning-border: oklch(94.5% 0.129 101.54); /* yellow-200 */
+    --color-callout-warning-text: oklch(47.6% 0.114 61.907); /* yellow-800 */
   }
 
   .dark {
@@ -74,6 +120,30 @@
     --color-brand-secondary: hsl(190, 90%, 50%);
     --color-brand-accent: hsl(35, 100%, 60%);
     --color-brand-surface: hsl(222, 40%, 18%);
+
+    --color-ui-text-muted: oklch(70.7% 0.022 261.325); /* gray-400 */
+    --color-ui-text-dim: oklch(37.3% 0.034 259.733); /* gray-700 */
+    --color-ui-border: oklch(27.8% 0.033 256.848); /* gray-800 */
+    --color-ui-border-strong: oklch(37.3% 0.034 259.733); /* gray-700 */
+    --color-ui-surface-hover: oklch(27.8% 0.033 256.848); /* gray-800 */
+
+    /*
+      Dark -bg tokens replicate the current bg-<color>-900/20 (20%-opacity
+      overlay) rendering as a single solid value, computed once here instead
+      of via a per-usage opacity modifier -- see design.md Decision 4.
+    */
+    --color-callout-error-bg: color-mix(in oklab, oklch(39.6% 0.141 25.723) 20%, var(--color-brand-bg)); /* red-900 @ 20% */
+    --color-callout-error-border: oklch(44.4% 0.177 26.899); /* red-800 */
+    --color-callout-error-text: oklch(88.5% 0.062 18.334); /* red-200 */
+    --color-callout-info-bg: color-mix(in oklab, oklch(37.9% 0.146 265.522) 20%, var(--color-brand-bg)); /* blue-900 @ 20% */
+    --color-callout-info-border: oklch(42.4% 0.199 265.638); /* blue-800 */
+    --color-callout-info-text: oklch(88.2% 0.059 254.128); /* blue-200 */
+    --color-callout-tip-bg: color-mix(in oklab, oklch(37.8% 0.077 168.94) 20%, var(--color-brand-bg)); /* emerald-900 @ 20% */
+    --color-callout-tip-border: oklch(43.2% 0.095 166.913); /* emerald-800 */
+    --color-callout-tip-text: oklch(90.5% 0.093 164.15); /* emerald-200 */
+    --color-callout-warning-bg: color-mix(in oklab, oklch(42.1% 0.095 57.708) 20%, var(--color-brand-bg)); /* yellow-900 @ 20% */
+    --color-callout-warning-border: oklch(47.6% 0.114 61.907); /* yellow-800 */
+    --color-callout-warning-text: oklch(94.5% 0.129 101.54); /* yellow-200 */
   }
 
   html {
