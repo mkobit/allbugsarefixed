@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import { cn } from '../../lib/ui'
 
 const textStyles = tv({
-  base: 'text-gray-500 dark:text-gray-400',
+  base: 'text-ui-text-muted',
   defaultVariants: {
     size: 'base',
     variant: 'default',
@@ -17,9 +17,9 @@ const textStyles = tv({
     },
     variant: {
       default: '',
-      dim: 'text-gray-300 dark:text-gray-700',
+      dim: 'text-ui-text-dim',
       mono: 'font-mono',
-      muted: 'text-gray-500 dark:text-gray-400',
+      muted: 'text-ui-text-muted',
     },
   },
 })

@@ -9,7 +9,7 @@ import { cn } from '../../lib/ui'
 
 export function SlashSeparator({ className }: Readonly<{ className?: string }>) {
   return (
-    <span className={cn('text-gray-300 dark:text-gray-700 font-mono', className)} aria-hidden="true">
+    <span className={cn('text-ui-text-dim font-mono', className)} aria-hidden="true">
       /
     </span>
   )

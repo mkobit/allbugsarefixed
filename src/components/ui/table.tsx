@@ -15,11 +15,11 @@ const tableStyles = tv({
   slots: {
     base: 'w-full caption-bottom text-sm',
     body: '[&_tr:last-child]:border-0',
-    cell: 'p-4 align-middle [&:has([role=checkbox])]:pr-0 text-gray-900 dark:text-gray-100',
-    head: 'h-12 px-4 text-left align-middle font-medium text-gray-500 dark:text-gray-400 [&:has([role=checkbox])]:pr-0',
+    cell: 'p-4 align-middle [&:has([role=checkbox])]:pr-0 text-brand-text',
+    head: 'h-12 px-4 text-left align-middle font-medium text-ui-text-muted [&:has([role=checkbox])]:pr-0',
     header: '[&_tr]:border-b',
-    row: 'border-b border-gray-200 dark:border-gray-800 transition-colors hover:bg-gray-100/50 dark:hover:bg-gray-800/50 data-[state=selected]:bg-gray-100 dark:data-[state=selected]:bg-gray-800',
-    wrapper: 'rounded-md border border-gray-200 dark:border-gray-800 overflow-hidden',
+    row: 'border-b border-ui-border transition-colors hover:bg-ui-surface-hover/50 data-[state=selected]:bg-ui-surface-hover',
+    wrapper: 'rounded-md border border-ui-border overflow-hidden',
   },
 })
 

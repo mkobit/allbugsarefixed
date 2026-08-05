@@ -9,11 +9,10 @@ const calloutStyles = tv({
   },
   variants: {
     type: {
-      error: 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200',
-      info: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200',
-      tip: 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200',
-      warning:
-        'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200',
+      error: 'bg-callout-error-bg border-callout-error-border text-callout-error-text',
+      info: 'bg-callout-info-bg border-callout-info-border text-callout-info-text',
+      tip: 'bg-callout-tip-bg border-callout-tip-border text-callout-tip-text',
+      warning: 'bg-callout-warning-bg border-callout-warning-border text-callout-warning-text',
     },
   },
 })
