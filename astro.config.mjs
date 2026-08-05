@@ -10,6 +10,7 @@ import { remarkCallout } from './src/lib/remark/remark-callout.ts'
 import { remarkValidateMermaid } from './src/lib/remark/remark-mermaid-validate.mjs'
 import { remarkMermaidToComponent } from './src/lib/remark/remark-mermaid-component.mjs'
 import remarkMath from 'remark-math'
+import remarkGfm from 'remark-gfm'
 import { remarkMathToComponent } from './src/lib/remark/remark-math-component.mjs'
 import { remarkReadingTimeFrontmatter } from './src/lib/remark/remark-reading-time-frontmatter.ts'
 
@@ -23,7 +24,7 @@ export default defineConfig({
       // list is left undefined -- since we set it explicitly, every plugin
       // needed for .mdx (all posts are .mdx) must be listed here too,
       // including the reading-time frontmatter bridge below.
-      remarkPlugins: [remarkStripScratch, remarkCallout, remarkReadingTime, remarkReadingTimeFrontmatter, remarkMath, remarkMathToComponent, remarkCodeToComponent, remarkValidateMermaid, remarkMermaidToComponent],
+      remarkPlugins: [remarkStripScratch, remarkCallout, remarkReadingTime, remarkReadingTimeFrontmatter, remarkMath, remarkGfm, remarkMathToComponent, remarkCodeToComponent, remarkValidateMermaid, remarkMermaidToComponent],
       extendMarkdownConfig: true,
     }),
     react(),
@@ -37,6 +38,7 @@ export default defineConfig({
       remarkReadingTimeFrontmatter,
       remarkCallout,
       remarkMath,
+      remarkGfm,
       remarkMathToComponent,
       remarkCodeToComponent,
       remarkValidateMermaid,
