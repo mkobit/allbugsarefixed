@@ -45,6 +45,10 @@ export default defineConfig({
   },
   trailingSlash: 'always',
   output: 'static',
+  image: {
+    layout: 'constrained',
+    responsiveStyles: true,
+  },
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {

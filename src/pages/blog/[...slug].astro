@@ -8,6 +8,7 @@ import { PostMetadata } from '../../components/ui/PostMetadata'
 import { LabelBadge } from '../../components/LabelBadge'
 import { MDXComponents } from '../../lib/mdx-components'
 import { ScrollProgress } from '../../components/ui/ScrollProgress'
+import { PostImageLightbox } from '../../components/PostImageLightbox'
 import Mermaid from '../../components/Mermaid.astro'
 import Latex from '../../components/Latex.astro'
 
@@ -83,6 +84,8 @@ const wordCount = readingTimeData?.words;
         >
           <Content components={{ ...MDXComponents, Mermaid, Latex }} />
         </div>
+
+        <PostImageLightbox client:idle />
       </div>
 
       {/* Sidebar / TOC Column - Hidden on mobile */}
