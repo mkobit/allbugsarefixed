@@ -48,7 +48,7 @@ export function ScrollProgress() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 z-50 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-lg ring-1 ring-gray-200 dark:ring-gray-700 transition-all duration-300 ease-in-out hover:scale-110 active:scale-95 ${
+      className={`fixed bottom-8 right-8 z-50 flex items-center justify-center rounded-full bg-ui-surface-raised shadow-lg ring-1 ring-ui-border-faint transition-all duration-300 ease-in-out hover:scale-110 active:scale-95 ${
         isVisible
           ? 'opacity-100 translate-y-0 pointer-events-auto'
           : 'opacity-0 translate-y-10 pointer-events-none'
@@ -65,7 +65,7 @@ export function ScrollProgress() {
         >
           {/* Track Circle */}
           <circle
-            className="text-gray-200 dark:text-gray-700 transition-colors"
+            className="text-ui-border-faint transition-colors"
             stroke="currentColor"
             strokeWidth="3"
             fill="transparent"
