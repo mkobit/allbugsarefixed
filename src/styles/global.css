@@ -26,7 +26,9 @@
   --color-ui-text-dim: var(--color-ui-text-dim);
   --color-ui-border: var(--color-ui-border);
   --color-ui-border-strong: var(--color-ui-border-strong);
+  --color-ui-border-faint: var(--color-ui-border-faint);
   --color-ui-surface-hover: var(--color-ui-surface-hover);
+  --color-ui-surface-raised: var(--color-ui-surface-raised);
 
   /* Tier 4: Callout component tokens, one bg/border/text triple per semantic state */
   --color-callout-error-bg: var(--color-callout-error-bg);
@@ -95,7 +97,9 @@
     --color-ui-text-dim: oklch(87.2% 0.01 258.338); /* gray-300 */
     --color-ui-border: oklch(92.8% 0.006 264.531); /* gray-200 */
     --color-ui-border-strong: oklch(87.2% 0.01 258.338); /* gray-300 */
+    --color-ui-border-faint: oklch(92.8% 0.006 264.531); /* gray-200 */
     --color-ui-surface-hover: oklch(96.7% 0.003 264.542); /* gray-100 */
+    --color-ui-surface-raised: #fff; /* white */
 
     --color-callout-error-bg: oklch(97.1% 0.013 17.38); /* red-50 */
     --color-callout-error-border: oklch(88.5% 0.062 18.334); /* red-200 */
@@ -125,7 +129,9 @@
     --color-ui-text-dim: oklch(37.3% 0.034 259.733); /* gray-700 */
     --color-ui-border: oklch(27.8% 0.033 256.848); /* gray-800 */
     --color-ui-border-strong: oklch(37.3% 0.034 259.733); /* gray-700 */
+    --color-ui-border-faint: oklch(37.3% 0.034 259.733); /* gray-700 */
     --color-ui-surface-hover: oklch(27.8% 0.033 256.848); /* gray-800 */
+    --color-ui-surface-raised: oklch(27.8% 0.033 256.848); /* gray-800 */
 
     /*
       Dark -bg tokens replicate the current bg-<color>-900/20 (20%-opacity
