@@ -3,7 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content'
 import { Temporal } from '@js-temporal/polyfill'
 import Layout from '../../layouts/Layout.astro'
 import { PostHeader } from '../../components/ui/PostHeader'
-import TableOfContents from '../../components/TableOfContents.astro'
+import { TableOfContents } from '../../components/TableOfContents'
 import { PostMetadata } from '../../components/ui/PostMetadata'
 import { LabelBadge } from '../../components/LabelBadge'
 import { MDXComponents } from '../../lib/mdx-components'
@@ -91,7 +91,7 @@ const wordCount = readingTimeData?.words;
       {/* Sidebar / TOC Column - Hidden on mobile */}
       <div class="hidden lg:block lg:col-span-3">
         <div class="sticky top-24">
-          <TableOfContents headings={headings} />
+          <TableOfContents headings={headings} client:visible />
         </div>
       </div>
     </div>

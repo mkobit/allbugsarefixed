@@ -201,5 +201,9 @@
       margin-top: 0;
       margin-bottom: 0;
     }
+
+    [data-footnotes] {
+      @apply mt-12 pt-6 border-t border-ui-border text-ui-text-muted;
+    }
   }
 }
