@@ -1,0 +1,27 @@
+---
+title: "Image pipeline verification (scratch)"
+pubDate: 2026-08-07
+description: "Throwaway scratch content for abf-k7d.5 -- verifying astro:assets optimization and Lightbox/Gallery components. Remove per task 6.1, held until task 4.4 (blocked on abf-k7d.3) verifies Gallery's mdx-components.tsx registration."
+visibility: "hidden"
+---
+
+import { LightboxHarness } from './LightboxHarness'
+import { Gallery } from '../../../components/Gallery'
+
+Scratch verification content for `abf-k7d.5`.
+
+![A synthetic gradient placeholder image used to verify astro:assets optimization](./gradient.png)
+
+<LightboxHarness client:load />
+
+## Gallery test
+
+<Gallery client:visible>
+
+![Gallery image one, the gradient](./gradient.png)
+
+![Gallery image two, red-tagged placeholder](./solid-red.png)
+
+![Gallery image three, blue-tagged placeholder](./solid-blue.png)
+
+</Gallery>

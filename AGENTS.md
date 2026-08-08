@@ -37,6 +37,7 @@ When the implementation approach isn't decided yet, describe the problem/goal in
 ## Specs
 
 This project uses OpenSpec for spec-driven development, with a project-local `beads-driven` schema at `openspec/schemas/beads-driven/`.
+**Always invoke OpenSpec via `bunx openspec` (or `bun run openspec:*`), never the bare `openspec` command.** The project pins `@fission-ai/openspec` in `package.json`'s devDependencies; a bare `openspec` resolves to whatever's on `$PATH` (e.g. a stale/unpinned global `mise` shim), which can silently run a different version.
 Artifact flow: proposal → specs → design → tasks → retrospective → reflection.
 `design.md` must include an `## Adversarial review and mitigations` section before `tasks.md` is created or beads issues are staged.
 After writing `tasks.md`, hydrate it into beads with `bd mol pour openspec-sync --var change_name=<name>`.
