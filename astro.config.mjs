@@ -12,6 +12,7 @@ import { remarkMermaidToComponent } from './src/lib/remark/remark-mermaid-compon
 import remarkMath from 'remark-math'
 import remarkGfm from 'remark-gfm'
 import { remarkMathToComponent } from './src/lib/remark/remark-math-component.mjs'
+import { remarkDatatable } from './src/lib/remark/remark-datatable.ts'
 import { remarkReadingTimeFrontmatter } from './src/lib/remark/remark-reading-time-frontmatter.ts'
 
 // https://astro.build/config
@@ -24,7 +25,19 @@ export default defineConfig({
       // list is left undefined -- since we set it explicitly, every plugin
       // needed for .mdx (all posts are .mdx) must be listed here too,
       // including the reading-time frontmatter bridge below.
-      remarkPlugins: [remarkStripScratch, remarkCallout, remarkReadingTime, remarkReadingTimeFrontmatter, remarkMath, remarkGfm, remarkMathToComponent, remarkCodeToComponent, remarkValidateMermaid, remarkMermaidToComponent],
+      remarkPlugins: [
+        remarkStripScratch,
+        remarkCallout,
+        remarkReadingTime,
+        remarkReadingTimeFrontmatter,
+        remarkMath,
+        remarkGfm,
+        remarkDatatable,
+        remarkMathToComponent,
+        remarkCodeToComponent,
+        remarkValidateMermaid,
+        remarkMermaidToComponent,
+      ],
       extendMarkdownConfig: true,
     }),
     react(),
@@ -39,6 +52,7 @@ export default defineConfig({
       remarkCallout,
       remarkMath,
       remarkGfm,
+      remarkDatatable,
       remarkMathToComponent,
       remarkCodeToComponent,
       remarkValidateMermaid,
