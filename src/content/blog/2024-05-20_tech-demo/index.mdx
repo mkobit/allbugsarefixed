@@ -16,7 +16,6 @@ import { csvParse } from 'd3-dsv';
 import rawData from './data.csv?raw';
 import {
 Zap,
-Activity,
 ShieldCheck,
 Terminal,
 Cpu,
@@ -51,11 +50,11 @@ This page documents the custom components and Markdown features available for us
 
 ## Icons and styling
 
-Import icons from **Lucide React**. Use the `IconBlock` component to create featured icon grids with consistent styling.
+Import icons from **Lucide React**, or pass icon names as strings (resolved dynamically). Use the `IconBlock` component to create featured icon grids with consistent styling.
 
 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
-  <IconBlock client:visible icon={Zap} label="Lightning fast" variant="warning" />
-  <IconBlock client:visible icon={Activity} label="Monitoring" variant="info" />
+  <IconBlock client:visible icon={Zap} label="Component reference" variant="warning" />
+  <IconBlock client:visible icon="activity" label="String icon name" variant="info" />
   <IconBlock client:visible icon={ShieldCheck} label="Secure" variant="success" />
   <IconBlock client:visible icon={Terminal} label="CLI tools" variant="brand" />
 </div>
@@ -228,7 +227,7 @@ Use the `<EChart>` component to render interactive visualizations powered by **A
 
 ## Interactive maps
 
-Use the `<Map>` component to render config-driven maps via **Pigeon Maps**.
+Use the `<Map>` component to render config-driven maps via **Pigeon Maps**. Map configurations should be colocated in a typed `*-data.ts` module (e.g. `map-data.ts`) to preserve TypeScript type checking.
 
 <Map client:load config={demoMapData} />
 
@@ -277,7 +276,19 @@ Omit the `inline` prop for block-level equations:
 
 ## Data tables
 
-Use the `<DataTable>` component for sortable tables powered by **TanStack Table**.
+Authors can opt-in to upgrade any standard Markdown table into an interactive, sortable `<DataTable>` by placing `{/* datatable */}` on its own line immediately before the table:
+
+{/* datatable */}
+| ID | Name | Role | Status |
+| :--- | :--- | :--- | :--- |
+| 1 | John Doe | Admin | Active |
+| 2 | Jane Smith | User | Inactive |
+| 3 | Bob Johnson | Editor | Active |
+| 4 | Alice Williams | User | Active |
+
+Standard Markdown tables without `{/* datatable */}` remain plain static HTML tables.
+
+For custom cell rendering or complex schemas, the hand-authored `<DataTable>` component is also supported:
 
 <DataTable client:load data={users} columns={userColumns} />
 
