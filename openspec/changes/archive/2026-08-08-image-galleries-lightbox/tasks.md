@@ -9,19 +9,24 @@
 - [x] 1.1 Add a real (or realistic placeholder) image to a scratch/draft post folder and reference it with plain `![alt](./file.jpg)` markdown syntax.
   Validation: `bun start`, inspect the rendered output in devtools — confirm an `astro:assets`-optimized `<img>` (responsive `srcset`, optimized format) is served, not a raw passthrough file. Note the actual `srcset` candidate widths for use in task 5.2.
   **Done (2026-08-07)**: verified via scratch post `2026-08-07_image-pipeline-verification/` with a synthetic 2400×1600 placeholder. Format optimization (`f=webp`) worked automatically, but `srcset` did **not** exist by default — required adding `image: { layout: 'constrained', responsiveStyles: true }` to `astro.config.mjs` (see design.md Decisions for the full correction). With that config, verified `srcset` candidates for a 2400w source: `640w, 750w, 828w, 1080w, 1280w, 1668w, 2048w, 2400w`, `sizes="(min-width: 2400px) 2400px, 100vw"`. Confirmed correct rendering (no distortion, proper aspect ratio) via Playwright screenshot in light and dark mode.
-- [ ] 1.2 Confirm `bun run build` fails loudly if the referenced image path doesn't exist (delete/rename the file temporarily to check, then restore it).
+- [x] 1.2 Confirm `bun run build` fails loudly if the referenced image path doesn't exist (delete/rename the file temporarily to check, then restore it).
   Validation: build output shows a clear file-not-found error identifying the missing image.
+  **Done (2026-08-08)**: verified via `abf-k7d.5.2` — Astro build fails with clear missing file error.
 
 ## 2. Lightbox component
 
-- [ ] 2.1 Create `src/components/Lightbox.tsx`: a React component wrapping `@headlessui/react`'s `Dialog`/`DialogPanel`/`DialogBackdrop`, accepting an image set (array of `{src, alt}`) and an initial index, with open/close and current-index state.
+- [x] 2.1 Create `src/components/Lightbox.tsx`: a React component wrapping `@headlessui/react`'s `Dialog`/`DialogPanel`/`DialogBackdrop`, accepting an image set (array of `{src, alt}`) and an initial index, with open/close and current-index state.
   Validation: `bun run typecheck` passes; component renders in isolation with a hardcoded test image set via `bun start` on a scratch page/post.
-- [ ] 2.2 Style `Lightbox` with `tailwind-variants` (`tv()`) against existing `@theme` design tokens, matching the styling convention already used in `src/components/ui/button.tsx`/`callout.tsx`.
+  **Done (2026-08-07)**: created `src/components/Lightbox.tsx` via `abf-k7d.5.3`.
+- [x] 2.2 Style `Lightbox` with `tailwind-variants` (`tv()`) against existing `@theme` design tokens, matching the styling convention already used in `src/components/ui/button.tsx`/`callout.tsx`.
   Validation: manual visual check via `bun start` in both light and dark mode.
-- [ ] 2.3 Wire Esc-to-close and backdrop-click-to-close (built into `@headlessui/react`'s `Dialog`) and confirm focus returns to the triggering click-target element on close.
+  **Done (2026-08-07)**: styled with `tv()` via `abf-k7d.5.4`.
+- [x] 2.3 Wire Esc-to-close and backdrop-click-to-close (built into `@headlessui/react`'s `Dialog`) and confirm focus returns to the triggering click-target element on close.
   Validation: manual keyboard-only and mouse-only test — open via click, close via Esc, close via backdrop click, confirm focus lands back on the click target each time.
-- [ ] 2.4 Add left/right arrow key navigation that updates the current index within the open image set, without closing the dialog, and hide navigation controls entirely when the set has only one image.
+  **Done (2026-08-07)**: wired via `abf-k7d.5.5`.
+- [x] 2.4 Add left/right arrow key navigation that updates the current index within the open image set, without closing the dialog, and hide navigation controls entirely when the set has only one image.
   Validation: manual test with a 3-image set (arrow keys cycle correctly, no out-of-bounds) and a 1-image set (no navigation controls rendered).
+  **Done (2026-08-07)**: wired arrow keys and conditional navigation controls via `abf-k7d.5.6`.
 
 ## 3. Single-image lightbox wiring
 
@@ -43,9 +48,9 @@
 - [x] 4.3 Apply the same focusable `<button>` click-target wrapper (task 3.1's pattern) to each `Gallery` child image, wiring it to open the shared `Lightbox` with the full gallery image set and the clicked/activated image's index, enabling next/previous navigation.
   Validation: manual test, both mouse and keyboard — activating any image in a 3-image scratch gallery opens `Lightbox` at the correct index, with working next/previous.
   **Done (2026-08-07)**: `Gallery.tsx` uses the same DOM-wrap-in-button mechanism as `PostImageLightbox` (task 3.1), scoped to its own container, building the full image set from all its children so next/previous navigation spans the whole gallery. Verified via Playwright: clicking gallery image 2 opens at the correct index; Lightbox's next/previous buttons correctly step to images 3 and back to 1; confirmed no double-wrapping (Gallery's images are excluded from `PostImageLightbox`'s scan via the `data-gallery` marker).
-- [ ] 4.4 Register `Gallery` in `src/lib/mdx-components.tsx` so it's usable directly in MDX body content without a per-post import.
-  **Hold this task until `abf-k7d.3` (Tailwind design-token audit) closes, or re-check for spine-file collisions immediately before starting** — `mdx-components.tsx` is a shared-spine file per the epic's sequencing convention (see design.md Context). Tasks 4.1-4.3 don't touch this file and can proceed without waiting.
+- [x] 4.4 Register `Gallery` in `src/lib/mdx-components.tsx` so it's usable directly in MDX body content without a per-post import.
   Validation: `bd show abf-k7d.3` confirms closed (or a fresh collision check clears it) before starting; once merged, a scratch post using `<Gallery>...</Gallery>` directly in its MDX body (no explicit import statement) renders correctly via `bun start`.
+  **Done (2026-08-08), Won't-fix**: architecturally impossible in Astro — client:* hydration directives require statically-traceable imports in MDX files; components resolved via mdx-components.tsx cannot carry client:* directives (withastro/astro#5853). Reverted registration attempt via `abf-k7d.5.12`.
 
 ## 5. Image loading priority and resolution
 
@@ -58,8 +63,10 @@
 
 ## 6. Cleanup and full CI gate
 
-- [ ] 6.1 Remove the scratch/draft test post content used for manual verification during tasks 1-5, unless the user wants it kept as a real post.
+- [x] 6.1 Remove the scratch/draft test post content used for manual verification during tasks 1-5, unless the user wants it kept as a real post.
   Validation: `rg -l "Gallery|Lightbox" src/content/blog` shows no unintended leftover scratch content.
+  **Done (2026-08-08)**: scratch post deleted via `abf-k7d.5.15`.
 - [x] 6.2 Run the complete required CI command set and fix any failures.
   Validation: `bun scripts/verify-versions.mjs`, `bun run lint`, `bun run openspec:validate`, `bun run typecheck`, `bun run test`, `bun run coverage`, `bun run build`, `bun run test:e2e` all pass.
-  **Done (2026-08-07)**: all 8 commands pass. `lint` initially failed with 19 errors (this repo's `eslint-plugin-functional` config forbids array/object mutation and loop statements) -- fixed by rewriting `PostImageLightbox.tsx`/`Gallery.tsx`'s DOM-wiring effects to build cleanup arrays via `.map()` instead of `.push()`-in-a-loop, changing `button.type =`/`button.className =` property assignment to `button.setAttribute(...)` calls (assignment is flagged, method calls aren't), fixing `sort-keys` ordering, arrow-parens style, and adding the repo's established `// eslint-disable-next-line functional/no-mixed-types` precedent (from `ThemeToggle.tsx`) for `LightboxProps`. Re-ran all three Playwright interaction suites (Lightbox, single-image, Gallery) after the refactor to confirm behavior was unchanged -- all pass. `build` produces 5 pages (scratch post correctly excluded via `visibility: hidden`); `test:e2e`'s 3 specs pass unaffected. Note: task 6.1 (removing the scratch content this gate exercises) is intentionally not yet done -- it's blocked on task 4.4, itself held for `abf-k7d.3` -- so this gate ran against the current state including scratch content; re-run once 4.4/6.1 land.
+  **Done (2026-08-08)**: full CI gate passed via `abf-k7d.5.16`.
+

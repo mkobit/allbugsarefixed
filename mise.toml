@@ -5,3 +5,49 @@ bun = "1.3.14"
 [settings]
 http_retries = 5
 lockfile = true
+
+[tasks.verify]
+description = "Verify tool versions"
+run = "bun scripts/verify-versions.ts"
+
+[tasks.lint]
+description = "Lint code with ESLint"
+run = "bun run lint"
+
+[tasks."openspec:validate"]
+description = "Validate OpenSpec specifications"
+run = "bun run openspec:validate"
+
+[tasks.typecheck]
+description = "Typecheck TypeScript and Astro files"
+run = "bun run typecheck"
+
+[tasks.test]
+description = "Run unit tests with Vitest"
+run = "bun run test"
+
+[tasks.coverage]
+description = "Run unit test coverage with Vitest"
+run = "bun run coverage"
+
+[tasks.build]
+description = "Build production site with Astro"
+run = "bun run build"
+
+[tasks."test:e2e"]
+description = "Run Playwright E2E tests"
+depends = ["build"]
+run = "bun run test:e2e"
+
+[tasks.check]
+description = "Run full CI verification suite"
+depends = [
+  "verify",
+  "lint",
+  "openspec:validate",
+  "typecheck",
+  "test",
+  "coverage",
+  "test:e2e",
+]
+

@@ -10,7 +10,7 @@ You **MUST** run the following commands before submitting any changes. These com
 
 **Use `bun run <script>`, not bare `bun <script>`.** `test` and `build` are Bun's own reserved subcommands (Bun's built-in test runner and bundler, respectively) — the bare form silently does the wrong thing instead of running this project's npm script, even though most other script names (`lint`, `typecheck`, `coverage`, etc.) work fine either way.
 
-1.  **Verify versions:** `bun scripts/verify-versions.mjs`
+1.  **Verify versions:** `bun scripts/verify-versions.ts`
 2.  **Lint:** `bun run lint`
 3.  **Validate specs:** `bun run openspec:validate`
 4.  **Typecheck:** `bun run typecheck`
@@ -20,6 +20,9 @@ You **MUST** run the following commands before submitting any changes. These com
 7.  **Build:** `bun run build`
     - Bare `bun build` errors with "Missing entrypoints" — it's Bun's bundler, not this script.
 8.  **E2E tests:** `bun run test:e2e`
+
+Alternatively, run `mise run check` to execute all 8 verification steps.
+
 
 ## Other Commands
 
@@ -31,6 +34,7 @@ You **MUST** run the following commands before submitting any changes. These com
 This project uses `bd` (beads) for issue tracking.
 Run `bd prime` for full workflow context before creating or updating issues.
 Key commands: `bd ready` (unblocked work), `bd create "Title" --type task` (new issue), `bd close <id>` (complete).
+Available formula templates in `.beads/formulas/`: `openspec-workflow`, `openspec-sync`, `blog-lifecycle`, `ci-fix`.
 Push local issue history to origin with `bd dolt push` after closing work.
 When the implementation approach isn't decided yet, describe the problem/goal in the issue and leave the solution open for the design phase — don't bake in a specific technical approach until it's actually been verified or decided.
 
@@ -39,9 +43,12 @@ When the implementation approach isn't decided yet, describe the problem/goal in
 This project uses OpenSpec for spec-driven development, with a project-local `beads-driven` schema at `openspec/schemas/beads-driven/`.
 **Always invoke OpenSpec via `bunx openspec` (or `bun run openspec:*`), never the bare `openspec` command.** The project pins `@fission-ai/openspec` in `package.json`'s devDependencies; a bare `openspec` resolves to whatever's on `$PATH` (e.g. a stale/unpinned global `mise` shim), which can silently run a different version.
 Artifact flow: proposal → specs → design → tasks → retrospective → reflection.
+The full change lifecycle can be tracked in beads via `bd mol pour openspec-workflow --var change_name=<name>`.
 `design.md` must include an `## Adversarial review and mitigations` section before `tasks.md` is created or beads issues are staged.
+Before writing `tasks.md`, explicitly re-read `proposal.md`'s component and file lists against `design.md`'s decisions and exclusions to reconcile scope divergences immediately.
 After writing `tasks.md`, hydrate it into beads with `bd mol pour openspec-sync --var change_name=<name>`.
 Because `bd` formulas do not interpolate `{{change_name}}` inside `labels` arrays (see `abf-2cq`), manually add `meta:openspec:<name>` to the 'Expand Tasks' bead and all created child task beads.
+When an OpenSpec-tracked epic closes in beads, reconcile `tasks.md` checkboxes against actual bead/PR status and archive the change via `bunx openspec archive <name>` (or `/opsx:archive`) so completed changes do not linger unarchived.
 Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work with specs.
 
 ## General guidelines
@@ -55,6 +62,7 @@ Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work w
   - Logic and styled components should reside in React (`.tsx`) files, typically in `src/components/ui`.
   - Astro (`.astro`) files should act as "glue" code: fetching data, handling routing, and rendering top-level React components.
   - Avoid heavy business logic or complex styling in `.astro` files.
+  - Any task adding or modifying a hydrated React island (`client:load`, `client:visible`, `client:idle`) requires runtime hydration verification in a real browser, not just typecheck/lint.
 - **Writing Style:**
   - Use **Sentence case** for headings and titles.
   - Use **semantic line breaks** (one sentence per line) in Markdown and MDX files to improve diff readability.

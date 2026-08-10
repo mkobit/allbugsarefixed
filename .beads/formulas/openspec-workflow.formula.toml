@@ -1,0 +1,79 @@
+formula = "openspec-workflow"
+description = "Full lifecycle workflow for OpenSpec spec-driven development, from proposal through archive."
+version = 1
+type = "workflow"
+
+[vars.change_name]
+description = "The OpenSpec change folder name"
+required = true
+
+[[steps]]
+id = "proposal"
+title = "Proposal: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+description = "Draft openspec/changes/{{change_name}}/proposal.md defining problem statement, goals, scope, and non-goals."
+
+[[steps]]
+id = "specs"
+title = "Specs: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["proposal"]
+description = "Draft openspec/changes/{{change_name}}/specs/**/*.md defining capability requirements and scenario-based tests."
+
+[[steps]]
+id = "design"
+title = "Design & Adversarial Review: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["specs"]
+description = "Draft openspec/changes/{{change_name}}/design.md with architecture, trade-offs, and mandatory ## Adversarial review and mitigations section."
+
+[[steps]]
+id = "scope-reconciliation"
+title = "Scope Reconciliation: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["design"]
+description = "Explicitly re-read proposal.md's component and file lists against design.md's decisions and exclusions to reconcile scope divergences before writing tasks.md."
+
+[[steps]]
+id = "tasks"
+title = "Tasks & Hydration: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["scope-reconciliation"]
+description = "Write openspec/changes/{{change_name}}/tasks.md, then hydrate into beads via `bd mol pour openspec-sync --var change_name={{change_name}}` and manually add `meta:openspec:<name>` labels."
+
+[[steps]]
+id = "implementation"
+title = "Implementation & Verification: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["tasks"]
+description = "Execute tasks in beads. Verify all changes locally with `mise run check` (and runtime browser hydration for React island tasks) before marking complete."
+
+[[steps]]
+id = "retrospective"
+title = "Retrospective: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["implementation"]
+description = "Draft openspec/changes/{{change_name}}/retrospective.md capturing what went well, unexpected obstacles, technical debt, and follow-up beads filed."
+
+[[steps]]
+id = "reflection"
+title = "Reflection: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["retrospective"]
+description = "Draft openspec/changes/{{change_name}}/reflection.md evaluating process effectiveness, tool/skill usage, and lessons to persist in guidelines/skills."
+
+[[steps]]
+id = "archive"
+title = "Archive: {{change_name}}"
+type = "task"
+labels = ["meta:openspec"]
+depends_on = ["reflection"]
+description = "Reconcile tasks.md checkboxes against actual bead/PR status and archive the change via `bunx openspec archive {{change_name}}`."
