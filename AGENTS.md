@@ -41,6 +41,7 @@ This project uses OpenSpec for spec-driven development, with a project-local `be
 Artifact flow: proposal → specs → design → tasks → retrospective → reflection.
 `design.md` must include an `## Adversarial review and mitigations` section before `tasks.md` is created or beads issues are staged.
 After writing `tasks.md`, hydrate it into beads with `bd mol pour openspec-sync --var change_name=<name>`.
+Because `bd` formulas do not interpolate `{{change_name}}` inside `labels` arrays (see `abf-2cq`), manually add `meta:openspec:<name>` to the 'Expand Tasks' bead and all created child task beads.
 Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work with specs.
 
 ## General guidelines
