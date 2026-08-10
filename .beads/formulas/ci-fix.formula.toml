@@ -1,0 +1,47 @@
+formula = "ci-fix"
+description = "Triage and resolution workflow for a CI failure or test regression."
+version = 1
+type = "workflow"
+
+[vars.issue_summary]
+description = "Brief summary of the CI failure (e.g. e2e-playwright-timeout or vitest-coverage-crash)"
+required = true
+
+[[steps]]
+id = "reproduce"
+title = "Reproduce CI Failure: {{issue_summary}}"
+type = "task"
+labels = ["type:ci-fix"]
+description = "Reproduce the CI failure locally using the corresponding `bun run <script>` command or `mise run check` steps."
+
+[[steps]]
+id = "root-cause"
+title = "Root Cause Analysis: {{issue_summary}}"
+type = "task"
+labels = ["type:ci-fix"]
+depends_on = ["reproduce"]
+description = "Diagnose the root cause of the failure. Identify affected files, dependencies, environment differences, or runtime friction."
+
+[[steps]]
+id = "fix"
+title = "Apply Fix: {{issue_summary}}"
+type = "task"
+labels = ["type:ci-fix"]
+depends_on = ["root-cause"]
+description = "Apply minimal, focused code or configuration changes to resolve the root cause without introducing speculative abstractions."
+
+[[steps]]
+id = "verify"
+title = "Verify Fix: {{issue_summary}}"
+type = "task"
+labels = ["type:ci-fix"]
+depends_on = ["fix"]
+description = "Run full local verification using `mise run check` to ensure all 8 CI checks pass cleanly."
+
+[[steps]]
+id = "retrospective"
+title = "Record Lessons: {{issue_summary}}"
+type = "task"
+labels = ["type:ci-fix"]
+depends_on = ["verify"]
+description = "If the fix uncovered non-obvious runtime behavior or convention drift, record a persistent memory via `bd remember` or update project guidelines."

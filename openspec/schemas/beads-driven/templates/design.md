@@ -12,7 +12,7 @@
 
 ## Decisions
 
-<!-- Key design decisions and rationale -->
+<!-- Key design decisions and rationale. Re-read proposal.md's component/file list line-by-line to ensure full scope coverage before tasks.md. -->
 
 ## Risks / Trade-offs
 

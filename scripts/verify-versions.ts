@@ -1,28 +1,43 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import actionData from '../.github/actions/setup-node-bun/action.yml' with { type: 'yaml' }
 import toml from '@iarna/toml'
 import { parse as parseJsonc } from 'jsonc-parser'
 
-const rootDir = process.cwd()
-
-const files = {
-  mise: path.join(rootDir, 'mise.toml'),
-  devcontainer: path.join(rootDir, '.devcontainer/devcontainer.json'),
-  action: path.join(rootDir, '.github/actions/setup-node-bun/action.yml'),
-}
-
-function readMise() {
-  const content = fs.readFileSync(files.mise, 'utf8')
-  const data = toml.parse(content)
-  return {
-    bun: data.tools.bun,
+interface ActionYaml {
+  runs?: {
+    steps?: Array<{
+      uses?: string
+      with?: Record<string, unknown>
+    }>
   }
 }
 
-function readDevcontainer() {
+interface MiseToml {
+  tools?: {
+    bun?: string
+  }
+}
+
+const rootDir = process.cwd()
+
+const files = {
+  action: path.join(rootDir, '.github/actions/setup-node-bun/action.yml'),
+  devcontainer: path.join(rootDir, '.devcontainer/devcontainer.json'),
+  mise: path.join(rootDir, 'mise.toml'),
+}
+
+function readMise(): { bun: string | undefined } {
+  const content = fs.readFileSync(files.mise, 'utf8')
+  const data = toml.parse(content) as MiseToml
+  return {
+    bun: data.tools?.bun,
+  }
+}
+
+function readDevcontainer(): { bun: string | undefined } {
   const content = fs.readFileSync(files.devcontainer, 'utf8')
-  const data = parseJsonc(content)
+  const data = parseJsonc(content) as { postCreateCommand?: string }
 
   const postCreateCommand = data.postCreateCommand || ''
   const bunMatch = postCreateCommand.match(/bun-v([0-9.]+)/)
@@ -33,16 +48,10 @@ function readDevcontainer() {
   }
 }
 
-function readAction() {
-  const data = actionData
-
-  let bunVersion
-
-  data.runs.steps.forEach((step) => {
-    if (step.uses && step.uses.startsWith('oven-sh/setup-bun')) {
-      bunVersion = String(step.with['bun-version'])
-    }
-  })
+function readAction(): { bun: string | undefined } {
+  const data = actionData as ActionYaml
+  const setupStep = data.runs?.steps?.find(step => step.uses?.startsWith('oven-sh/setup-bun'))
+  const bunVersion = setupStep?.with ? String(setupStep.with['bun-version']) : undefined
 
   return {
     bun: bunVersion,
@@ -60,15 +69,12 @@ try {
   const actionVersions = readAction()
   console.log('Action versions:', actionVersions)
 
-  const errors = []
+  const checks = [
+    miseVersions.bun !== devVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Devcontainer (${devVersions.bun})` : undefined,
+    miseVersions.bun !== actionVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Action (${actionVersions.bun})` : undefined,
+  ]
 
-  if (miseVersions.bun !== devVersions.bun) {
-    errors.push(`Bun version mismatch: Mise (${miseVersions.bun}) != Devcontainer (${devVersions.bun})`)
-  }
-
-  if (miseVersions.bun !== actionVersions.bun) {
-    errors.push(`Bun version mismatch: Mise (${miseVersions.bun}) != Action (${actionVersions.bun})`)
-  }
+  const errors = checks.filter((err): err is string => err !== undefined)
 
   if (errors.length > 0) {
     console.error('Version verification failed:')

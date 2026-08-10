@@ -14,7 +14,7 @@
   },
   "permissions": {
     "allow": [
-      "Bash(bun scripts/verify-versions.mjs)",
+      "Bash(bun scripts/verify-versions.ts)",
       "Bash(bun run lint *)",
       "Bash(bun run openspec:validate *)",
       "Bash(bun run typecheck *)",
