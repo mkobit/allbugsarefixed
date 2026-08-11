@@ -7,6 +7,7 @@
       "@/*": ["src/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["bun"],
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
@@ -21,7 +22,6 @@
     "eslint.config.mjs",
     "prettier.config.mjs",
     "playwright.config.ts",
-    "vitest.config.ts",
     "tests/**/*.ts",
     "scripts/**/*.ts"
   ],
