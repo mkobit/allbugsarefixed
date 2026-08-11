@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
+import { Temporal } from '@js-temporal/polyfill'
+
+const webServerStartupTimeout = Temporal.Duration.from({ minutes: 2 })
 
 // A random port (instead of Astro's 4321 default) avoids colliding with a
 // stale/leftover server -- e.g. a `bun start` dev server left running from a
@@ -11,7 +14,12 @@ import { defineConfig, devices } from '@playwright/test'
 // disagrees with the others on which port the one real server is on.
 process.env.PLAYWRIGHT_PREVIEW_PORT ??= String(10000 + Math.floor(Math.random() * 45000))
 const port = process.env.PLAYWRIGHT_PREVIEW_PORT
-const baseURL = `http://localhost:${port}`
+
+// When PLAYWRIGHT_BASE_URL is set (e.g. a deployed URL in CI), tests run
+// against that destination directly and Playwright must not spawn a local
+// preview server. When unset, fall back to today's local-preview behavior.
+const liveBaseURL = process.env.PLAYWRIGHT_BASE_URL
+const baseURL = liveBaseURL ?? `http://localhost:${port}`
 
 export default defineConfig({
   forbidOnly: !!process.env.CI,
@@ -29,11 +37,13 @@ export default defineConfig({
     baseURL,
     trace: 'on-first-retry',
   },
-  webServer: {
-    command: `bun run preview -- --port ${port}`,
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-    url: baseURL,
-  },
+  webServer: liveBaseURL
+    ? undefined
+    : {
+        command: `bun run preview -- --port ${port}`,
+        reuseExistingServer: !process.env.CI,
+        timeout: webServerStartupTimeout.total('milliseconds'),
+        url: baseURL,
+      },
   workers: process.env.CI ? 1 : undefined,
 })
