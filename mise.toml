@@ -23,11 +23,11 @@ description = "Typecheck TypeScript and Astro files"
 run = "bun run typecheck"
 
 [tasks.test]
-description = "Run unit tests with Vitest"
+description = "Run unit tests with Bun's test runner"
 run = "bun run test"
 
 [tasks.coverage]
-description = "Run unit test coverage with Vitest"
+description = "Run unit test coverage with Bun's test runner"
 run = "bun run coverage"
 
 [tasks.build]

@@ -13,7 +13,7 @@ context: |
   Standards:
     - ESLint is the formatter (Prettier is not used).
     - Semantic line breaks (one sentence per line) in Markdown/MDX.
-    - CI required commands (use `bun run <script>`, not bare `bun <script>` — `test`/`build` collide with Bun's own reserved subcommands): bun run lint, bun run typecheck, bun run test, bun run coverage, bun run build, bun run test:e2e.
+    - CI required commands (use `bun run <script>`, not bare `bun <script>` — `test`/`build` collide with Bun's own reserved subcommands, and bare `bun test` also loses the `src`-scoped file discovery this project relies on): bun run lint, bun run typecheck, bun run test, bun run coverage, bun run build, bun run test:e2e.
 
 # Per-artifact rules
 rules:

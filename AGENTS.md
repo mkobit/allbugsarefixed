@@ -8,14 +8,14 @@ You **MUST** run the following commands before submitting any changes. These com
 
 **CI Workflow File:** [.github/workflows/check.yml](.github/workflows/check.yml) (see [reusable-check.yml](.github/workflows/reusable-check.yml) for the actual commands CI runs)
 
-**Use `bun run <script>`, not bare `bun <script>`.** `test` and `build` are Bun's own reserved subcommands (Bun's built-in test runner and bundler, respectively) — the bare form silently does the wrong thing instead of running this project's npm script, even though most other script names (`lint`, `typecheck`, `coverage`, etc.) work fine either way.
+**Use `bun run <script>`, not bare `bun <script>`.** `test` and `build` are Bun's own reserved subcommands (Bun's built-in test runner and bundler, respectively) — the bare form bypasses this project's npm script and its arguments, even though most other script names (`lint`, `typecheck`, `coverage`, etc.) work fine either way.
 
 1.  **Verify versions:** `bun scripts/verify-versions.ts`
 2.  **Lint:** `bun run lint`
 3.  **Validate specs:** `bun run openspec:validate`
 4.  **Typecheck:** `bun run typecheck`
 5.  **Unit tests:** `bun run test`
-    - Bare `bun test` invokes Bun's own test runner instead, which will try and fail to run the Playwright specs under `tests/e2e/`.
+    - Bare `bun test` invokes Bun's test runner unscoped (repo-wide default file discovery) instead of the `src`-scoped run this script defines, so it will try and fail to run the Playwright specs under `tests/e2e/`.
 6.  **Coverage:** `bun run coverage`
 7.  **Build:** `bun run build`
     - Bare `bun build` errors with "Missing entrypoints" — it's Bun's bundler, not this script.

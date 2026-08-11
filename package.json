@@ -12,8 +12,8 @@
     "preview": "astro preview --host",
     "lint": "eslint . --ext .js,.ts,.tsx,.astro,.mdx --cache",
     "typecheck": "astro check && tsc --noEmit",
-    "test": "vitest run",
-    "coverage": "vitest run --coverage",
+    "test": "bun test src",
+    "coverage": "bun test src --coverage",
     "test:e2e": "playwright test",
     "new-idea": "bun scripts/new-idea.ts",
     "openspec:validate": "openspec validate --all --no-interactive",
@@ -59,11 +59,11 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/bun": "^1.3.14",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.65.0",
     "@typescript-eslint/parser": "^8.65.0",
-    "@vitest/coverage-istanbul": "^4.1.10",
     "astro-eslint-parser": "^3.0.0",
     "d3-dsv": "^3.0.1",
     "dompurify": "^3.4.12",
@@ -91,7 +91,6 @@
     "unified": "^11.0.5",
     "unist": "^0.0.1",
     "unist-util-visit": "^5.1.0",
-    "vfile": "^6.0.3",
-    "vitest": "^4.1.10"
+    "vfile": "^6.0.3"
   }
 }
