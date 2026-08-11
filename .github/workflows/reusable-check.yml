@@ -3,6 +3,16 @@ name: Reusable checks
 on:
   workflow_call:
 
+# Scoped to the commit SHA (not the caller workflow's ref) so that multiple
+# caller workflows triggered by the same push -- e.g. deploy.yml and any
+# future sibling deploy workflow -- queue instead of running two full CI
+# pipelines (including two integration-test/Playwright jobs) concurrently on
+# shared runners, which caused a webServer startup timeout in practice
+# (see abf-zdv.9).
+concurrency:
+  group: reusable-check-${{ github.sha }}
+  cancel-in-progress: false
+
 jobs:
   ci:
     runs-on: ubuntu-latest
