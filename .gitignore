@@ -237,6 +237,7 @@ test-results/
 *.db
 .beads-credential-key
 .beads/proxieddb/
+.beads.gate.lock
 
 # Beads auto-export/interactions log — rewritten on every bd command, pollutes diffs.
 # Dolt is the source of truth (bd dolt push/pull); config.yaml/metadata.json stay tracked.
