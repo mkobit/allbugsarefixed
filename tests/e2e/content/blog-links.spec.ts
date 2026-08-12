@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('Blog index has valid links', async ({ page }) => {
+test('Blog index has valid links', { tag: '@local-only' }, async ({ page }) => {
   await page.goto('/blog/')
 
   // Get all blog post links

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('ScrollProgress meter appears on blog posts', async ({ page }) => {
+test('ScrollProgress meter appears on blog posts', { tag: '@local-only' }, async ({ page }) => {
   await page.goto('/')
 
   const firstPostLink = page.locator('main a[href^="/blog/"]').first()
