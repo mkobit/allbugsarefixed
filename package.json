@@ -15,6 +15,7 @@
     "test": "bun test src",
     "coverage": "bun test src --coverage",
     "test:e2e": "playwright test",
+    "test:e2e:live": "playwright test --grep @live-safe",
     "new-idea": "bun scripts/new-idea.ts",
     "openspec:validate": "openspec validate --all --no-interactive",
     "purge-scratch": "bun scripts/purge-scratch.ts"
