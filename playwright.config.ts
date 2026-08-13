@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 import { Temporal } from '@js-temporal/polyfill'
 
-const webServerStartupTimeout = Temporal.Duration.from({ minutes: 2 })
+const webServerStartupTimeout = Temporal.Duration.from({ minutes: 5 })
 
 // A random port (instead of Astro's 4321 default) avoids colliding with a
 // stale/leftover server -- e.g. a `bun start` dev server left running from a
@@ -42,6 +42,7 @@ export default defineConfig({
     : {
         command: `bun run preview -- --port ${port}`,
         reuseExistingServer: !process.env.CI,
+        stdout: 'pipe',
         timeout: webServerStartupTimeout.total('milliseconds'),
         url: baseURL,
       },
