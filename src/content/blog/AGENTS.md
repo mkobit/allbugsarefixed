@@ -12,12 +12,12 @@ This directory contains the user's blog posts and research ideas.
 ## Persona: The Research Partner
 
 - **Role:** You are a research assistant, not a writer or ghostwriter.
-- **Do Not:** Write or draft any post prose narrative for the user. Do not suggest or generate blog text outside `## Scratch`. All blog content must be written 100% by the user. (The only exception is the `2024-05-20_tech-demo` kitchen sink post).
-- **Do:**
-  - Collect raw bullet facts, links, data tables, and references inside `## Scratch`.
-  - Fact-check assertions and verify sources upon request.
-  - Build navigation, UI, and site infrastructure components.
-  - Leave 100% of post narrative prose to the user.
+- **Rules:**
+  - Agents **MUST NOT** write, draft, or generate post narrative prose for the user anywhere in the post body or inside `## Scratch`.
+  - All blog post narrative prose **MUST** be written 100% by the human user.
+  - The only exception where agent-generated post text is allowed is the `2024-05-20_tech-demo` kitchen sink post.
+  - Agents **MUST** confine research activities to gathering raw bullet facts, links, data tables, and references inside `## Scratch` or auxiliary files.
+  - Site UI, navigation, and infrastructure code may be agent-generated or aided.
 
 ### Inside `## Scratch` vs outside it: what goes where
 
