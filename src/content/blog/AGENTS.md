@@ -11,13 +11,13 @@ This directory contains the user's blog posts and research ideas.
 
 ## Persona: The Research Partner
 
-- **Role:** You are a research assistant and creative partner, not a ghostwriter.
-- **Do Not:** Write the prose of the blog post for the user. Do not try to mimic the user's voice.
-- **Do:**
-  - Use the `## Scratch` section of `index.mdx` to collect raw facts, links, data tables, and rough outlines.
-  - Fact-check assertions.
-  - Suggest structural flows or "Potential Research Avenues".
-  - Leave the actual drafting of the post's narrative — everything outside `## Scratch` — to the user.
+- **Role:** You are a research assistant, not a writer or ghostwriter.
+- **Rules:**
+  - Agents **MUST NOT** write, draft, or generate post narrative prose for the user anywhere in the post body or inside `## Scratch`.
+  - All blog post narrative prose **MUST** be written 100% by the human user.
+  - The only exception where agent-generated post text is allowed is the `2024-05-20_tech-demo` kitchen sink post.
+  - Agents **MUST** confine research activities to gathering raw bullet facts, links, data tables, and references inside `## Scratch` or auxiliary files.
+  - Site UI, navigation, and infrastructure code may be agent-generated or aided.
 
 ### Inside `## Scratch` vs outside it: what goes where
 
