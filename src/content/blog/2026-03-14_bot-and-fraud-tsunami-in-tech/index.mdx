@@ -10,8 +10,16 @@ visibility: "hidden"
 #### Idea
 High fraud rates today create severe friction for legitimate users incorrectly classified by automated systems, a problem compounded by the amplified volume of bot attacks, which forces platforms to deploy increasingly stringent barriers that further complicate human verification and account recovery processes.
 
+#### Data points
+| Metric / Observation | Value / Stat | Source |
+| --- | --- | --- |
+| 2025 Total Automated Bot Web Traffic | >53% of all web traffic (human traffic under 47%) | Imperva 2026 Bad Bot Report |
+| 2025 Malicious (Bad) Bot Traffic | 40% of all web traffic | Imperva 2026 Bad Bot Report |
+| AI-driven bot attack surge | 12.5x increase | Imperva 2026 Bad Bot Report |
+
 #### Key observations
 * I observed that platforms are struggling with an unprecedented influx of sophisticated AI agents and automated accounts.
+* I noted that automated bot traffic reached over 53% of all web traffic in 2025 (with malicious bad bots making up 40%), outnumbering human traffic for the first time (Imperva 2026 Bad Bot Report).
 * I noted that Digg downsized its team to a small core group, failing to find product-market fit against established social media platforms while grappling with AI bots undermining their voting and engagement systems (source: https://digg.com/).
 * I read that Mitchell Hashimoto created Vouch (`mitchellh/vouch`), an open-source declarative contributor trust management system for repositories designed to mitigate low-effort drive-by contributions and establish a web of trust.
 * I learned that the Vouch system uses a flat text file (`VOUCHED.td`) inside a repository where trusted project members can vouch for or denounce contributors, with forge-agnostic CLI and GitHub Actions integration.
@@ -19,7 +27,8 @@ High fraud rates today create severe friction for legitimate users incorrectly c
 * I recalled the xz-utils backdoor incident where a contributor ("Jia Tan") spent two years earning trust before planting a severe vulnerability, highlighting the complexity of long-term social engineering attacks versus automated bot spammers.
 * I observed that automated agents and SEO spam can quickly discover and flood new platforms, as seen with Digg banning tens of thousands of accounts almost immediately after launch.
 * I noted that getting to a human for support on major platforms like Stripe or Google is difficult for users caught in automated fraud detection nets.
-* I observed that open-source maintainers face an asymmetric burden from "AI slop" PRs and automated bug bounty reports (e.g. curl receiving waves of hallucinated vulnerability reports), shifting verification costs onto volunteer maintainers.
+* I observed that open-source maintainers face an asymmetric burden from "AI slop" PRs and automated bug bounty reports (e.g. `curl` receiving waves of hallucinated vulnerability reports with fake GDB traces referencing non-existent functions, leading Daniel Stenberg to temporarily pause the project's HackerOne bug bounty program).
+* I noted that while low-effort AI slop causes administrative denial-of-service for maintainers, advanced AI static analysis tools (like ZeroPath) have successfully uncovered genuine complex C memory/logic flaws when used by experienced security researchers.
 * I noted that projects like Ghostty experiment with explicit trust models (like Vouch) to require vouching before pull request reviews or CI triggers.
 
 #### References
@@ -28,4 +37,8 @@ High fraud rates today create severe friction for legitimate users incorrectly c
 * [Vouch: earn the right to submit a pull request (from Mitchell Hashimoto) : r/devops - Reddit](https://www.reddit.com/r/devops/comments/1qzgoao/vouch_earn_the_right_to_submit_a_pull_request/)
 * [Mitchell Hashimoto Launches 'Vouch' to Fight AI Slop in Open Source Ecosystem - It's FOSS](https://itsfoss.com/news/mitchell-hashimoto-vouch/)
 * [mitchellh/vouch - GitHub repository](https://github.com/mitchellh/vouch)
+* [Imperva 2026 Bad Bot Report](https://www.imperva.com/)
+* [Daniel Stenberg on AI Slop and Curl Bug Bounty Suspensions](https://daniel.haxx.se/)
+* [ZeroPath AI Security Analysis on Curl](https://zeropath.com/)
+
 
