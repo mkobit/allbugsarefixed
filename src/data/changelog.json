@@ -1,0 +1,1589 @@
+{
+  "entries": [
+    {
+      "category": "platform",
+      "closedAt": "2026-08-13T03:54:22Z",
+      "id": "abf-2mk",
+      "issueType": "task",
+      "labels": [],
+      "title": "Pin all GitHub Actions to commit SHAs"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-13T03:31:23Z",
+      "id": "abf-k8c",
+      "issueType": "task",
+      "labels": [],
+      "title": "Correct static-site-hosting spec to reflect actual GH Pages production target"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-13T03:24:05Z",
+      "id": "abf-ctw",
+      "issueType": "bug",
+      "labels": [],
+      "parent": "abf-zdv",
+      "title": "CI: integration-test webServer timeout recurs without concurrent-run cause"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-12T13:57:03Z",
+      "id": "abf-prg",
+      "issueType": "task",
+      "labels": [],
+      "title": "Evaluate bumping beads from 1.1.0 to 1.2.1"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T04:40:51Z",
+      "id": "abf-zdv.2",
+      "issueType": "epic",
+      "labels": [
+        "meta:beads-flow",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv",
+      "title": "Live/production testing of the deployed site"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-12T04:40:33Z",
+      "id": "abf-zdv.2.14",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 4.3 Open PR for live-deploy-verification"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T04:40:15Z",
+      "id": "abf-zdv.2.12",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 4.1 Run full local CI gate"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-12T04:30:23Z",
+      "id": "abf-zdv.2.11",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 3.3 Upload Playwright report/trace on live-verification failure"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-12T04:30:23Z",
+      "id": "abf-zdv.2.10",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 3.2 Add post-deploy live-verification step to deploy.yml"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T03:37:45Z",
+      "id": "abf-zdv.2.9",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 3.1 Add test:e2e:live npm script"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T01:53:55Z",
+      "id": "abf-zdv.2.13",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 4.2 Confirm no remaining references to old flat test file names"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-12T01:53:32Z",
+      "id": "abf-zdv.2.8",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 2.7 Confirm full e2e suite still covers all specs after reorg"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T01:53:32Z",
+      "id": "abf-zdv.2.7",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 2.6 Move scroll_progress.spec.ts to tests/e2e/ui/scroll-progress.spec.ts"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T01:53:31Z",
+      "id": "abf-zdv.2.6",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 2.5 Move blog_integrity.spec.ts to tests/e2e/content/blog-links.spec.ts"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T01:53:31Z",
+      "id": "abf-zdv.2.5",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 2.4 Delete tests/e2e/smoke.spec.ts"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T01:53:31Z",
+      "id": "abf-zdv.2.4",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 2.3 Create tests/e2e/reachability/console-errors.spec.ts"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T01:53:30Z",
+      "id": "abf-zdv.2.3",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 2.2 Create tests/e2e/reachability/layout.spec.ts"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-12T01:53:30Z",
+      "id": "abf-zdv.2.2",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 2.1 Create tests/e2e/reachability/home.spec.ts"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-11T21:41:21Z",
+      "id": "abf-zdv.2.1",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:live-deploy-verification",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv.2",
+      "title": "task 1.1 Add PLAYWRIGHT_BASE_URL branch to playwright.config.ts"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-11T20:27:42Z",
+      "id": "abf-0yc.4.1",
+      "issueType": "task",
+      "labels": [],
+      "title": "Consider migrating unit tests from vitest to Bun's native test runner"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-11T14:16:33Z",
+      "id": "abf-zdv.9",
+      "issueType": "bug",
+      "labels": [
+        "meta:beads-flow",
+        "scope:testing"
+      ],
+      "parent": "abf-zdv",
+      "title": "CI: integration-test job flakes with webServer timeout under concurrent workflow runs"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-10T14:29:21Z",
+      "id": "abf-zdv.5",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow"
+      ],
+      "parent": "abf-zdv",
+      "title": "Clarify scope: feature logging with beads"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-10T05:31:59Z",
+      "id": "abf-zdv.3.1",
+      "issueType": "feature",
+      "labels": [
+        "meta:beads-flow",
+        "scope:infra"
+      ],
+      "parent": "abf-zdv.3.2",
+      "title": "Add PR preview deployments for blog content"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-10T05:29:47Z",
+      "id": "abf-mol-7yv",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec"
+      ],
+      "parent": "abf-mol-7s6",
+      "title": "Implementation & Verification: cloudflare-pages-migration"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-10T05:29:44Z",
+      "id": "abf-mol-7yv.6",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec",
+        "meta:openspec:cloudflare-pages-migration"
+      ],
+      "parent": "abf-mol-7yv",
+      "title": "Verify all 8 CI checks with mise run check"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-10T05:25:10Z",
+      "id": "abf-mol-7yv.5",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec",
+        "meta:openspec:cloudflare-pages-migration"
+      ],
+      "parent": "abf-mol-7yv",
+      "title": "Document custom domain DNS setup for allbugsarefixed.com"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-10T05:25:07Z",
+      "id": "abf-mol-7yv.4",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec",
+        "meta:openspec:cloudflare-pages-migration"
+      ],
+      "parent": "abf-mol-7yv",
+      "title": "Document Cloudflare Pages setup and API credentials"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-10T05:24:57Z",
+      "id": "abf-mol-7yv.3",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec",
+        "meta:openspec:cloudflare-pages-migration"
+      ],
+      "parent": "abf-mol-7yv",
+      "title": "Create GitHub Actions deployment workflow deploy-pages.yml"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-10T05:16:56Z",
+      "id": "abf-mol-7yv.2",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec",
+        "meta:openspec:cloudflare-pages-migration"
+      ],
+      "parent": "abf-mol-7yv",
+      "title": "Add wrangler devDependency to package.json"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-10T05:16:33Z",
+      "id": "abf-mol-7yv.1",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec",
+        "meta:openspec:cloudflare-pages-migration"
+      ],
+      "parent": "abf-mol-7yv",
+      "title": "Create wrangler.json project configuration file"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-10T05:06:02Z",
+      "id": "abf-mol-97z",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec"
+      ],
+      "parent": "abf-mol-ei7",
+      "title": "Implementation & Verification: hosting-provider-decision"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-10T05:03:16Z",
+      "id": "abf-zdv.3",
+      "issueType": "epic",
+      "labels": [
+        "meta:beads-flow",
+        "scope:infra"
+      ],
+      "parent": "abf-zdv",
+      "title": "[EPIC] Decide: GitHub Pages vs Cloudflare hosting"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-10T04:47:14Z",
+      "id": "abf-zdv.6",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow"
+      ],
+      "parent": "abf-zdv",
+      "title": "File additional beads molecules for recurring workflows"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-10T01:55:55Z",
+      "id": "abf-kht",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow"
+      ],
+      "title": "Improve: cross-check design.md scope against proposal.md before writing tasks.md"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-10T01:55:54Z",
+      "id": "abf-6c5",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow"
+      ],
+      "title": "Improve: require hydration verification for React-island subagent tasks"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-10T01:32:52Z",
+      "id": "abf-m2c",
+      "issueType": "feature",
+      "labels": [],
+      "title": "Add mise tasks for running CI verification suite"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-10T01:25:00Z",
+      "id": "abf-bst",
+      "issueType": "task",
+      "labels": [],
+      "title": "Convert scripts/verify-versions.mjs to TypeScript"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-10T01:06:35Z",
+      "id": "abf-q7e",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow"
+      ],
+      "title": "Improve: reconcile tasks.md + archive as an explicit epic-close step"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-10T00:49:15Z",
+      "id": "abf-7gk",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow"
+      ],
+      "title": "Improve: document the openspec-sync labels-workaround as default procedure"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-08-10T00:49:14Z",
+      "id": "abf-2cq",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow"
+      ],
+      "title": "Fix: openspec-sync formula doesn't template {{change_name}} inside labels array"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-10T00:21:26Z",
+      "id": "abf-4i8",
+      "issueType": "task",
+      "labels": [],
+      "title": "Update astro and dependencies to latest versions"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-08-09T20:43:42Z",
+      "id": "abf-k7d",
+      "issueType": "epic",
+      "labels": [],
+      "title": "Platform & authoring experience overhaul"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-08-09T19:10:18Z",
+      "id": "abf-k7d.2",
+      "issueType": "epic",
+      "labels": [],
+      "parent": "abf-k7d",
+      "title": "Design a lower-friction authoring path for data/interactive widgets"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-09T19:10:17Z",
+      "id": "abf-k7d.2.10",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "5.1 Full CI gate for data-widget-authoring"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-09T18:34:35Z",
+      "id": "abf-k7d.2.9",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "4.1 Update tech-demo reference page and document conventions"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-09T15:47:25Z",
+      "id": "abf-k7d.2.5",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "2.2 Register DataTable remark plugin in astro.config.mjs"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-09T15:47:25Z",
+      "id": "abf-k7d.2.6",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "2.3 Register DataTable in mdx-components.tsx"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-09T15:42:50Z",
+      "id": "abf-k7d.2.4",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "2.1 Implement remark table-to-DataTable plugin"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-09T06:34:58Z",
+      "id": "abf-k7d.2.8",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "3.2 Add unit coverage for IconBlock icon branches"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-09T06:34:57Z",
+      "id": "abf-k7d.2.7",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "3.1 Extend IconBlock to accept icon name string"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-09T06:31:07Z",
+      "id": "abf-k7d.2.3",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "1.3 Validate DataTable demand"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-09T06:31:06Z",
+      "id": "abf-k7d.2.2",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "1.2 Decide DataTable opt-in dependency question"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-09T06:31:05Z",
+      "id": "abf-k7d.2.1",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:data-widget-authoring"
+      ],
+      "parent": "abf-k7d.2",
+      "title": "1.1 Prototype DataTable opt-in syntax candidates"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-08T15:06:39Z",
+      "id": "abf-k7d.5",
+      "issueType": "epic",
+      "labels": [],
+      "parent": "abf-k7d",
+      "title": "Design a lower-friction path for post images: galleries and lightbox"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-08T15:06:32Z",
+      "id": "abf-k7d.5.16",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "6.2 Full CI gate"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-08T05:15:07Z",
+      "id": "abf-k7d.5.15",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "6.1 Remove scratch/draft verification content"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-08T05:09:32Z",
+      "id": "abf-k7d.5.12",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "4.4 Register Gallery in mdx-components.tsx (hold for abf-k7d.3)"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-08T05:00:51Z",
+      "id": "abf-k7d.3",
+      "issueType": "epic",
+      "labels": [],
+      "parent": "abf-k7d",
+      "title": "Audit and extend the existing Tailwind design-token system"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-08T05:00:41Z",
+      "id": "abf-k7d.3.16",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "Migrate ScrollProgress.tsx off raw gray-scale (needs new tokens)"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-08T02:27:57Z",
+      "id": "abf-hwj",
+      "issueType": "bug",
+      "labels": [],
+      "title": "Investigate and fix failing integration-test on PR #294 (footnotes/TOC) and #295 (dependabot bun bump)"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-08T01:49:40Z",
+      "id": "abf-184",
+      "issueType": "task",
+      "labels": [],
+      "title": "Merge clean open PRs: #296 (image galleries/lightbox) and #278 (dependabot actions bump)"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:33:28Z",
+      "id": "abf-k7d.5.14",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "5.2 Check lightbox resolution, tune sizes attribute if needed"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:29:53Z",
+      "id": "abf-k7d.5.13",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "5.1 Add fetchpriority/loading props for LCP tuning"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:27:29Z",
+      "id": "abf-k7d.5.11",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "4.3 Wire gallery images to shared Lightbox with navigation"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:27:28Z",
+      "id": "abf-k7d.5.10",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "4.2 Confirm gallery child images receive the same optimization"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:27:27Z",
+      "id": "abf-k7d.5.9",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "4.1 Create Gallery.tsx as a children-based wrapper"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:20:52Z",
+      "id": "abf-k7d.5.8",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "3.2 Hydrate single-image wrapper with client:visible"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:20:51Z",
+      "id": "abf-k7d.5.7",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "3.1 Build focusable button click-target for standalone image"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:07:22Z",
+      "id": "abf-k7d.5.6",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "2.4 Add arrow-key navigation, hide controls for single-image sets"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:07:22Z",
+      "id": "abf-k7d.5.5",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "2.3 Wire Esc/backdrop dismiss and focus-return"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:07:21Z",
+      "id": "abf-k7d.5.4",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "2.2 Style Lightbox with tailwind-variants against design tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T20:07:20Z",
+      "id": "abf-k7d.5.3",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "2.1 Create Lightbox.tsx wrapping headlessui Dialog"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T19:59:35Z",
+      "id": "abf-k7d.5.2",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "1.2 Confirm build fails on a missing referenced image"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-07T18:19:01Z",
+      "id": "abf-k7d.5.1",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:image-galleries-lightbox"
+      ],
+      "parent": "abf-k7d.5",
+      "title": "1.1 Verify automatic astro:assets rewrite for a single embedded image"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-06T23:43:12Z",
+      "id": "abf-k7d.1",
+      "issueType": "epic",
+      "labels": [],
+      "parent": "abf-k7d",
+      "title": "Extend content-polish widget support for blog posts"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-06T23:43:01Z",
+      "id": "abf-k7d.1.9",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "3.1 Full CI gate"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-06T19:07:10Z",
+      "id": "abf-k7d.1.8",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "2.4 Verify progressive-enhancement fallback"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-06T18:08:50Z",
+      "id": "abf-k7d.1.7",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "2.3 Hydrate TableOfContents.tsx from [...slug].astro"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-06T14:44:57Z",
+      "id": "abf-k7d.1.6",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "2.2 Add IntersectionObserver scroll-spy"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-06T04:29:20Z",
+      "id": "abf-k7d.1.4",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "1.4 Verify no rendering regression on existing posts"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-05T23:59:01Z",
+      "id": "abf-k7d.1.3",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "1.3 Add footnote section styling to global.css"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-05T22:16:09Z",
+      "id": "abf-k7d.1.5",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "2.1 Port TableOfContents.astro to TableOfContents.tsx"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-05T21:53:48Z",
+      "id": "abf-k7d.1.2",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "1.2 Wire remark-gfm into astro.config.mjs"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-05T17:08:58Z",
+      "id": "abf-k7d.1.1",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:content-polish-widgets"
+      ],
+      "parent": "abf-k7d.1",
+      "title": "1.1 Add remark-gfm dependency"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T22:33:50Z",
+      "id": "abf-k7d.3.15",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "4.2 Fallback: revert callout color-mix() if visibly off"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T22:33:49Z",
+      "id": "abf-k7d.3.14",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "4.1 Visual verification: screenshot tech-demo in light/dark"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-04T09:37:19Z",
+      "id": "abf-k7d.3.13",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "3.2 Run full CI gate for design-token-audit"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:35:52Z",
+      "id": "abf-k7d.3.12",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "3.1 Repo-wide sweep for leftover raw-gray/semantic-color patterns"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:18Z",
+      "id": "abf-k7d.3.11",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.9 Migrate callout.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:18Z",
+      "id": "abf-k7d.3.10",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.8 Migrate link.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:17Z",
+      "id": "abf-k7d.3.9",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.7 Migrate separator.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:16Z",
+      "id": "abf-k7d.3.8",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.6 Migrate PostMetadata.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:16Z",
+      "id": "abf-k7d.3.7",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.5 Migrate time.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:15Z",
+      "id": "abf-k7d.3.6",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.4 Migrate text.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:14Z",
+      "id": "abf-k7d.3.5",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.3 Migrate button.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:13Z",
+      "id": "abf-k7d.3.4",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.2 Migrate table.tsx to tokens"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:34:12Z",
+      "id": "abf-k7d.3.3",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "2.1 Migrate heading.tsx to brand-text token"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:32:38Z",
+      "id": "abf-k7d.3.2",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "1.2 Add callout-* Tier-4 tokens to global.css"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-04T04:32:37Z",
+      "id": "abf-k7d.3.1",
+      "issueType": "task",
+      "labels": [
+        "meta:openspec:design-token-audit"
+      ],
+      "parent": "abf-k7d.3",
+      "title": "1.1 Add ui-* Tier-3 tokens to global.css"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-03T13:01:20Z",
+      "id": "abf-k7d.4",
+      "issueType": "task",
+      "labels": [],
+      "parent": "abf-k7d",
+      "title": "Decide how platform, content, tracking, and publishing stay decoupled"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-03T04:44:34Z",
+      "id": "abf-age",
+      "issueType": "task",
+      "labels": [],
+      "title": "Read and apply Claude context-engineering best practices to repo"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-08-03T04:00:28Z",
+      "id": "abf-9eq",
+      "issueType": "bug",
+      "labels": [],
+      "title": "Fix blog-lifecycle.formula.toml: stale two-file (notebook.md+index.mdx) description"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-03T03:23:41Z",
+      "id": "abf-zdv.4",
+      "issueType": "epic",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv",
+      "title": "Overhaul blog draft/staging pipeline (beads-driven planning)"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-02T22:43:01Z",
+      "id": "abf-eei",
+      "issueType": "task",
+      "labels": [],
+      "title": "Document modern-web-guidance skill invocation convention in AGENTS.md"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-02T22:09:21Z",
+      "id": "abf-zdv.7",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:agents"
+      ],
+      "parent": "abf-zdv",
+      "title": "New Claude Code sessions don't auto-prime with bd/AGENTS.md context"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-02T13:47:34Z",
+      "id": "abf-z5s",
+      "issueType": "bug",
+      "labels": [],
+      "title": "Reading-time badge shows fallback '1 min read' for every .mdx post"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-08-02T03:21:38Z",
+      "id": "abf-zl2",
+      "issueType": "task",
+      "labels": [],
+      "title": "Allowlist bun run <script> in Claude Code settings, scoped to known-safe package.json targets"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-02T00:54:18Z",
+      "id": "abf-zdv.4.18",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "Design and implement single-file-per-post with purge-on-publish scratch section"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-08-02T00:54:11Z",
+      "id": "abf-zdv.4.18.5",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4.18",
+      "title": "Verify single-file mechanism: CI gate + manual dev-server check"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-01T13:19:17Z",
+      "id": "abf-zdv.4.18.4",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4.18",
+      "title": "Migrate existing notebook-only folders to single-file shape"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-01T13:19:16Z",
+      "id": "abf-zdv.4.18.3",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4.18",
+      "title": "Content pipeline updates for single-file shape"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-08-01T02:52:18Z",
+      "id": "abf-zdv.4.18.2",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4.18",
+      "title": "Purge script: scripts/purge-scratch.ts"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-31T19:27:04Z",
+      "id": "abf-zdv.4.18.1",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4.18",
+      "title": "Scratch-section infrastructure: shared boundary function + remark strip plugin"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-07-31T19:04:06Z",
+      "id": "abf-7sf",
+      "issueType": "epic",
+      "labels": [
+        "scope:rendering"
+      ],
+      "title": "Evaluate TanStack markdown & renderer adoption"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-07-31T19:04:05Z",
+      "id": "abf-7sf.2",
+      "issueType": "task",
+      "labels": [
+        "scope:rendering"
+      ],
+      "parent": "abf-7sf",
+      "title": "Implement TanStack markdown/renderer adoption"
+    },
+    {
+      "category": "platform",
+      "closedAt": "2026-07-31T18:51:24Z",
+      "id": "abf-7sf.1",
+      "issueType": "task",
+      "labels": [
+        "scope:rendering"
+      ],
+      "parent": "abf-7sf",
+      "title": "Research current TanStack markdown/renderer libraries and evaluate fit"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-30T17:02:33Z",
+      "id": "abf-zdv.4.17",
+      "issueType": "decision",
+      "labels": [
+        "meta:beads-flow",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "Decide: single-file purge-on-publish vs notebook.md+index.mdx split"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T12:51:01Z",
+      "id": "abf-zdv.1",
+      "issueType": "epic",
+      "labels": [
+        "meta:beads-flow",
+        "scope:agents"
+      ],
+      "parent": "abf-zdv",
+      "title": "Fill gaps in Jules / AI-agent tooling"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-29T12:50:51Z",
+      "id": "abf-zdv.1.3",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:agents"
+      ],
+      "parent": "abf-zdv.1",
+      "title": "Fix bun run vs bare bun command inaccuracies in docs"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T12:50:50Z",
+      "id": "abf-zdv.1.2",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:agents"
+      ],
+      "parent": "abf-zdv.1",
+      "title": "Add Jules pointer section to root AGENTS.md"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T12:50:50Z",
+      "id": "abf-zdv.1.1",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "scope:agents"
+      ],
+      "parent": "abf-zdv.1",
+      "title": "Port canopy's Jules tooling pattern (.jules/AGENTS.md + prompts)"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T12:22:32Z",
+      "id": "abf-zdv.4.16",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "7.2 Manually verify draft visibility in dev server"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-29T12:19:42Z",
+      "id": "abf-zdv.4.15",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "7.1 Run full CI gate locally"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-07-29T12:13:47Z",
+      "id": "abf-zdv.4.11",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "4.1 Backfill blog-lifecycle molecules for notebook-only folders"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T04:10:09Z",
+      "id": "abf-zdv.4.14",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "6.2 Strengthen blog AGENTS.md persona section with notebook-vs-prose examples"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T04:10:08Z",
+      "id": "abf-zdv.4.13",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "6.1 Rewrite blog AGENTS.md workflow & lifecycle section"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-07-29T03:56:01Z",
+      "id": "abf-zdv.4.12",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "5.1 Rework new-idea.ts notebook template"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:55:15Z",
+      "id": "abf-zdv.4.10",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "3.5 Update pages/index.astro listing filter to use visibility"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:55:14Z",
+      "id": "abf-zdv.4.9",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "3.4 Update blog/index.astro listing filter to use visibility"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:55:13Z",
+      "id": "abf-zdv.4.8",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "3.3 Update [...slug].astro static-path gate and badge to use visibility"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:55:12Z",
+      "id": "abf-zdv.4.7",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "3.2 Update Layout.astro search index to use visibility"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:41:32Z",
+      "id": "abf-zdv.4.6",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "3.1 Replace status enum with required visibility enum in schema"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:30:03Z",
+      "id": "abf-zdv.4.5",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "2.3 Migrate tech-demo frontmatter to draft"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:30:03Z",
+      "id": "abf-zdv.4.4",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "2.2 Migrate measuring-commute-cost frontmatter to draft"
+    },
+    {
+      "category": "info",
+      "closedAt": "2026-07-29T03:30:02Z",
+      "id": "abf-zdv.4.3",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "2.1 Migrate hidden-costs-of-flexible-time-off frontmatter to draft"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-07-29T03:29:31Z",
+      "id": "abf-zdv.4.2",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "1.2 Verify blog-lifecycle chaining empirically"
+    },
+    {
+      "category": "authoring-tooling",
+      "closedAt": "2026-07-29T03:28:59Z",
+      "id": "abf-zdv.4.1",
+      "issueType": "task",
+      "labels": [
+        "meta:beads-flow",
+        "meta:openspec:blog-workflow-overhaul",
+        "scope:blog"
+      ],
+      "parent": "abf-zdv.4",
+      "title": "1.1 Write blog-lifecycle formula (5 chained steps)"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-28T13:51:19Z",
+      "id": "abf-0yc",
+      "issueType": "epic",
+      "labels": [],
+      "parent": "abf-zdv",
+      "title": "CI/CD integration & end-to-end testing is broken/never runs"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-28T12:24:53Z",
+      "id": "abf-0yc.2",
+      "issueType": "task",
+      "labels": [],
+      "parent": "abf-0yc",
+      "title": "Gate main/deploy on typecheck+test+e2e, not just lint+build"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-28T03:31:37Z",
+      "id": "abf-0yc.1",
+      "issueType": "task",
+      "labels": [],
+      "parent": "abf-0yc",
+      "title": "Enable Playwright e2e job in CI (currently if: false)"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-27T21:29:04Z",
+      "id": "abf-0yc.5",
+      "issueType": "bug",
+      "labels": [],
+      "parent": "abf-0yc",
+      "title": "bun run coverage fails: node:inspector coverage APIs not supported under Bun runtime"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-27T14:18:20Z",
+      "id": "abf-0yc.3",
+      "issueType": "bug",
+      "labels": [],
+      "parent": "abf-0yc",
+      "title": "Fix typescript@7.0.2 / @typescript-eslint@8.64.0 incompatibility breaking lint"
+    },
+    {
+      "category": "testing",
+      "closedAt": "2026-07-27T03:29:10Z",
+      "id": "abf-0cc",
+      "issueType": "epic",
+      "labels": [
+        "meta:ci",
+        "scope:infra"
+      ],
+      "parent": "abf-zdv",
+      "title": "Wire up and validate CI/CD: fix broken lint, enable e2e testing"
+    }
+  ],
+  "generatedAt": "2026-08-14T04:44:28.66866809Z"
+}

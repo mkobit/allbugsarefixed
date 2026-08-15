@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { ChangelogView } from '../components/ui/changelog-view'
+import changelogData from '../data/changelog.json'
+import type { ChangelogData } from '../lib/changelog'
+
+const data = changelogData as ChangelogData
+---
+
+<Layout title="Changelog">
+  <ChangelogView client:load data={data} />
+</Layout>
