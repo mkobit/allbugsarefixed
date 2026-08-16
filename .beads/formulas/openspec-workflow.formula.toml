@@ -76,4 +76,4 @@ title = "Archive: {{change_name}}"
 type = "task"
 labels = ["meta:openspec"]
 depends_on = ["reflection"]
-description = "Reconcile tasks.md checkboxes against actual bead/PR status and archive the change via `bunx openspec archive {{change_name}}`."
+description = "Reconcile tasks.md checkboxes against actual bead/PR status and archive the change via `bun x openspec archive {{change_name}}`."

@@ -41,14 +41,14 @@ When the implementation approach isn't decided yet, describe the problem/goal in
 ## Specs
 
 This project uses OpenSpec for spec-driven development, with a project-local `beads-driven` schema at `openspec/schemas/beads-driven/`.
-**Always invoke OpenSpec via `bunx openspec` (or `bun run openspec:*`), never the bare `openspec` command.** The project pins `@fission-ai/openspec` in `package.json`'s devDependencies; a bare `openspec` resolves to whatever's on `$PATH` (e.g. a stale/unpinned global `mise` shim), which can silently run a different version.
+**Always invoke OpenSpec via `bun x openspec` (or `bun run openspec:*`), never the bare `openspec` command.** The project pins `@fission-ai/openspec` in `package.json`'s devDependencies; a bare `openspec` resolves to whatever's on `$PATH` (e.g. a stale/unpinned global `mise` shim), which can silently run a different version.
 Artifact flow: proposal → specs → design → tasks → retrospective → reflection.
 The full change lifecycle can be tracked in beads via `bd mol pour openspec-workflow --var change_name=<name>`.
 `design.md` must include an `## Adversarial review and mitigations` section before `tasks.md` is created or beads issues are staged.
 Before writing `tasks.md`, explicitly re-read `proposal.md`'s component and file lists against `design.md`'s decisions and exclusions to reconcile scope divergences immediately.
 After writing `tasks.md`, hydrate it into beads with `bd mol pour openspec-sync --var change_name=<name>`.
 Because `bd` formulas do not interpolate `{{change_name}}` inside `labels` arrays (see `abf-2cq`), manually add `meta:openspec:<name>` to the 'Expand Tasks' bead and all created child task beads.
-When an OpenSpec-tracked epic closes in beads, reconcile `tasks.md` checkboxes against actual bead/PR status and archive the change via `bunx openspec archive <name>` (or `/opsx:archive`) so completed changes do not linger unarchived.
+When an OpenSpec-tracked epic closes in beads, reconcile `tasks.md` checkboxes against actual bead/PR status and archive the change via `bun x openspec archive <name>` (or `/opsx:archive`) so completed changes do not linger unarchived.
 Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work with specs.
 
 ## General guidelines
