@@ -9,7 +9,7 @@ Scope: read and write prompt files in `.jules/prompts/` only. Do not modify sour
 
 2. For each existing prompt, verify the commands it references still exist and have the correct flags:
    - Run `bd --help` (and relevant subcommand `--help`, e.g. `bd update --help`) to check bd subcommands.
-   - Run `bunx openspec --help` (and relevant subcommand `--help`) to check openspec subcommands.
+   - Run `bun x openspec --help` (and relevant subcommand `--help`) to check openspec subcommands.
    - If a command or flag has changed, update the prompt file directly.
    - Specifically check that no prompt uses `bd edit` — it opens `$EDITOR` and blocks a non-interactive session; it must always be `bd update --title`/`--description` instead.
 

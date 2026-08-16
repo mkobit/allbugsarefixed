@@ -11,11 +11,11 @@ Scope: read and report only. Do not create issues, modify prompts, or touch sour
 
 3. Run `bd lint` to check issues for missing template sections.
 
-4. Run `bunx openspec list` and, for each in-progress change, `bunx openspec validate <name> --no-interactive`.
+4. Run `bun x openspec list` and, for each in-progress change, `bun x openspec validate <name> --no-interactive`.
    Note any changes that are stale (no recent activity) or structurally invalid.
 
 5. List the files in `.jules/prompts/` and check each prompt for:
-   - Commands that no longer exist or have changed flags (run `bd --help` and `bunx openspec --help` to verify)
+   - Commands that no longer exist or have changed flags (run `bd --help` and `bun x openspec --help` to verify)
    - Steps that reference openspec changes or bd issues that no longer exist
    - Scope constraints that are too broad or too narrow given current workflow
 

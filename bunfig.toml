@@ -2,4 +2,4 @@
 minimumReleaseAge = 1209600 # days in seconds
 
 [run]
-bun = true # alias node -> bun for all scripts, so tools with a node shebang (e.g. bunx) run on bun
+bun = true # alias node -> bun for all scripts, so tools with a node shebang (e.g. bun x) run on bun
