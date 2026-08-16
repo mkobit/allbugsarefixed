@@ -17,7 +17,7 @@
     "test:e2e": "playwright test",
     "test:e2e:live": "playwright test --grep @live-safe",
     "new-idea": "bun scripts/new-idea.ts",
-    "openspec:validate": "openspec validate --all --no-interactive",
+    "openspec:validate": "openspec validate --all",
     "changelog:generate": "bun scripts/generate-changelog.ts",
     "purge-scratch": "bun scripts/purge-scratch.ts"
   },
