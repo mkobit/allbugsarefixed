@@ -24,6 +24,7 @@ export default [
       'playwright-report/',
       'test-results/',
       'scripts/verify-blog-structure.ts',
+      '.claude/',
     ],
   },
   js.configs.recommended,
