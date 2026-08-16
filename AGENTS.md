@@ -12,7 +12,7 @@ You **MUST** run the following commands before submitting any changes. These com
 
 1.  **Verify versions:** `bun scripts/verify-versions.ts`
 2.  **Lint:** `bun run lint`
-3.  **Validate specs:** `bun run openspec:validate`
+3.  **Validate specs:** `bun run openspec:validate` (Note: `bun x openspec validate --all` runs as a PR check on changes under `openspec/**`)
 4.  **Typecheck:** `bun run typecheck`
 5.  **Unit tests:** `bun run test`
     - Bare `bun test` invokes Bun's test runner unscoped (repo-wide default file discovery) instead of the `src`-scoped run this script defines, so it will try and fail to run the Playwright specs under `tests/e2e/`.
