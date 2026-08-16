@@ -37,4 +37,4 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Validate OpenSpec specs and changes
-        run: bun exec openspec validate --all
+        run: bun x openspec validate --all
