@@ -17,6 +17,7 @@ export default [
   {
     ignores: [
       '.astro/',
+      '.claude/',
       'dist/',
       'node_modules/',
       'build/',

@@ -23,7 +23,8 @@
     "prettier.config.mjs",
     "playwright.config.ts",
     "tests/**/*.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    ".claude/**/*.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }
