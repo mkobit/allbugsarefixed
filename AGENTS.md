@@ -41,6 +41,8 @@ When the implementation approach isn't decided yet, describe the problem/goal in
 ## Specs
 
 This project uses OpenSpec for spec-driven development, with a project-local `beads-driven` schema at `openspec/schemas/beads-driven/`.
+Reserve OpenSpec for larger platform features (new widgets, UX/UI elements, other platform-supported capabilities) and infrastructure or tooling proposals that help write faster, deploy, or improve general tracking.
+Lightweight operational or authoring workflows (e.g. the `blog-idea-kickoff` skill) are a bead plus a directly-built `.claude/skills/<name>/SKILL.md`, not an OpenSpec change.
 **Always invoke OpenSpec via `bun x openspec` (or `bun run openspec:*`), never the bare `openspec` command.** The project pins `@fission-ai/openspec` in `package.json`'s devDependencies; a bare `openspec` resolves to whatever's on `$PATH` (e.g. a stale/unpinned global `mise` shim), which can silently run a different version.
 Artifact flow: proposal → specs → design → tasks → retrospective → reflection.
 The full change lifecycle can be tracked in beads via `bd mol pour openspec-workflow --var change_name=<name>`.
