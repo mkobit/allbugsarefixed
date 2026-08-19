@@ -16,6 +16,7 @@ This directory contains the user's blog posts and research ideas.
   - Agents **MUST NOT** write, draft, or generate post narrative prose for the user anywhere in the post body or inside `## Scratch`.
   - All blog post narrative prose **MUST** be written 100% by the human user.
   - The only exception where agent-generated post text is allowed is the `2024-05-20_tech-demo` kitchen sink post.
+  - Agents **MUST NOT** provide unsolicited writing aid, rewrites, copyediting, or prose reviews unless explicitly requested by the user.
   - Agents **MUST** confine research activities to gathering raw bullet facts, links, data tables, and references inside `## Scratch` or auxiliary files.
   - Site UI, navigation, and infrastructure code may be agent-generated or aided.
 
@@ -52,36 +53,65 @@ A nested heading that happens to contain the word "scratch" is fine (e.g. `### S
 
 ## Workflow & lifecycle
 
-Lifecycle state (seed → researching → drafting → review → published) lives in beads via the `blog-lifecycle` formula, **not** in frontmatter. Frontmatter only ever carries `visibility` (see Files below), which is a build-visibility switch, not a lifecycle tracker.
+Lifecycle state (seed → researching → drafting → fact-checking → editorial-critique → review → published) lives in beads via the `blog-lifecycle` formula, **not** in frontmatter.
+Frontmatter only ever carries `visibility` (see Files below), which is a build-visibility switch, not a lifecycle tracker.
 
-### 1. Capture
+### 1. Capture (`stage:seed`, `actor:human`)
 
-- **Action:** Before creating any folder, check for an existing idea first: `bd search <slug>` (or `bd query "label=blog"` and scan titles). Don't pour a second molecule for the same idea.
-- **Then:** `bd mol pour blog-lifecycle --var slug=<kebab-slug> --var title="..."`. This creates a root epic plus one bead per stage (`stage:seed`, `stage:researching`, `stage:drafting`, `stage:review`, `stage:published`), each blocked on the previous. No folder is created yet.
+- **Action:** Before creating any folder, check for an existing idea first: `bd search <slug>` (or `bd query "label=blog"` and scan titles).
+  Don't pour a second molecule for the same idea.
+- **Then:** `bd mol pour blog-lifecycle --var slug=<kebab-slug> --var title="..."`.
+  This creates a root epic plus one bead per stage (`stage:seed`, `stage:researching`, `stage:drafting`, `stage:fact-checking`, `stage:editorial-critique`, `stage:review`, `stage:published`), each blocked on the previous.
+  No folder is created yet.
 
 ### 2. Research (`stage:researching`)
 
-- **Trigger:** Close the `stage:seed` bead when research begins. This unblocks `stage:researching` — claim it (`bd update <id> --claim`).
+- **Trigger:** Close the `stage:seed` bead when research begins.
+  This unblocks `stage:researching` — claim it (`bd update <id> --claim`).
 - **Action:** Create the folder (`YYYY-MM-DD_slug/`) and `index.mdx` inside it (`bun new-idea "Title"` does both), with `visibility: "hidden"` set from creation.
-- **Content:** See "Inside `## Scratch` vs outside it" above. Research goes inside `## Scratch`; keep it factual and structured, avoid long-form paragraphs or "bloggy" language.
-- **Constraint:** Leave everything outside `## Scratch` empty until drafting begins. `index.mdx` exists from this stage onward, but `visibility: "hidden"` is what keeps it out of the prod build (see Files below) — its mere existence no longer does that job, unlike the old two-file shape.
+- **Content:** See "Inside `## Scratch` vs outside it" above.
+  Research goes inside `## Scratch`; keep it factual and structured, avoid long-form paragraphs or "bloggy" language.
+- **Constraint:** Leave everything outside `## Scratch` empty until drafting begins.
+  `index.mdx` exists from this stage onward, but `visibility: "hidden"` keeps it out of the prod build.
 
-### 3. Drafting (`stage:drafting`)
+### 3. Drafting (`stage:drafting`, `actor:human`)
 
-- **Trigger:** The user explicitly asks to start writing the draft. Close `stage:researching`, claim the now-unblocked `stage:drafting` bead.
-- **Action:** Write the real narrative content in the same `index.mdx`, outside `## Scratch`, using the `## Scratch` section as source material/reference. This stage does not create `index.mdx` — it already exists from the researching stage — it fills in the post body around the reserved section.
-- **Content:** The human writes the narrative. An agent's role here is research support and fact-checking, not ghostwriting.
+- **Trigger:** The human begins writing narrative prose.
+  Close `stage:researching`, claim `stage:drafting`.
+- **Action:** Write the real narrative content in `index.mdx`, outside `## Scratch`, referencing the `## Scratch` section.
+- **Content:** The human writes 100% of narrative prose.
+  Agents MUST NOT write, rewrite, copyedit, or offer unsolicited writing aid/prose suggestions.
+  Close this step when the human draft is ready for fact-checking.
 
-### 4. Review (`stage:review`)
+### 4. Fact-checking (`stage:fact-checking`, `actor:agent`)
 
-- **Trigger:** Draft is ready for a final read-through. Close `stage:drafting`, claim `stage:review`.
+- **Trigger:** Human closes `stage:drafting`, unblocking `stage:fact-checking`.
+- **Action:** Agent verifies factual claims, dates, statistics, quotes, and citations in the draft against `## Scratch` and external references.
+- **Constraint:** Findings are recorded as bullet points in `## Scratch` (under `### Fact-check findings`) or issue notes/comments.
+  Agents MUST NEVER alter the post body prose text directly.
+  Close this step when verification notes are recorded.
 
-### 5. Publishing (`stage:published`)
+### 5. Editorial critique (`stage:editorial-critique`, `actor:agent`)
+
+- **Trigger:** Agent closes `stage:fact-checking`, unblocking `stage:editorial-critique`.
+- **Action:** Agent reviews narrative structure, pacing, tone consistency, and alignment with repository voice.
+- **Constraint:** Suggestions are recorded as collaborative notes in `## Scratch` (under `### Editorial suggestions`) or issue comments.
+  Agents MUST NEVER automatically rewrite prose.
+  Close this step when feedback notes are ready for human consideration.
+
+### 6. Review (`stage:review`, `actor:human`)
+
+- **Trigger:** Agent closes `stage:editorial-critique`, unblocking `stage:review`.
+- **Action:** Human reads through agent findings and suggestions, makes desired prose edits, verifies rendering in dev server, and approves publication.
+  Agents MUST NOT perform unprompted prose edits during review.
+  Close `stage:review` when the post is approved.
+
+### 7. Publishing (`stage:published`)
 
 - **Action:**
   - Flip `visibility: "visible"` in `index.mdx` frontmatter.
   - Run `bun run purge-scratch <slug>` to remove the `## Scratch` section from the file (a manual step, not automated).
-  - Close `stage:review`, then close `stage:published` with `bd close <id> --reason "published"`.
+  - Close `stage:published` with `bd close <id> --reason "published"`.
 
 ## Files
 
