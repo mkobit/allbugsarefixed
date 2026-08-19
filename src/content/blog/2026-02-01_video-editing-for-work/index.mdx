@@ -33,6 +33,91 @@ A basic walkthrough of my experience getting started with video editing using Da
 - **Alternatives**:
   - Mention CleanShot Pro as a potential simpler alternative (haven't used it for this specifically but thinking about it).
 
-#### References
-- DaVinci Resolve
-- CleanShot Pro (mention)
+### Links & sources
+
+- [Blackmagic Design Support Center](https://www.blackmagicdesign.com/support)
+- [DaVinci Resolve Official Training Page](https://www.blackmagicdesign.com/products/davinciresolve/training)
+- [Descript AI Editor Features & Documentation](https://www.descript.com)
+- [CleanShot X Mac Capture Tool](https://cleanshot.com)
+- [Loom Async Video Messaging](https://www.loom.com)
+- [Telestream ScreenFlow Screencast Editor](https://www.telestream.net/screenflow/)
+
+### Facts & data
+
+* **System requirements for DaVinci Resolve:**
+  * **Minimum OS:** Windows 10/11, macOS 11+, or Linux.
+  * **Minimum system RAM:** 16 GB (32 GB recommended for Fusion page and complex graphics).
+  * **Minimum GPU VRAM:** 4 GB VRAM (8 GB VRAM for 1080p, 12 GB VRAM for 4K timeline resolution).
+  * **Storage requirement:** Solid State Drive (SSD) required for media cache and database access.
+
+* **DaVinci Resolve Free vs Studio comparison:**
+
+| Feature | Free Version | Studio Version ($295) |
+| :--- | :--- | :--- |
+| **Max Export Resolution** | UHD 3840x2160 up to 60fps | Up to 32K resolution and >60fps |
+| **GPU Acceleration** | Single GPU limit | Multi-GPU support enabled |
+| **H.264/H.265 Hardware Decoding** | Software CPU on Windows (Free); restricted | Hardware accelerated (NVIDIA, Intel, AMD, Apple Silicon) |
+| **AI Tools (Neural Engine)** | Excluded | Magic Mask, Voice Isolation, Smart Reframe, Super Scale |
+| **Noise Reduction** | Basic / disabled | Temporal & Spatial Noise Reduction included |
+
+* **Essential keyboard shortcuts:**
+
+| Action | Shortcut (Mac) | Shortcut (Windows) |
+| :--- | :--- | :--- |
+| **Blade clip at playhead** | `Cmd + B` | `Ctrl + B` |
+| **Select Blade tool** | `B` | `B` |
+| **Normal selection mode** | `A` | `A` |
+| **Ripple delete clip** | `Shift + Delete` | `Shift + Backspace` |
+| **Ripple trim start to playhead** | `Shift + [` | `Shift + [` |
+| **Ripple trim end to playhead** | `Shift + ]` | `Shift + ]` |
+| **Insert edit** | `F9` | `F9` |
+| **Append to timeline** | `Shift + F12` | `Shift + F12` |
+| **Toggle snapping** | `N` | `N` |
+
+* **Tool feature matrix for software feature demos:**
+
+| Tool | Screen Capture | Primary Editing Mode | Audio Processing | Motion Zooms / Callouts | Best For |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **DaVinci Resolve** | No (requires OBS/QuickTime) | Timeline (NLE) | Fairlight (EQ, Compression, Voice Isolation) | Manual Inspector / Fusion Spline | Polished video production & color |
+| **Descript** | Built-in | Text-transcript editing | Studio Sound (AI noise removal) | Basic layout transitions | Fast script-driven cuts & podcasts |
+| **ScreenFlow** | High-res multitrack | Timeline NLE | Basic EQ & noise reduction | Built-in click actions & screen zoom | Mac screen tutorials & course material |
+| **Loom** | Built-in | Trim & transcript cut | Basic background noise suppression | Auto-zoom on focus | Asynchronous team communication |
+| **CleanShot X** | Screenshots & video | Trimming only | None | Basic annotation overlays | Instant screen capture & bug reports |
+
+### Agent research notes
+
+* **DaVinci Resolve database and project architecture:**
+  * DaVinci Resolve uses a database architecture rather than standalone `.drp` project files on disk for active editing.
+  * Local project libraries rely on an internal SQLite database stored in application support directories.
+  * Moving projects across computers requires explicit export as `.drp` (DaVinci Resolve Project) files or `.dra` project archives containing media.
+  * Accessing local SQLite project databases over network shares (NAS) causes database corruption.
+
+* **Keyframe animation mechanics:**
+  * Edit page Inspector provides simple linear keyframing for `Transform` parameters (`Position`, `Pitch`, `Yaw`, `Zoom`).
+  * Dynamic Zoom tool in the Edit page provides automated Ken Burns style framing without manual keyframes.
+  * Fusion page `Transform` node connected to the `Spline` editor enables cubic bezier easing curves via the `F` shortcut key.
+  * Complex screen recording animations (smooth easing zooms into UI elements) require Fusion node composition or third-party macros.
+
+* **Color page non-video-professional basics:**
+  * Primaries wheels manage tonal ranges: `Lift` (shadows), `Gamma` (midtones), `Gain` (highlights), `Offset` (global balance).
+  * Recommended serial node order: `Node 1` (Color Space Transform / CST) -> `Node 2` (Primary balance) -> `Node 3` (Secondaries / Power windows) -> `Node 4` (Output LUT / Look).
+  * Color Space Transform (CST) plugin normalizes camera log or display formats to target spaces like `Rec.709`.
+
+* **Audio processing in Fairlight page:**
+  * Channel strip order for voiceover cleanup: `Voice Isolation` -> `High-Pass Filter` (80-100Hz cut) -> `Parametric EQ` -> `Dynamics Compressor` -> `Limiter` (-4dB ceiling).
+  * Studio edition AI Voice Isolation requires 60-70% wet mix to prevent artificial artifacts while stripping background noise.
+
+* **Software feature demo workflow strategy:**
+  * Capture lossless 4K screen footage using OBS Studio or ScreenFlow at native display resolution.
+  * Import clips into DaVinci Resolve; assemble rough cut on the Cut or Edit page.
+  * Apply smooth UI zoom callouts using Fusion page Spline curves or third-party macros.
+  * Process narration audio in Fairlight using Voice Isolation and Dialogue Leveler.
+  * Render MP4 H.264/H.265 using Web Optimized preset for fast browser playback.
+
+### Open questions
+
+* What are the benchmarked render time differences for 4K screen recording exports in DaVinci Resolve Free (CPU) vs Studio (GPU H.264 hardware encoding)?
+* Which third-party DaVinci Resolve macros best replicate Screen Studio's automatic cursor smoothing and auto-zoom capabilities for non-video-professionals?
+
+### Rough thoughts (human)
+
