@@ -30,17 +30,33 @@ description = "The reserved `## Scratch` heading inside index.mdx is a scratchpa
 id = "drafting"
 title = "Drafting: {{title}}"
 type = "task"
-labels = ["blog", "stage:drafting"]
+labels = ["blog", "stage:drafting", "actor:human"]
 depends_on = ["researching"]
-description = "index.mdx already exists (created during researching). The human writes the narrative prose outside `## Scratch`; an agent's role here is research support and fact-checking, not ghostwriting or mimicking the user's voice. Close this step when the draft is ready for review."
+description = "Human authoring step. The human writes 100% of narrative prose outside `## Scratch`. Agents do not write, rewrite, copyedit, or offer unsolicited writing aid/prose suggestions. Close this step when the human draft is ready for automated fact-checking and editorial review."
+
+[[steps]]
+id = "fact-checking"
+title = "Fact-checking: {{title}}"
+type = "task"
+labels = ["blog", "stage:fact-checking", "actor:agent"]
+depends_on = ["drafting"]
+description = "Agent fact-checking step. Verify claims, citations, links, dates, and data points in the draft against `## Scratch` and external references. Record findings as bullet points in `## Scratch` (under `### Fact-check findings`) or issue notes; NEVER alter post body narrative text directly. Close when fact-checking notes are recorded."
+
+[[steps]]
+id = "editorial-critique"
+title = "Editorial critique: {{title}}"
+type = "task"
+labels = ["blog", "stage:editorial-critique", "actor:agent"]
+depends_on = ["fact-checking"]
+description = "Agent style, tone, and alignment critique step. Review narrative structure, clarity, tone consistency, and alignment with repository voice. Record collaborative suggestions and feedback as bullet points in `## Scratch` (under `### Editorial suggestions`) or issue comments; NEVER automatically rewrite or edit the prose. Close when critique notes are ready for human consideration."
 
 [[steps]]
 id = "review"
 title = "Review: {{title}}"
 type = "task"
-labels = ["blog", "stage:review"]
-depends_on = ["drafting"]
-description = "Final read-through before publish. Close this step when the post is approved to publish."
+labels = ["blog", "stage:review", "actor:human"]
+depends_on = ["editorial-critique"]
+description = "Human review and approval step. The human reviews agent fact-checking and critique suggestions, makes desired prose edits, verifies rendering in dev server, and signs off. Close this step when the post is approved for publication."
 
 [[steps]]
 id = "published"
@@ -48,4 +64,4 @@ title = "Published: {{title}}"
 type = "task"
 labels = ["blog", "stage:published"]
 depends_on = ["review"]
-description = "Flip visibility: \"visible\" in index.mdx frontmatter, then close this step with a reason of 'published'."
+description = "Flip visibility: \"visible\" in index.mdx frontmatter, run `bun run purge-scratch {{slug}}`, and close this step with a reason of 'published'."

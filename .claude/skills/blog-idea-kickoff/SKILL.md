@@ -25,7 +25,9 @@ Inside `## Scratch` you may add: `- raw fact (source-link)`, `> "quoted text" (s
 ## Where this skill stops
 
 It covers **seed → researching only**. It does not draft, review, or publish.
-Drafting starts *only* when the human explicitly asks, and the human writes the prose. Don't advance past research on your own.
+Drafting starts *only* when the human explicitly asks, and the human writes 100% of narrative prose.
+Agents do not provide unsolicited writing aid, rewrites, or editorial reviews unless explicitly requested by the user.
+Don't advance past research on your own.
 
 ## Stage 1 — Seed capture (no folder yet)
 
@@ -34,7 +36,7 @@ Drafting starts *only* when the human explicitly asks, and the human writes the 
    bd search <slug-words>
    ```
 2. **Pick the slug once, from the title**, and reuse it everywhere. `bun new-idea "<Title>"` derives the folder slug by lowercasing the title and replacing non-alphanumerics with `-`. The beads `--var slug` MUST match that derived slug, or the bead and folder won't line up.
-3. **Pour the lifecycle molecule** (creates a root epic + 5 stage beads, each blocked on the previous):
+3. **Pour the lifecycle molecule** (creates a root epic + 7 stage beads, each blocked on the previous):
    ```bash
    bd mol pour blog-lifecycle --var slug=<kebab-slug> --var title="<Title>"
    ```
