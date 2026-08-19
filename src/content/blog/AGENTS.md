@@ -43,9 +43,12 @@ This distinction has broken down in practice before — delegated agents (Jules 
 ### Reserved heading: `## Scratch`
 
 `## Scratch` — an exact-text, depth-2 heading — is reserved.
+Each `index.mdx` file MUST contain at most one `## Scratch` heading; duplicate `## Scratch` headings cause build-time compilation errors in `remark-strip-scratch`.
 It marks the start of the research section that gets silently stripped from every render, in every environment, regardless of lifecycle stage or `visibility` (see `src/lib/remark/remark-strip-scratch.ts`).
+Subsections inside `## Scratch` (such as `### Links & sources`, `### Facts & data`, `### Agent research notes`, `### Open questions`) MUST use depth-3 (`###`) or deeper headings to avoid inadvertently breaking section boundaries.
 A post's real content must **never** use a literal depth-2 heading with the exact text "Scratch" outside the intended section — reusing it causes everything from that heading through the next depth-≤2 heading (or end of file) to silently disappear from the rendered page.
 A nested heading that happens to contain the word "scratch" is fine (e.g. `### Scratchpad ideas`, `## Scratching the surface of X`) — only an actual depth-2 heading with the exact text "Scratch" is forbidden.
+
 
 ## Workflow & lifecycle
 
