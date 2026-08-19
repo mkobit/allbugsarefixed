@@ -32,3 +32,84 @@ visibility: "hidden"
 - Specific workflow details?
 - Comparison with other tools?
 - Specific insights to highlight?
+
+### Links & sources
+
+- [Beancount documentation](https://beancount.github.io/docs/)
+- [Beancount v3 repository](https://github.com/beancount/beancount)
+- [beanquery standalone query engine](https://github.com/beancount/beanquery)
+- [beangulp ingestion framework](https://github.com/beancount/beangulp)
+- [beanprice commodity price fetcher](https://github.com/beancount/beanprice)
+- [Fava web UI repository](https://github.com/beancount/fava)
+- [fava_envelope budgeting plugin](https://github.com/aumayr/fava_envelope)
+- [Actual Budget repository](https://github.com/actualbudget/actual)
+- [Actual Budget sync server repository](https://github.com/actualbudget/actual-server)
+- [Local-first architecture deep-dive by James Longster](https://jlongster.com/local-first)
+- [Paisa personal finance manager](https://github.com/ananthakumaran/paisa)
+- [smart_importer machine learning extension](https://github.com/beancount/smart_importer)
+- [beancount-import interactive web importer](https://github.com/jbms/beancount-import)
+- [SimpleFIN protocol documentation](https://bridge.simplefin.org/)
+
+### Facts & data
+
+* **Tool comparison matrix:**
+
+| Dimension | Beancount + Fava | Actual Budget | Paisa | Raw SQLite + Metabase |
+| :--- | :--- | :--- | :--- | :--- |
+| **Core Storage Format** | Plain-text `.beancount` journal files | Local SQLite database (`sqlite-wasm` / Node.js `better-sqlite3`) | Plain-text journal files (`beancount`/`ledger`/`hledger`) | SQLite database (`.sqlite` / `.db`) exported via ETL |
+| **Primary Backend Language** | Python 3 | JavaScript / TypeScript | Go | SQL / Python (ETL parser) |
+| **Synchronization Method** | Git / File syncing (Syncthing, Dropbox) | CRDT operation log with Hybrid Unique Logical Clocks (HULC) | Git / File syncing | Database replication / File copy |
+| **Budgeting Methodology** | Custom directives / `fava_envelope` plugin | Envelope / Zero-based budgeting (YNAB style) | Envelope & goal tracking UI | Custom SQL queries & Metabase dashboards |
+| **UI Type** | Flask/Vue-based web dashboard (Fava) | React web & Electron desktop UI | Web UI (React/Go server) | Metabase web BI dashboard |
+| **Extensibility** | Python plugins, `bean-query` SQL, custom importers | TypeScript extensions / custom sync server | Go / CLI invocation | Custom SQL schema, SQL views, Metabase plugins |
+
+* **Beancount v2 vs v3 architectural breakdown:**
+
+| Aspect | Beancount v2 | Beancount v3 |
+| :--- | :--- | :--- |
+| **Architecture** | Monolithic Python package containing engine, query tool, importer framework, price fetcher | Modular ecosystem with slim core library and extracted external packages |
+| **Query Engine** | Bundled `beancount.query` module and embedded `bean-query` CLI | Independent `beanquery` standalone package with dedicated `#accounts`, `#balances`, `#commodities` tables |
+| **Importer Framework** | Integrated `beancount.ingest` module using `config.py` definitions | Standalone `beangulp` library with script-driven ingestion hooks |
+| **Price Fetching** | Embedded `beancount.prices` module | Independent `beanprice` package |
+| **Reporting Tools** | Includes legacy `bean-report` CLI tool | Deprecates `bean-report`; relies strictly on `beanquery` SQL queries |
+| **C++ Core Port** | Experimental C++ parser branch | Core remains Python-based; C++ parser port remains in experimental branch |
+
+* **Transaction import tools & protocols:**
+
+| Tool / Protocol | Input Format | Automation & Categorization Mechanism | Primary Integration Target |
+| :--- | :--- | :--- | :--- |
+| **OFX / QFX** | Standard XML/SGML financial export | Rule-based parser mapping account IDs and transaction IDs | Native importers (`beangulp`, `beancount-import`) |
+| **CSV** | Text tabular data | Configurable column index and regex parsing | `beangulp.importers.csv`, Fava UI |
+| **SimpleFIN Bridge** | REST API returning JSON (`/accounts` endpoint) | HTTP GET with Access URL token authentication (24 req/day rate limit) | Custom Python script / `beangulp` ingestion |
+| **`beancount-import`** | CSV, OFX, QFX | Interactive web UI with machine learning predictions and duplicate detection | Standalone Python web server parsing Beancount ledger |
+| **`smart_importer`** | Ingested Beancount entries | Python hooks using `scikit-learn` Support Vector Machine (SVC) classification | `beangulp` / `bean-extract` Python pipeline |
+
+* **Direct quotes with source links:**
+  * > "[Beancount v3 separates previously bundled components into independent packages such as beanquery, beangulp, and beanprice.](https://github.com/beancount/beancount)"
+  * > "[Actual Budget uses Hybrid Unique Logical Clocks (HULC) to order CRDT operations across devices, guaranteeing eventual consistency without server-side business logic.](https://jlongster.com/local-first)"
+  * > "[Paisa is a web interface for plain-text accounting written in Go that parses Beancount, Ledger, and hledger files directly.](https://github.com/ananthakumaran/paisa)"
+  * > "[smart_importer applies scikit-learn classification hooks locally during data extraction to predict payee and account postings based on historical ledger entries.](https://github.com/beancount/smart_importer)"
+
+### Agent research notes
+
+* **Technical pros & cons:**
+  * **Plain-text ledger systems (Beancount):** Pros: Version control compatible via Git, human-readable storage, auditability, programmatically scriptable. Cons: Requires manual file management, lacks out-of-the-box real-time UI write capabilities, higher initial setup overhead.
+  * **Local-first SQLite systems (Actual Budget):** Pros: Instant local performance, automatic multi-device CRDT synchronization, end-to-end encryption (E2EE), zero setup for web/desktop binaries. Cons: Data stored in binary database format, versioning requires database migration scripts rather than Git diffs.
+  * **Hybrid ETL systems (Beancount + SQLite + Metabase):** Pros: High-performance relational queries, arbitrary dashboard visualization via Metabase, separation of ledger accounting from analytics. Cons: One-way synchronization (Metabase cannot edit ledger), ETL pipeline maintenance required for schema updates.
+
+* **Architecture comparisons:**
+  * **Data mutability:** Beancount read-only paradigm enforces immutability; UI frontends (Fava) compute balances on-the-fly from raw `.beancount` journal files. Actual Budget uses an operation-based CRDT log where state mutations produce operation tuples `(dataset, row, column, value, timestamp)` merged locally.
+  * **Storage representation:** Beancount stores balance assertions and transactions as text directives using double-entry posting constraints. Actual Budget stores data in SQLite schema executing inside browser Web Workers via `sqlite-wasm` or inside desktop Node.js child processes. Raw SQLite + Metabase projects normalize Beancount directives into relational star-schema tables (`transactions`, `postings`, `accounts`, `prices`).
+
+* **Workflow automation:**
+  * **Importer automation pipeline:** Raw bank data fetched via SimpleFIN JSON endpoint or downloaded OFX/CSV files. `beangulp` pipeline parses raw formats into intermediate Beancount entry structs. `smart_importer` decorates parsing with `scikit-learn` SVC models trained on existing `.beancount` ledger history to populate missing posting accounts. `beancount-import` provides a review UI to resolve ambiguous matches and prevent duplicate transaction entries.
+
+### Open questions
+
+* Status of the experimental C++ parser port for Beancount v3 performance optimization on multi-gigabyte ledgers.
+* Optimal strategy for mapping SQLite float/real numeric representations to fixed-precision decimal types in Metabase visualizations without precision loss.
+* Multi-account rate limit management in SimpleFIN given the hard 24 requests per day cap per access token.
+* Scalability of `fava_envelope` in-memory calculation logic when applied to multi-year ledgers containing tens of thousands of postings.
+
+### Rough thoughts (human)
+
