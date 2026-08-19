@@ -52,7 +52,7 @@ jobs:
   integration-test:
     needs: ci
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup Node, Bun, and Cache
@@ -64,7 +64,14 @@ jobs:
         with:
           name: dist
           path: dist/
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package.json') }}
       - name: Install Playwright Browsers
         run: bun x playwright install --with-deps chromium
       - name: Run E2E Tests
         run: bun run test:e2e
+
