@@ -6,13 +6,28 @@ bun = "1.3.14"
 http_retries = 5
 lockfile = true
 
+[tasks."verify:versions"]
+description = "Verify tool versions across mise, devcontainer, and CI actions"
+run = "bun run verify:versions"
+
+[tasks."verify:blog"]
+description = "Verify blog folder structure and ISO date format"
+run = "bun run verify:blog"
+
 [tasks.verify]
-description = "Verify tool versions"
-run = "bun scripts/verify-versions.ts"
+description = "Run all verification checks"
+depends = [
+  "verify:versions",
+  "verify:blog",
+]
 
 [tasks.lint]
 description = "Lint code with ESLint"
 run = "bun run lint"
+
+[tasks."lint:fix"]
+description = "Lint and auto-fix code with ESLint"
+run = "bun run lint:fix"
 
 [tasks."openspec:validate"]
 description = "Validate OpenSpec specifications"
@@ -39,8 +54,20 @@ description = "Run Playwright E2E tests"
 depends = ["build"]
 run = "bun run test:e2e"
 
-[tasks.check]
-description = "Run full CI verification suite"
+[tasks."test:e2e:live"]
+description = "Run live-safe Playwright E2E tests"
+depends = ["build"]
+run = "bun run test:e2e:live"
+
+[tasks."test:all"]
+description = "Run all test suites (unit coverage and E2E)"
+depends = [
+  "coverage",
+  "test:e2e",
+]
+
+[tasks."check:fast"]
+description = "Run fast verification suite (static checks and unit tests)"
 depends = [
   "verify",
   "lint",
@@ -48,6 +75,12 @@ depends = [
   "typecheck",
   "test",
   "coverage",
+]
+
+[tasks.check]
+description = "Run full CI verification suite"
+depends = [
+  "check:fast",
   "test:e2e",
 ]
 
