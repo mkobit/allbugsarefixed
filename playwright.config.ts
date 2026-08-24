@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test'
-import { Temporal } from '@js-temporal/polyfill'
 
 const webServerStartupTimeout = Temporal.Duration.from({ minutes: 5 })
 

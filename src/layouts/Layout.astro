@@ -6,7 +6,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
 import '../styles/global.css'
 import { Container } from '../components/ui/container'
 import { getCollection, type CollectionEntry } from 'astro:content'
-import { Temporal } from '@js-temporal/polyfill'
 
 interface Props {
   title: string
@@ -50,9 +49,6 @@ const allPosts = sortedPosts.map((post: CollectionEntry<'blog'>) => ({
       {' '}
       {SITE_TITLE}
     </title>
-    <script>
-      import '../lib/polyfills'
-</script>
     <ThemeInit />
   </head>
   <body class="flex flex-col min-h-screen transition-colors duration-300">

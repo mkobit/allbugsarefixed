@@ -2,7 +2,6 @@ import React from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { cn } from '../../lib/ui'
 import { formatDateToHumanString } from '../../lib/date'
-import { Temporal } from '@js-temporal/polyfill'
 
 const timeStyles = tv({
   base: 'font-mono text-sm text-ui-text-muted',
@@ -18,7 +17,7 @@ const timeStyles = tv({
 })
 
 export interface TimeProps extends React.TimeHTMLAttributes<HTMLTimeElement>, VariantProps<typeof timeStyles> {
-  readonly date: Temporal.PlainDate | string | object
+  readonly date: Temporal.PlainDateLike | string
   readonly format?: boolean
 }
 

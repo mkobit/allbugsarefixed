@@ -19,12 +19,18 @@ interface MiseToml {
   }
 }
 
+interface PackageJson {
+  packageManager?: string
+}
+
 const rootDir = process.cwd()
 
 const files = {
   action: path.join(rootDir, '.github/actions/setup-node-bun/action.yml'),
   devcontainer: path.join(rootDir, '.devcontainer/devcontainer.json'),
   mise: path.join(rootDir, 'mise.toml'),
+  openspec: path.join(rootDir, '.github/workflows/openspec.yml'),
+  packageJson: path.join(rootDir, 'package.json'),
 }
 
 function readMise(): { bun: string | undefined } {
@@ -58,6 +64,23 @@ function readAction(): { bun: string | undefined } {
   }
 }
 
+function readOpenspec(): { bun: string | undefined } {
+  const content = fs.readFileSync(files.openspec, 'utf8')
+  const bunMatch = content.match(/BUN_VERSION:\s*["']?([0-9.]+)["']?/)
+  return {
+    bun: bunMatch ? bunMatch[1] : undefined,
+  }
+}
+
+function readPackageJson(): { bun: string | undefined } {
+  const content = fs.readFileSync(files.packageJson, 'utf8')
+  const data = JSON.parse(content) as PackageJson
+  const bunMatch = data.packageManager?.match(/^bun@([0-9.]+)/)
+  return {
+    bun: bunMatch ? bunMatch[1] : undefined,
+  }
+}
+
 try {
   console.log('Verifying versions...')
   const miseVersions = readMise()
@@ -69,9 +92,17 @@ try {
   const actionVersions = readAction()
   console.log('Action versions:', actionVersions)
 
+  const openspecVersions = readOpenspec()
+  console.log('OpenSpec workflow versions:', openspecVersions)
+
+  const packageJsonVersions = readPackageJson()
+  console.log('Package.json versions:', packageJsonVersions)
+
   const checks = [
     miseVersions.bun !== devVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Devcontainer (${devVersions.bun})` : undefined,
     miseVersions.bun !== actionVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Action (${actionVersions.bun})` : undefined,
+    miseVersions.bun !== openspecVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != OpenSpec workflow (${openspecVersions.bun})` : undefined,
+    miseVersions.bun !== packageJsonVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != package.json (${packageJsonVersions.bun})` : undefined,
   ]
 
   const errors = checks.filter((err): err is string => err !== undefined)

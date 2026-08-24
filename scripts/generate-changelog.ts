@@ -1,7 +1,6 @@
 import { execSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { Temporal } from '@js-temporal/polyfill'
 import type { ChangelogCategory, ChangelogData, ChangelogEntry } from '../src/lib/changelog'
 
 export interface RawBeadIssue {

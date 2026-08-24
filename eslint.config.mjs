@@ -83,7 +83,7 @@ export default [
         'error',
         {
           name: 'Date',
-          message: 'Use Temporal instead of Date. Import Temporal from @js-temporal/polyfill.',
+          message: 'Use Temporal instead of Date.',
         },
       ],
     },
@@ -153,7 +153,7 @@ export default [
         'error',
         {
           name: 'Date',
-          message: 'Use Temporal instead of Date. Import Temporal from @js-temporal/polyfill.',
+          message: 'Use Temporal instead of Date.',
         },
       ],
       // Disable stylistic rules that conflict with Astro parsing/formatting

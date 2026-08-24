@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react'
-import { Temporal } from '@js-temporal/polyfill'
 import type { ChangelogCategory, ChangelogData, ChangelogEntry } from '../../lib/changelog'
 import { Badge } from './badge'
 import { Button } from './button'

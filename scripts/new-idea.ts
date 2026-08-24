@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { Temporal } from '@js-temporal/polyfill'
 
 const BLOG_DIR = path.join(process.cwd(), 'src/content/blog')
 

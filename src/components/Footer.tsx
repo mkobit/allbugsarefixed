@@ -1,6 +1,5 @@
 import React from 'react'
 import { tv } from 'tailwind-variants'
-import { Temporal } from '@js-temporal/polyfill'
 import { SITE_TITLE, SITE_DESCRIPTION, FOOTER_LINKS } from '../consts'
 import { Link } from './ui/link'
 

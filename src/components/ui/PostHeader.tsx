@@ -5,7 +5,6 @@ import { Text } from './text'
 import { HStack, Stack } from './stack'
 import { Time } from './time'
 import { SlashSeparator } from './separator'
-import type { Temporal } from '@js-temporal/polyfill'
 
 interface PostHeaderProps {
   readonly title: string

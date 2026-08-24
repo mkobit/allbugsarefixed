@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { Temporal } from "@js-temporal/polyfill";
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 const DATE_PREFIX_REGEX = /^(\d{4}-\d{2}-\d{2})_/;
