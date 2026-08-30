@@ -61,7 +61,7 @@ Frontmatter only ever carries `visibility` (see Files below), which is a build-v
 - **Action:** Before creating any folder, check for an existing idea first: `bd search <slug>` (or `bd query "label=blog"` and scan titles).
   Don't pour a second molecule for the same idea.
 - **Then:** `bd mol pour blog-lifecycle --var slug=<kebab-slug> --var title="..."`.
-  This creates a root epic plus one bead per stage (`stage:seed`, `stage:researching`, `stage:drafting`, `stage:fact-checking`, `stage:editorial-critique`, `stage:review`, `stage:published`), each blocked on the previous.
+  This creates a root epic plus one bead per stage (`stage:seed`, `stage:researching`, `stage:drafting`, `stage:fact-checking`, `stage:editorial-critique`, `stage:review`, `stage:published`), each blocked on the previous (with explicit human gates on drafting, review, and published).
   No folder is created yet.
 
 ### 2. Research (`stage:researching`)
@@ -77,7 +77,7 @@ Frontmatter only ever carries `visibility` (see Files below), which is a build-v
 ### 3. Drafting (`stage:drafting`, `actor:human`)
 
 - **Trigger:** The human begins writing narrative prose.
-  Close `stage:researching`, claim `stage:drafting`.
+  Resolve the human gate (`bd gate resolve <gate-id>`), close `stage:researching`, and claim `stage:drafting`.
 - **Action:** Write the real narrative content in `index.mdx`, outside `## Scratch`, referencing the `## Scratch` section.
 - **Content:** The human writes 100% of narrative prose.
   Agents MUST NOT write, rewrite, copyedit, or offer unsolicited writing aid/prose suggestions.
@@ -102,6 +102,7 @@ Frontmatter only ever carries `visibility` (see Files below), which is a build-v
 ### 6. Review (`stage:review`, `actor:human`)
 
 - **Trigger:** Agent closes `stage:editorial-critique`, unblocking `stage:review`.
+  Resolve the human gate (`bd gate resolve <gate-id>`).
 - **Action:** Human reads through agent findings and suggestions, makes desired prose edits, verifies rendering in dev server, and approves publication.
   Agents MUST NOT perform unprompted prose edits during review.
   Close `stage:review` when the post is approved.
@@ -109,6 +110,7 @@ Frontmatter only ever carries `visibility` (see Files below), which is a build-v
 ### 7. Publishing (`stage:published`)
 
 - **Action:**
+  - Resolve the human gate (`bd gate resolve <gate-id>`).
   - Flip `visibility: "visible"` in `index.mdx` frontmatter.
   - Run `bun run purge-scratch <slug>` to remove the `## Scratch` section from the file (a manual step, not automated).
   - Close `stage:published` with `bd close <id> --reason "published"`.
