@@ -34,6 +34,9 @@ labels = ["blog", "stage:drafting", "actor:human"]
 depends_on = ["researching"]
 description = "Human authoring step. The human writes 100% of narrative prose outside `## Scratch`. Agents do not write, rewrite, copyedit, or offer unsolicited writing aid/prose suggestions. Close this step when the human draft is ready for automated fact-checking and editorial review."
 
+[steps.gate]
+type = "human"
+
 [[steps]]
 id = "fact-checking"
 title = "Fact-checking: {{title}}"
@@ -58,6 +61,9 @@ labels = ["blog", "stage:review", "actor:human"]
 depends_on = ["editorial-critique"]
 description = "Human review and approval step. The human reviews agent fact-checking and critique suggestions, makes desired prose edits, verifies rendering in dev server, and signs off. Close this step when the post is approved for publication."
 
+[steps.gate]
+type = "human"
+
 [[steps]]
 id = "published"
 title = "Published: {{title}}"
@@ -65,3 +71,6 @@ type = "task"
 labels = ["blog", "stage:published"]
 depends_on = ["review"]
 description = "Flip visibility: \"visible\" in index.mdx frontmatter, run `bun run purge-scratch {{slug}}`, and close this step with a reason of 'published'."
+
+[steps.gate]
+type = "human"
