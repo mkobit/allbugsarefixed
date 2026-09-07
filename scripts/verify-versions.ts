@@ -31,6 +31,7 @@ const files = {
   mise: path.join(rootDir, 'mise.toml'),
   openspec: path.join(rootDir, '.github/workflows/openspec.yml'),
   packageJson: path.join(rootDir, 'package.json'),
+  sbx: path.join(rootDir, '.sbx/kit/spec.yaml'),
 }
 
 function readMise(): { bun: string | undefined } {
@@ -81,6 +82,14 @@ function readPackageJson(): { bun: string | undefined } {
   }
 }
 
+function readSbx(): { bun: string | undefined } {
+  const content = fs.readFileSync(files.sbx, 'utf8')
+  const bunMatch = content.match(/bun@([0-9.]+)/)
+  return {
+    bun: bunMatch ? bunMatch[1] : undefined,
+  }
+}
+
 try {
   console.log('Verifying versions...')
   const miseVersions = readMise()
@@ -98,11 +107,15 @@ try {
   const packageJsonVersions = readPackageJson()
   console.log('Package.json versions:', packageJsonVersions)
 
+  const sbxVersions = readSbx()
+  console.log('Docker Sandbox versions:', sbxVersions)
+
   const checks = [
     miseVersions.bun !== devVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Devcontainer (${devVersions.bun})` : undefined,
     miseVersions.bun !== actionVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Action (${actionVersions.bun})` : undefined,
     miseVersions.bun !== openspecVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != OpenSpec workflow (${openspecVersions.bun})` : undefined,
     miseVersions.bun !== packageJsonVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != package.json (${packageJsonVersions.bun})` : undefined,
+    miseVersions.bun !== sbxVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Docker Sandbox (${sbxVersions.bun})` : undefined,
   ]
 
   const errors = checks.filter((err): err is string => err !== undefined)

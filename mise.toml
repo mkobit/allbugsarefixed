@@ -33,6 +33,10 @@ run = "bun run lint:fix"
 description = "Validate OpenSpec specifications"
 run = "bun run openspec:validate"
 
+[tasks.validate-sbx]
+description = "Validate Docker Sandbox environment files"
+run = "bun run check:sbx-env"
+
 [tasks.typecheck]
 description = "Typecheck TypeScript and Astro files"
 run = "bun run typecheck"
@@ -71,6 +75,7 @@ description = "Run fast verification suite (static checks and unit tests)"
 depends = [
   "verify",
   "lint",
+  "validate-sbx",
   "openspec:validate",
   "typecheck",
   "test",
