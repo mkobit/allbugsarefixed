@@ -23,6 +23,7 @@
     "new-idea": "bun scripts/new-idea.ts",
     "openspec:validate": "openspec validate --all",
     "changelog:generate": "bun scripts/generate-changelog.ts",
+    "check:sbx-env": "bun scripts/check-sbx-env.ts",
     "purge-scratch": "bun scripts/purge-scratch.ts"
   },
   "dependencies": {
@@ -96,6 +97,7 @@
     "unified": "^11.0.5",
     "unist": "^0.0.1",
     "unist-util-visit": "^5.1.0",
-    "vfile": "^6.0.3"
+    "vfile": "^6.0.3",
+    "zod": "^4.4.3"
   }
 }

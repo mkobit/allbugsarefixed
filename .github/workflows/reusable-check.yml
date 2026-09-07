@@ -28,6 +28,9 @@ jobs:
       - name: Lint code
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
         run: bun run lint
+      - name: Validate Docker Sandbox environments
+        if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
+        run: bun run check:sbx-env
       - name: Validate OpenSpec
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
         run: bun run openspec:validate
