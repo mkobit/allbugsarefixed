@@ -5,25 +5,28 @@ image:https://github.com/mkobit/allbugsarefixed/actions/workflows/deploy.yml/bad
 
 Personal blog and research repository.
 
-== Local Setup
+== Local setup
 
 This project provides https://docs.docker.com/ai/sandboxes/configuration/environment-files/[Docker Sandbox environment files] for local development.
 
-```sh
+[source,sh]
+----
 sbx env exec .sbx/sbxenv.yaml -- bun run check:sbx-env
-```
+----
 
 Users may append an optional host configuration layer, for example:
 
-```sh
+[source,sh]
+----
 sbx env exec .sbx/sbxenv.yaml ~/.local/share/sbx/personal/personal.sbxenv.yaml -- bun run check:sbx-env
-```
+----
 
 Other literal command shapes for running:
 
-```sh
+[source,sh]
+----
 sbx env run .sbx/sbxenv.yaml
 sbx env run .sbx/sbxenv.yaml ~/.local/share/sbx/personal/personal.sbxenv.yaml
-```
+----
 
 For the AGY kit, substitute `.sbx/sbxenv.agy.yaml` to preserve its extra pinned agent-kit reference.
