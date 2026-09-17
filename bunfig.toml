@@ -1,5 +1,7 @@
 [install]
 minimumReleaseAge = 1209600 # days in seconds
+minimumReleaseAgeExcludes = ["@fission-ai/openspec"]
+
 
 [run]
 bun = true # alias node -> bun for all scripts, so tools with a node shebang (e.g. bun x) run on bun
