@@ -23,6 +23,14 @@ You **MUST** run the following commands before submitting any changes. These com
 
 Alternatively, run `mise run check` to execute all 8 verification steps.
 
+## Docker Sandbox Execution
+
+When running the project within a Docker Sandbox environment, you can run all 8 checks by using `sbx env exec` without needing to log in interactively:
+
+```bash
+sbx env exec .sbx/sbxenv.yaml -- mise run check
+```
+
 
 ## Other Commands
 
