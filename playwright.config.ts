@@ -40,6 +40,9 @@ export default defineConfig({
     ? undefined
     : {
         command: `bun run preview -- --port ${port}`,
+        env: {
+          ASTRO_PREVIEW_BACKGROUND: 'true',
+        },
         reuseExistingServer: !process.env.CI,
         stdout: 'pipe',
         timeout: webServerStartupTimeout.total('milliseconds'),
