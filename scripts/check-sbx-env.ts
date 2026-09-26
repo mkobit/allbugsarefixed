@@ -13,7 +13,7 @@ const FORBIDDEN_KEYS = [
 ] as const
 
 const REQUIRED_PORTS = [4321, 5173] as const
-const filesToCheck = ['.sbx/sbxenv.yaml', '.sbx/sbxenv.agy.yaml'] as const
+const filesToCheck = ['.sbx/sbxenv.yaml', '.sbx/sbxenv.agy.yaml', '.sbx/sbxenv.claude.yaml'] as const
 const kitSpecFile = '.sbx/kit/spec.yaml'
 const kitDir = '.sbx/kit'
 
@@ -113,8 +113,8 @@ function checkFile(file: string): boolean {
     return false
   }
 
-  if (!result.data.workspace.clone) {
-    console.error(`File ${file} must have workspace.clone: true`)
+  if (result.data.workspace.clone) {
+    console.error(`File ${file} must have workspace.clone: false`)
     return false
   }
 
