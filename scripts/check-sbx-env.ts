@@ -5,7 +5,6 @@ import { execSync } from 'node:child_process'
 import { kitSpecSchema, sbxEnvV1Schema } from './sbx-schemas'
 
 const FORBIDDEN_KEYS = [
-  'additionalWorkspaces',
   'bindings',
   'localWorkspaces',
   'registries',
