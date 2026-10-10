@@ -1,17 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import actionData from '../.github/actions/setup-node-bun/action.yml' with { type: 'yaml' }
 import toml from '@iarna/toml'
 import { parse as parseJsonc } from 'jsonc-parser'
-
-interface ActionYaml {
-  runs?: {
-    steps?: Array<{
-      uses?: string
-      with?: Record<string, unknown>
-    }>
-  }
-}
 
 interface MiseToml {
   tools?: {
@@ -56,12 +46,11 @@ function readDevcontainer(): { bun: string | undefined } {
 }
 
 function readAction(): { bun: string | undefined } {
-  const data = actionData as ActionYaml
-  const setupStep = data.runs?.steps?.find(step => step.uses?.startsWith('oven-sh/setup-bun'))
-  const bunVersion = setupStep?.with ? String(setupStep.with['bun-version']) : undefined
+  const content = fs.readFileSync(files.action, 'utf8')
+  const bunMatch = content.match(/bun-version:\s*["']?([0-9.]+)["']?/)
 
   return {
-    bun: bunVersion,
+    bun: bunMatch ? bunMatch[1] : undefined,
   }
 }
 

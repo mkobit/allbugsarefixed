@@ -298,7 +298,22 @@ export const sbxEnvWorkspaceSchema = z
 
 export const sbxEnvV1Schema = z
   .object({
+    additionalWorkspaces: z
+      .array(
+        sbxEnvWorkspaceSchema.extend({
+          readOnly: z.boolean().optional(),
+        }).omit({ clone: true }),
+      )
+      .optional(),
     agent: z.string().min(1),
+    args: z
+      .record(
+        z.string(),
+        z.object({
+          default: z.string(),
+        }),
+      )
+      .optional(),
     env: z.record(z.string(), z.string()).optional(),
     kit: z.union([z.string(), z.array(z.string())]).optional(),
     kits: z.array(z.string()).optional(),
