@@ -1,3 +1,4 @@
+import { Temporal } from '@js-temporal/polyfill'
 import { defineCollection, z } from 'astro:content'
 import { glob } from 'astro/loaders'
 import { LabelIdSchema } from './lib/labels'
