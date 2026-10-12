@@ -1,15 +1,21 @@
 import React from 'react'
 import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-  getSortedRowModel,
+  useTable,
+  tableFeatures,
+  rowSortingFeature,
+  createSortedRowModel,
   type SortingState,
   type ColumnDef,
+  type RowData,
 } from '@tanstack/react-table'
 import { tv } from 'tailwind-variants'
 import { cn } from '../../lib/ui'
 import { ChevronDown, ChevronUp, ChevronsUpDown } from 'lucide-react'
+
+const dataTableFeatures = tableFeatures({
+  rowSortingFeature,
+  sortedRowModel: createSortedRowModel(),
+})
 
 const tableStyles = tv({
   slots: {
@@ -23,19 +29,18 @@ const tableStyles = tv({
   },
 })
 
-export interface DataTableProps<TData, TValue> {
-  readonly columns: readonly ColumnDef<TData, TValue>[]
+export interface DataTableProps<TData extends RowData> {
+  readonly columns: readonly ColumnDef<typeof dataTableFeatures, TData, unknown>[]
   readonly data: readonly TData[]
 }
 
-export function DataTable<TData, TValue>({ columns, data }: Readonly<DataTableProps<TData, TValue>>) {
+export function DataTable<TData extends RowData>({ columns, data }: Readonly<DataTableProps<TData>>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
 
-  const table = useReactTable({
-    columns: columns as ColumnDef<TData, TValue>[],
-    data: data as TData[],
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+  const table = useTable({
+    columns,
+    data,
+    features: dataTableFeatures,
     onSortingChange: setSorting,
     state: {
       sorting,
@@ -63,7 +68,7 @@ export function DataTable<TData, TValue>({ columns, data }: Readonly<DataTablePr
                               )}
                               onClick={header.column.getToggleSortingHandler()}
                             >
-                              {flexRender(header.column.columnDef.header, header.getContext())}
+                              <table.FlexRender header={header} />
                               {{
                                 asc: <ChevronUp className="h-4 w-4" />,
                                 desc: <ChevronDown className="h-4 w-4" />,
@@ -81,10 +86,10 @@ export function DataTable<TData, TValue>({ columns, data }: Readonly<DataTablePr
             {table.getRowModel().rows?.length
               ? (
                   table.getRowModel().rows.map(rowEl => (
-                    <tr key={rowEl.id} data-state={rowEl.getIsSelected() && 'selected'} className={row()}>
-                      {rowEl.getVisibleCells().map(cellEl => (
+                    <tr key={rowEl.id} className={row()}>
+                      {rowEl.getAllCells().map(cellEl => (
                         <td key={cellEl.id} className={cell()}>
-                          {flexRender(cellEl.column.columnDef.cell, cellEl.getContext())}
+                          <table.FlexRender cell={cellEl} />
                         </td>
                       ))}
                     </tr>
