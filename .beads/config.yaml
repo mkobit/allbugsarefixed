@@ -65,4 +65,7 @@
 # - linear.api_key  → use LINEAR_API_KEY env var instead
 # - github.token    → use GITHUB_TOKEN env var instead
 
-sync.remote: "git+ssh://git@github.com/mkobit/allbugsarefixed.git"
+# sync.remote intentionally unset (allbugsarefixed-9bm): explicit git+ssh:// or
+# git+https:// values interfere with CI environments lacking SSH access, while
+# leaving sync.remote unset allows bd bootstrap to auto-detect refs/dolt/data
+# from the git origin remote directly.
