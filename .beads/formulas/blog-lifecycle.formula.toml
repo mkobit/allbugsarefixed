@@ -16,7 +16,12 @@ id = "seed"
 title = "Seed: {{title}}"
 type = "task"
 labels = ["blog", "stage:seed"]
-description = "A fleeting post idea with no research started yet. No src/content/blog/ folder exists yet for {{slug}}. Close this step when research begins; that creates the YYYY-MM-DD_{{slug}}/index.mdx file (via `bun new-idea`, with visibility: \"hidden\") and unblocks the researching step."
+description = """
+A fleeting post idea with no research started yet. No src/content/blog/ folder exists yet for {{slug}}. Close this step when research begins; that creates the YYYY-MM-DD_{{slug}}/index.mdx file (via `bun new-idea`, with visibility: "hidden") and unblocks the researching step.
+
+## Acceptance Criteria
+- Post directory and index.mdx exist with visibility: "hidden", unblocking research.
+"""
 
 [[steps]]
 id = "researching"
@@ -24,7 +29,12 @@ title = "Researching: {{title}}"
 type = "task"
 labels = ["blog", "stage:researching"]
 depends_on = ["seed"]
-description = "The reserved `## Scratch` heading inside index.mdx is a scratchpad ONLY: facts, links, quotes, rough human notes, agent-research findings. Do NOT write publish-ready prose or anything trying to sound like a finished blog post here -- that's the job of the rest of index.mdx, written by the human. Code or data needed for research (scripts, datasets) goes in a separate auxiliary file in the post's folder (e.g. data.csv, map.ts), never pasted inline into `## Scratch`. Close this step when the user is ready to start drafting prose outside `## Scratch`; that unblocks the drafting step (index.mdx already exists from this stage)."
+description = """
+The reserved `## Scratch` heading inside index.mdx is a scratchpad ONLY: facts, links, quotes, rough human notes, agent-research findings. Do NOT write publish-ready prose or anything trying to sound like a finished blog post here -- that's the job of the rest of index.mdx, written by the human. Code or data needed for research (scripts, datasets) goes in a separate auxiliary file in the post's folder (e.g. data.csv, map.ts), never pasted inline into `## Scratch`. Close this step when the user is ready to start drafting prose outside `## Scratch`; that unblocks the drafting step (index.mdx already exists from this stage).
+
+## Acceptance Criteria
+- Research findings and scratch material are recorded in ## Scratch, ready for narrative drafting.
+"""
 
 [[steps]]
 id = "drafting"
@@ -32,7 +42,12 @@ title = "Drafting: {{title}}"
 type = "task"
 labels = ["blog", "stage:drafting", "actor:human"]
 depends_on = ["researching"]
-description = "Human authoring step. The human writes 100% of narrative prose outside `## Scratch`. Agents do not write, rewrite, copyedit, or offer unsolicited writing aid/prose suggestions. Close this step when the human draft is ready for automated fact-checking and editorial review."
+description = """
+Human authoring step. The human writes 100% of narrative prose outside `## Scratch`. Agents do not write, rewrite, copyedit, or offer unsolicited writing aid/prose suggestions. Close this step when the human draft is ready for automated fact-checking and editorial review.
+
+## Acceptance Criteria
+- Human draft prose completed outside ## Scratch and ready for automated review.
+"""
 
 [steps.gate]
 type = "human"
@@ -43,7 +58,12 @@ title = "Fact-checking: {{title}}"
 type = "task"
 labels = ["blog", "stage:fact-checking", "actor:agent"]
 depends_on = ["drafting"]
-description = "Agent fact-checking step. Verify claims, citations, links, dates, and data points in the draft against `## Scratch` and external references. Record findings as bullet points in `## Scratch` (under `### Fact-check findings`) or issue notes; NEVER alter post body narrative text directly. Close when fact-checking notes are recorded."
+description = """
+Agent fact-checking step. Verify claims, citations, links, dates, and data points in the draft against `## Scratch` and external references. Record findings as bullet points in `## Scratch` (under `### Fact-check findings`) or issue notes; NEVER alter post body narrative text directly. Close when fact-checking notes are recorded.
+
+## Acceptance Criteria
+- Fact-check findings recorded under ### Fact-check findings in ## Scratch without altering draft prose.
+"""
 
 [[steps]]
 id = "editorial-critique"
@@ -51,7 +71,12 @@ title = "Editorial critique: {{title}}"
 type = "task"
 labels = ["blog", "stage:editorial-critique", "actor:agent"]
 depends_on = ["fact-checking"]
-description = "Agent style, tone, and alignment critique step. Review narrative structure, clarity, tone consistency, and alignment with repository voice. Record collaborative suggestions and feedback as bullet points in `## Scratch` (under `### Editorial suggestions`) or issue comments; NEVER automatically rewrite or edit the prose. Close when critique notes are ready for human consideration."
+description = """
+Agent style, tone, and alignment critique step. Review narrative structure, clarity, tone consistency, and alignment with repository voice. Record collaborative suggestions and feedback as bullet points in `## Scratch` (under `### Editorial suggestions`) or issue comments; NEVER automatically rewrite or edit the prose. Close when critique notes are ready for human consideration.
+
+## Acceptance Criteria
+- Editorial critique suggestions recorded under ### Editorial suggestions in ## Scratch without altering draft prose.
+"""
 
 [[steps]]
 id = "review"
@@ -59,7 +84,12 @@ title = "Review: {{title}}"
 type = "task"
 labels = ["blog", "stage:review", "actor:human"]
 depends_on = ["editorial-critique"]
-description = "Human review and approval step. The human reviews agent fact-checking and critique suggestions, makes desired prose edits, verifies rendering in dev server, and signs off. Close this step when the post is approved for publication."
+description = """
+Human review and approval step. The human reviews agent fact-checking and critique suggestions, makes desired prose edits, verifies rendering in dev server, and signs off. Close this step when the post is approved for publication.
+
+## Acceptance Criteria
+- Human author reviews feedback, approves final prose, and signs off on publication.
+"""
 
 [steps.gate]
 type = "human"
@@ -70,7 +100,12 @@ title = "Published: {{title}}"
 type = "task"
 labels = ["blog", "stage:published"]
 depends_on = ["review"]
-description = "Flip visibility: \"visible\" in index.mdx frontmatter, run `bun run purge-scratch {{slug}}`, and close this step with a reason of 'published'."
+description = """
+Flip visibility: "visible" in index.mdx frontmatter, run `bun run purge-scratch {{slug}}`, and close this step with a reason of 'published'.
+
+## Acceptance Criteria
+- Visibility flipped to 'visible' in index.mdx frontmatter, scratch purged via bun run purge-scratch, and post published.
+"""
 
 [steps.gate]
 type = "human"
