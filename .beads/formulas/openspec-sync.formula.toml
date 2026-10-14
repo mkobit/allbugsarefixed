@@ -20,3 +20,9 @@ id = "expand-tasks"
 title = "Expand Tasks from {{change_name}}"
 type = "task"
 labels = ["type:sync", "meta:openspec"]
+description = """
+Parse hierarchical checkboxes in openspec/changes/{{change_name}}/tasks.md and create linked child Beads issues.
+
+## Acceptance Criteria
+- Child tasks from tasks.md are hydrated into Beads with meta:openspec:{{change_name}} label applied.
+"""
