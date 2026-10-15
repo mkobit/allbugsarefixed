@@ -11,14 +11,14 @@ This project provides https://docs.docker.com/ai/sandboxes/configuration/environ
 
 [source,sh]
 ----
-sbx env exec .sbx/sbxenv.yaml -- bun run check:sbx-env
+sbx env exec .sbx/sbxenv.yaml -- mise run check
 ----
 
 Users may append an optional host configuration layer, for example:
 
 [source,sh]
 ----
-sbx env exec .sbx/sbxenv.yaml ~/.local/share/sbx/personal/personal.sbxenv.yaml -- bun run check:sbx-env
+sbx env exec .sbx/sbxenv.yaml ~/.local/share/sbx/personal/personal.sbxenv.yaml -- mise run check
 ----
 
 Other literal command shapes for running:
