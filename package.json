@@ -23,8 +23,9 @@
     "new-idea": "bun scripts/new-idea.ts",
     "openspec:validate": "openspec validate --all",
     "changelog:generate": "bun scripts/generate-changelog.ts",
-    "check:sbx-env": "bun scripts/check-sbx-env.ts",
-    "purge-scratch": "bun scripts/purge-scratch.ts"
+    "purge-scratch": "bun scripts/purge-scratch.ts",
+    "sbx:plan": "sbx env plan .sbx/sbxenv.yaml",
+    "sbx:validate-kit": "sbx kit validate .sbx/kit"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.1",
