@@ -77,8 +77,8 @@ Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work w
   - Use **Sentence case** for headings and titles.
   - Use **semantic line breaks** (one sentence per line) in Markdown and MDX files to improve diff readability.
 - **Frontend guidance skill:**
-  - The user-global `modern-web-guidance` skill covers current web-platform best practices.
-  - Invoke it before HTML/CSS or client-side JS work in this repo, regardless of which agent tool is running.
+  - The `modern-web-guidance` skill is installed at `.agents/skills/modern-web-guidance` and tracked in `skills-lock.json`.
+  - Invoke it directly via `bun x modern-web-guidance search "<query>"` and `bun x modern-web-guidance retrieve "<id>"` before HTML/CSS or client-side JS work in this repo, regardless of which agent tool is running.
 
 ## Blog & research
 
