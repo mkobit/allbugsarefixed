@@ -8,6 +8,4 @@ kits:
   - ./kit
 ports:
   - sandbox: 4321
-    host: 4321
   - sandbox: 5173
-    host: 5173
