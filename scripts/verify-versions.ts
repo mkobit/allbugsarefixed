@@ -1,7 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import toml from '@iarna/toml'
-import { parse as parseJsonc } from 'jsonc-parser'
 
 interface MiseToml {
   tools?: {
@@ -17,7 +16,6 @@ const rootDir = process.cwd()
 
 const files = {
   action: path.join(rootDir, '.github/actions/setup-node-bun/action.yml'),
-  devcontainer: path.join(rootDir, '.devcontainer/devcontainer.json'),
   mise: path.join(rootDir, 'mise.toml'),
   openspec: path.join(rootDir, '.github/workflows/openspec.yml'),
   packageJson: path.join(rootDir, 'package.json'),
@@ -29,19 +27,6 @@ function readMise(): { bun: string | undefined } {
   const data = toml.parse(content) as MiseToml
   return {
     bun: data.tools?.bun,
-  }
-}
-
-function readDevcontainer(): { bun: string | undefined } {
-  const content = fs.readFileSync(files.devcontainer, 'utf8')
-  const data = parseJsonc(content) as { postCreateCommand?: string }
-
-  const postCreateCommand = data.postCreateCommand || ''
-  const bunMatch = postCreateCommand.match(/bun-v([0-9.]+)/)
-  const bunVersion = bunMatch ? bunMatch[1] : undefined
-
-  return {
-    bun: bunVersion,
   }
 }
 
@@ -84,9 +69,6 @@ try {
   const miseVersions = readMise()
   console.log('Mise versions:', miseVersions)
 
-  const devVersions = readDevcontainer()
-  console.log('Devcontainer versions:', devVersions)
-
   const actionVersions = readAction()
   console.log('Action versions:', actionVersions)
 
@@ -100,7 +82,6 @@ try {
   console.log('Docker Sandbox versions:', sbxVersions)
 
   const checks = [
-    miseVersions.bun !== devVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Devcontainer (${devVersions.bun})` : undefined,
     miseVersions.bun !== actionVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != Action (${actionVersions.bun})` : undefined,
     miseVersions.bun !== openspecVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != OpenSpec workflow (${openspecVersions.bun})` : undefined,
     miseVersions.bun !== packageJsonVersions.bun ? `Bun version mismatch: Mise (${miseVersions.bun}) != package.json (${packageJsonVersions.bun})` : undefined,

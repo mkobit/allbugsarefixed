@@ -7,7 +7,7 @@ http_retries = 5
 lockfile = true
 
 [tasks."verify:versions"]
-description = "Verify tool versions across mise, devcontainer, and CI actions"
+description = "Verify tool versions across mise, sbx, and CI actions"
 run = "bun run verify:versions"
 
 [tasks."verify:blog"]
