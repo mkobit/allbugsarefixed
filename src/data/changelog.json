@@ -1281,7 +1281,7 @@
         "scope:agents"
       ],
       "parent": "abf-zdv",
-      "title": "Fill gaps in Jules / AI-agent tooling"
+      "title": "Fill gaps in AI-agent tooling"
     },
     {
       "category": "testing",
@@ -1305,7 +1305,7 @@
         "scope:agents"
       ],
       "parent": "abf-zdv.1",
-      "title": "Add Jules pointer section to root AGENTS.md"
+      "title": "Add AI-agent pointer section to root AGENTS.md"
     },
     {
       "category": "info",
@@ -1317,7 +1317,7 @@
         "scope:agents"
       ],
       "parent": "abf-zdv.1",
-      "title": "Port canopy's Jules tooling pattern (.jules/AGENTS.md + prompts)"
+      "title": "Port canopy's AI-agent tooling pattern"
     },
     {
       "category": "info",

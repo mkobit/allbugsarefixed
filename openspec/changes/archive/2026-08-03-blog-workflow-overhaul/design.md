@@ -10,7 +10,7 @@ This matters directly for the migration plan below: the two status-less posts ar
 
 Two problems motivate this change (see `proposal.md`):
 1. No dashboard of what's in flight, and a manually-flipped `status` field that's easy to forget.
-2. `notebook.md` — meant to be a fact/link/quote scratchpad — keeps getting turned into agent-written, blog-voiced prose (and stray code) by delegated agents (Jules and others), bleeding into the eventual post's voice.
+2. `notebook.md` — meant to be a fact/link/quote scratchpad — keeps getting turned into agent-written, blog-voiced prose (and stray code) by delegated agents , bleeding into the eventual post's voice.
 
 `bd` (beads) is already adopted in this repo, including a molecule/formula system (`bd mol pour`) used elsewhere (`openspec-sync` formula) to spawn a DAG of child issues from a template. Sibling repos (`canopy`, `storagemaxxing`) have prior art for multi-step formulas (e.g. `storagemaxxing/.beads/formulas/feature-probe.formula.toml`): each `[[steps]]` entry becomes a child issue under a root epic, and the repo's own convention treats step order as sequential unless a step explicitly signals otherwise (e.g. `human-review`'s description says to mark itself `blocked`).
 

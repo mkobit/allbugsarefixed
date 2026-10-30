@@ -2,7 +2,7 @@
 
 The current staged/in-progress blog workflow (`YYYY-MM-DD_slug/notebook.md` → `index.mdx` with a 5-value `status` frontmatter enum, documented in `src/content/blog/AGENTS.md`) is disliked by the repo owner enough to want it "entirely ripped out."
 Research into the mechanics and prior art (see `research.md` in this change folder) surfaces plausible root causes: no dashboard of what's in flight across dozens of folders, a manually-flipped `status` field that's easy to forget, and no cheap capture step for a fleeting idea.
-A second, distinct problem surfaced during review: `notebook.md` is meant to be a research scratchpad (links, facts, agent-research findings, the human's own rough notes), but delegated agents (Jules and others) have repeatedly turned it into agent-written prose that leaks into the eventual post's voice, and have committed stray code into it that doesn't belong there. The repo owner wants the blog's actual prose to stay human-written, with the notebook as pure feeder material.
+A second, distinct problem surfaced during review: `notebook.md` is meant to be a research scratchpad (links, facts, agent-research findings, the human's own rough notes), but delegated agents  have repeatedly turned it into agent-written prose that leaks into the eventual post's voice, and have committed stray code into it that doesn't belong there. The repo owner wants the blog's actual prose to stay human-written, with the notebook as pure feeder material.
 Beads is already being adopted in this repo as the planning/tracking system; this proposal reuses it instead of inventing new content-status machinery.
 
 ## What Changes
