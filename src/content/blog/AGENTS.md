@@ -22,7 +22,7 @@ This directory contains the user's blog posts and research ideas.
 
 ### Inside `## Scratch` vs outside it: what goes where
 
-This distinction has broken down in practice before — delegated agents (Jules and others) have written blog-voiced prose into the scratch section, which then leaked into the eventual post's voice. Treat it as a hard boundary, not a suggestion.
+This distinction has broken down in practice before — delegated agents have written blog-voiced prose into the scratch section, which then leaked into the eventual post's voice. Treat it as a hard boundary, not a suggestion.
 
 | | Inside `## Scratch` | Outside `## Scratch` (the real post body) |
 |---|---|---|

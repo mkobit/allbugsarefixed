@@ -91,11 +91,6 @@ For instructions on how to handle blog posts, drafts, and research notes, strict
 - `src/components/`: React and Astro components.
 - `src/lib/`: Shared utilities and logic.
 
-## Jules agents
-
-See `.jules/AGENTS.md`.
-Check existing tooling and `.jules/` prompt files before adding a new automation script.
-
 ## Package Management
 
 We have configured a `minimumReleaseAge` for package installs in `bunfig.toml` to mitigate supply chain risks.
