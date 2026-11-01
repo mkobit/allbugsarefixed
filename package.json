@@ -23,6 +23,8 @@
     "new-idea": "bun scripts/new-idea.ts",
     "openspec:validate": "openspec validate --all",
     "changelog:generate": "bun scripts/generate-changelog.ts",
+    "tokens:generate": "bun scripts/generate-tokens.ts",
+    "tokens:check": "bun scripts/generate-tokens.ts --check",
     "purge-scratch": "bun scripts/purge-scratch.ts",
     "sbx:plan": "sbx env plan .sbx/sbxenv.yaml",
     "sbx:validate-kit": "sbx kit validate .sbx/kit"
