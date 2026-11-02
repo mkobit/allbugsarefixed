@@ -66,14 +66,27 @@ Use the `/opsx:propose`, `/opsx:apply`, `/opsx:archive` slash commands to work w
 - **Formatting:** ESLint is used for formatting (Prettier is NOT used).
 - **Strictness:** Do not bypass checks. All tests and linting must pass.
 
-## Architecture & Style
+## Architecture & style
 
-- **Astro as Glue, React for UI:**
+- **Astro as glue, React for UI:**
   - Logic and styled components should reside in React (`.tsx`) files, typically in `src/components/ui`.
   - Astro (`.astro`) files should act as "glue" code: fetching data, handling routing, and rendering top-level React components.
   - Avoid heavy business logic or complex styling in `.astro` files.
   - Any task adding or modifying a hydrated React island (`client:load`, `client:visible`, `client:idle`) requires runtime hydration verification in a real browser, not just typecheck/lint.
-- **Writing Style:**
+- **Local CSS architecture:**
+  - Colocate CSS Modules (`<component>.module.css`) with React components in `src/components/ui/`.
+  - Express component variants via HTML `data-*` attributes (`data-variant`, `data-size`) typed with TypeScript string literal unions.
+  - Do not add new `tailwind-variants` (`tv()`) or Tailwind utility chains to UI components.
+  - Scope component selectors inside `@layer components` and use private CSS custom properties (`--_*`) with `:where(&[data-*])` to keep specificity low.
+  - Consume design tokens through CSS custom properties (`var(--color-*)`) or `src/lib/tokens.gen.ts`.
+  - Do not hardcode raw hex or RGB color values in components.
+  - Use `@layer typography` with `:where()` selectors for prose content styling.
+  - Use container queries (`@container`) instead of viewport queries for component-level responsive layouts.
+  - Use `grid-template-columns: subgrid` or `grid-template-rows: subgrid` for aligned nested grids.
+  - Use `:has()` for parent styling based on child or form state.
+  - Prefer native HTML `<dialog>` and the Popover API with `@starting-style` over external overlay libraries.
+  - Run `bun run tokens:check` when modifying design tokens in `src/styles/global.css`.
+- **Writing style:**
   - Use **Sentence case** for headings and titles.
   - Use **semantic line breaks** (one sentence per line) in Markdown and MDX files to improve diff readability.
 - **Frontend guidance skill:**
