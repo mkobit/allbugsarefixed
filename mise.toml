@@ -14,11 +14,16 @@ run = "bun run verify:versions"
 description = "Verify blog folder structure and ISO date format"
 run = "bun run verify:blog"
 
+[tasks."verify:css"]
+description = "Verify CSS token references and ban raw colors"
+run = "bun run verify:css"
+
 [tasks.verify]
 description = "Run all verification checks"
 depends = [
   "verify:versions",
   "verify:blog",
+  "verify:css",
 ]
 
 [tasks.lint]
