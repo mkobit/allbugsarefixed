@@ -11,21 +11,22 @@ You **MUST** run the following commands before submitting any changes. These com
 **Use `bun run <script>`, not bare `bun <script>`.** `test` and `build` are Bun's own reserved subcommands (Bun's built-in test runner and bundler, respectively) — the bare form bypasses this project's npm script and its arguments, even though most other script names (`lint`, `typecheck`, `coverage`, etc.) work fine either way.
 
 1.  **Verify versions:** `bun scripts/verify-versions.ts`
-2.  **Lint:** `bun run lint`
-3.  **Validate specs:** `bun run openspec:validate` (Note: `bun x openspec validate --all` runs as a PR check on changes under `openspec/**`)
-4.  **Typecheck:** `bun run typecheck`
-5.  **Unit tests:** `bun run test`
+2.  **Verify CSS:** `bun run verify:css`
+3.  **Lint:** `bun run lint`
+4.  **Validate specs:** `bun run openspec:validate` (Note: `bun x openspec validate --all` runs as a PR check on changes under `openspec/**`)
+5.  **Typecheck:** `bun run typecheck`
+6.  **Unit tests:** `bun run test`
     - Bare `bun test` invokes Bun's test runner unscoped (repo-wide default file discovery) instead of the `src`-scoped run this script defines, so it will try and fail to run the Playwright specs under `tests/e2e/`.
-6.  **Coverage:** `bun run coverage`
-7.  **Build:** `bun run build`
+7.  **Coverage:** `bun run coverage`
+8.  **Build:** `bun run build`
     - Bare `bun build` errors with "Missing entrypoints" — it's Bun's bundler, not this script.
-8.  **E2E tests:** `bun run test:e2e`
+9.  **E2E tests:** `bun run test:e2e`
 
-Alternatively, run `mise run check` to execute all 8 verification steps.
+Alternatively, run `mise run check` to execute all 9 verification steps.
 
 ## Docker Sandbox Execution
 
-When running the project within a Docker Sandbox environment, you can run all 8 checks by using `sbx env exec` without needing to log in interactively:
+When running the project within a Docker Sandbox environment, you can run all 9 checks by using `sbx env exec` without needing to log in interactively:
 
 ```bash
 sbx env exec .sbx/sbxenv.yaml -- mise run check

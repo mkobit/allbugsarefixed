@@ -25,6 +25,9 @@ jobs:
       - name: Verify tool versions
         id: verify
         run: bun scripts/verify-versions.ts
+      - name: Verify CSS rules
+        if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
+        run: bun run verify:css
       - name: Lint code
         if: ${{ !cancelled() && steps.verify.outcome == 'success' }}
         run: bun run lint

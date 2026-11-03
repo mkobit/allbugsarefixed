@@ -82,8 +82,27 @@ export default [
       'no-restricted-globals': [
         'error',
         {
-          name: 'Date',
           message: 'Use Temporal instead of Date.',
+          name: 'Date',
+        },
+      ],
+    },
+  },
+
+  // Prohibit raw hex color literals and arbitrary hex class names in JSX/TSX
+  {
+    files: ['**/*.tsx', '**/*.jsx'],
+    ignores: ['src/components/PigeonMap.tsx'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          message: 'Raw hex color literals are prohibited in JSX/TSX. Use tokens from src/lib/tokens.gen.ts or CSS classes.',
+          selector: 'Literal[value=/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/]',
+        },
+        {
+          message: 'Arbitrary hex values in class names are prohibited. Use design tokens.',
+          selector: 'JSXAttribute[name.name="className"] Literal[value=/\\[#(?:[0-9a-fA-F]{3,8})\\]/]',
         },
       ],
     },
