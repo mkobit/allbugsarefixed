@@ -13,18 +13,15 @@ interface Props {
 
 const { title } = Astro.props
 
-// Fetch posts for search
 const posts = await getCollection('blog', ({ data }: CollectionEntry<'blog'>) => {
   return data.visibility === 'visible'
 })
 
-// Sort by date desc (though for search it doesn't strictly matter, but good for consistency)
 const sortedPosts = posts.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => Temporal.PlainDate.compare(
   Temporal.PlainDate.from(b.data.pubDate),
   Temporal.PlainDate.from(a.data.pubDate),
 ))
 
-// Data for fuzzy search (all published posts)
 const allPosts = sortedPosts.map((post: CollectionEntry<'blog'>) => ({
   title: post.data.title,
   slug: post.id.replace(/^src\/content\/blog\//, '').replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, ''),
@@ -51,20 +48,15 @@ const allPosts = sortedPosts.map((post: CollectionEntry<'blog'>) => ({
     </title>
     <ThemeInit />
   </head>
-  <body class="flex flex-col min-h-screen transition-colors duration-300">
-    <!-- Header with client:load for interactivity -->
-    <Header client:load allPosts={allPosts} />
+  <body class="flex min-h-screen flex-col transition-colors duration-300">
+    <Header client:load allPosts={allPosts} currentPath={Astro.url.pathname} />
 
-    <!-- Main Content Wrapper -->
-    <!-- Added pt-14 (header height) to ensure content isn't hidden behind fixed header -->
-    <div class="flex-grow flex flex-col w-full min-w-0 pt-14">
-      <main class="flex-grow py-8 md:py-12">
-        <Container>
-          <slot />
-        </Container>
-      </main>
+    <main class="w-full min-w-0 flex-1 py-8 md:py-12">
+      <Container>
+        <slot />
+      </Container>
+    </main>
 
-      <Footer client:only="react" />
-    </div>
+    <Footer client:only="react" />
   </body>
 </html>
