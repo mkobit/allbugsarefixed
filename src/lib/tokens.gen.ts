@@ -30,8 +30,24 @@ export type ColorToken
 
 /** Font token identifiers */
 export type FontToken
-  = | '--font-mono'
+  = | '--font-leading-loose'
+    | '--font-leading-none'
+    | '--font-leading-normal'
+    | '--font-leading-relaxed'
+    | '--font-leading-snug'
+    | '--font-leading-tight'
+    | '--font-measure-prose'
+    | '--font-mono'
     | '--font-sans'
+    | '--font-size-2xl'
+    | '--font-size-3xl'
+    | '--font-size-4xl'
+    | '--font-size-5xl'
+    | '--font-size-base'
+    | '--font-size-lg'
+    | '--font-size-sm'
+    | '--font-size-xl'
+    | '--font-size-xs'
 
 /** Animation token identifiers */
 export type AnimationToken
@@ -93,8 +109,42 @@ export const tokenNames = {
   colorUiTextDim: '--color-ui-text-dim',
   /** gray-500 */
   colorUiTextMuted: '--color-ui-text-muted',
+  /** Line height loose */
+  fontLeadingLoose: '--font-leading-loose',
+  /** Line height none */
+  fontLeadingNone: '--font-leading-none',
+  /** Line height normal */
+  fontLeadingNormal: '--font-leading-normal',
+  /** Line height relaxed */
+  fontLeadingRelaxed: '--font-leading-relaxed',
+  /** Line height snug */
+  fontLeadingSnug: '--font-leading-snug',
+  /** Line height tight */
+  fontLeadingTight: '--font-leading-tight',
+  /** Reading line measure cap */
+  fontMeasureProse: '--font-measure-prose',
+  /** Monospace code font stack */
   fontMono: '--font-mono',
+  /** Primary sans-serif font stack */
   fontSans: '--font-sans',
+  /** Fluid text size 2xl */
+  fontSize2xl: '--font-size-2xl',
+  /** Fluid text size 3xl */
+  fontSize3xl: '--font-size-3xl',
+  /** Fluid text size 4xl */
+  fontSize4xl: '--font-size-4xl',
+  /** Fluid text size 5xl */
+  fontSize5xl: '--font-size-5xl',
+  /** Fluid text size base */
+  fontSizeBase: '--font-size-base',
+  /** Fluid text size lg */
+  fontSizeLg: '--font-size-lg',
+  /** Fluid text size sm */
+  fontSizeSm: '--font-size-sm',
+  /** Fluid text size xl */
+  fontSizeXl: '--font-size-xl',
+  /** Fluid text size xs */
+  fontSizeXs: '--font-size-xs',
 } as const
 
 /** Map of token camelCase keys to CSS var() references */
@@ -125,8 +175,24 @@ export const tokenVars = {
   colorUiSurfaceRaised: 'var(--color-ui-surface-raised)',
   colorUiTextDim: 'var(--color-ui-text-dim)',
   colorUiTextMuted: 'var(--color-ui-text-muted)',
+  fontLeadingLoose: 'var(--font-leading-loose)',
+  fontLeadingNone: 'var(--font-leading-none)',
+  fontLeadingNormal: 'var(--font-leading-normal)',
+  fontLeadingRelaxed: 'var(--font-leading-relaxed)',
+  fontLeadingSnug: 'var(--font-leading-snug)',
+  fontLeadingTight: 'var(--font-leading-tight)',
+  fontMeasureProse: 'var(--font-measure-prose)',
   fontMono: 'var(--font-mono)',
   fontSans: 'var(--font-sans)',
+  fontSize2xl: 'var(--font-size-2xl)',
+  fontSize3xl: 'var(--font-size-3xl)',
+  fontSize4xl: 'var(--font-size-4xl)',
+  fontSize5xl: 'var(--font-size-5xl)',
+  fontSizeBase: 'var(--font-size-base)',
+  fontSizeLg: 'var(--font-size-lg)',
+  fontSizeSm: 'var(--font-size-sm)',
+  fontSizeXl: 'var(--font-size-xl)',
+  fontSizeXs: 'var(--font-size-xs)',
 } as const
 
 /** Grouped token definitions with metadata */
@@ -291,6 +357,41 @@ export const tokens = {
     },
   },
   font: {
+    leadingLoose: {
+      name: '--font-leading-loose',
+      value: '2',
+      var: 'var(--font-leading-loose)',
+    },
+    leadingNone: {
+      name: '--font-leading-none',
+      value: '1',
+      var: 'var(--font-leading-none)',
+    },
+    leadingNormal: {
+      name: '--font-leading-normal',
+      value: '1.5',
+      var: 'var(--font-leading-normal)',
+    },
+    leadingRelaxed: {
+      name: '--font-leading-relaxed',
+      value: '1.625',
+      var: 'var(--font-leading-relaxed)',
+    },
+    leadingSnug: {
+      name: '--font-leading-snug',
+      value: '1.375',
+      var: 'var(--font-leading-snug)',
+    },
+    leadingTight: {
+      name: '--font-leading-tight',
+      value: '1.25',
+      var: 'var(--font-leading-tight)',
+    },
+    measureProse: {
+      name: '--font-measure-prose',
+      value: '70ch',
+      var: 'var(--font-measure-prose)',
+    },
     mono: {
       name: '--font-mono',
       value: '"JetBrains Mono", Menlo, monospace',
@@ -300,6 +401,51 @@ export const tokens = {
       name: '--font-sans',
       value: '"Inter", system-ui, sans-serif',
       var: 'var(--font-sans)',
+    },
+    size2xl: {
+      name: '--font-size-2xl',
+      value: 'clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem)',
+      var: 'var(--font-size-2xl)',
+    },
+    size3xl: {
+      name: '--font-size-3xl',
+      value: 'clamp(1.875rem, 1.65rem + 1.125vw, 2.25rem)',
+      var: 'var(--font-size-3xl)',
+    },
+    size4xl: {
+      name: '--font-size-4xl',
+      value: 'clamp(2.25rem, 1.95rem + 1.5vw, 3rem)',
+      var: 'var(--font-size-4xl)',
+    },
+    size5xl: {
+      name: '--font-size-5xl',
+      value: 'clamp(2.75rem, 2.3rem + 2.25vw, 3.75rem)',
+      var: 'var(--font-size-5xl)',
+    },
+    sizeBase: {
+      name: '--font-size-base',
+      value: 'clamp(1rem, 0.95rem + 0.25vw, 1.0625rem)',
+      var: 'var(--font-size-base)',
+    },
+    sizeLg: {
+      name: '--font-size-lg',
+      value: 'clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem)',
+      var: 'var(--font-size-lg)',
+    },
+    sizeSm: {
+      name: '--font-size-sm',
+      value: 'clamp(0.875rem, 0.825rem + 0.25vw, 0.9375rem)',
+      var: 'var(--font-size-sm)',
+    },
+    sizeXl: {
+      name: '--font-size-xl',
+      value: 'clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem)',
+      var: 'var(--font-size-xl)',
+    },
+    sizeXs: {
+      name: '--font-size-xs',
+      value: 'clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem)',
+      var: 'var(--font-size-xs)',
     },
   },
 } as const
