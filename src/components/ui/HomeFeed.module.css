@@ -1,0 +1,210 @@
+@layer components {
+  .home {
+    container-name: home;
+    container-type: inline-size;
+  }
+
+  .intro {
+    padding-block: 1rem 2.5rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 1rem;
+    color: var(--color-brand-primary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+  }
+
+  .title {
+    max-inline-size: 18ch;
+    margin: 0;
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    line-height: var(--font-leading-tight);
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .bio {
+    max-inline-size: 58ch;
+    margin-block: 1.25rem;
+    color: var(--color-ui-text-muted);
+    font-size: var(--font-size-lg);
+    line-height: var(--font-leading-relaxed);
+    text-wrap: pretty;
+  }
+
+  .quickLinks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    font-size: var(--font-size-sm);
+  }
+
+  .quickLinks a,
+  .archiveLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-block-size: 2.75rem;
+    color: var(--color-brand-text);
+    text-decoration: underline;
+    text-decoration-color: var(--color-ui-border-strong);
+    text-underline-offset: 0.3em;
+
+    &:hover {
+      text-decoration-color: var(--color-brand-primary);
+    }
+  }
+
+  .stat,
+  .hint,
+  .summary,
+  .yearCount {
+    color: var(--color-ui-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .topics {
+    padding-block: 1.5rem 2rem;
+    border-block: 1px solid var(--color-ui-border);
+  }
+
+  .sectionTitle {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    line-height: var(--font-leading-snug);
+    letter-spacing: -0.025em;
+  }
+
+  .hint {
+    margin-block: 0.5rem 1rem;
+  }
+
+  .topicList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .topic {
+    --_topic-background: transparent;
+    --_topic-border: var(--color-ui-border-strong);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-block-size: 2.75rem;
+    max-inline-size: 100%;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--_topic-border);
+    border-radius: 999px;
+    background: var(--_topic-background);
+    color: var(--color-brand-text);
+    font: inherit;
+    font-size: var(--font-size-sm);
+    text-align: start;
+    cursor: pointer;
+
+    &:hover,
+    :where(&[data-selected="true"]) {
+      --_topic-background: var(--color-brand-surface);
+      --_topic-border: var(--color-brand-primary);
+    }
+
+    :where(&[data-selected="true"]) {
+      font-weight: 700;
+    }
+  }
+
+  .topicCount {
+    color: var(--color-ui-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .topic:focus-visible,
+  .quickLinks a:focus-visible,
+  .archiveLink:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 3px;
+  }
+
+  .feed {
+    padding-block-start: 2rem;
+    scroll-margin-block-start: 6rem;
+  }
+
+  .feedHeader,
+  .yearHeader {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+
+  .archiveLink {
+    margin-block-start: 1.5rem;
+    font-size: var(--font-size-sm);
+  }
+
+  .summary {
+    margin-block: 0.25rem 2rem;
+  }
+
+  .year + .year {
+    margin-block-start: 2.5rem;
+  }
+
+  .yearHeader {
+    margin-block-end: 1rem;
+  }
+
+  .yearTitle {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+  }
+
+  .postGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .postGrid > a {
+    grid-row: span 4;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: subgrid;
+  }
+
+  .year:has(a:focus-visible) .yearTitle {
+    color: var(--color-brand-primary);
+  }
+
+  .empty {
+    padding-block: 2rem;
+    color: var(--color-ui-text-muted);
+    font-size: var(--font-size-base);
+  }
+
+  @container home (min-width: 42rem) {
+    .intro {
+      padding-block: 2rem 3rem;
+    }
+
+    .title {
+      font-size: var(--font-size-5xl);
+    }
+
+    .postGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

@@ -1,0 +1,102 @@
+@layer components {
+  .card {
+    --_card-padding: 1.25rem;
+    --_card-background: var(--color-brand-bg);
+    --_card-border: var(--color-ui-border);
+
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.75rem;
+    min-inline-size: 0;
+    padding: var(--_card-padding);
+    border: 1px solid var(--_card-border);
+    border-radius: 0.875rem;
+    background: var(--_card-background);
+    color: var(--color-brand-text);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    container-name: blog-card;
+    container-type: inline-size;
+
+    :where(&[data-variant="compact"]) {
+      --_card-padding: 1rem;
+    }
+
+    :where(&[data-variant="featured"]) {
+      --_card-background: var(--color-brand-surface);
+      --_card-border: color-mix(in oklab, var(--color-brand-primary) 45%, var(--color-ui-border));
+    }
+
+    &:hover,
+    &:focus-visible {
+      --_card-background: var(--color-ui-surface-hover);
+      --_card-border: var(--color-brand-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-brand-primary);
+      outline-offset: 3px;
+    }
+
+    &:has(.title:hover) .title {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+
+  .date {
+    grid-row: 1;
+    color: var(--color-ui-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+  }
+
+  .title {
+    grid-row: 2;
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    line-height: var(--font-leading-snug);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .description {
+    grid-row: 3;
+    margin: 0;
+    color: var(--color-ui-text-muted);
+    font-size: var(--font-size-base);
+    line-height: var(--font-leading-relaxed);
+    text-wrap: pretty;
+  }
+
+  .labels {
+    display: flex;
+    grid-row: 4;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 0.375rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .label {
+    padding: 0.25rem 0.625rem;
+    border: 1px solid var(--color-ui-border);
+    border-radius: 999px;
+    color: var(--color-brand-text);
+    font-size: var(--font-size-xs);
+    line-height: var(--font-leading-normal);
+  }
+
+  @container blog-card (min-width: 26rem) {
+    .title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .date {
+      font-size: var(--font-size-sm);
+    }
+  }
+}

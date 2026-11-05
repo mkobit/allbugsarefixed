@@ -1,7 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
-import { BlogCard } from '../components/BlogCard'
+import { HomeFeed } from '../components/ui/HomeFeed'
 
 const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
   .filter((post: CollectionEntry<'blog'>) => {
@@ -17,19 +17,14 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog'))
 ---
 
 <Layout title="Home">
-  <h1 class="text-3xl font-bold mb-8">All posts</h1>
-  <div class="space-y-8">
-    {
-      posts.map(post => (
-        <BlogCard
-          title={post.data.title}
-          description={post.data.description}
-          pubDate={post.data.pubDate}
-          href={`/blog/${post.id.replace(/^src\/content\/blog\//, '').replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '')}/`}
-          labels={post.data.labels}
-          client:visible
-        />
-      ))
-    }
-  </div>
+  <HomeFeed
+    posts={posts.map(post => ({
+      description: post.data.description,
+      href: `/blog/${post.id.replace(/^src\/content\/blog\//, '').replace(/\/index\.mdx$/, '').replace(/\.mdx?$/, '')}/`,
+      labels: post.data.labels,
+      pubDate: post.data.pubDate,
+      title: post.data.title,
+    }))}
+    client:load
+  />
 </Layout>
