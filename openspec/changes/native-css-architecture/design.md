@@ -2,7 +2,7 @@
 
 Styling in this repository currently depends on Tailwind CSS v4, `tailwind-variants`, `@tailwindcss/typography`, and `tailwind-merge`.
 An audit across `src/components/ui/`, layout components in `src/components/`, and article templates revealed significant framework coupling:
-1. Ten of 15 UI components use `tv()` and `VariantProps` to concatenate utility classes.
+1. Sixteen components across `src/components/ui/` (10: `badge.tsx`, `button.tsx`, `callout.tsx`, `container.tsx`, `heading.tsx`, `link.tsx`, `stack.tsx`, `table.tsx`, `text.tsx`, `time.tsx`) and `src/components/` (6: `Footer.tsx`, `Gallery.tsx`, `LabelBadge.tsx`, `Lightbox.tsx`, `Search.tsx`, `ThemeToggle.tsx`) use `tv()` to concatenate utility classes, while `SiteHeader.tsx`, `BlogCard.tsx`, `HomeFeed.tsx`, and Phase 1 verification (`scripts/verify-css.ts`, `tokens.gen.ts`) have already landed.
 2. Hydrated React islands pull `tailwind-variants` and `tailwind-merge` into client JavaScript bundles solely to resolve class conflicts.
 3. Long-form article formatting depends on `@tailwindcss/typography`, which generates 698 utility classes (~22 kB) and requires defensive `!important` overrides in code blocks.
 4. Interactive widgets use JavaScript scroll listeners and `@headlessui/react` to emulate capabilities now available natively in browsers.
@@ -108,8 +108,8 @@ If blocked by package age policies, validation will remain inside `scripts/verif
 The migration proceeds incrementally across distinct phases:
 
 1. **Phase 1: Build verification and validation infrastructure**
-   - Create `scripts/verify-css.ts` and add `bun run verify:css` to `package.json` and CI workflows.
-   - Add ESLint AST rule to ban raw color literals in JSX/TSX files.
+   - `scripts/verify-css.ts`, ESLint raw hex check, and `tokens.gen.ts` are in place.
+   - Wire `getStaticTokenColor()` in `src/lib/theme.ts` and migrate `src/styles/shiki.css` to declared design tokens so `EXCLUDED_FILES` in `scripts/verify-css.ts` is empty.
    - Ensure `bun run tokens:check` passes in CI.
 2. **Phase 2: Native article typography stylesheet**
    - Author `src/styles/typography.css` with `@layer typography`, `:where()` selectors, and `.article-prose`.
@@ -117,14 +117,15 @@ The migration proceeds incrementally across distinct phases:
    - Remove `!important` utility overrides from `CodeBlock.tsx` and clean up `callout.tsx`.
    - Remove `@tailwindcss/typography` plugin and dependency.
 3. **Phase 3: Component migration in `src/components/ui/`**
-   - Migrate components to colocated `.module.css` files and `data-*` attributes one component at a time (`badge.tsx`, `button.tsx`, `callout.tsx`, `heading.tsx`, `table.tsx`, `stack.tsx`, `text.tsx`, `link.tsx`, `time.tsx`, `container.tsx`, `separator.tsx`, `changelog-view.tsx`).
+   - Migrate components to colocated `.module.css` files and `data-*` attributes one component at a time (`badge.tsx`, `button.tsx`, `callout.tsx`, `heading.tsx`, `table.tsx`, `stack.tsx`, `text.tsx`, `link.tsx`, `time.tsx`, `container.tsx`, `separator.tsx`, `changelog-view.tsx`, `PostHeader.tsx`, `PostMetadata.tsx`).
    - Remove `tailwind-variants` and `tailwind-merge` dependencies.
    - Simplify `cn()` in `src/lib/ui.ts` to concatenate truthy class strings.
 4. **Phase 4: Modern layout and widget enhancements**
    - Migrate `ScrollProgress.tsx` to CSS scroll-driven animations in a static Astro component.
    - Refactor `BlogCard.tsx` and blog post grid to use CSS subgrid and container queries.
-   - Migrate `Lightbox.tsx` to native `<dialog>` with `@starting-style`.
-   - Migrate `Search.tsx` to HTML Popover API.
+   - Migrate `Lightbox.tsx`, `Gallery.tsx`, and `PostImageLightbox.tsx` to native `<dialog>` with `@starting-style`.
+   - Migrate `Search.tsx`, `ThemeToggle.tsx`, `Footer.tsx`, `LabelBadge.tsx`, and `TableOfContents.tsx` to native CSS modules, HTML Popover API, and `data-*` attributes.
+   - Migrate remaining content widgets and page shells (`IconBlock.tsx`, `EChart.tsx`, `PigeonMap.tsx`, `Mermaid.astro`, `Latex.astro`, `Layout.astro`, `blog/index.astro`, and `src/content/blog/2024-05-20_tech-demo/index.mdx`).
 5. **Phase 5: Final compiler cleanup**
    - Remove `@theme` block from `src/styles/global.css`.
    - Remove `@tailwindcss/vite` and `tailwindcss` packages.
