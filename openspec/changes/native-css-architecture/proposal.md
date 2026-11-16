@@ -29,9 +29,9 @@ Migrating to an internal modern CSS architecture removes external framework depe
 ## Impact
 
 - Affected code:
-  - All components in `src/components/ui/` (`button.tsx`, `badge.tsx`, `callout.tsx`, `heading.tsx`, `table.tsx`, `stack.tsx`, `text.tsx`, `link.tsx`, `time.tsx`, `container.tsx`, `separator.tsx`, `ScrollProgress.tsx`, `changelog-view.tsx`, `PostHeader.tsx`, `PostMetadata.tsx`).
-  - Layout and presentation widgets in `src/components/` (`BlogCard.tsx`, `Gallery.tsx`, `Lightbox.tsx`, `PostImageLightbox.tsx`, `Search.tsx`, `TableOfContents.tsx`, `CodeBlock.tsx`, `Header.tsx`, `Footer.tsx`).
-  - Page shells and layouts in `src/layouts/Layout.astro` and `src/pages/` (`blog/[...slug].astro`, `about.astro`).
+  - All components in `src/components/ui/` (`BlogCard.tsx`, `HomeFeed.tsx`, `SiteHeader.tsx`, `button.tsx`, `badge.tsx`, `callout.tsx`, `heading.tsx`, `table.tsx`, `stack.tsx`, `text.tsx`, `link.tsx`, `time.tsx`, `container.tsx`, `separator.tsx`, `ScrollProgress.tsx`, `changelog-view.tsx`, `PostHeader.tsx`, `PostMetadata.tsx`).
+  - Layout and presentation widgets in `src/components/` (`BlogCard.tsx`, `Gallery.tsx`, `Lightbox.tsx`, `PostImageLightbox.tsx`, `Search.tsx`, `TableOfContents.tsx`, `CodeBlock.tsx`, `Header.tsx`, `Footer.tsx`, `LabelBadge.tsx`, `ThemeToggle.tsx`, `IconBlock.tsx`, `EChart.tsx`, `PigeonMap.tsx`, `Mermaid.astro`, `Latex.astro`).
+  - Page shells and layouts in `src/layouts/Layout.astro` and `src/pages/` (`blog/[...slug].astro`, `blog/index.astro`, `about.astro`).
   - Global styles in `src/styles/global.css`, `src/styles/shiki.css`, and new `src/styles/typography.css`.
   - Utility helpers in `src/lib/ui.ts` and `src/lib/theme.ts`.
 - Build and CI config:
