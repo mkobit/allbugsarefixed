@@ -40,4 +40,4 @@ updates:
     assignees:
       - "mkobit"
     cooldown:
-      default-days: 14
+      default-days: 21
