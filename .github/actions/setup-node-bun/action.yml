@@ -13,7 +13,7 @@ runs:
     - name: Setup Bun
       uses: oven-sh/setup-bun@v2.2.0
       with:
-        bun-version: 1.4.3
+        bun-version-file: package.json
 
     - name: Cache build and lint artifacts
       uses: actions/cache@v6.1.0

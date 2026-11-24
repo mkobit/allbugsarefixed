@@ -2,7 +2,7 @@
   "name": "allbugsarefixed",
   "type": "module",
   "version": "1.0.0",
-  "packageManager": "bun@1.4.3",
+  "packageManager": "bun@1.4.4",
   "main": "index.js",
   "repository": "git@github.com:mkobit/allbugsarefixed.git",
   "license": "MIT",
