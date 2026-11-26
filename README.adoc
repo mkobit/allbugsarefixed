@@ -30,3 +30,21 @@ sbx env run .sbx/sbxenv.yaml ~/.local/share/sbx/personal/personal.sbxenv.yaml
 ----
 
 For the AGY kit, substitute `.sbx/sbxenv.agy.yaml` to preserve its extra pinned agent-kit reference.
+
+== Branch and release policy
+
+Open a pull request for changes to `main`.
+Wait for the required CI checks to pass, then squash merge.
+Enable auto-merge on the pull request to let GitHub merge it when the checks pass.
+
+For future releases, use the UTC date as an unprefixed, unpadded https://calver.org/overview.html[CalVer] tag in the form `YYYY.M.D`, for example `2026.11.5`.
+Both padded and unpadded dates are valid CalVer.
+Use unpadded fields so tools that require https://semver.org/[SemVer] syntax can read the version.
+Compare the year, month, and day as numbers so that `2026.11.5` sorts before `2026.11.16`.
+Where the release channel supports release candidates, append `-rc.N`, for example `2026.11.5-rc.1`.
+Use a SemVer-compatible comparator to sort each candidate before its stable release.
+The Gradle repositories keep their established release formats.
+
+Attach release assets to a draft before publishing an immutable GitHub release.
+Leave historical releases and tags in place.
+This site deploys from `main` and uses no release tag workflow.
