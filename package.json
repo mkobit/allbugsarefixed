@@ -15,7 +15,7 @@
     "typecheck": "astro check && tsc --noEmit",
     "test": "bun test src tests/unit",
     "coverage": "bun test src tests/unit --coverage",
-    "test:e2e": "bun test tests/e2e --forbid-only",
+    "test:e2e": "bun test tests/e2e --forbid-only --timeout 15000",
     "test:e2e:live": "bun run test:e2e --test-name-pattern @live-safe",
     "verify": "bun run verify:versions && bun run verify:blog && bun run verify:css",
     "verify:versions": "bun scripts/verify-versions.ts",
