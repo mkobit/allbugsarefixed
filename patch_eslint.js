@@ -11,5 +11,5 @@ const patch = `
     }
   },
 `
-const newCode = code.replace('  // Playwright Tests', patch + '  // Playwright Tests')
+const newCode = code.replace('  // Browser end-to-end tests', patch + '  // Browser end-to-end tests')
 fs.writeFileSync('eslint.config.mjs', newCode)

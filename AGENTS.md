@@ -16,11 +16,12 @@ You **MUST** run the following commands before submitting any changes. These com
 4.  **Validate specs:** `bun run openspec:validate` (Note: `bun x openspec validate --all` runs as a PR check on changes under `openspec/**`)
 5.  **Typecheck:** `bun run typecheck`
 6.  **Unit tests:** `bun run test`
-    - Bare `bun test` invokes Bun's test runner unscoped (repo-wide default file discovery) instead of the `src`-scoped run this script defines, so it will try and fail to run the Playwright specs under `tests/e2e/`.
+    - Use the unit test script to exclude browser tests under `tests/e2e/`.
 7.  **Coverage:** `bun run coverage`
 8.  **Build:** `bun run build`
     - Bare `bun build` errors with "Missing entrypoints" — it's Bun's bundler, not this script.
 9.  **E2E tests:** `bun run test:e2e`
+    - Install Chrome or Chromium for `Bun.WebView`. Set `BUN_CHROME_PATH` if Bun cannot find the browser.
 
 Alternatively, run `mise run check` to execute all 9 verification steps.
 

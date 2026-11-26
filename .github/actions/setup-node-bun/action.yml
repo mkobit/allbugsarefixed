@@ -21,7 +21,6 @@ runs:
         path: |
           .astro
           .eslintcache
-          ~/.cache/ms-playwright
         key: ${{ runner.os }}-build-lint-${{ hashFiles('**/bun.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-lint-

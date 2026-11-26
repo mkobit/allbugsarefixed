@@ -21,7 +21,6 @@ export default [
       'node_modules/',
       'build/',
       'coverage/',
-      'playwright-report/',
       'test-results/',
       'scripts/verify-blog-structure.ts',
       '.claude/',
@@ -125,13 +124,13 @@ export default [
       'functional/immutable-data': 'off',
     },
   },
-  // Playwright Tests
+  // Browser end-to-end tests
   {
-    files: ['tests/e2e/**/*.ts', 'playwright.config.ts'],
+    files: ['tests/e2e/**/*.ts'],
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.browser, // Playwright tests can sometimes look like they use browser globals inside evaluate()
+        ...globals.browser,
       },
     },
     rules: {

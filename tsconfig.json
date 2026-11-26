@@ -21,7 +21,6 @@
     "astro.config.mjs",
     "eslint.config.mjs",
     "prettier.config.mjs",
-    "playwright.config.ts",
     "tests/**/*.ts",
     "scripts/**/*.ts"
   ],

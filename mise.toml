@@ -63,12 +63,12 @@ description = "Build production site with Astro"
 run = "bun run build"
 
 [tasks."test:e2e"]
-description = "Run Playwright E2E tests"
+description = "Run browser end-to-end tests"
 depends = ["build"]
 run = "bun run test:e2e"
 
 [tasks."test:e2e:live"]
-description = "Run live-safe Playwright E2E tests"
+description = "Run live-safe browser end-to-end tests"
 depends = ["build"]
 run = "bun run test:e2e:live"
 
