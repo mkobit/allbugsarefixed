@@ -19,14 +19,14 @@ The e2e test suite SHALL be runnable against any base URL (local preview, GitHub
 
 #### Scenario: Running against a local build
 - **WHEN** no external base URL is provided
-- **THEN** Playwright starts a local preview server and runs tests against it, as today
+- **THEN** The test suite starts a local preview server and runs tests against it
 
 #### Scenario: Running against a deployed URL
-- **WHEN** an external base URL is provided via `PLAYWRIGHT_BASE_URL`
-- **THEN** Playwright runs the same spec files against that URL without starting a local preview server
+- **WHEN** an external base URL is provided via `E2E_BASE_URL`
+- **THEN** The test suite runs the same checks against that URL without starting a local preview server
 
 ### Requirement: Test categorization by live-safety
-Each e2e test SHALL be tagged, using Playwright's native `tag` option, to indicate whether it is safe and meaningful to run against a live deployed target, so a subset can be selected independent of the full suite. A test is tagged `@live-safe` only if its assertions concern the deploy/hosting layer itself (the page is reachable, core markup and styling render); tests whose concern is content correctness baked in at build time (e.g. internal link validity) are `@local-only`, since that content doesn't change based on deploy target and is already verified pre-merge.
+Each e2e test SHALL be labeled in its name to indicate whether it is safe and meaningful to run against a live deployed target, so a subset can be selected independent of the full suite. A test is tagged `@live-safe` only if its assertions concern the deploy/hosting layer itself (the page is reachable, core markup and styling render); tests whose concern is content correctness baked in at build time (e.g. internal link validity) are `@local-only`, since that content doesn't change based on deploy target and is already verified pre-merge.
 
 #### Scenario: Selecting live-safe tests only
 - **WHEN** the post-deploy verification step runs
@@ -34,12 +34,12 @@ Each e2e test SHALL be tagged, using Playwright's native `tag` option, to indica
 
 #### Scenario: Full suite still runs pre-merge
 - **WHEN** the pre-merge CI gate (`reusable-check.yml`) runs `bun run test:e2e`
-- **THEN** all tests run regardless of tag, against the local build, as today
+- **THEN** all tests run regardless of tag, against the local build
 
 ### Requirement: Diagnosable live-verification failures
-When the post-deploy verification step fails, the workflow SHALL retain the Playwright report and trace as a downloadable artifact so the failure can be diagnosed without manually reproducing it against the live URL.
+When the post-deploy verification step fails, the workflow SHALL retain the JUnit test report as a downloadable artifact so the failure can be diagnosed without manually reproducing it against the live URL.
 
 #### Scenario: Live verification fails
 - **WHEN** any `@live-safe` test fails during the post-deploy step
-- **THEN** the workflow uploads the Playwright HTML report and trace as a build artifact before completing
+- **THEN** the workflow uploads the JUnit test report as a build artifact before completing
 

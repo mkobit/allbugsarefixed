@@ -12,5 +12,5 @@ const patch = `
     },
   },
 `
-const newCode = code.replace(/ {2}\/\/ Remark plugins often need to mutate AST nodes([\s\S]*?) {2}\/\/ Playwright Tests/, patch + '  // Playwright Tests')
+const newCode = code.replace(/ {2}\/\/ Remark plugins often need to mutate AST nodes([\s\S]*?) {2}\/\/ Browser end-to-end tests/, patch + '  // Browser end-to-end tests')
 fs.writeFileSync('eslint.config.mjs', newCode)

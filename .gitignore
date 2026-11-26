@@ -226,7 +226,6 @@ $RECYCLE.BIN/
 
 # Claude Code local settings
 .claude/settings.local.json
-playwright-report/
 test-results/
 
 # Ignore root PNG files
